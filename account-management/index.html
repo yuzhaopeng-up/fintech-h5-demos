@@ -1,0 +1,761 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>账户管理 - DemoBank</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      background: #0a0f1a;
+      color: #e8ecf3;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a3a5c 0%, #0d2137 100%);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -30%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(100,180,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .header-title { font-size: 18px; font-weight: 600; }
+    .header-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; cursor: pointer;
+    }
+    .account-card {
+      background: linear-gradient(135deg, #1e5aa8 0%, #0f3d6e 100%);
+      border-radius: 16px;
+      padding: 24px 20px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .account-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .account-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 4px;
+    }
+    .account-balance {
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .account-stats {
+      display: flex;
+      gap: 20px;
+    }
+    .account-stat {
+      flex: 1;
+    }
+    .account-stat-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .account-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 2px;
+    }
+    .section {
+      padding: 20px;
+      background: #111827;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::before {
+      content: '';
+      width: 4px; height: 16px;
+      background: #3b82f6;
+      border-radius: 2px;
+    }
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 16px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .menu-icon.blue { background: rgba(59,130,246,0.15); }
+    .menu-icon.green { background: rgba(16,185,129,0.15); }
+    .menu-icon.orange { background: rgba(245,158,11,0.15); }
+    .menu-icon.red { background: rgba(239,68,68,0.15); }
+    .menu-icon.purple { background: rgba(139,92,246,0.15); }
+    .menu-icon.cyan { background: rgba(6,182,212,0.15); }
+    .menu-content { flex: 1; }
+    .menu-title { font-size: 15px; font-weight: 500; }
+    .menu-desc { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .menu-arrow {
+      color: #4b5563;
+      font-size: 18px;
+      transition: transform 0.2s;
+    }
+    .menu-item:active .menu-arrow { transform: translateX(4px); }
+    .menu-badge {
+      background: #ef4444;
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-right: 8px;
+      font-weight: 600;
+    }
+    .menu-toggle {
+      width: 48px; height: 28px;
+      background: #374151;
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+    .menu-toggle.active { background: #3b82f6; }
+    .menu-toggle::after {
+      content: '';
+      position: absolute;
+      width: 24px; height: 24px;
+      background: #fff;
+      border-radius: 50%;
+      top: 2px; left: 2px;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .menu-toggle.active::after { transform: translateX(20px); }
+    .info-card {
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .info-details { flex: 1; }
+    .info-name { font-size: 16px; font-weight: 600; }
+    .info-id { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .info-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: #10b981;
+      margin-top: 4px;
+    }
+    .info-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #10b981;
+      border-radius: 50%;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #374151;
+      border-radius: 3px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .progress-text {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+      text-align: right;
+    }
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .asset-card {
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .asset-card-title {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    .asset-card-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #e8ecf3;
+    }
+    .asset-card-change {
+      font-size: 12px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .asset-card-change.up { color: #10b981; }
+    .asset-card-change.down { color: #ef4444; }
+    .transaction-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .transaction-item:last-child { border-bottom: none; }
+    .transaction-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: #1f2937;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .transaction-info { flex: 1; }
+    .transaction-title { font-size: 14px; font-weight: 500; }
+    .transaction-time { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .transaction-amount {
+      font-size: 15px;
+      font-weight: 600;
+      text-align: right;
+    }
+    .transaction-amount.in { color: #10b981; }
+    .transaction-amount.out { color: #e8ecf3; }
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:active { opacity: 0.8; }
+    .btn-danger {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      color: #ef4444;
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.2s;
+    }
+    .btn-danger:active { background: rgba(239,68,68,0.1); }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-content {
+      background: #1f2937;
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%;
+      max-width: 400px;
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .modal-desc { font-size: 14px; color: #6b7280; margin-bottom: 20px; }
+    .modal-actions { display: flex; gap: 12px; }
+    .modal-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+    .modal-btn-cancel { background: #374151; color: #e8ecf3; }
+    .modal-btn-confirm { background: #ef4444; color: #fff; }
+    .security-level {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .security-level-bar {
+      flex: 1;
+      height: 6px;
+      background: #374151;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .security-level-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .security-level-text {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .security-level-text.weak { color: #ef4444; }
+    .security-level-text.medium { color: #f59e0b; }
+    .security-level-text.strong { color: #10b981; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .tag.verified {
+      background: rgba(16,185,129,0.15);
+      color: #10b981;
+    }
+    .tag.pending {
+      background: rgba(245,158,11,0.15);
+      color: #f59e0b;
+    }
+    .bank-card {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .bank-card::before {
+      content: '';
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 80px; height: 80px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .bank-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .bank-name { font-size: 15px; font-weight: 600; }
+    .bank-card-type {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.05);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .bank-card-number {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      font-family: 'Courier New', monospace;
+    }
+    .bank-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+    .add-card-btn {
+      border: 2px dashed rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .add-card-btn:active { border-color: rgba(59,130,246,0.5); }
+    .add-card-btn-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      color: #3b82f6;
+    }
+    .add-card-btn-text { font-size: 14px; color: #6b7280; }
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1f2937;
+      color: #e8ecf3;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 2000;
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <div class="header-title">账户管理</div>
+      <div class="header-icon" onclick="showToast('设置功能开发中')">⚙️</div>
+    </div>
+    <div class="account-card">
+      <div class="account-label">总资产（元）</div>
+      <div class="account-balance">¥ 128,456.78</div>
+      <div class="account-stats">
+        <div class="account-stat">
+          <div class="account-stat-value">¥ 89,234.56</div>
+          <div class="account-stat-label">理财资产</div>
+        </div>
+        <div class="account-stat">
+          <div class="account-stat-value">¥ 39,222.22</div>
+          <div class="account-stat-label">活期余额</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">个人信息</div>
+    <div class="info-card">
+      <div class="avatar">张</div>
+      <div class="info-details">
+        <div class="info-name">张三 <span class="tag verified">✓ 已实名</span></div>
+        <div class="info-id">ID: 8801****5678</div>
+        <div class="info-status">账户状态正常</div>
+      </div>
+    </div>
+    <div class="progress-bar" style="margin-top: 12px;">
+      <div class="progress-fill" style="width: 85%;"></div>
+    </div>
+    <div class="progress-text">资料完整度 85%</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">资产概览</div>
+    <div class="asset-grid">
+      <div class="asset-card">
+        <div class="asset-card-title">今日收益</div>
+        <div class="asset-card-value" style="color: #10b981;">+¥ 234.56</div>
+        <div class="asset-card-change up">↑ 0.18%</div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-card-title">累计收益</div>
+        <div class="asset-card-value">¥ 12,456.78</div>
+        <div class="asset-card-change up">↑ 10.72%</div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-card-title">本月支出</div>
+        <div class="asset-card-value">¥ 8,234.50</div>
+        <div class="asset-card-change down">↓ 5.2% 较上月</div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-card-title">本月收入</div>
+        <div class="asset-card-value">¥ 25,000.00</div>
+        <div class="asset-card-change up">↑ 12.5% 较上月</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">银行卡</div>
+    <div class="bank-card">
+      <div class="bank-card-top">
+        <div class="bank-name">🏦 某国有银行</div>
+        <div class="bank-card-type">储蓄卡</div>
+      </div>
+      <div class="bank-card-number">**** **** **** 8888</div>
+      <div class="bank-card-bottom">
+        <span>张三</span>
+        <span>默认卡</span>
+      </div>
+    </div>
+    <div class="bank-card" style="background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);">
+      <div class="bank-card-top">
+        <div class="bank-name">🏦 某股份制银行</div>
+        <div class="bank-card-type">信用卡</div>
+      </div>
+      <div class="bank-card-number">**** **** **** 6666</div>
+      <div class="bank-card-bottom">
+        <span>张三</span>
+        <span>额度 ¥50,000</span>
+      </div>
+    </div>
+    <div class="add-card-btn" onclick="showToast('添加银行卡功能开发中')">
+      <div class="add-card-btn-icon">+</div>
+      <div class="add-card-btn-text">添加银行卡</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">安全设置</div>
+    <div class="menu-list">
+      <div class="menu-item" onclick="showToast('登录密码功能开发中')">
+        <div class="menu-icon blue">🔐</div>
+        <div class="menu-content">
+          <div class="menu-title">登录密码</div>
+          <div class="menu-desc">定期修改密码保护账户安全</div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </div>
+      <div class="menu-item" onclick="showToast('支付密码功能开发中')">
+        <div class="menu-icon green">💳</div>
+        <div class="menu-content">
+          <div class="menu-title">支付密码</div>
+          <div class="menu-desc">已设置</div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </div>
+      <div class="menu-item" onclick="toggleSwitch(this)">
+        <div class="menu-icon orange">📱</div>
+        <div class="menu-content">
+          <div class="menu-title">指纹/面容支付</div>
+          <div class="menu-desc">快速安全支付</div>
+        </div>
+        <div class="menu-toggle active" data-toggle="true"></div>
+      </div>
+      <div class="menu-item" onclick="toggleSwitch(this)">
+        <div class="menu-icon purple">🔔</div>
+        <div class="menu-content">
+          <div class="menu-title">登录提醒</div>
+          <div class="menu-desc">新设备登录时通知</div>
+        </div>
+        <div class="menu-toggle active" data-toggle="true"></div>
+      </div>
+    </div>
+    <div class="security-level">
+      <div class="security-level-bar">
+        <div class="security-level-fill" style="width: 80%; background: linear-gradient(90deg, #10b981, #3b82f6);"></div>
+      </div>
+      <span class="security-level-text strong">强</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">账户功能</div>
+    <div class="menu-list">
+      <div class="menu-item" onclick="showToast('交易记录功能开发中')">
+        <div class="menu-icon blue">📋</div>
+        <div class="menu-content">
+          <div class="menu-title">交易记录</div>
+          <div class="menu-desc">查看全部收支明细</div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </div>
+      <div class="menu-item" onclick="showToast('消息通知功能开发中')">
+        <div class="menu-icon green">📨</div>
+        <div class="menu-content">
+          <div class="menu-title">消息通知</div>
+          <div class="menu-desc">系统消息、活动提醒</div>
+        </div>
+        <div class="menu-badge">3</div>
+        <div class="menu-arrow">›</div>
+      </div>
+      <div class="menu-item" onclick="showToast('地址管理功能开发中')">
+        <div class="menu-icon orange">📍</div>
+        <div class="menu-content">
+          <div class="menu-title">地址管理</div>
+          <div class="menu-desc">管理收货地址</div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </div>
+      <div class="menu-item" onclick="showToast('帮助中心功能开发中')">
+        <div class="menu-icon cyan">❓</div>
+        <div class="menu-content">
+          <div class="menu-title">帮助中心</div>
+          <div class="menu-desc">常见问题、在线客服</div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </div>
+      <div class="menu-item" onclick="showToast('关于我们功能开发中')">
+        <div class="menu-icon purple">ℹ️</div>
+        <div class="menu-content">
+          <div class="menu-title">关于我们</div>
+          <div class="menu-desc">版本 v2.1.0</div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">最近交易</div>
+    <div class="transaction-item">
+      <div class="transaction-icon">💰</div>
+      <div class="transaction-info">
+        <div class="transaction-title">工资收入</div>
+        <div class="transaction-time">2026-06-28 15:30</div>
+      </div>
+      <div class="transaction-amount in">+¥25,000.00</div>
+    </div>
+    <div class="transaction-item">
+      <div class="transaction-icon">🛒</div>
+      <div class="transaction-info">
+        <div class="transaction-title">超市购物</div>
+        <div class="transaction-time">2026-06-28 12:15</div>
+      </div>
+      <div class="transaction-amount out">-¥345.60</div>
+    </div>
+    <div class="transaction-item">
+      <div class="transaction-icon">📈</div>
+      <div class="transaction-info">
+        <div class="transaction-title">理财收益</div>
+        <div class="transaction-time">2026-06-28 08:00</div>
+      </div>
+      <div class="transaction-amount in">+¥156.78</div>
+    </div>
+    <div class="transaction-item">
+      <div class="transaction-icon">⚡</div>
+      <div class="transaction-info">
+        <div class="transaction-title">电费缴纳</div>
+        <div class="transaction-time">2026-06-27 20:00</div>
+      </div>
+      <div class="transaction-amount out">-¥289.00</div>
+    </div>
+    <button class="btn-primary" onclick="showToast('查看全部交易')">查看全部交易</button>
+  </div>
+
+  <div class="section" style="background: transparent;">
+    <button class="btn-danger" onclick="showLogoutModal()">退出登录</button>
+  </div>
+
+  <div class="modal-overlay" id="logoutModal">
+    <div class="modal-content">
+      <div class="modal-title">确认退出登录？</div>
+      <div class="modal-desc">退出后需要重新登录才能使用账户功能</div>
+      <div class="modal-actions">
+        <button class="modal-btn modal-btn-cancel" onclick="hideLogoutModal()">取消</button>
+        <button class="modal-btn modal-btn-confirm" onclick="confirmLogout()">确认退出</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    function toggleSwitch(el) {
+      const toggle = el.querySelector('.menu-toggle');
+      const isActive = toggle.getAttribute('data-toggle') === 'true';
+      toggle.setAttribute('data-toggle', !isActive);
+      toggle.classList.toggle('active');
+      const label = el.querySelector('.menu-title').textContent;
+      showToast((!isActive ? '已开启' : '已关闭') + ' ' + label);
+    }
+
+    function showLogoutModal() {
+      document.getElementById('logoutModal').classList.add('active');
+    }
+
+    function hideLogoutModal() {
+      document.getElementById('logoutModal').classList.remove('active');
+    }
+
+    function confirmLogout() {
+      hideLogoutModal();
+      showToast('已退出登录');
+      setTimeout(() => {
+        // window.location.href = '/login';
+      }, 1000);
+    }
+
+    document.getElementById('logoutModal').addEventListener('click', function(e) {
+      if (e.target === this) hideLogoutModal();
+    });
+  </script>
+</body>
+</html>
