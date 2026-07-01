@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0f1a">
+  <title>数据报表中心</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-base: #0a0f1a; --bg-elevated: #111827; --bg-card: #1f2937;
+      --text-primary: #e8ecf3; --text-secondary: #9ca3af; --text-tertiary: #6b7280;
+      --accent: #3b82f6; --accent-light: #60a5fa; --success: #10b981; --warning: #f59e0b;
+      --danger: #ef4444; --info: #06b6d4; --border: rgba(255,255,255,0.05);
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif; background: var(--bg-base); color: var(--text-primary); min-height: 100vh; padding-bottom: 20px; }
+    .header { padding: 16px; background: var(--bg-elevated); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .header-title { font-size: 18px; font-weight: 600; text-align: center; }
+    .header-date { text-align: center; font-size: 12px; color: var(--text-tertiary); margin-top: 4px; }
+    /* Date Selector */
+    .date-bar { display: flex; padding: 12px 16px; gap: 8px; background: var(--bg-elevated); border-bottom: 1px solid var(--border); overflow-x: auto; }
+    .date-btn { padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-size: 13px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .date-btn.active { background: linear-gradient(135deg, var(--accent), #60a5fa); color: #fff; border-color: transparent; }
+    /* KPI Cards */
+    .kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 12px; }
+    .kpi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px; }
+    .kpi-label { font-size: 12px; color: var(--text-tertiary); margin-bottom: 6px; }
+    .kpi-value { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .kpi-trend { display: flex; align-items: center; gap: 4px; font-size: 11px; }
+    .trend-up { color: var(--success); }
+    .trend-down { color: var(--danger); }
+    .kpi-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 4px; }
+    /* Chart Section */
+    .section { padding: 12px 16px; }
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .section-title { font-size: 14px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+    .section-action { font-size: 12px; color: var(--accent); cursor: pointer; }
+    .chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 12px; }
+    .chart-title { font-size: 14px; font-weight: 500; margin-bottom: 12px; }
+    /* Bar Chart */
+    .bar-chart { display: flex; align-items: flex-end; justify-content: space-around; height: 160px; padding: 0 8px; gap: 8px; }
+    .bar-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .bar-track { width: 100%; height: 120px; background: var(--bg-elevated); border-radius: 6px; position: relative; overflow: hidden; }
+    .bar-fill { position: absolute; bottom: 0; left: 0; right: 0; border-radius: 6px 6px 0 0; transition: height 0.8s ease; }
+    .bar-fill.blue { background: linear-gradient(to top, var(--accent), #60a5fa); }
+    .bar-fill.green { background: linear-gradient(to top, var(--success), #34d399); }
+    .bar-fill.orange { background: linear-gradient(to top, var(--warning), #fbbf24); }
+    .bar-fill.red { background: linear-gradient(to top, var(--danger), #f87171); }
+    .bar-label { font-size: 10px; color: var(--text-tertiary); }
+    .bar-value { font-size: 11px; font-weight: 500; }
+    /* Line Chart */
+    .line-chart { height: 180px; position: relative; padding: 8px 0; }
+    .line-chart svg { width: 100%; height: 100%; }
+    .line-chart path { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .line-chart .area { fill-opacity: 0.1; }
+    .line-chart .grid-line { stroke: var(--border); stroke-width: 1; }
+    .line-chart .axis-label { font-size: 10px; fill: var(--text-tertiary); }
+    /* Pie Chart */
+    .pie-chart { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 12px 0; }
+    .pie-container { position: relative; width: 120px; height: 120px; }
+    .pie-container svg { transform: rotate(-90deg); }
+    .pie-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+    .pie-center-value { font-size: 16px; font-weight: 700; }
+    .pie-center-label { font-size: 10px; color: var(--text-tertiary); }
+    .pie-legend { display: flex; flex-direction: column; gap: 8px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+    .legend-value { color: var(--text-tertiary); margin-left: auto; }
+    /* Table */
+    .table-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .table-header { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; padding: 12px 16px; background: var(--bg-elevated); font-size: 12px; font-weight: 500; color: var(--text-secondary); }
+    .table-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; padding: 12px 16px; border-top: 1px solid var(--border); font-size: 12px; }
+    .table-row:hover { background: rgba(59,130,246,0.05); }
+    .table-cell { display: flex; align-items: center; gap: 6px; }
+    .table-cell.right { justify-content: flex-end; }
+    .cell-positive { color: var(--success); }
+    .cell-negative { color: var(--danger); }
+    .rank-badge { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+    .rank-1 { background: linear-gradient(135deg, #ffd700, #ffb700); color: #000; }
+    .rank-2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); color: #000; }
+    .rank-3 { background: linear-gradient(135deg, #cd7f32, #b87333); color: #fff; }
+    .rank-other { background: var(--bg-elevated); color: var(--text-tertiary); }
+    /* Progress Rings */
+    .progress-ring { display: flex; justify-content: space-around; padding: 16px 0; }
+    .ring-item { text-align: center; }
+    .ring-svg { transform: rotate(-90deg); }
+    .ring-value { font-size: 14px; font-weight: 700; }
+    .ring-label { font-size: 10px; color: var(--text-tertiary); margin-top: 4px; }
+    /* Summary Card */
+    .summary-card { background: linear-gradient(135deg, var(--accent), #1e40af); border-radius: var(--radius-lg); padding: 20px; margin: 12px 16px; }
+    .summary-title { font-size: 14px; opacity: 0.9; margin-bottom: 8px; }
+    .summary-value { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+    .summary-bar { height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; }
+    .summary-bar-fill { height: 100%; background: rgba(255,255,255,0.8); border-radius: 3px; transition: width 0.8s ease; }
+    .summary-footer { display: flex; justify-content: space-between; margin-top: 12px; font-size: 12px; opacity: 0.8; }
+    /* Empty */
+    .empty { padding: 40px; text-align: center; color: var(--text-tertiary); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-title">📊 数据报表中心</div>
+    <div class="header-date">数据更新：2026年6月29日 16:30</div>
+  </div>
+
+  <div class="date-bar">
+    <div class="date-btn" data-range="today">今日</div>
+    <div class="date-btn active" data-range="week">本周</div>
+    <div class="date-btn" data-range="month">本月</div>
+    <div class="date-btn" data-range="quarter">本季度</div>
+    <div class="date-btn" data-range="year">本年</div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">总交易额</div>
+      <div class="kpi-value" style="color: var(--accent-light);">¥2,847万</div>
+      <div class="kpi-trend trend-up">▲ 12.5% 环比</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">交易笔数</div>
+      <div class="kpi-value" style="color: var(--success);">15,832</div>
+      <div class="kpi-trend trend-up">▲ 8.3% 环比</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">活跃用户</div>
+      <div class="kpi-value" style="color: var(--warning);">3,456</div>
+      <div class="kpi-trend trend-down">▼ 2.1% 环比</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">客单价</div>
+      <div class="kpi-value" style="color: var(--info);">¥1,798</div>
+      <div class="kpi-trend trend-up">▲ 3.7% 环比</div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary-card">
+    <div class="summary-title">月度目标完成度</div>
+    <div class="summary-value">78.4%</div>
+    <div class="summary-bar"><div class="summary-bar-fill" style="width: 78.4%;"></div></div>
+    <div class="summary-footer">
+      <span>已达成 ¥2,847万</span>
+      <span>目标 ¥3,630万</span>
+    </div>
+  </div>
+
+  <!-- Trend Chart -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">交易趋势</div>
+      <div class="section-action">查看详情 →</div>
+    </div>
+    <div class="chart-card">
+      <div class="line-chart" id="trendChart">
+        <svg viewBox="0 0 360 180">
+          <!-- Grid -->
+          <line x1="0" y1="45" x2="360" y2="45" class="grid-line"/>
+          <line x1="0" y1="90" x2="360" y2="90" class="grid-line"/>
+          <line x1="0" y1="135" x2="360" y2="135" class="grid-line"/>
+          
+          <!-- Area -->
+          <polygon points="0,180 0,120 60,100 120,110 180,80 240,60 300,70 360,40 360,180" fill="rgba(59,130,246,0.1)"/>
+          
+          <!-- Line -->
+          <path d="M0,120 L60,100 L120,110 L180,80 L240,60 L300,70 L360,40" stroke="#3b82f6" class="area"/>
+          
+          <!-- Dots -->
+          <circle cx="0" cy="120" r="4" fill="#3b82f6"/>
+          <circle cx="60" cy="100" r="4" fill="#3b82f6"/>
+          <circle cx="120" cy="110" r="4" fill="#3b82f6"/>
+          <circle cx="180" cy="80" r="4" fill="#3b82f6"/>
+          <circle cx="240" cy="60" r="4" fill="#3b82f6"/>
+          <circle cx="300" cy="70" r="4" fill="#3b82f6"/>
+          <circle cx="360" cy="40" r="4" fill="#3b82f6"/>
+          
+          <!-- Labels -->
+          <text x="0" y="175" class="axis-label">周一</text>
+          <text x="60" y="175" class="axis-label">周二</text>
+          <text x="120" y="175" class="axis-label">周三</text>
+          <text x="180" y="175" class="axis-label">周四</text>
+          <text x="240" y="175" class="axis-label">周五</text>
+          <text x="300" y="175" class="axis-label">周六</text>
+          <text x="360" y="175" class="axis-label" text-anchor="end">周日</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Bar Chart -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">产品交易额</div>
+      <div class="section-action">查看详情 →</div>
+    </div>
+    <div class="chart-card">
+      <div class="bar-chart">
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--accent);">¥892万</div>
+          <div class="bar-track"><div class="bar-fill blue" style="height: 85%;"></div></div>
+          <div class="bar-label">理财产品</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--success);">¥756万</div>
+          <div class="bar-track"><div class="bar-fill green" style="height: 72%;"></div></div>
+          <div class="bar-label">贷款服务</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--warning);">¥634万</div>
+          <div class="bar-track"><div class="bar-fill orange" style="height: 60%;"></div></div>
+          <div class="bar-label">保险业务</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--danger);">¥423万</div>
+          <div class="bar-track"><div class="bar-fill red" style="height: 40%;"></div></div>
+          <div class="bar-label">跨境金融</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--info);">¥142万</div>
+          <div class="bar-track"><div class="bar-fill blue" style="height: 15%;"></div></div>
+          <div class="bar-label">信用卡</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Channel Pie Chart -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">渠道分布</div>
+      <div class="section-action">查看详情 →</div>
+    </div>
+    <div class="chart-card">
+      <div class="pie-chart">
+        <div class="pie-container">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1f2937" stroke-width="12"/>
+            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3b82f6" stroke-width="12" stroke-dasharray="94.2 157"/>
+            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#10b981" stroke-width="12" stroke-dasharray="62.8 188.4" stroke-dashoffset="-94.2"/>
+            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f59e0b" stroke-width="12" stroke-dasharray="31.4 219.8" stroke-dashoffset="-157"/>
+          </svg>
+          <div class="pie-center">
+            <div class="pie-center-value">5渠道</div>
+            <div class="pie-center-label">总览</div>
+          </div>
+        </div>
+        <div class="pie-legend">
+          <div class="legend-item"><div class="legend-dot" style="background: var(--accent);"></div><span>企微渠道</span><span class="legend-value">45%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background: var(--success);"></div><span>App</span><span class="legend-value">30%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background: var(--warning);"></div><span>H5页面</span><span class="legend-value">15%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background: var(--danger);"></div><span>柜台</span><span class="legend-value">6%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background: var(--info);"></div><span>其他</span><span class="legend-value">4%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress Rings -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">业务指标达成</div>
+    </div>
+    <div class="chart-card">
+      <div class="progress-ring">
+        <div class="ring-item">
+          <svg width="70" height="70" viewBox="0 0 70 70" class="ring-svg">
+            <circle cx="35" cy="35" r="28" fill="transparent" stroke="#1f2937" stroke-width="6"/>
+            <circle cx="35" cy="35" r="28" fill="transparent" stroke="#3b82f6" stroke-width="6" stroke-dasharray="175.9" stroke-dashoffset="44" stroke-linecap="round"/>
+          </svg>
+          <div class="ring-value" style="color: var(--accent);">75%</div>
+          <div class="ring-label">新客获取</div>
+        </div>
+        <div class="ring-item">
+          <svg width="70" height="70" viewBox="0 0 70 70" class="ring-svg">
+            <circle cx="35" cy="35" r="28" fill="transparent" stroke="#1f2937" stroke-width="6"/>
+            <circle cx="35" cy="35" r="28" fill="transparent" stroke="#10b981" stroke-width="6" stroke-dasharray="175.9" stroke-dashoffset="18" stroke-linecap="round"/>
+          </svg>
+          <div class="ring-value" style="color: var(--success);">90%</div>
+          <div class="ring-label">客户留存</div>
+        </div>
+        <div class="ring-item">
+          <svg width="70" height="70" viewBox="0 0 70 70" class="ring-svg">
+            <circle cx="35" cy="35" r="28" fill="transparent" stroke="#1f2937" stroke-width="6"/>
+            <circle cx="35" cy="35" r="28" fill="transparent" stroke="#f59e0b" stroke-width="6" stroke-dasharray="175.9" stroke-dashoffset="88" stroke-linecap="round"/>
+          </svg>
+          <div class="ring-value" style="color: var(--warning);">50%</div>
+          <div class="ring-label">交叉销售</div>
+        </div>
+        <div class="ring-item">
+          <svg width="70" height="70" viewBox="0 0 70 70" class="ring-svg">
+            <circle cx="35" cy="35" r="28" fill="transparent" stroke="#1f2937" stroke-width="6"/>
+            <circle cx="35" cy="35" r="28" fill="transparent" stroke="#ef4444" stroke-width="6" stroke-dasharray="175.9" stroke-dashoffset="123" stroke-linecap="round"/>
+          </svg>
+          <div class="ring-value" style="color: var(--danger);">30%</div>
+          <div class="ring-label">投诉处理</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Products Table -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">产品排行榜</div>
+      <div class="section-action">查看全部 →</div>
+    </div>
+    <div class="table-card">
+      <div class="table-header">
+        <div>产品名称</div>
+        <div class="right">交易额</div>
+        <div class="right">环比增长</div>
+        <div class="right">占比</div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell"><div class="rank-badge rank-1">1</div>稳健理财A款</div>
+        <div class="table-cell right">¥425万</div>
+        <div class="table-cell right cell-positive">+15.2%</div>
+        <div class="table-cell right">14.9%</div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell"><div class="rank-badge rank-2">2</div>个人消费贷</div>
+        <div class="table-cell right">¥389万</div>
+        <div class="table-cell right cell-positive">+8.7%</div>
+        <div class="table-cell right">13.7%</div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell"><div class="rank-badge rank-3">3</div>企业经营贷</div>
+        <div class="table-cell right">¥367万</div>
+        <div class="table-cell right cell-positive">+22.1%</div>
+        <div class="table-cell right">12.9%</div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell"><div class="rank-badge rank-other">4</div>旅行保险</div>
+        <div class="table-cell right">¥298万</div>
+        <div class="table-cell right cell-positive">+5.3%</div>
+        <div class="table-cell right">10.5%</div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell"><div class="rank-badge rank-other">5</div>供应链融资</div>
+        <div class="table-cell right">¥256万</div>
+        <div class="table-cell right cell-negative">-3.2%</div>
+        <div class="table-cell right">9.0%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Regional Distribution -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">区域分布</div>
+      <div class="section-action">查看详情 →</div>
+    </div>
+    <div class="chart-card">
+      <div class="bar-chart" style="height: 140px;">
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--accent); font-size: 10px;">华东</div>
+          <div class="bar-track" style="height: 100px;"><div class="bar-fill blue" style="height: 90%;"></div></div>
+          <div class="bar-label">35%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--success); font-size: 10px;">华南</div>
+          <div class="bar-track" style="height: 100px;"><div class="bar-fill green" style="height: 70%;"></div></div>
+          <div class="bar-label">28%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--warning); font-size: 10px;">华北</div>
+          <div class="bar-track" style="height: 100px;"><div class="bar-fill orange" style="height: 55%;"></div></div>
+          <div class="bar-label">18%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--danger); font-size: 10px;">西南</div>
+          <div class="bar-track" style="height: 100px;"><div class="bar-fill red" style="height: 35%;"></div></div>
+          <div class="bar-label">10%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-value" style="color: var(--info); font-size: 10px;">其他</div>
+          <div class="bar-track" style="height: 100px;"><div class="bar-fill blue" style="height: 25%;"></div></div>
+          <div class="bar-label">9%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Date selector
+    document.querySelectorAll('.date-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
