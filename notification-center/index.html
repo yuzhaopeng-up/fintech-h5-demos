@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0f1a">
+  <title>消息中心</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-base: #0a0f1a; --bg-elevated: #111827; --bg-card: #1f2937;
+      --text-primary: #e8ecf3; --text-secondary: #9ca3af; --text-tertiary: #6b7280;
+      --accent: #3b82f6; --accent-light: #60a5fa; --success: #10b981; --warning: #f59e0b;
+      --danger: #ef4444; --info: #06b6d4; --border: rgba(255,255,255,0.05);
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif; background: var(--bg-base); color: var(--text-primary); min-height: 100vh; padding-bottom: 80px; }
+    .header { padding: 16px; background: var(--bg-elevated); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+    .header-title { font-size: 18px; font-weight: 600; }
+    .header-action { font-size: 13px; color: var(--accent); cursor: pointer; }
+    .tabs { display: flex; padding: 12px 16px; gap: 8px; background: var(--bg-elevated); border-bottom: 1px solid var(--border); overflow-x: auto; }
+    .tab { flex: 1; padding: 10px; text-align: center; font-size: 14px; color: var(--text-secondary); border-radius: var(--radius-md); background: transparent; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .tab.active { background: linear-gradient(135deg, var(--accent), #60a5fa); color: #fff; border-color: transparent; font-weight: 500; }
+    .tab .badge { display: inline-block; min-width: 18px; height: 18px; line-height: 18px; text-align: center; background: var(--danger); color: #fff; font-size: 10px; border-radius: 9px; margin-left: 4px; padding: 0 4px; }
+    .tab.active .badge { background: rgba(255,255,255,0.3); }
+    .notification-list { padding: 12px; }
+    .notification-group { margin-bottom: 16px; }
+    .group-date { font-size: 12px; color: var(--text-tertiary); padding: 8px 4px; font-weight: 500; }
+    .notification-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 10px; display: flex; gap: 12px; transition: all 0.2s; cursor: pointer; }
+    .notification-card:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow); }
+    .notification-card.unread { border-left: 3px solid var(--accent); }
+    .notification-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-system { background: rgba(6,182,212,0.2); } .icon-system::before { content: '🔔'; }
+    .icon-transaction { background: rgba(16,185,129,0.2); } .icon-transaction::before { content: '💰'; }
+    .icon-security { background: rgba(239,68,68,0.2); } .icon-security::before { content: '🛡️'; }
+    .icon-promo { background: rgba(245,158,11,0.2); } .icon-promo::before { content: '🎁'; }
+    .icon-approval { background: rgba(59,130,246,0.2); } .icon-approval::before { content: '✅'; }
+    .icon-reminder { background: rgba(139,92,246,0.2); } .icon-reminder::before { content: '⏰'; }
+    .notification-content { flex: 1; min-width: 0; }
+    .notification-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; line-height: 1.4; }
+    .notification-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px; }
+    .notification-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-tertiary); }
+    .notification-actions { display: flex; gap: 8px; margin-top: 8px; }
+    .notif-btn { padding: 6px 14px; border-radius: var(--radius-sm); font-size: 12px; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); cursor: pointer; }
+    .notif-btn.primary { background: linear-gradient(135deg, var(--accent), #60a5fa); color: #fff; border-color: transparent; }
+    .notif-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+    .unread-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 4px; }
+    /* Detail */
+    .detail-view { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-base); z-index: 200; overflow-y: auto; }
+    .detail-view.active { display: block; }
+    .detail-header { padding: 16px; background: var(--bg-elevated); display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+    .back-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; }
+    .detail-title { font-size: 16px; font-weight: 600; flex: 1; }
+    .detail-content { padding: 20px 16px; }
+    .detail-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 16px; }
+    .detail-heading { font-size: 18px; font-weight: 600; text-align: center; margin-bottom: 8px; }
+    .detail-time { text-align: center; font-size: 12px; color: var(--text-tertiary); margin-bottom: 20px; }
+    .detail-body { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 16px; line-height: 1.8; font-size: 14px; color: var(--text-secondary); }
+    .detail-actions { display: flex; gap: 10px; padding: 0 16px 20px; }
+    .detail-btn { flex: 1; padding: 14px; border-radius: var(--radius-md); font-size: 15px; font-weight: 500; border: none; cursor: pointer; text-align: center; }
+    .detail-btn.primary { background: linear-gradient(135deg, var(--accent), #60a5fa); color: #fff; }
+    .detail-btn.secondary { background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border); }
+    /* Toast */
+    .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-60px); background: var(--bg-elevated); border: 1px solid var(--border); padding: 12px 24px; border-radius: var(--radius-md); font-size: 14px; z-index: 400; transition: transform 0.3s ease; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.success { border-color: var(--success); color: var(--success); }
+    /* Empty */
+    .empty { padding: 60px 16px; text-align: center; }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+    .empty-title { font-size: 16px; color: var(--text-secondary); margin-bottom: 8px; }
+    .empty-desc { font-size: 13px; color: var(--text-tertiary); }
+    /* Settings FAB */
+    .fab { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #60a5fa); color: #fff; border: none; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; box-shadow: var(--shadow); z-index: 50; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-title">🔔 消息中心</div>
+    <div class="header-action" onclick="markAllRead()">全部已读</div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="all">全部 <span class="badge">3</span></div>
+    <div class="tab" data-tab="system">系统</div>
+    <div class="tab" data-tab="transaction">交易</div>
+    <div class="tab" data-tab="security">安全</div>
+  </div>
+
+  <div class="notification-list" id="notificationList"></div>
+
+  <div class="detail-view" id="detailView">
+    <div class="detail-header">
+      <div class="back-btn" onclick="closeDetail()">←</div>
+      <div class="detail-title">消息详情</div>
+    </div>
+    <div id="detailContent"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const notifications = [
+      { id: 1, type: 'approval', icon: 'icon-approval', title: '贷款审批通过', desc: '您的个人消费贷款申请（¥50万）已审批通过，请在7天内完成签约。', time: '14:30', date: '今天', unread: true, action: '立即签约' },
+      { id: 2, type: 'transaction', icon: 'icon-transaction', title: '大额交易提醒', desc: '您的账户于14:25发生一笔¥8,560的支出交易，收款方：京东支付。', time: '14:25', date: '今天', unread: true, action: '查看详情' },
+      { id: 3, type: 'security', icon: 'icon-security', title: '异地登录警告', desc: '检测到您的账户在北京市（IP: 114.114.114.114）登录，如非本人操作请立即修改密码。', time: '12:10', date: '今天', unread: true, action: '确认安全' },
+      { id: 4, type: 'promo', icon: 'icon-promo', title: '新卡专属福利', desc: '恭喜获得经典白金卡！激活后30天内首刷满100元，送100元话费。', time: '10:00', date: '今天', unread: false, action: '查看活动' },
+      { id: 5, type: 'system', icon: 'icon-system', title: '系统维护通知', desc: '系统将于今晚 23:00-02:00 进行例行维护，期间部分服务可能不可用。', time: '09:00', date: '今天', unread: false, action: '了解详情' },
+      { id: 6, type: 'reminder', icon: 'icon-reminder', title: '还款提醒', desc: '您的信用卡账单将于3天后到期，本期应还金额 ¥5,280，请确保账户余额充足。', time: '08:00', date: '今天', unread: false, action: '立即还款' },
+      { id: 7, type: 'transaction', icon: 'icon-transaction', title: '工资到账', desc: '您的工资已到账，金额 ¥18,500，付款方：DemoBank Technologies。', time: '17:00', date: '昨天', unread: false, action: '查看明细' },
+      { id: 8, type: 'security', icon: 'icon-security', title: '密码修改成功', desc: '您的登录密码已于昨日修改成功，如非本人操作请立即联系客服。', time: '16:30', date: '昨天', unread: false, action: '查看记录' },
+      { id: 9, type: 'approval', icon: 'icon-approval', title: '报销审批通过', desc: '您的差旅费报销（¥8,560）已通过审批，款项将在3个工作日内到账。', time: '15:00', date: '昨天', unread: false, action: '查看进度' },
+      { id: 10, type: 'promo', icon: 'icon-promo', title: '理财加息活动', desc: '稳健理财A款限时加息0.5%，年化收益率提升至4.5%，活动截止6月30日。', time: '11:00', date: '昨天', unread: false, action: '立即购买' },
+    ];
+
+    let currentTab = 'all';
+
+    function getFiltered() {
+      if (currentTab === 'all') return notifications;
+      return notifications.filter(n => n.type === currentTab);
+    }
+
+    function renderList() {
+      const list = document.getElementById('notificationList');
+      const filtered = getFiltered();
+      const grouped = {};
+      filtered.forEach(n => {
+        if (!grouped[n.date]) grouped[n.date] = [];
+        grouped[n.date].push(n);
+      });
+
+      if (filtered.length === 0) {
+        list.innerHTML = '<div class="empty"><div class="empty-icon">📭</div><div class="empty-title">暂无消息</div><div class="empty-desc">当前状态下没有消息</div></div>';
+        return;
+      }
+
+      list.innerHTML = Object.entries(grouped).map(([date, items]) => `
+        <div class="notification-group">
+          <div class="group-date">${date}</div>
+          ${items.map(n => `
+            <div class="notification-card ${n.unread ? 'unread' : ''}" onclick="openDetail(${n.id})">
+              ${n.unread ? '<div class="unread-dot"></div>' : '<div style="width:8px;"></div>'}
+              <div class="notification-icon ${n.icon}"></div>
+              <div class="notification-content">
+                <div class="notification-title">${n.title}</div>
+                <div class="notification-desc">${n.desc}</div>
+                <div class="notification-meta">
+                  <span>${n.time}</span>
+                  <span>${n.unread ? '未读' : '已读'}</span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+
+    function openDetail(id) {
+      const n = notifications.find(x => x.id === id);
+      if (!n) return;
+      n.unread = false;
+      renderList();
+      updateBadge();
+
+      document.getElementById('detailContent').innerHTML = `
+        <div class="detail-content">
+          <div class="detail-icon ${n.icon}" style="margin:0 auto 16px;"></div>
+          <div class="detail-heading">${n.title}</div>
+          <div class="detail-time">${n.date} ${n.time}</div>
+          <div class="detail-body">${n.desc}</div>
+        </div>
+        <div class="detail-actions">
+          <button class="detail-btn secondary" onclick="closeDetail()">关闭</button>
+          <button class="detail-btn primary" onclick="actionClick('${n.action}')">${n.action}</button>
+        </div>
+      `;
+      document.getElementById('detailView').classList.add('active');
+    }
+
+    function closeDetail() {
+      document.getElementById('detailView').classList.remove('active');
+    }
+
+    function actionClick(action) {
+      showToast(`${action}成功`, 'success');
+      closeDetail();
+    }
+
+    function markAllRead() {
+      notifications.forEach(n => n.unread = false);
+      renderList();
+      updateBadge();
+      showToast('全部已读', 'success');
+    }
+
+    function updateBadge() {
+      const unread = notifications.filter(n => n.unread).length;
+      const badge = document.querySelector('.tab.active .badge');
+      if (badge) badge.textContent = unread;
+    }
+
+    function showToast(msg, type) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = 'toast ' + type;
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentTab = tab.dataset.tab;
+        renderList();
+      });
+    });
+
+    renderList();
+  </script>
+</body>
+</html>
