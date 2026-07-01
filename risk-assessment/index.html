@@ -1,0 +1,992 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>风险评估 - DemoBank</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      background: #0a0f1a;
+      color: #e8ecf3;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a3a5c 0%, #0d2137 100%);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -30%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(100,180,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .header-title { font-size: 18px; font-weight: 600; }
+    .header-step {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+    .progress-container {
+      position: relative;
+      z-index: 1;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .progress-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 6px;
+      text-align: right;
+    }
+    .section {
+      padding: 20px;
+      background: #111827;
+      margin-bottom: 12px;
+    }
+    .question-card {
+      margin-bottom: 24px;
+    }
+    .question-number {
+      font-size: 12px;
+      color: #3b82f6;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .question-text {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      background: #1f2937;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .option-item:hover {
+      border-color: rgba(59,130,246,0.3);
+    }
+    .option-item.selected {
+      border-color: #3b82f6;
+      background: rgba(59,130,246,0.1);
+    }
+    .option-radio {
+      width: 20px; height: 20px;
+      border: 2px solid #4b5563;
+      border-radius: 50%;
+      margin-right: 12px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .option-item.selected .option-radio {
+      border-color: #3b82f6;
+      background: #3b82f6;
+    }
+    .option-radio::after {
+      content: '';
+      width: 8px; height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .option-item.selected .option-radio::after {
+      opacity: 1;
+    }
+    .option-text {
+      font-size: 14px;
+      line-height: 1.5;
+      flex: 1;
+    }
+    .option-score {
+      font-size: 12px;
+      color: #6b7280;
+      margin-left: 8px;
+    }
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 20px;
+    }
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-primary:not(:disabled):active { opacity: 0.8; }
+    .btn-secondary {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      color: #9ca3af;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: all 0.2s;
+    }
+    .btn-secondary:active { background: rgba(255,255,255,0.05); }
+    .result-card {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .result-icon {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 20px;
+    }
+    .result-icon.conservative { background: rgba(16,185,129,0.15); }
+    .result-icon.moderate { background: rgba(59,130,246,0.15); }
+    .result-icon.balanced { background: rgba(245,158,11,0.15); }
+    .result-icon.aggressive { background: rgba(239,68,68,0.15); }
+    .result-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .result-desc {
+      font-size: 14px;
+      color: #9ca3af;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .result-score {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .result-score-label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+    .result-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .result-feature {
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .result-feature-value {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .result-feature-label {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .result-chart {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    .result-chart svg {
+      transform: rotate(-90deg);
+    }
+    .result-chart-circle {
+      fill: none;
+      stroke-width: 12;
+    }
+    .result-chart-bg { stroke: #1f2937; }
+    .result-chart-fill {
+      stroke: url(#gradient);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s ease;
+    }
+    .result-chart-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .result-chart-score {
+      font-size: 36px;
+      font-weight: 700;
+    }
+    .result-chart-label {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .recommendation-card {
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .recommendation-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .recommendation-desc {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+    .recommendation-tags {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .recommendation-tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .recommendation-tag.green { background: rgba(16,185,129,0.15); color: #10b981; }
+    .recommendation-tag.blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .recommendation-tag.orange { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .disclaimer {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.6;
+      padding: 16px;
+      background: rgba(245,158,11,0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(245,158,11,0.1);
+    }
+    .hidden { display: none !important; }
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1f2937;
+      color: #e8ecf3;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 2000;
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <div class="header-title">风险评估问卷</div>
+      <div class="header-step" id="stepIndicator">第 1 / 10 题</div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressBar" style="width: 10%;"></div>
+      </div>
+      <div class="progress-text" id="progressText">10% 已完成</div>
+    </div>
+  </div>
+
+  <div id="questionContainer">
+    <div class="section" id="question-0">
+      <div class="question-card">
+        <div class="question-number">问题 1/10</div>
+        <div class="question-text">您的年龄是？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(0, 0, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">18-30岁</div>
+            <div class="option-score">+5分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(0, 1, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">31-40岁</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(0, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">41-50岁</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(0, 3, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">51-60岁</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(0, 4, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">60岁以上</div>
+            <div class="option-score">+1分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section hidden" id="question-1">
+      <div class="question-card">
+        <div class="question-number">问题 2/10</div>
+        <div class="question-text">您的家庭年收入大概是多少？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(1, 0, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">10万元以下</div>
+            <div class="option-score">+1分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(1, 1, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">10-30万元</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(1, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">30-50万元</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(1, 3, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">50-100万元</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(1, 4, 5)">
+            <div class="option-radio"></div>
+            <div class="option-text">100万元以上</div>
+            <div class="option-score">+5分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section hidden" id="question-2">
+      <div class="question-card">
+        <div class="question-number">问题 3/10</div>
+        <div class="question-text">您目前的家庭总资产（含房产、存款、投资等）大概是多少？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(2, 0, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">50万元以下</div>
+            <div class="option-score">+1分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(2, 1, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">50-200万元</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(2, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">200-500万元</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(2, 3, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">500-1000万元</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(2, 4, 5)">
+            <div class="option-radio"></div>
+            <div class="option-text">1000万元以上</div>
+            <div class="option-score">+5分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section hidden" id="question-3">
+      <div class="question-card">
+        <div class="question-number">问题 4/10</div>
+        <div class="question-text">您的投资经验如何？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(3, 0, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">没有投资经验，只存过银行定期</div>
+            <div class="option-score">+1分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(3, 1, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">有少量经验，买过货币基金或银行理财</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(3, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">有一定经验，买过债券基金或混合基金</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(3, 3, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">经验丰富，买过股票或股票基金</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(3, 4, 5)">
+            <div class="option-radio"></div>
+            <div class="option-text">非常丰富，做过期货、期权等衍生品交易</div>
+            <div class="option-score">+5分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section hidden" id="question-4">
+      <div class="question-card">
+        <div class="question-number">问题 5/10</div>
+        <div class="question-text">您计划的投资期限是多久？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(4, 0, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">1年以内，可能随时需要用到这笔钱</div>
+            <div class="option-score">+1分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(4, 1, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">1-3年，有明确的短期资金需求</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(4, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">3-5年，有中期理财规划</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(4, 3, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">5-10年，为长期目标投资</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(4, 4, 5)">
+            <div class="option-radio"></div>
+            <div class="option-text">10年以上，为退休或子女教育储备</div>
+            <div class="option-score">+5分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section hidden" id="question-5">
+      <div class="question-card">
+        <div class="question-number">问题 6/10</div>
+        <div class="question-text">您希望的投资回报目标是？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(5, 0, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">保本第一，收益高于银行存款即可</div>
+            <div class="option-score">+1分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(5, 1, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">稳健收益，能接受小幅波动</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(5, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">中等收益，能承受一定的市场波动</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(5, 3, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">较高收益，愿意承担较大波动</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(5, 4, 5)">
+            <div class="option-radio"></div>
+            <div class="option-text">追求高收益，能承受本金大幅波动</div>
+            <div class="option-score">+5分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section hidden" id="question-6">
+      <div class="question-card">
+        <div class="question-number">问题 7/10</div>
+        <div class="question-text">如果您的投资在短期内亏损了10%，您会怎么做？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(6, 0, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">非常焦虑，立即全部卖出止损</div>
+            <div class="option-score">+1分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(6, 1, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">比较担心，会卖出大部分</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(6, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">有点担心，但会暂时持有观望</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(6, 3, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">不太担心，相信长期会涨回来</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(6, 4, 5)">
+            <div class="option-radio"></div>
+            <div class="option-text">完全不在意，甚至会加仓摊薄成本</div>
+            <div class="option-score">+5分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section hidden" id="question-7">
+      <div class="question-card">
+        <div class="question-number">问题 8/10</div>
+        <div class="question-text">您投资时最看重什么？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(7, 0, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">本金安全，绝对不能亏损</div>
+            <div class="option-score">+1分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(7, 1, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">稳定收益，波动越小越好</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(7, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">收益与风险的平衡</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(7, 3, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">较高收益，愿意承担一定风险</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(7, 4, 5)">
+            <div class="option-radio"></div>
+            <div class="option-text">最大化收益，风险是次要的</div>
+            <div class="option-score">+5分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section hidden" id="question-8">
+      <div class="question-card">
+        <div class="question-number">问题 9/10</div>
+        <div class="question-text">您目前的负债情况如何？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(8, 0, 5)">
+            <div class="option-radio"></div>
+            <div class="option-text">无负债</div>
+            <div class="option-score">+5分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(8, 1, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">有房贷/车贷，但还款压力不大</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(8, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">有房贷/车贷，还款占收入一定比例</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(8, 3, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">有较多负债，还款压力较大</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(8, 4, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">负债很多，财务状况紧张</div>
+            <div class="option-score">+1分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section hidden" id="question-9">
+      <div class="question-card">
+        <div class="question-number">问题 10/10</div>
+        <div class="question-text">您每月可用于投资的资金占收入的比例大概是？</div>
+        <div class="options-list">
+          <div class="option-item" onclick="selectOption(9, 0, 1)">
+            <div class="option-radio"></div>
+            <div class="option-text">10%以下</div>
+            <div class="option-score">+1分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(9, 1, 2)">
+            <div class="option-radio"></div>
+            <div class="option-text">10%-20%</div>
+            <div class="option-score">+2分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(9, 2, 3)">
+            <div class="option-radio"></div>
+            <div class="option-text">20%-30%</div>
+            <div class="option-score">+3分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(9, 3, 4)">
+            <div class="option-radio"></div>
+            <div class="option-text">30%-50%</div>
+            <div class="option-score">+4分</div>
+          </div>
+          <div class="option-item" onclick="selectOption(9, 4, 5)">
+            <div class="option-radio"></div>
+            <div class="option-text">50%以上</div>
+            <div class="option-score">+5分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <button class="btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>下一题</button>
+      <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()" style="display: none;">上一题</button>
+    </div>
+  </div>
+
+  <div id="resultContainer" class="hidden">
+    <div class="section">
+      <div class="result-card" id="resultCard">
+        <div class="result-icon" id="resultIcon">🛡️</div>
+        <div class="result-title" id="resultTitle">评估中...</div>
+        <div class="result-desc" id="resultDesc">正在分析您的风险承受能力...</div>
+        <div class="result-chart">
+          <svg width="200" height="200" viewBox="0 0 200 200">
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#10b981"/>
+                <stop offset="50%" style="stop-color:#3b82f6"/>
+                <stop offset="100%" style="stop-color:#f59e0b"/>
+              </linearGradient>
+            </defs>
+            <circle class="result-chart-circle result-chart-bg" cx="100" cy="100" r="88"/>
+            <circle class="result-chart-circle result-chart-fill" id="resultChartFill" cx="100" cy="100" r="88"
+              stroke-dasharray="552.9" stroke-dashoffset="552.9"/>
+          </svg>
+          <div class="result-chart-text">
+            <div class="result-chart-score" id="resultChartScore">--</div>
+            <div class="result-chart-label">风险评分</div>
+          </div>
+        </div>
+        <div class="result-features" id="resultFeatures">
+          <div class="result-feature">
+            <div class="result-feature-value" id="riskLevel">--</div>
+            <div class="result-feature-label">风险等级</div>
+          </div>
+          <div class="result-feature">
+            <div class="result-feature-value" id="expectedReturn">--%</div>
+            <div class="result-feature-label">预期年化收益</div>
+          </div>
+          <div class="result-feature">
+            <div class="result-feature-value" id="maxDrawdown">--%</div>
+            <div class="result-feature-label">最大回撤承受</div>
+          </div>
+          <div class="result-feature">
+            <div class="result-feature-value" id="suitableProducts">--</div>
+            <div class="result-feature-label">适合产品类型</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">推荐资产配置</div>
+      <div class="recommendation-card">
+        <div class="recommendation-title" id="recTitle1">保守型配置</div>
+        <div class="recommendation-desc" id="recDesc1">以保本型产品为主，适合风险厌恶型投资者</div>
+        <div class="recommendation-tags" id="recTags1">
+          <span class="recommendation-tag green">货币基金 40%</span>
+          <span class="recommendation-tag blue">债券基金 40%</span>
+          <span class="recommendation-tag orange">定期存款 20%</span>
+        </div>
+      </div>
+      <div class="recommendation-card">
+        <div class="recommendation-title" id="recTitle2">稳健增值策略</div>
+        <div class="recommendation-desc" id="recDesc2">平衡收益与风险，适合追求稳健回报的投资者</div>
+        <div class="recommendation-tags" id="recTags2">
+          <span class="recommendation-tag blue">债券基金 30%</span>
+          <span class="recommendation-tag orange">混合基金 40%</span>
+          <span class="recommendation-tag green">货币基金 30%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="disclaimer">
+        ⚠️ 风险提示：本评估结果仅供参考，不构成投资建议。投资有风险，入市需谨慎。过往业绩不代表未来表现，请根据自身的风险承受能力和投资目标做出决策。
+      </div>
+      <button class="btn-primary" onclick="restartAssessment()">重新评估</button>
+      <button class="btn-secondary" onclick="showToast('查看推荐产品')">查看推荐产品</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let currentQuestion = 0;
+    const totalQuestions = 10;
+    let answers = new Array(totalQuestions).fill(null);
+    let scores = new Array(totalQuestions).fill(0);
+
+    function selectOption(questionIdx, optionIdx, score) {
+      answers[questionIdx] = optionIdx;
+      scores[questionIdx] = score;
+      
+      // Update UI
+      const questionEl = document.getElementById('question-' + questionIdx);
+      const options = questionEl.querySelectorAll('.option-item');
+      options.forEach((opt, idx) => {
+        opt.classList.toggle('selected', idx === optionIdx);
+      });
+      
+      // Enable next button
+      document.getElementById('nextBtn').disabled = false;
+    }
+
+    function nextQuestion() {
+      if (currentQuestion < totalQuestions - 1) {
+        document.getElementById('question-' + currentQuestion).classList.add('hidden');
+        currentQuestion++;
+        document.getElementById('question-' + currentQuestion).classList.remove('hidden');
+        
+        updateProgress();
+        updateButtons();
+      } else {
+        showResult();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestion > 0) {
+        document.getElementById('question-' + currentQuestion).classList.add('hidden');
+        currentQuestion--;
+        document.getElementById('question-' + currentQuestion).classList.remove('hidden');
+        
+        updateProgress();
+        updateButtons();
+      }
+    }
+
+    function updateProgress() {
+      const progress = ((currentQuestion + 1) / totalQuestions * 100);
+      document.getElementById('progressBar').style.width = progress + '%';
+      document.getElementById('progressText').textContent = Math.round(progress) + '% 已完成';
+      document.getElementById('stepIndicator').textContent = '第 ' + (currentQuestion + 1) + ' / ' + totalQuestions + ' 题';
+    }
+
+    function updateButtons() {
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      
+      if (currentQuestion === totalQuestions - 1) {
+        nextBtn.textContent = '查看结果';
+      } else {
+        nextBtn.textContent = '下一题';
+      }
+      
+      prevBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
+      nextBtn.disabled = answers[currentQuestion] === null;
+    }
+
+    function showResult() {
+      const totalScore = scores.reduce((a, b) => a + b, 0);
+      const maxScore = totalQuestions * 5;
+      const percentage = Math.round((totalScore / maxScore) * 100);
+      
+      document.getElementById('questionContainer').classList.add('hidden');
+      document.getElementById('resultContainer').classList.remove('hidden');
+      document.querySelector('.header').style.display = 'none';
+      
+      // Determine risk profile
+      let riskProfile, icon, color, title, desc, expectedReturn, maxDrawdown, suitableProducts;
+      
+      if (percentage <= 25) {
+        riskProfile = 'conservative';
+        icon = '🛡️';
+        title = '保守型投资者';
+        desc = '您非常注重本金安全，风险承受能力较低。建议选择低风险、保本型产品。';
+        expectedReturn = '3-5';
+        maxDrawdown = '≤5';
+        suitableProducts = '货币基金/债券';
+      } else if (percentage <= 45) {
+        riskProfile = 'moderate';
+        icon = '⚖️';
+        title = '稳健型投资者';
+        desc = '您在追求收益的同时注重风险控制，适合配置稳健型理财产品。';
+        expectedReturn = '5-8';
+        maxDrawdown = '≤15';
+        suitableProducts = '债券/混合基金';
+      } else if (percentage <= 65) {
+        riskProfile = 'balanced';
+        icon = '📊';
+        title = '平衡型投资者';
+        desc = '您能够接受一定的市场波动，适合均衡配置权益类和固定收益类产品。';
+        expectedReturn = '8-12';
+        maxDrawdown = '≤25';
+        suitableProducts = '混合/指数基金';
+      } else if (percentage <= 80) {
+        riskProfile = 'aggressive';
+        icon = '📈';
+        title = '进取型投资者';
+        desc = '您有较强的风险承受能力，追求较高的投资回报，适合配置权益类产品。';
+        expectedReturn = '12-18';
+        maxDrawdown = '≤35';
+        suitableProducts = '股票/指数基金';
+      } else {
+        riskProfile = 'speculative';
+        icon = '🚀';
+        title = '激进型投资者';
+        desc = '您追求最大化收益，能够承受大幅波动甚至本金损失，适合高风险高收益产品。';
+        expectedReturn = '18+';
+        maxDrawdown = '>35';
+        suitableProducts = '股票/衍生品';
+      }
+      
+      // Update result UI
+      const resultIcon = document.getElementById('resultIcon');
+      resultIcon.textContent = icon;
+      resultIcon.className = 'result-icon ' + riskProfile;
+      
+      document.getElementById('resultTitle').textContent = title;
+      document.getElementById('resultDesc').textContent = desc;
+      document.getElementById('resultChartScore').textContent = percentage;
+      
+      // Animate chart
+      setTimeout(() => {
+        const circumference = 552.9;
+        const offset = circumference - (percentage / 100) * circumference;
+        document.getElementById('resultChartFill').style.strokeDashoffset = offset;
+      }, 300);
+      
+      document.getElementById('riskLevel').textContent = title;
+      document.getElementById('expectedReturn').textContent = expectedReturn + '%';
+      document.getElementById('maxDrawdown').textContent = maxDrawdown + '%';
+      document.getElementById('suitableProducts').textContent = suitableProducts;
+      
+      // Update recommendations
+      updateRecommendations(riskProfile);
+    }
+
+    function updateRecommendations(profile) {
+      const configs = {
+        conservative: {
+          title1: '保本策略', desc1: '以货币基金和国债为主，确保本金安全',
+          tags1: ['货币基金 50%', '债券基金 30%', '定期存款 20%'],
+          title2: '稳健增值', desc2: '少量配置债券基金，获取略高收益',
+          tags2: ['债券基金 60%', '货币基金 30%', '银行理财 10%']
+        },
+        moderate: {
+          title1: '稳健配置', desc1: '债券为主，少量权益类资产增强收益',
+          tags1: ['债券基金 40%', '混合基金 30%', '货币基金 30%'],
+          title2: '平衡策略', desc2: '股债均衡配置，追求稳健回报',
+          tags2: ['混合基金 50%', '债券基金 30%', '货币基金 20%']
+        },
+        balanced: {
+          title1: '均衡配置', desc1: '权益与固定收益均衡配置',
+          tags1: ['混合基金 40%', '指数基金 30%', '债券基金 30%'],
+          title2: '成长策略', desc2: '增加权益类配置，追求长期增值',
+          tags2: ['指数基金 40%', '混合基金 35%', '债券基金 25%']
+        },
+        aggressive: {
+          title1: '成长配置', desc1: '以权益类资产为主，追求高收益',
+          tags1: ['股票基金 45%', '指数基金 35%', '债券基金 20%'],
+          title2: '进取策略', desc2: '高权益配置，适合长期投资者',
+          tags2: ['股票基金 60%', '指数基金 25%', '混合基金 15%']
+        },
+        speculative: {
+          title1: '激进配置', desc1: '最大化权益 exposure，追求超额收益',
+          tags1: ['股票基金 50%', '指数基金 30%', 'ETF 20%'],
+          title2: '交易型策略', desc2: '灵活配置，把握市场机会',
+          tags2: ['股票 40%', '指数基金 30%', '衍生品 20%', '债券 10%']
+        }
+      };
+      
+      const config = configs[profile];
+      document.getElementById('recTitle1').textContent = config.title1;
+      document.getElementById('recDesc1').textContent = config.desc1;
+      document.getElementById('recTags1').innerHTML = config.tags1.map(t => 
+        `<span class="recommendation-tag ${t.includes('货币') ? 'green' : t.includes('债券') ? 'blue' : 'orange'}">${t}</span>`
+      ).join('');
+      
+      document.getElementById('recTitle2').textContent = config.title2;
+      document.getElementById('recDesc2').textContent = config.desc2;
+      document.getElementById('recTags2').innerHTML = config.tags2.map(t => 
+        `<span class="recommendation-tag ${t.includes('货币') ? 'green' : t.includes('债券') ? 'blue' : 'orange'}">${t}</span>`
+      ).join('');
+    }
+
+    function restartAssessment() {
+      currentQuestion = 0;
+      answers = new Array(totalQuestions).fill(null);
+      scores = new Array(totalQuestions).fill(0);
+      
+      document.getElementById('resultContainer').classList.add('hidden');
+      document.getElementById('questionContainer').classList.remove('hidden');
+      document.querySelector('.header').style.display = 'block';
+      
+      for (let i = 0; i < totalQuestions; i++) {
+        document.getElementById('question-' + i).classList.toggle('hidden', i !== 0);
+      }
+      
+      // Reset all selections
+      document.querySelectorAll('.option-item').forEach(opt => opt.classList.remove('selected'));
+      
+      updateProgress();
+      updateButtons();
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+  </script>
+</body>
+</html>
