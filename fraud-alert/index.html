@@ -1,0 +1,769 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>反欺诈预警 - DemoBank</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      background: #0a0f1a;
+      color: #e8ecf3;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a3a5c 0%, #0d2137 100%);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -30%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(239,68,68,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .header-title { font-size: 18px; font-weight: 600; }
+    .header-badge {
+      background: rgba(239,68,68,0.2);
+      color: #ef4444;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .risk-overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .risk-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .risk-card-value {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .risk-card-label {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .risk-high { color: #ef4444; }
+    .risk-medium { color: #f59e0b; }
+    .risk-low { color: #10b981; }
+    .security-score {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .score-circle {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: conic-gradient(#10b981 0deg, #10b981 324deg, #1f2937 324deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .score-circle::before {
+      content: '';
+      width: 66px; height: 66px;
+      background: #0f172a;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .score-number {
+      position: relative;
+      font-size: 24px;
+      font-weight: 700;
+      color: #10b981;
+    }
+    .score-info { flex: 1; }
+    .score-title { font-size: 15px; font-weight: 600; }
+    .score-desc { font-size: 12px; color: #6b7280; margin-top: 4px; }
+    .score-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: #10b981;
+      margin-top: 6px;
+      background: rgba(16,185,129,0.1);
+      padding: 2px 10px;
+      border-radius: 6px;
+    }
+    .section {
+      padding: 20px;
+      background: #111827;
+      margin-bottom: 12px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::before {
+      content: '';
+      width: 4px; height: 16px;
+      background: #ef4444;
+      border-radius: 2px;
+    }
+    .section-action {
+      font-size: 13px;
+      color: #3b82f6;
+      cursor: pointer;
+    }
+    .alert-item {
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-left: 4px solid;
+      transition: transform 0.2s;
+    }
+    .alert-item:active { transform: scale(0.98); }
+    .alert-item.high { border-left-color: #ef4444; }
+    .alert-item.medium { border-left-color: #f59e0b; }
+    .alert-item.low { border-left-color: #3b82f6; }
+    .alert-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .alert-type {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .alert-time {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .alert-desc {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .alert-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .alert-tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .alert-tag.high { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .alert-tag.medium { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .alert-tag.low { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .alert-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .alert-btn {
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      font-weight: 500;
+    }
+    .alert-btn-primary {
+      background: #3b82f6;
+      color: #fff;
+    }
+    .alert-btn-secondary {
+      background: #374151;
+      color: #9ca3af;
+    }
+    .risk-type-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .risk-type-card {
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .risk-type-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 12px;
+    }
+    .risk-type-icon.red { background: rgba(239,68,68,0.15); }
+    .risk-type-icon.orange { background: rgba(245,158,11,0.15); }
+    .risk-type-icon.blue { background: rgba(59,130,246,0.15); }
+    .risk-type-icon.green { background: rgba(16,185,129,0.15); }
+    .risk-type-name {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .risk-type-count {
+      font-size: 20px;
+      font-weight: 700;
+      color: #e8ecf3;
+    }
+    .risk-type-label {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+    .chart-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .chart-label {
+      font-size: 12px;
+      color: #9ca3af;
+      width: 80px;
+      flex-shrink: 0;
+    }
+    .chart-track {
+      flex: 1;
+      height: 8px;
+      background: #374151;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .chart-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .chart-value {
+      font-size: 13px;
+      font-weight: 600;
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #374151;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .timeline-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -24px;
+      top: 2px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      border: 2px solid #1f2937;
+    }
+    .timeline-dot.high { background: #ef4444; }
+    .timeline-dot.medium { background: #f59e0b; }
+    .timeline-dot.low { background: #3b82f6; }
+    .timeline-dot.resolved { background: #10b981; }
+    .timeline-content {
+      background: #1f2937;
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .timeline-desc {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .timeline-time {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .rule-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .rule-item:last-child { border-bottom: none; }
+    .rule-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .rule-icon.active { background: rgba(16,185,129,0.15); }
+    .rule-icon.inactive { background: rgba(107,114,128,0.15); }
+    .rule-content { flex: 1; }
+    .rule-name { font-size: 14px; font-weight: 500; }
+    .rule-desc { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .rule-toggle {
+      width: 44px; height: 26px;
+      background: #374151;
+      border-radius: 13px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+    .rule-toggle.active { background: #10b981; }
+    .rule-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px; height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      top: 2px; left: 2px;
+      transition: transform 0.3s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .rule-toggle.active::after { transform: translateX(18px); }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .stats-item {
+      text-align: center;
+      padding: 12px 4px;
+    }
+    .stats-value {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .stats-label {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1f2937;
+      color: #e8ecf3;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 2000;
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-content {
+      background: #1f2937;
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%;
+      max-width: 400px;
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .modal-desc { font-size: 14px; color: #6b7280; margin-bottom: 20px; }
+    .modal-actions { display: flex; gap: 12px; }
+    .modal-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+    .modal-btn-cancel { background: #374151; color: #e8ecf3; }
+    .modal-btn-confirm { background: #10b981; color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <div class="header-title">🛡️ 反欺诈预警中心</div>
+      <div class="header-badge">● 实时监控中</div>
+    </div>
+    <div class="risk-overview">
+      <div class="risk-card">
+        <div class="risk-card-value risk-high">12</div>
+        <div class="risk-card-label">高风险预警</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card-value risk-medium">28</div>
+        <div class="risk-card-label">中风险预警</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card-value risk-low">156</div>
+        <div class="risk-card-label">已处置</div>
+      </div>
+    </div>
+    <div class="security-score">
+      <div class="score-circle">
+        <div class="score-number">90</div>
+      </div>
+      <div class="score-info">
+        <div class="score-title">安全防护评分</div>
+        <div class="score-desc">系统运行正常， fraud 检出率 99.2%</div>
+        <div class="score-status">✓ 防护等级优秀</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">实时预警</div>
+      <div class="section-action" onclick="showToast('查看全部预警')">查看全部 ›</div>
+    </div>
+    <div class="alert-item high" onclick="showAlertDetail('异常登录')">
+      <div class="alert-header">
+        <div class="alert-type">⚠️ 异常登录检测</div>
+        <div class="alert-time">2分钟前</div>
+      </div>
+      <div class="alert-desc">用户 139****8888 在异地（IP: 45.32.xxx.xxx）尝试登录，与常用登录地（北京）不符</div>
+      <div class="alert-meta">
+        <span class="alert-tag high">高风险</span>
+        <div class="alert-actions">
+          <button class="alert-btn alert-btn-secondary" onclick="event.stopPropagation(); showToast('已忽略')">忽略</button>
+          <button class="alert-btn alert-btn-primary" onclick="event.stopPropagation(); showBlockModal()">拦截</button>
+        </div>
+      </div>
+    </div>
+    <div class="alert-item medium" onclick="showAlertDetail('高频交易')">
+      <div class="alert-header">
+        <div class="alert-type">📊 高频交易预警</div>
+        <div class="alert-time">5分钟前</div>
+      </div>
+      <div class="alert-desc">账户 88012345678 在 1 分钟内发起 15 笔转账交易，触发高频交易规则</div>
+      <div class="alert-meta">
+        <span class="alert-tag medium">中风险</span>
+        <div class="alert-actions">
+          <button class="alert-btn alert-btn-secondary" onclick="event.stopPropagation(); showToast('已忽略')">忽略</button>
+          <button class="alert-btn alert-btn-primary" onclick="event.stopPropagation(); showBlockModal()">拦截</button>
+        </div>
+      </div>
+    </div>
+    <div class="alert-item low" onclick="showAlertDetail('设备变更')">
+      <div class="alert-header">
+        <div class="alert-type">📱 新设备登录</div>
+        <div class="alert-time">12分钟前</div>
+      </div>
+      <div class="alert-desc">用户在新设备（iPhone 15 Pro, iOS 17.2）上首次登录，已发送验证通知</div>
+      <div class="alert-meta">
+        <span class="alert-tag low">低风险</span>
+        <div class="alert-actions">
+          <button class="alert-btn alert-btn-secondary" onclick="event.stopPropagation(); showToast('已忽略')">忽略</button>
+          <button class="alert-btn alert-btn-primary" onclick="event.stopPropagation(); showToast('已确认安全')">确认</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">风险类型分布</div>
+    <div class="risk-type-grid">
+      <div class="risk-type-card">
+        <div class="risk-type-icon red">🎣</div>
+        <div class="risk-type-name">钓鱼欺诈</div>
+        <div class="risk-type-count">23</div>
+        <div class="risk-type-label">本月拦截</div>
+      </div>
+      <div class="risk-type-card">
+        <div class="risk-type-icon orange">💳</div>
+        <div class="risk-type-name">盗刷交易</div>
+        <div class="risk-type-count">17</div>
+        <div class="risk-type-label">本月拦截</div>
+      </div>
+      <div class="risk-type-card">
+        <div class="risk-type-icon blue">🤖</div>
+        <div class="risk-type-name">机器人攻击</div>
+        <div class="risk-type-count">45</div>
+        <div class="risk-type-label">本月拦截</div>
+      </div>
+      <div class="risk-type-card">
+        <div class="risk-type-icon green">🔄</div>
+        <div class="risk-type-name">洗钱交易</div>
+        <div class="risk-type-count">8</div>
+        <div class="risk-type-label">本月拦截</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">风险趋势（近7天）</div>
+    <div class="chart-bar">
+      <div class="chart-label">高风险</div>
+      <div class="chart-track">
+        <div class="chart-fill" style="width: 35%; background: #ef4444;"></div>
+      </div>
+      <div class="chart-value risk-high">12</div>
+    </div>
+    <div class="chart-bar">
+      <div class="chart-label">中风险</div>
+      <div class="chart-track">
+        <div class="chart-fill" style="width: 65%; background: #f59e0b;"></div>
+      </div>
+      <div class="chart-value risk-medium">28</div>
+    </div>
+    <div class="chart-bar">
+      <div class="chart-label">低风险</div>
+      <div class="chart-track">
+        <div class="chart-fill" style="width: 45%; background: #3b82f6;"></div>
+      </div>
+      <div class="chart-value">19</div>
+    </div>
+    <div class="chart-bar">
+      <div class="chart-label">已处置</div>
+      <div class="chart-track">
+        <div class="chart-fill" style="width: 85%; background: #10b981;"></div>
+      </div>
+      <div class="chart-value" style="color: #10b981;">156</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">处置时间线</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot high"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">拦截可疑转账 ¥50,000</div>
+          <div class="timeline-desc">检测到异常收款账户，已自动拦截</div>
+          <div class="timeline-time">今天 14:23</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot medium"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">限制高频交易账户</div>
+          <div class="timeline-desc">用户 8801****5678 触发频率限制</div>
+          <div class="timeline-time">今天 13:15</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot resolved"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">解除误报限制</div>
+          <div class="timeline-desc">用户确认交易为本人操作，已恢复</div>
+          <div class="timeline-time">今天 11:42</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot low"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">新设备验证通过</div>
+          <div class="timeline-desc">用户完成短信验证，标记为可信设备</div>
+          <div class="timeline-time">今天 10:08</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">防护规则配置</div>
+    <div class="rule-item">
+      <div class="rule-icon active">🔐</div>
+      <div class="rule-content">
+        <div class="rule-name">异地登录检测</div>
+        <div class="rule-desc">非常用地点登录触发二次验证</div>
+      </div>
+      <div class="rule-toggle active" onclick="toggleRule(this)"></div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon active">📊</div>
+      <div class="rule-content">
+        <div class="rule-name">高频交易监控</div>
+        <div class="rule-desc">1分钟内超过10笔交易触发预警</div>
+      </div>
+      <div class="rule-toggle active" onclick="toggleRule(this)"></div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon active">💰</div>
+      <div class="rule-content">
+        <div class="rule-name">大额转账审核</div>
+        <div class="rule-desc">单笔超过5万元需人工审核</div>
+      </div>
+      <div class="rule-toggle active" onclick="toggleRule(this)"></div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon active">📱</div>
+      <div class="rule-content">
+        <div class="rule-name">新设备验证</div>
+        <div class="rule-desc">首次登录新设备需短信验证</div>
+      </div>
+      <div class="rule-toggle active" onclick="toggleRule(this)"></div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon inactive">🤖</div>
+      <div class="rule-content">
+        <div class="rule-name">行为生物识别</div>
+        <div class="rule-desc">基于操作习惯识别异常行为</div>
+      </div>
+      <div class="rule-toggle" onclick="toggleRule(this)"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">今日统计</div>
+    <div class="stats-grid">
+      <div class="stats-item">
+        <div class="stats-value risk-high">59</div>
+        <div class="stats-label">风险事件</div>
+      </div>
+      <div class="stats-item">
+        <div class="stats-value" style="color: #10b981;">156</div>
+        <div class="stats-label">已处置</div>
+      </div>
+      <div class="stats-item">
+        <div class="stats-value" style="color: #3b82f6;">99.2%</div>
+        <div class="stats-label">检出率</div>
+      </div>
+      <div class="stats-item">
+        <div class="stats-value" style="color: #f59e0b;">0.3%</div>
+        <div class="stats-label">误报率</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="blockModal">
+    <div class="modal-content">
+      <div class="modal-title">确认拦截？</div>
+      <div class="modal-desc">拦截后该操作将被阻止，用户将收到安全提醒通知</div>
+      <div class="modal-actions">
+        <button class="modal-btn modal-btn-cancel" onclick="hideBlockModal()">取消</button>
+        <button class="modal-btn modal-btn-confirm" onclick="confirmBlock()">确认拦截</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    function showAlertDetail(type) {
+      showToast(`查看 ${type} 详情`);
+    }
+
+    function showBlockModal() {
+      document.getElementById('blockModal').classList.add('active');
+    }
+
+    function hideBlockModal() {
+      document.getElementById('blockModal').classList.remove('active');
+    }
+
+    function confirmBlock() {
+      hideBlockModal();
+      showToast('✓ 已拦截该操作');
+    }
+
+    function toggleRule(el) {
+      const isActive = el.classList.contains('active');
+      el.classList.toggle('active');
+      const item = el.closest('.rule-item');
+      const icon = item.querySelector('.rule-icon');
+      const name = item.querySelector('.rule-name').textContent;
+      icon.classList.toggle('active', !isActive);
+      icon.classList.toggle('inactive', isActive);
+      showToast(`${!isActive ? '已启用' : '已停用'} ${name}`);
+    }
+
+    document.getElementById('blockModal').addEventListener('click', function(e) {
+      if (e.target === this) hideBlockModal();
+    });
+  </script>
+</body>
+</html>
