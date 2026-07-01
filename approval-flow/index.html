@@ -1,0 +1,411 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0f1a">
+  <title>审批中心</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-base: #0a0f1a; --bg-elevated: #111827; --bg-card: #1f2937;
+      --text-primary: #e8ecf3; --text-secondary: #9ca3af; --text-tertiary: #6b7280;
+      --accent: #3b82f6; --accent-light: #60a5fa; --success: #10b981; --warning: #f59e0b;
+      --danger: #ef4444; --info: #06b6d4; --border: rgba(255,255,255,0.05);
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif; background: var(--bg-base); color: var(--text-primary); min-height: 100vh; padding-bottom: 80px; }
+    /* Header */
+    .header { padding: 16px; background: var(--bg-elevated); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .header-title { font-size: 18px; font-weight: 600; text-align: center; }
+    /* Tabs */
+    .tabs { display: flex; padding: 12px 16px; gap: 8px; background: var(--bg-elevated); border-bottom: 1px solid var(--border); overflow-x: auto; }
+    .tab { flex: 1; padding: 10px; text-align: center; font-size: 14px; color: var(--text-secondary); border-radius: var(--radius-md); background: transparent; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .tab.active { background: linear-gradient(135deg, var(--accent), #60a5fa); color: #fff; border-color: transparent; font-weight: 500; }
+    .tab .badge { display: inline-block; min-width: 18px; height: 18px; line-height: 18px; text-align: center; background: var(--danger); color: #fff; font-size: 10px; border-radius: 9px; margin-left: 4px; padding: 0 4px; }
+    .tab.active .badge { background: rgba(255,255,255,0.3); }
+    /* Approval List */
+    .approval-list { padding: 12px; }
+    .approval-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; }
+    .approval-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .approval-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .approval-type { display: flex; align-items: center; gap: 8px; }
+    .approval-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .approval-icon.loan { background: rgba(59,130,246,0.2); } .approval-icon.loan::before { content: '💰'; }
+    .approval-icon.expense { background: rgba(16,185,129,0.2); } .approval-icon.expense::before { content: '📄'; }
+    .approval-icon.leave { background: rgba(245,158,11,0.2); } .approval-icon.leave::before { content: '🏖️'; }
+    .approval-icon.project { background: rgba(6,182,212,0.2); } .approval-icon.project::before { content: '📁'; }
+    .approval-title { font-size: 15px; font-weight: 500; }
+    .approval-subtitle { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+    .approval-status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+    .status-pending { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .status-approved { background: rgba(16,185,129,0.15); color: var(--success); }
+    .status-rejected { background: rgba(239,68,68,0.15); color: var(--danger); }
+    .status-processing { background: rgba(6,182,212,0.15); color: var(--info); }
+    .approval-body { border-top: 1px solid var(--border); padding-top: 12px; }
+    .approval-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
+    .approval-row:last-child { margin-bottom: 0; }
+    .approval-label { color: var(--text-secondary); }
+    .approval-value { color: var(--text-primary); font-weight: 500; }
+    .approval-value.highlight { color: var(--accent-light); }
+    .approval-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .approval-time { font-size: 12px; color: var(--text-tertiary); }
+    .approval-user { display: flex; align-items: center; gap: 6px; }
+    .user-avatar { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #10b981); display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; }
+    .user-name { font-size: 12px; color: var(--text-secondary); }
+    /* Detail View */
+    .detail-view { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-base); z-index: 200; overflow-y: auto; }
+    .detail-view.active { display: block; }
+    .detail-header { padding: 16px; background: var(--bg-elevated); display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+    .back-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; }
+    .detail-title { font-size: 16px; font-weight: 600; flex: 1; }
+    /* Flow Diagram */
+    .flow-section { padding: 16px; }
+    .section-title { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+    .flow-diagram { position: relative; padding-left: 24px; }
+    .flow-diagram::before { content: ''; position: absolute; left: 11px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--success)); }
+    .flow-node { position: relative; margin-bottom: 24px; padding-left: 20px; }
+    .flow-node::before { content: ''; position: absolute; left: -17px; top: 4px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent); background: var(--bg-base); }
+    .flow-node.completed::before { background: var(--success); border-color: var(--success); }
+    .flow-node.current::before { background: var(--accent); border-color: var(--accent); animation: pulse 2s infinite; }
+    .flow-node.rejected::before { background: var(--danger); border-color: var(--danger); }
+    @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.4); } 50% { box-shadow: 0 0 0 8px rgba(59,130,246,0); } }
+    .flow-node-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+    .flow-node-meta { font-size: 12px; color: var(--text-tertiary); }
+    .flow-node-comment { margin-top: 8px; padding: 8px 12px; background: var(--bg-elevated); border-radius: var(--radius-sm); font-size: 12px; color: var(--text-secondary); }
+    /* Info Cards */
+    .info-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 12px; }
+    .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { font-size: 13px; color: var(--text-secondary); }
+    .info-value { font-size: 13px; color: var(--text-primary); font-weight: 500; }
+    .info-value.amount { color: var(--accent-light); font-size: 15px; }
+    /* Action Buttons */
+    .action-bar { position: fixed; bottom: 0; left: 0; right: 0; padding: 12px 16px; background: var(--bg-elevated); border-top: 1px solid var(--border); display: flex; gap: 10px; z-index: 50; }
+    .action-btn { flex: 1; padding: 14px; border-radius: var(--radius-md); font-size: 15px; font-weight: 500; border: none; cursor: pointer; transition: all 0.2s; text-align: center; }
+    .action-btn.reject { background: rgba(239,68,68,0.15); color: var(--danger); border: 1px solid var(--danger); }
+    .action-btn.approve { background: linear-gradient(135deg, var(--success), #059669); color: #fff; }
+    .action-btn.transfer { background: rgba(59,130,246,0.15); color: var(--accent); border: 1px solid var(--accent); }
+    .action-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .action-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    /* Modal */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 300; align-items: center; justify-content: center; padding: 16px; }
+    .modal-overlay.active { display: flex; }
+    .modal-content { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); width: 100%; max-width: 400px; padding: 20px; }
+    .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+    .modal-textarea { width: 100%; min-height: 80px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-elevated); color: var(--text-primary); font-size: 14px; resize: vertical; margin-bottom: 16px; }
+    .modal-textarea:focus { outline: none; border-color: var(--accent); }
+    .modal-actions { display: flex; gap: 10px; }
+    .modal-btn { flex: 1; padding: 12px; border-radius: var(--radius-sm); font-size: 14px; border: none; cursor: pointer; }
+    .modal-btn.cancel { background: var(--bg-elevated); color: var(--text-secondary); border: 1px solid var(--border); }
+    .modal-btn.confirm { background: linear-gradient(135deg, var(--accent), #60a5fa); color: #fff; }
+    /* Toast */
+    .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-60px); background: var(--bg-elevated); border: 1px solid var(--border); padding: 12px 24px; border-radius: var(--radius-md); font-size: 14px; z-index: 400; transition: transform 0.3s ease; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.success { border-color: var(--success); color: var(--success); }
+    .toast.error { border-color: var(--danger); color: var(--danger); }
+    /* Search */
+    .search-bar { padding: 12px 16px; background: var(--bg-elevated); }
+    .search-input { width: 100%; padding: 10px 16px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-card); color: var(--text-primary); font-size: 14px; }
+    .search-input:focus { outline: none; border-color: var(--accent); }
+    .search-input::placeholder { color: var(--text-tertiary); }
+    /* Stats */
+    .stats-bar { display: flex; padding: 12px 16px; gap: 8px; background: var(--bg-elevated); border-bottom: 1px solid var(--border); }
+    .stat-item { flex: 1; text-align: center; padding: 10px; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border); }
+    .stat-value { font-size: 18px; font-weight: 600; }
+    .stat-value.pending { color: var(--warning); }
+    .stat-value.approved { color: var(--success); }
+    .stat-value.rejected { color: var(--danger); }
+    .stat-label { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+    /* Empty State */
+    .empty-state { padding: 60px 16px; text-align: center; }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+    .empty-title { font-size: 16px; color: var(--text-secondary); margin-bottom: 8px; }
+    .empty-desc { font-size: 13px; color: var(--text-tertiary); }
+  </style>
+</head>
+<body>
+  <div class="header"><div class="header-title">📋 审批中心</div></div>
+  
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-value pending" id="stat-pending">5</div><div class="stat-label">待审批</div></div>
+    <div class="stat-item"><div class="stat-value approved" id="stat-approved">12</div><div class="stat-label">已通过</div></div>
+    <div class="stat-item"><div class="stat-value rejected" id="stat-rejected">2</div><div class="stat-label">已拒绝</div></div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="pending">待审批 <span class="badge">5</span></div>
+    <div class="tab" data-tab="approved">已审批</div>
+    <div class="tab" data-tab="mine">我发起的</div>
+  </div>
+
+  <div class="search-bar"><input type="text" class="search-input" placeholder="搜索审批标题、申请人..." id="searchInput"></div>
+
+  <div class="approval-list" id="approvalList"></div>
+
+  <!-- Detail View -->
+  <div class="detail-view" id="detailView">
+    <div class="detail-header">
+      <div class="back-btn" onclick="closeDetail()">←</div>
+      <div class="detail-title" id="detailTitle">审批详情</div>
+    </div>
+    <div id="detailContent"></div>
+  </div>
+
+  <!-- Action Modal -->
+  <div class="modal-overlay" id="actionModal">
+    <div class="modal-content">
+      <div class="modal-title" id="modalTitle">审批意见</div>
+      <textarea class="modal-textarea" placeholder="请输入审批意见（选填）..." id="modalComment"></textarea>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" onclick="closeModal()">取消</button>
+        <button class="modal-btn confirm" id="modalConfirmBtn" onclick="confirmAction()">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Data
+    const approvals = [
+      { id: 'APV-2026-0001', type: 'loan', title: '贷款申请审批', subtitle: '个人消费贷款', applicant: '张三', avatar: '张', amount: '500,000', status: 'pending', time: '2026-06-29 14:30', currentStep: 2, totalSteps: 4, priority: 'high', desc: '申请个人消费贷款50万元，期限3年，用于房屋装修。', steps: [
+        { title: '提交申请', user: '张三', time: '2026-06-29 10:00', status: 'completed', comment: '已提交完整资料' },
+        { title: '客户经理初审', user: '李经理', time: '2026-06-29 11:20', status: 'completed', comment: '资料齐全，建议通过' },
+        { title: '风控部门审核', user: '王风控', time: '2026-06-29 14:30', status: 'current', comment: '正在审核中' },
+        { title: '最终审批', user: '赵总监', time: '—', status: 'pending', comment: '' },
+      ], info: { '申请金额': '¥500,000', '贷款期限': '36个月', '年化利率': '4.85%', '还款方式': '等额本息', '用途': '房屋装修', '抵押物': '房产' } },
+      { id: 'APV-2026-0002', type: 'expense', title: '费用报销审批', subtitle: '差旅费报销', applicant: '李四', avatar: '李', amount: '8,560', status: 'pending', time: '2026-06-29 13:15', currentStep: 1, totalSteps: 3, priority: 'normal', desc: '6月上海出差差旅费报销，含机票、酒店、餐饮费用。', steps: [
+        { title: '提交报销', user: '李四', time: '2026-06-29 13:15', status: 'completed', comment: '发票已上传' },
+        { title: '部门经理审批', user: '陈经理', time: '2026-06-29 14:00', status: 'current', comment: '' },
+        { title: '财务审核', user: '刘财务', time: '—', status: 'pending', comment: '' },
+      ], info: { '报销金额': '¥8,560', '报销类型': '差旅费', '出差时间': '2026-06-20 至 06-25', '出差地点': '上海', '发票数量': '12张', '关联项目': 'P-2026-003' } },
+      { id: 'APV-2026-0003', type: 'leave', title: '请假审批', subtitle: '年假申请', applicant: '王五', avatar: '王', amount: '—', status: 'pending', time: '2026-06-29 09:00', currentStep: 1, totalSteps: 2, priority: 'normal', desc: '申请年假5天，用于家庭旅行。', steps: [
+        { title: '提交申请', user: '王五', time: '2026-06-29 09:00', status: 'completed', comment: '已交接工作安排' },
+        { title: '主管审批', user: '孙主管', time: '2026-06-29 10:30', status: 'current', comment: '' },
+      ], info: { '请假类型': '年假', '开始日期': '2026-07-01', '结束日期': '2026-07-05', '请假天数': '5天', '剩余年假': '12天', '工作交接': '已安排' } },
+      { id: 'APV-2026-0004', type: 'project', title: '项目立项审批', subtitle: '供应链金融平台升级', applicant: '赵六', avatar: '赵', amount: '2,000,000', status: 'pending', time: '2026-06-28 16:00', currentStep: 3, totalSteps: 5, priority: 'high', desc: '供应链金融平台技术升级项目，预算200万元。', steps: [
+        { title: '项目申请', user: '赵六', time: '2026-06-28 16:00', status: 'completed', comment: '可行性报告已提交' },
+        { title: '技术评审', user: '技术委员会', time: '2026-06-28 17:30', status: 'completed', comment: '技术方案可行' },
+        { title: '预算审核', user: '财务总监', time: '2026-06-29 09:00', status: 'completed', comment: '预算合理' },
+        { title: '总裁审批', user: '马总裁', time: '2026-06-29 15:00', status: 'current', comment: '需要补充ROI分析' },
+        { title: '董事会决议', user: '董事会', time: '—', status: 'pending', comment: '' },
+      ], info: { '项目预算': '¥2,000,000', '项目周期': '8个月', '预期ROI': '25%', '技术团队': '15人', '关联系统': '核心系统、支付系统', '风险等级': '中等' } },
+      { id: 'APV-2026-0005', type: 'loan', title: '贷款申请审批', subtitle: '企业经营贷款', applicant: '钱七', avatar: '钱', amount: '2,000,000', status: 'pending', time: '2026-06-28 11:00', currentStep: 1, totalSteps: 4, priority: 'high', desc: '企业经营贷款200万元，用于扩大生产规模。', steps: [
+        { title: '提交申请', user: '钱七', time: '2026-06-28 11:00', status: 'completed', comment: '营业执照已更新' },
+        { title: '客户经理初审', user: '李经理', time: '2026-06-29 10:00', status: 'current', comment: '' },
+        { title: '风控部门审核', user: '王风控', time: '—', status: 'pending', comment: '' },
+        { title: '最终审批', user: '赵总监', time: '—', status: 'pending', comment: '' },
+      ], info: { '申请金额': '¥2,000,000', '贷款期限': '24个月', '年化利率': '5.20%', '还款方式': '先息后本', '企业类型': '制造业', '年营业额': '5000万' } },
+      { id: 'APV-2026-0006', type: 'expense', title: '费用报销审批', subtitle: '办公用品采购', applicant: '孙八', avatar: '孙', amount: '3,200', status: 'approved', time: '2026-06-27 10:00', currentStep: 3, totalSteps: 3, priority: 'low', desc: 'Q2办公用品集中采购。', steps: [
+        { title: '提交申请', user: '孙八', time: '2026-06-27 10:00', status: 'completed', comment: '清单已附' },
+        { title: '部门审批', user: '陈经理', time: '2026-06-27 11:00', status: 'completed', comment: '同意采购' },
+        { title: '财务审核', user: '刘财务', time: '2026-06-27 14:00', status: 'completed', comment: '已报销' },
+      ], info: { '报销金额': '¥3,200', '采购类型': '办公用品', '供应商': '某供应商', '发票状态': '已验证', '报销时间': '2026-06-27' } },
+      { id: 'APV-2026-0007', type: 'leave', title: '请假审批', subtitle: '病假申请', applicant: '周九', avatar: '周', amount: '—', status: 'rejected', time: '2026-06-26 08:00', currentStep: 2, totalSteps: 2, priority: 'normal', desc: '因病申请病假3天。', steps: [
+        { title: '提交申请', user: '周九', time: '2026-06-26 08:00', status: 'completed', comment: '已上传病历' },
+        { title: '主管审批', user: '孙主管', time: '2026-06-26 10:00', status: 'rejected', comment: '缺少医院诊断证明，请补充后重新提交' },
+      ], info: { '请假类型': '病假', '开始日期': '2026-06-26', '结束日期': '2026-06-28', '请假天数': '3天', '医院': '某市第一医院', '驳回原因': '缺少诊断证明' } },
+    ];
+
+    let currentTab = 'pending';
+    let currentApproval = null;
+    let pendingAction = null;
+
+    function getIconClass(type) {
+      const map = { loan: 'loan', expense: 'expense', leave: 'leave', project: 'project' };
+      return map[type] || 'expense';
+    }
+
+    function getStatusClass(status) {
+      const map = { pending: 'status-pending', approved: 'status-approved', rejected: 'status-rejected', processing: 'status-processing' };
+      return map[status] || 'status-pending';
+    }
+
+    function getStatusText(status) {
+      const map = { pending: '待审批', approved: '已通过', rejected: '已拒绝', processing: '审批中' };
+      return map[status] || status;
+    }
+
+    function renderList() {
+      const list = document.getElementById('approvalList');
+      const filtered = approvals.filter(a => {
+        if (currentTab === 'pending') return a.status === 'pending' || a.status === 'processing';
+        if (currentTab === 'approved') return a.status === 'approved';
+        if (currentTab === 'mine') return a.applicant === '张三';
+        return true;
+      });
+
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const searched = search ? filtered.filter(a => a.title.toLowerCase().includes(search) || a.applicant.toLowerCase().includes(search) || a.id.toLowerCase().includes(search)) : filtered;
+
+      if (searched.length === 0) {
+        list.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">暂无审批</div><div class="empty-desc">当前状态下没有审批事项</div></div>';
+        return;
+      }
+
+      list.innerHTML = searched.map(a => `
+        <div class="approval-card" onclick="openDetail('${a.id}')">
+          <div class="approval-header">
+            <div class="approval-type">
+              <div class="approval-icon ${getIconClass(a.type)}"></div>
+              <div>
+                <div class="approval-title">${a.title}</div>
+                <div class="approval-subtitle">${a.subtitle} · ${a.id}</div>
+              </div>
+            </div>
+            <div class="approval-status ${getStatusClass(a.status)}">${getStatusText(a.status)}</div>
+          </div>
+          <div class="approval-body">
+            ${a.amount !== '—' ? `<div class="approval-row"><span class="approval-label">金额</span><span class="approval-value highlight">¥${a.amount}</span></div>` : ''}
+            <div class="approval-row"><span class="approval-label">当前进度</span><span class="approval-value">${a.currentStep}/${a.totalSteps} 步</span></div>
+            <div class="approval-row"><span class="approval-label">优先级</span><span class="approval-value" style="color:${a.priority === 'high' ? 'var(--danger)' : 'var(--text-secondary)'}">${a.priority === 'high' ? '高' : '普通'}</span></div>
+          </div>
+          <div class="approval-footer">
+            <div class="approval-time">${a.time}</div>
+            <div class="approval-user">
+              <div class="user-avatar">${a.avatar}</div>
+              <div class="user-name">${a.applicant}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openDetail(id) {
+      const a = approvals.find(x => x.id === id);
+      if (!a) return;
+      currentApproval = a;
+
+      document.getElementById('detailTitle').textContent = a.title;
+
+      const flowHtml = a.steps.map((s, i) => {
+        let status = 'completed';
+        if (i === a.currentStep - 1 && a.status === 'pending') status = 'current';
+        if (s.status === 'rejected') status = 'rejected';
+        if (s.status === 'pending') status = '';
+        return `
+          <div class="flow-node ${status}">
+            <div class="flow-node-title">${s.title}</div>
+            <div class="flow-node-meta">${s.user} · ${s.time}</div>
+            ${s.comment ? `<div class="flow-node-comment">"${s.comment}"</div>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      const infoHtml = Object.entries(a.info).map(([k, v]) => `
+        <div class="info-row"><span class="info-label">${k}</span><span class="info-value ${k.includes('金额') || k.includes('预算') ? 'amount' : ''}">${v}</span></div>
+      `).join('');
+
+      const canAction = a.status === 'pending' || a.status === 'processing';
+
+      document.getElementById('detailContent').innerHTML = `
+        <div class="flow-section">
+          <div class="section-title">审批流程</div>
+          <div class="flow-diagram">${flowHtml}</div>
+        </div>
+        <div class="flow-section">
+          <div class="section-title">详细信息</div>
+          <div class="info-card">${infoHtml}</div>
+          <div class="info-card" style="margin-top:12px;">
+            <div class="info-row"><span class="info-label">申请说明</span></div>
+            <div style="padding:8px 0;font-size:13px;color:var(--text-secondary);line-height:1.6;">${a.desc}</div>
+          </div>
+        </div>
+        ${canAction ? `
+          <div style="height:80px;"></div>
+          <div class="action-bar">
+            <button class="action-btn reject" onclick="openActionModal('reject')">拒绝</button>
+            <button class="action-btn transfer" onclick="openActionModal('transfer')">转办</button>
+            <button class="action-btn approve" onclick="openActionModal('approve')">同意</button>
+          </div>
+        ` : ''}
+      `;
+
+      document.getElementById('detailView').classList.add('active');
+    }
+
+    function closeDetail() {
+      document.getElementById('detailView').classList.remove('active');
+      currentApproval = null;
+      pendingAction = null;
+    }
+
+    function openActionModal(action) {
+      pendingAction = action;
+      const titles = { approve: '确认同意', reject: '确认拒绝', transfer: '确认转办' };
+      document.getElementById('modalTitle').textContent = titles[action] || '审批意见';
+      const btn = document.getElementById('modalConfirmBtn');
+      btn.textContent = action === 'approve' ? '同意' : action === 'reject' ? '拒绝' : '转办';
+      btn.style.background = action === 'approve' ? 'linear-gradient(135deg, var(--success), #059669)' : action === 'reject' ? 'linear-gradient(135deg, var(--danger), #dc2626)' : 'linear-gradient(135deg, var(--accent), #60a5fa)';
+      document.getElementById('modalComment').value = '';
+      document.getElementById('actionModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('actionModal').classList.remove('active');
+      pendingAction = null;
+    }
+
+    function confirmAction() {
+      const comment = document.getElementById('modalComment').value.trim();
+      const actionMap = { approve: '同意', reject: '拒绝', transfer: '转办' };
+      const actionText = actionMap[pendingAction] || '审批';
+
+      closeModal();
+      closeDetail();
+
+      if (pendingAction === 'approve') {
+        currentApproval.status = 'approved';
+        currentApproval.steps[currentApproval.currentStep - 1].status = 'completed';
+        currentApproval.steps[currentApproval.currentStep - 1].comment = comment || '审批通过';
+      } else if (pendingAction === 'reject') {
+        currentApproval.status = 'rejected';
+        currentApproval.steps[currentApproval.currentStep - 1].status = 'rejected';
+        currentApproval.steps[currentApproval.currentStep - 1].comment = comment || '审批拒绝';
+      }
+
+      showToast(`${actionText}成功`, 'success');
+      renderList();
+      updateStats();
+    }
+
+    function showToast(msg, type) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = 'toast ' + type;
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function updateStats() {
+      const pending = approvals.filter(a => a.status === 'pending' || a.status === 'processing').length;
+      const approved = approvals.filter(a => a.status === 'approved').length;
+      const rejected = approvals.filter(a => a.status === 'rejected').length;
+      document.getElementById('stat-pending').textContent = pending;
+      document.getElementById('stat-approved').textContent = approved;
+      document.getElementById('stat-rejected').textContent = rejected;
+
+      const badge = document.querySelector('.tab.active .badge');
+      if (badge) badge.textContent = pending;
+    }
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentTab = tab.dataset.tab;
+        renderList();
+      });
+    });
+
+    // Search
+    document.getElementById('searchInput').addEventListener('input', () => renderList());
+
+    // Init
+    renderList();
+  </script>
+</body>
+</html>
