@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<title>财富保全规划 — API对接测试</title>
+<style>
+:root{--primary:#1e40af;--accent:#3b82f6;--bg:#f1f5f9;--card:#fff;--text:#1e293b;--text-secondary:#64748b;--border:#e2e8f0;--success:#10b981;--warning:#f59e0b;--danger:#ef4444}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);margin:0;padding:16px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+.card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px;transition:opacity 0.2s}
+.btn:disabled{opacity:0.6;cursor:not-allowed}
+.btn-loading{position:relative;color:transparent!important}
+.btn-loading::after{content:'';position:absolute;left:50%;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+input,select{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:14px;margin-bottom:8px;box-sizing:border-box}
+label{font-size:13px;color:var(--text-secondary);margin-bottom:4px;display:block}
+.api-log{background:#1e293b;color:#e2e8f0;padding:12px;border-radius:8px;font-family:monospace;font-size:12px;max-height:300px;overflow-y:auto;margin-top:16px}
+.api-log .success{color:var(--success)}
+.api-log .error{color:var(--danger)}
+.api-log .info{color:#60a5fa}
+.hidden{display:none}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:8px;color:#fff;font-size:14px;z-index:1000;animation:fadeIn 0.3s}
+.toast-success{background:var(--success)}
+.toast-error{background:var(--danger)}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <div class="card-title">🔌 API对接测试</div>
+    <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">
+      测试H5页面与后端API的数据对接，包括请求、响应、错误处理、加载状态。
+    </div>
+    <label>API模式</label>
+    <select id="apiMode">
+      <option value="mock">模拟模式（Mock）</option>
+      <option value="real">真实API</option>
+    </select>
+    <label>场景</label>
+    <select id="testScene">
+      <option value="trust">家族信托</option>
+      <option value="insurance">保险架构</option>
+      <option value="tax">税务筹划</option>
+      <option value="isolation">资产隔离</option>
+      <option value="succession">代际传承</option>
+    </select>
+    <label>资产规模（万）</label>
+    <input type="number" id="testAsset" value="5000" min="100" max="100000">
+    <button class="btn" id="testBtn" onclick="runApiTest()">🚀 发送API请求</button>
+  </div>
+
+  <div class="card" id="resultCard" style="display:none">
+    <div class="card-title">📊 响应结果</div>
+    <div id="resultContent"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 请求日志</div>
+    <div class="api-log" id="apiLog"></div>
+  </div>
+</div>
+
+<script>
+// ============ API客户端 ============
+class ApiClient {
+  constructor(config = {}) {
+    this.baseURL = config.baseURL || '/api';
+    this.timeout = config.timeout || 10000;
+    this.retries = config.retries || 3;
+    this.retryDelay = config.retryDelay || 1000;
+    this.token = localStorage.getItem('api_token') || '';
+  }
+
+  setToken(token) {
+    this.token = token;
+    localStorage.setItem('api_token', token);
+  }
+
+  async request(method, path, data = null) {
+    const url = `${this.baseURL}${path}`;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': this.token ? `Bearer ${this.token}` : '',
+      'X-Request-ID': this.generateRequestId(),
+    };
+
+    const fetchOptions = {
+      method,
+      headers,
+    };
+
+    if (data && method !== 'GET') {
+      fetchOptions.body = JSON.stringify(data);
+    }
+
+    let lastError;
+    for (let attempt = 0; attempt <= this.retries; attempt++) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+        fetchOptions.signal = controller.signal;
+
+        const response = await fetch(url, fetchOptions);
+        clearTimeout(timeoutId);
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new ApiError(result.code || response.status, result.message || '请求失败', result.details, result.requestId);
+        }
+
+        if (result.code !== 0) {
+          throw new ApiError(result.code, result.message, null, result.requestId);
+        }
+
+        return result;
+      } catch (err) {
+        lastError = err;
+        if (attempt < this.retries && this.isRetryable(err)) {
+          await this.delay(this.retryDelay * Math.pow(2, attempt));
+        }
+      }
+    }
+
+    throw lastError;
+  }
+
+  get(path) { return this.request('GET', path); }
+  post(path, data) { return this.request('POST', path, data); }
+
+  isRetryable(err) {
+    return err.name === 'AbortError' || err.name === 'TypeError' ||
+           (err instanceof ApiError && [408, 429, 502, 503, 504].includes(err.code));
+  }
+
+  delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  generateRequestId() {
+    return `req_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  }
+}
+
+class ApiError extends Error {
+  constructor(code, message, details, requestId) {
+    super(message);
+    this.code = code;
+    this.details = details;
+    this.requestId = requestId;
+  }
+}
+
+// ============ Mock API客户端 ============
+class MockApiClient {
+  async request(method, path, data = null) {
+    await this.delay(300 + Math.random() * 700); // 模拟网络延迟
+
+    const mockData = this.getMockData(path, data);
+    if (mockData) {
+      return { code: 0, data: mockData, message: 'success', timestamp: Date.now(), requestId: `mock_${Date.now()}` };
+    }
+
+    throw new ApiError(404, '接口不存在', null, 'mock_' + Date.now());
+  }
+
+  get(path) { return this.request('GET', path); }
+  post(path, data) { return this.request('POST', path, data); }
+
+  async delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  getMockData(path, data) {
+    const params = data || {};
+    const asset = params.asset || 5000;
+    const seed = asset % 100;
+
+    const mockMap = {
+      '/trust/generate': () => ({
+        scheme: 'discretionary_trust',
+        asset_allocation: [
+          { name: '现金及等价物', value: Math.round(asset * 0.30), ratio: 0.30 },
+          { name: '固定收益类', value: Math.round(asset * 0.40), ratio: 0.40 },
+          { name: '权益类', value: Math.round(asset * 0.20), ratio: 0.20 },
+          { name: '另类投资', value: Math.round(asset * 0.10), ratio: 0.10 },
+        ],
+        timeline: [
+          { phase: '第1-2周', task: '明确信托目的、梳理资产、确定受益人' },
+          { phase: '第3-4周', task: '选择受托机构、设计分配条款' },
+          { phase: '第5-6周', task: '资产权属核查、法律风险评估' },
+          { phase: '第7-8周', task: '信托契约起草、受益人协议' },
+          { phase: '第9-12周', task: '资金/股权/房产过户、登记备案' },
+        ],
+        cost_estimate: {
+          setup_fee: Math.round(asset * 0.02),
+          annual_fee: Math.round(asset * 0.005),
+          total_first_year: Math.round(asset * 0.025),
+        },
+        risk_analysis: { level: '中等', score: 3, factors: ['市场波动', '利率变化', '政策调整'] },
+      }),
+
+      '/insurance/generate': () => ({
+        architecture: '年金+重疾+终身寿',
+        products: [
+          { name: '养老年金保险', coverage: Math.round(asset * 0.3), premium: Math.round(asset * 0.03), period: '20年' },
+          { name: '重大疾病保险', coverage: Math.round(asset * 0.2), premium: Math.round(asset * 0.01), period: '终身' },
+          { name: '终身寿险', coverage: Math.round(asset * 0.5), premium: Math.round(asset * 0.02), period: '终身' },
+        ],
+        total_premium: Math.round(asset * 0.06),
+        tax_benefit: Math.round(asset * 0.006),
+      }),
+
+      '/tax/generate': () => ({
+        strategy: '综合税务筹划',
+        recommendations: [
+          { action: '利用个人所得税专项附加扣除', saving: Math.round(asset * 0.01) },
+          { action: '设立个人独资企业核定征收', saving: Math.round(asset * 0.03) },
+          { action: '合理利用地区税收优惠政策', saving: Math.round(asset * 0.02) },
+        ],
+        total_saving: Math.round(asset * 0.06),
+        compliance_score: 95,
+      }),
+
+      '/isolation/generate': () => ({
+        tools: [
+          { name: '家族信托', isolation: 5, cost: '高', time: '6-12个月', best: '债务+婚姻+传承' },
+          { name: '保险金信托', isolation: 4, cost: '中', time: '2-4个月', best: '债务+传承' },
+          { name: '离岸公司', isolation: 4, cost: '高', time: '3-6个月', best: '税务+隐私' },
+        ],
+        recommended: ['家族信托', '保险金信托'],
+        risk_score: 2.5,
+      }),
+
+      '/succession/generate': () => ({
+        phases: [
+          { name: '未成年阶段', age: '0-18岁', tools: ['教育金保险', '家族信托'], budget: Math.round(asset * 0.1) },
+          { name: '成年阶段', age: '18-30岁', tools: ['终身寿险', '股权信托'], budget: Math.round(asset * 0.2) },
+          { name: '接班阶段', age: '30-50岁', tools: ['经营权交接', '家族治理'], budget: Math.round(asset * 0.3) },
+        ],
+        total_budget: Math.round(asset * 0.6),
+        gantt: [
+          { name: '教育保障', start: 0, duration: 18, color: '#1e40af' },
+          { name: '婚姻隔离', start: 20, duration: 5, color: '#0ea5e9' },
+          { name: '经营权交接', start: 28, duration: 22, color: '#10b981' },
+        ],
+      }),
+    };
+
+    const mockFn = mockMap[path];
+    return mockFn ? mockFn() : null;
+  }
+}
+
+// ============ 业务API封装 ============
+class WealthApi {
+  constructor(client) {
+    this.client = client;
+  }
+
+  async generateTrust(params) {
+    return this.client.post('/trust/generate', params);
+  }
+
+  async generateInsurance(params) {
+    return this.client.post('/insurance/generate', params);
+  }
+
+  async generateTax(params) {
+    return this.client.post('/tax/generate', params);
+  }
+
+  async generateIsolation(params) {
+    return this.client.post('/isolation/generate', params);
+  }
+
+  async generateSuccession(params) {
+    return this.client.post('/succession/generate', params);
+  }
+}
+
+// ============ 全局实例 ============
+let apiClient, wealthApi;
+
+function initApi() {
+  const mode = document.getElementById('apiMode').value;
+  if (mode === 'mock') {
+    apiClient = new MockApiClient();
+    log('info', '已切换到模拟模式');
+  } else {
+    apiClient = new ApiClient({ baseURL: '/api' });
+    log('info', '已切换到真实API模式');
+  }
+  wealthApi = new WealthApi(apiClient);
+}
+
+// 初始化
+initApi();
+document.getElementById('apiMode').addEventListener('change', initApi);
+
+// ============ 日志系统 ============
+function log(level, message) {
+  const logEl = document.getElementById('apiLog');
+  const time = new Date().toLocaleTimeString();
+  const line = document.createElement('div');
+  line.className = level;
+  line.textContent = `[${time}] ${message}`;
+  logEl.appendChild(line);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+// ============ 错误处理 ============
+function handleError(err) {
+  if (err instanceof ApiError) {
+    const messages = {
+      400: '⚠️ 参数错误，请检查输入',
+      401: '🔒 登录已过期，请重新登录',
+      403: '🚫 权限不足',
+      404: '🔧 接口不存在',
+      408: '⏳ 请求超时',
+      429: '⏱️ 请求太频繁',
+      500: '🔧 服务器错误',
+      502: '🔧 网关错误',
+      503: '🔧 服务不可用',
+    };
+    return messages[err.code] || `❌ 错误 (${err.code}): ${err.message}`;
+  }
+  if (err.name === 'AbortError') {
+    return '⏳ 请求超时，请检查网络';
+  }
+  return '❌ 网络异常，请检查网络连接';
+}
+
+function showToast(message, type = 'success') {
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 4000);
+}
+
+// ============ 测试执行 ============
+async function runApiTest() {
+  const btn = document.getElementById('testBtn');
+  btn.classList.add('btn-loading');
+  btn.disabled = true;
+
+  const scene = document.getElementById('testScene').value;
+  const asset = +document.getElementById('testAsset').value;
+
+  log('info', `开始测试: ${scene}, 资产=${asset}万`);
+
+  const start = performance.now();
+
+  try {
+    let result;
+    switch (scene) {
+      case 'trust':
+        result = await wealthApi.generateTrust({ asset, purpose: '传承', beneficiaries: 3 });
+        break;
+      case 'insurance':
+        result = await wealthApi.generateInsurance({ role: '企业主', income: 300, age: 45 });
+        break;
+      case 'tax':
+        result = await wealthApi.generateTax({ incomeType: '工资薪金', annualIncome: 300, assets: asset });
+        break;
+      case 'isolation':
+        result = await wealthApi.generateIsolation({ type: '债务隔离', asset, risk: '高', urgency: '紧急' });
+        break;
+      case 'succession':
+        result = await wealthApi.generateSuccession({ age: 45, asset, goal: '代际传承', children: 2 });
+        break;
+    }
+
+    const duration = Math.round(performance.now() - start);
+    log('success', `✅ 请求成功 (${duration}ms)`);
+    log('info', `响应数据: ${JSON.stringify(result.data).slice(0, 200)}...`);
+
+    // 显示结果
+    document.getElementById('resultCard').style.display = 'block';
+    document.getElementById('resultContent').innerHTML = `<pre style="font-size:12px;overflow-x:auto">${JSON.stringify(result.data, null, 2)}</pre>`;
+
+    showToast('✅ API请求成功！', 'success');
+  } catch (err) {
+    const duration = Math.round(performance.now() - start);
+    const errorMsg = handleError(err);
+    log('error', `❌ 请求失败 (${duration}ms): ${errorMsg}`);
+    showToast(errorMsg, 'error');
+  } finally {
+    btn.classList.remove('btn-loading');
+    btn.disabled = false;
+  }
+}
+
+log('info', 'API对接测试页面已加载');
+log('info', '当前模式: 模拟模式（Mock）');
+</script>
+</body>
+</html>
