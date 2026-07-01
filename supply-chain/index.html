@@ -1,0 +1,776 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f172a">
+<title>供应链金融 - DemoBank AI</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+  padding-bottom: 20px;
+}
+
+/* === 头部 === */
+.header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+  padding: 28px 20px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(59,130,246,0.15);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(59,130,246,0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.header-badge {
+  display: inline-block;
+  background: rgba(59,130,246,0.15);
+  border: 1px solid rgba(59,130,246,0.3);
+  color: #60a5fa;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.header-title { font-size: 22px; font-weight: 700; position: relative; z-index: 1; }
+.header-subtitle { font-size: 13px; opacity: 0.7; margin-top: 6px; position: relative; z-index: 1; }
+
+/* === 核心数据 === */
+.core-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 16px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 16px 8px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.stat-card:hover { border-color: rgba(59,130,246,0.3); transform: translateY(-2px); }
+
+.stat-icon { font-size: 24px; margin-bottom: 6px; display: block; }
+.stat-value { font-size: 18px; font-weight: 700; color: #fbbf24; }
+.stat-label { font-size: 11px; color: #64748b; margin-top: 4px; }
+
+/* === 容器 === */
+.container { padding: 0 16px; max-width: 480px; margin: 0 auto; }
+
+/* === 卡片 === */
+.card {
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 14px;
+  backdrop-filter: blur(20px);
+  animation: fadeInUp 0.5s ease both;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-icon { font-size: 18px; }
+
+/* === 供应链流程 === */
+.flow-container { position: relative; padding: 10px 0; }
+.flow-line {
+  position: absolute;
+  left: 20px;
+  top: 30px;
+  bottom: 30px;
+  width: 2px;
+  background: linear-gradient(to bottom, #3b82f6, rgba(59,130,246,0.2));
+}
+
+.flow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.flow-step:last-child { margin-bottom: 0; }
+
+.flow-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(59,130,246,0.15);
+  border: 2px solid rgba(59,130,246,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.flow-content { flex: 1; padding-top: 4px; }
+.flow-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.flow-desc { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+
+/* === 产品卡片 === */
+.product-list { display: flex; flex-direction: column; gap: 12px; }
+
+.product-item {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.product-item:hover { border-color: rgba(59,130,246,0.3); transform: translateX(4px); }
+
+.product-item.selected {
+  border-color: #3b82f6;
+  background: rgba(59,130,246,0.08);
+}
+
+.product-item.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  animation: checkIn 0.3s ease;
+}
+
+.product-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.product-logo {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+
+.product-title { font-size: 15px; font-weight: 600; }
+.product-company { font-size: 11px; color: #64748b; }
+
+.product-tags { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.tag-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.tag-green { background: rgba(52,211,153,0.15); color: #34d399; }
+.tag-gold { background: rgba(251,191,36,0.15); color: #fbbf24; }
+
+.product-specs { display: flex; gap: 16px; }
+.spec { text-align: center; }
+.spec-num { font-size: 16px; font-weight: 700; }
+.spec-num.blue { color: #60a5fa; }
+.spec-num.gold { color: #fbbf24; }
+.spec-num.green { color: #34d399; }
+.spec-desc { font-size: 10px; color: #64748b; margin-top: 2px; }
+
+/* === 核心企业 === */
+.enterprise-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.3s;
+}
+
+.enterprise-card:hover { border-color: rgba(59,130,246,0.3); }
+
+.enterprise-logo {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.enterprise-info { flex: 1; }
+.enterprise-name { font-size: 14px; font-weight: 600; }
+.enterprise-meta { font-size: 11px; color: #64748b; margin-top: 2px; }
+.enterprise-rating { font-size: 12px; color: #fbbf24; }
+
+/* === 融资计算器 === */
+.calc-row { display: flex; gap: 10px; margin-bottom: 12px; }
+.calc-row .form-group { flex: 1; margin-bottom: 0; }
+
+.form-group { margin-bottom: 14px; }
+.form-group:last-child { margin-bottom: 0; }
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  font-size: 14px;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.form-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.15); }
+
+.form-select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  outline: none;
+}
+
+/* === 计算结果 === */
+.result-panel {
+  background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(37,99,235,0.05));
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 14px;
+}
+
+.result-title { font-size: 13px; color: #60a5fa; margin-bottom: 10px; font-weight: 600; }
+
+.result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.result-row:last-child { border-bottom: none; }
+.result-label { font-size: 12px; color: #94a3b8; }
+.result-value { font-size: 13px; font-weight: 600; }
+.result-value.highlight { color: #fbbf24; font-size: 16px; }
+
+/* === 按钮 === */
+.btn {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  outline: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+}
+
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(59,130,246,0.4); }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #e2e8f0;
+}
+
+/* === 优势列表 === */
+.benefit-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+.benefit-item {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 10px;
+  padding: 14px 10px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.3s;
+}
+
+.benefit-item:hover { border-color: rgba(59,130,246,0.2); }
+
+.benefit-icon { font-size: 24px; margin-bottom: 6px; display: block; }
+.benefit-title { font-size: 12px; font-weight: 600; }
+.benefit-desc { font-size: 10px; color: #64748b; margin-top: 2px; }
+
+/* === 动画 === */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes checkIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.2s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+
+/* === 底部CTA === */
+.bottom-cta {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 12px 16px 20px;
+  z-index: 100;
+}
+
+.bottom-cta .container { padding: 0; }
+</style>
+</head>
+<body>
+
+<!-- === 头部 === -->
+<div class="header">
+  <div class="header-badge">🏢 企业金融服务</div>
+  <div class="header-title">供应链金融</div>
+  <div class="header-subtitle">盘活应收账款 · 优化现金流 · 降低融资成本</div>
+</div>
+
+<!-- === 核心数据 === -->
+<div class="core-stats">
+  <div class="stat-card">
+    <span class="stat-icon">💰</span>
+    <div class="stat-value">¥50亿</div>
+    <div class="stat-label">累计融资额</div>
+  </div>
+  <div class="stat-card">
+    <span class="stat-icon">🏭</span>
+    <div class="stat-value">2,000+</div>
+    <div class="stat-label">服务核心企业</div>
+  </div>
+  <div class="stat-card">
+    <span class="stat-icon">⚡</span>
+    <div class="stat-value">T+0</div>
+    <div class="stat-label">最快放款</div>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom: 80px;">
+
+<!-- === 服务流程 === -->
+<div class="card">
+  <div class="card-title"><span class="card-icon">🔄</span> 服务流程</div>
+  <div class="flow-container">
+    <div class="flow-line"></div>
+    <div class="flow-step">
+      <div class="flow-dot">1</div>
+      <div class="flow-content">
+        <div class="flow-name">在线申请</div>
+        <div class="flow-desc">提交企业资料与贸易背景，AI智能预审</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-dot">2</div>
+      <div class="flow-content">
+        <div class="flow-name">核心企业确权</div>
+        <div class="flow-desc">系统自动向核心企业发起应收账款确权</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-dot">3</div>
+      <div class="flow-content">
+        <div class="flow-name">智能风控评估</div>
+        <div class="flow-desc">大数据风控模型实时评估，秒级授信</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-dot">4</div>
+      <div class="flow-content">
+        <div class="flow-name">融资放款</div>
+        <div class="flow-desc">确认融资方案，资金实时到账</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- === 供应链产品 === -->
+<div class="card">
+  <div class="card-title"><span class="card-icon">📦</span> 供应链金融产品</div>
+  <div class="product-list">
+    <div class="product-item selected" onclick="selectProduct(this)">
+      <div class="product-header">
+        <div class="product-logo">📄</div>
+        <div>
+          <div class="product-title">应收账款融资</div>
+          <div class="product-company">基于核心企业信用</div>
+        </div>
+      </div>
+      <div class="product-tags">
+        <span class="tag tag-blue">核心企业确权</span>
+        <span class="tag tag-green">随借随还</span>
+      </div>
+      <div class="product-specs">
+        <div class="spec">
+          <div class="spec-num blue">3.5%</div>
+          <div class="spec-desc">年化利率起</div>
+        </div>
+        <div class="spec">
+          <div class="spec-num gold">500万</div>
+          <div class="spec-desc">单户最高额度</div>
+        </div>
+        <div class="spec">
+          <div class="spec-num green">T+0</div>
+          <div class="spec-desc">最快到账</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-item" onclick="selectProduct(this)">
+      <div class="product-header">
+        <div class="product-logo" style="background: linear-gradient(135deg, #f59e0b, #d97706)">🎫</div>
+        <div>
+          <div class="product-title">电子票据融资</div>
+          <div class="product-company">银票/商票贴现</div>
+        </div>
+      </div>
+      <div class="product-tags">
+        <span class="tag tag-gold">电子票据</span>
+        <span class="tag tag-blue">快速贴现</span>
+      </div>
+      <div class="product-specs">
+        <div class="spec">
+          <div class="spec-num blue">2.8%</div>
+          <div class="spec-desc">贴现率低</div>
+        </div>
+        <div class="spec">
+          <div class="spec-num gold">1000万</div>
+          <div class="spec-desc">单票最高</div>
+        </div>
+        <div class="spec">
+          <div class="spec-num green">实时</div>
+          <div class="spec-desc">秒级到账</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-item" onclick="selectProduct(this)">
+      <div class="product-header">
+        <div class="product-logo" style="background: linear-gradient(135deg, #10b981, #059669)">📦</div>
+        <div>
+          <div class="product-title">存货质押融资</div>
+          <div class="product-company">盘活库存资产</div>
+        </div>
+      </div>
+      <div class="product-tags">
+        <span class="tag tag-green">库存盘活</span>
+        <span class="tag tag-blue">灵活质押</span>
+      </div>
+      <div class="product-specs">
+        <div class="spec">
+          <div class="spec-num blue">4.2%</div>
+          <div class="spec-desc">年化利率起</div>
+        </div>
+        <div class="spec">
+          <div class="spec-num gold">70%</div>
+          <div class="spec-desc">质押率</div>
+        </div>
+        <div class="spec">
+          <div class="spec-num green">1-3天</div>
+          <div class="spec-desc">评估放款</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-item" onclick="selectProduct(this)">
+      <div class="product-header">
+        <div class="product-logo" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed)">🌐</div>
+        <div>
+          <div class="product-title">跨境供应链金融</div>
+          <div class="product-company">进出口贸易融资</div>
+        </div>
+      </div>
+      <div class="product-tags">
+        <span class="tag tag-blue">信用证</span>
+        <span class="tag tag-gold">多币种</span>
+      </div>
+      <div class="product-specs">
+        <div class="spec">
+          <div class="spec-num blue">Libor+1.5%</div>
+          <div class="spec-desc">利率基准</div>
+        </div>
+        <div class="spec">
+          <div class="spec-num gold">$500万</div>
+          <div class="spec-desc">美元额度</div>
+        </div>
+        <div class="spec">
+          <div class="spec-num green">多币种</div>
+          <div class="spec-desc">灵活结算</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- === 核心企业 === -->
+<div class="card">
+  <div class="card-title"><span class="card-icon">🏆</span> 已接入核心企业</div>
+
+  <div class="enterprise-card">
+    <div class="enterprise-logo">🏭</div>
+    <div class="enterprise-info">
+      <div class="enterprise-name">某通信技术有限公司</div>
+      <div class="enterprise-meta">ICT行业龙头 · 年采购额 ¥5000亿+</div>
+    </div>
+    <div class="enterprise-rating">AAA</div>
+  </div>
+
+  <div class="enterprise-card">
+    <div class="enterprise-logo" style="background: linear-gradient(135deg, #f59e0b, #d97706)">🚗</div>
+    <div class="enterprise-info">
+      <div class="enterprise-name">某汽车股份有限公司</div>
+      <div class="enterprise-meta">新能源汽车 · 年采购额 ¥3000亿+</div>
+    </div>
+    <div class="enterprise-rating">AAA</div>
+  </div>
+
+  <div class="enterprise-card">
+    <div class="enterprise-logo" style="background: linear-gradient(135deg, #10b981, #059669)">📱</div>
+    <div class="enterprise-info">
+      <div class="enterprise-name">某电子集团</div>
+      <div class="enterprise-meta">智能硬件 · 年采购额 ¥2000亿+</div>
+    </div>
+    <div class="enterprise-rating">AA+</div>
+  </div>
+
+  <div class="enterprise-card">
+    <div class="enterprise-logo" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed)">⚡</div>
+    <div class="enterprise-info">
+      <div class="enterprise-name">某新能源科技</div>
+      <div class="enterprise-meta">动力电池 · 年采购额 ¥1500亿+</div>
+    </div>
+    <div class="enterprise-rating">AA+</div>
+  </div>
+</div>
+
+<!-- === 融资计算器 === -->
+<div class="card">
+  <div class="card-title"><span class="card-icon">🧮</span> 融资计算器</div>
+
+  <div class="calc-row">
+    <div class="form-group">
+      <label class="form-label">应收账款金额</label>
+      <input type="number" class="form-input" placeholder="万元" id="invoiceAmount" value="100" oninput="calculate()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">融资比例</label>
+      <select class="form-select" id="financingRatio" onchange="calculate()">
+        <option value="0.8">80%</option>
+        <option value="0.85">85%</option>
+        <option value="0.9" selected>90%</option>
+        <option value="0.95">95%</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="calc-row">
+    <div class="form-group">
+      <label class="form-label">年化利率</label>
+      <select class="form-select" id="interestRate" onchange="calculate()">
+        <option value="0.035">3.5%</option>
+        <option value="0.04">4.0%</option>
+        <option value="0.045" selected>4.5%</option>
+        <option value="0.05">5.0%</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">融资期限</label>
+      <select class="form-select" id="term" onchange="calculate()">
+        <option value="1">1个月</option>
+        <option value="3" selected>3个月</option>
+        <option value="6">6个月</option>
+        <option value="12">12个月</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-title">💡 融资方案测算</div>
+    <div class="result-row">
+      <span class="result-label">可融资金额</span>
+      <span class="result-value highlight" id="financingAmount">¥90.00万</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">融资利息</span>
+      <span class="result-value" id="interestCost">¥1.01万</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">手续费</span>
+      <span class="result-value" id="fee">¥0.18万</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">实际到账</span>
+      <span class="result-value highlight" id="actualAmount">¥88.81万</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">综合成本率</span>
+      <span class="result-value" style="color: #34d399" id="totalCostRate">4.68%</span>
+    </div>
+  </div>
+</div>
+
+<!-- === 服务优势 === -->
+<div class="card">
+  <div class="card-title"><span class="card-icon">✨</span> 服务优势</div>
+  <div class="benefit-list">
+    <div class="benefit-item">
+      <span class="benefit-icon">⚡</span>
+      <div class="benefit-title">极速审批</div>
+      <div class="benefit-desc">AI智能风控，秒级授信</div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">🔒</span>
+      <div class="benefit-title">核心企业背书</div>
+      <div class="benefit-desc">信用传递，降低融资成本</div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">📊</span>
+      <div class="benefit-title">灵活额度</div>
+      <div class="benefit-desc">随借随还，循环使用</div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">🌐</span>
+      <div class="benefit-title">跨境支持</div>
+      <div class="benefit-desc">多币种，全球贸易</div>
+    </div>
+  </div>
+</div>
+
+<!-- === 申请条件 === -->
+<div class="card">
+  <div class="card-title"><span class="card-icon">📋</span> 申请条件</div>
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(15,23,42,0.5); border-radius: 8px;">
+      <span style="font-size: 18px;">✅</span>
+      <span style="font-size: 13px;">与已接入核心企业有真实贸易往来</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(15,23,42,0.5); border-radius: 8px;">
+      <span style="font-size: 18px;">✅</span>
+      <span style="font-size: 13px;">企业正常经营满1年，无重大不良记录</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(15,23,42,0.5); border-radius: 8px;">
+      <span style="font-size: 18px;">✅</span>
+      <span style="font-size: 13px;">提供真实有效的贸易合同及发票</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(15,23,42,0.5); border-radius: 8px;">
+      <span style="font-size: 18px;">✅</span>
+      <span style="font-size: 13px;">应收账款账期不超过180天</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- === 底部CTA === -->
+<div class="bottom-cta">
+  <div class="container">
+    <button class="btn btn-primary" onclick="apply()">🚀 立即申请融资</button>
+  </div>
+</div>
+
+<script>
+// 产品选择
+function selectProduct(el) {
+  document.querySelectorAll('.product-item').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// 融资计算器
+function calculate() {
+  const amount = parseFloat(document.getElementById('invoiceAmount').value) || 0;
+  const ratio = parseFloat(document.getElementById('financingRatio').value) || 0.9;
+  const rate = parseFloat(document.getElementById('interestRate').value) || 0.045;
+  const term = parseInt(document.getElementById('term').value) || 3;
+
+  const financingAmount = amount * ratio;
+  const interestCost = financingAmount * rate * (term / 12);
+  const fee = financingAmount * 0.002; // 0.2%手续费
+  const actualAmount = financingAmount - interestCost - fee;
+  const totalCostRate = ((interestCost + fee) / financingAmount * (12 / term) * 100).toFixed(2);
+
+  document.getElementById('financingAmount').textContent = '¥' + financingAmount.toFixed(2) + '万';
+  document.getElementById('interestCost').textContent = '¥' + interestCost.toFixed(2) + '万';
+  document.getElementById('fee').textContent = '¥' + fee.toFixed(2) + '万';
+  document.getElementById('actualAmount').textContent = '¥' + actualAmount.toFixed(2) + '万';
+  document.getElementById('totalCostRate').textContent = totalCostRate + '%';
+}
+
+// 申请
+function apply() {
+  alert('申请功能即将上线，敬请期待！\n\n如需紧急融资，请拨打客服热线：400-888-0000');
+}
+
+// 初始化
+window.onload = function() {
+  calculate();
+};
+</script>
+
+</body>
+</html>
