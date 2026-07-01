@@ -1,0 +1,1509 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+
+<!-- SEO 优化 -->
+<title>财富保全规划深度体验 — 家族信托·保险架构·税务筹划·DemoBank AI</title>
+<meta name="description" content="为高净值人群提供家族信托、保险架构、税务筹划、资产隔离、代际传承五大场景的一站式财富保全规划工具。基于AI智能生成个性化方案，保障家族财富安全传承。">
+<meta name="keywords" content="财富保全,家族信托,保险架构,税务筹划,资产隔离,代际传承,高净值,理财规划,DemoBank">
+<meta name="author" content="DemoBank AI">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#1e40af">
+
+<!-- Open Graph / 微信分享 -->
+<meta property="og:title" content="财富保全规划深度体验 — DemoBank AI">
+<meta property="og:description" content="家族信托、保险架构、税务筹划、资产隔离、代际传承一站式智能规划">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+<!-- 缓存策略优化 -->
+<meta http-equiv="Cache-Control" content="max-age=3600,must-revalidate">
+<meta http-equiv="Expires" content="">
+
+<!-- 性能优化：预加载关键资源 -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+<!-- PWA 支持 -->
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="财富保全规划">
+<style>
+:root{--bg:#f8fafc;--card:#fff;--primary:#1e40af;--primary-light:#dbeafe;--accent:#0ea5e9;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--text:#0f172a;--text-secondary:#475569;--border:#e2e8f0;--radius:10px;--shadow:0 4px 20px rgba(0,0,0,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:40px}
+.container{max-width:420px;margin:0 auto;padding:16px}
+
+/* 头部 */
+.header{text-align:center;padding:24px 0 16px}
+.header .logo{width:56px;height:56px;margin:0 auto 12px;border-radius:18px;background:linear-gradient(135deg,#1e40af,#0ea5e9);display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;box-shadow:0 8px 24px rgba(30,64,175,.25)}
+.header h1{font-size:22px;font-weight:800;background:linear-gradient(135deg,#1e40af,#0ea5e9);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header p{font-size:13px;color:var(--text-secondary);margin-top:4px}
+
+/* 功能选择 */
+.func-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.func-card{cursor:pointer;padding:12px 8px;border-radius:12px;border:2px solid var(--border);background:#fff;text-align:center;transition:all .15s}
+.func-card:hover{border-color:var(--primary)}
+.func-card.active{border-color:var(--primary);background:linear-gradient(135deg,#eff6ff,#eef2ff)}
+.func-card .emoji{font-size:24px;margin-bottom:4px}
+.func-card .name{font-size:12px;font-weight:700}
+
+/* 卡片 */
+.card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow);animation:fadeIn .5s ease forwards;opacity:0;transform:translateY(12px)}
+.card:nth-child(2){animation-delay:.05s}
+.card-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.card-title .icon{font-size:18px}
+
+/* 表单 */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-item{display:flex;flex-direction:column;gap:4px}
+.form-item.full{grid-column:1/-1}
+.form-item label{font-size:12px;color:var(--text-secondary);font-weight:500}
+.form-item input,.form-item select{padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:#fff}
+.form-item input:focus,.form-item select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(30,64,175,.1)}
+
+/* 多选标签 */
+.tag-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tag{cursor:pointer;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:13px;transition:all .15s;user-select:none}
+.tag:hover{border-color:var(--primary);color:var(--primary)}
+.tag.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* 按钮 */
+.btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;margin-top:10px}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(30,64,175,.25)}
+.btn:active{transform:translateY(0)}
+
+/* 结果区 */
+.result-section{margin-top:16px;padding-top:16px;border-top:2px dashed var(--border)}
+.result-title{font-size:16px;font-weight:800;margin-bottom:12px;color:var(--primary)}
+
+/* 表格 */
+.table-wrap{overflow-x:auto;margin-top:10px}
+.table{width:100%;border-collapse:collapse;font-size:12px}
+.table th,.table td{padding:8px;border:1px solid var(--border);text-align:center}
+.table th{background:var(--primary-light);font-weight:700;color:var(--primary)}
+
+/* 建议列表 */
+.advice-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.advice-item{display:flex;gap:8px;padding:10px 12px;background:#f8fafc;border-radius:10px;border-left:3px solid var(--primary);font-size:13px}
+.advice-item .bullet{width:18px;height:18px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* 时间线 */
+.timeline{position:relative;padding-left:24px;margin-top:10px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.timeline-item{position:relative;padding:8px 0}
+.timeline-item::before{content:'';position:absolute;left:-20px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--primary);border:2px solid #fff}
+.timeline-item .time{font-size:12px;font-weight:700;color:var(--primary)}
+.timeline-item .desc{font-size:13px;color:var(--text-secondary);margin-top:2px}
+
+/* 结论卡片 */
+.conclusion{padding:16px;border-radius:12px;text-align:center;margin-top:14px}
+.conclusion.green{background:linear-gradient(135deg,#d1fae5,#ecfdf5);border:1px solid #a7f3d0}
+.conclusion.yellow{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fde68a}
+.conclusion.red{background:linear-gradient(135deg,#fee2e2,#fef2f2);border:1px solid #fecaca}
+.conclusion-icon{font-size:32px;margin-bottom:6px}
+.conclusion-title{font-size:16px;font-weight:800;margin-bottom:4px}
+.conclusion-desc{font-size:13px;color:var(--text-secondary)}
+
+/* 风险条 */
+.risk-bar{height:8px;border-radius:999px;background:var(--border);overflow:hidden;margin-top:6px}
+.risk-fill{height:100%;border-radius:999px;transition:width .8s ease}
+.risk-fill.green{background:var(--success)}
+.risk-fill.yellow{background:var(--warning)}
+.risk-fill.red{background:var(--danger)}
+
+/* 性能优化：骨架屏动画 */
+@keyframes skeletonPulse{0%,100%{opacity:1}50%{opacity:.5}}
+.skeleton-line{background:#e2e8f0;border-radius:4px;animation:skeletonPulse 1.5s ease-in-out infinite}
+
+/* 性能优化：懒加载 */
+.lazy-loaded{animation:fadeIn .5s ease}
+
+/* 性能优化：减少重绘 */
+.card,.func-card,.tag,.btn,.advice-item{will-change:transform,opacity}
+
+/* ========== 图表组件：纯CSS+SVG ========== */
+
+/* 饼图 */
+.pie-chart{width:180px;height:180px;border-radius:50%;margin:0 auto 16px;position:relative;transition:transform .3s ease}
+.pie-chart:hover{transform:scale(1.05)}
+.pie-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.pie-center .num{font-size:28px;font-weight:800;color:var(--primary)}
+.pie-center .label{font-size:11px;color:var(--text-secondary)}
+.pie-legend{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;font-size:12px;margin-top:10px}
+.pie-legend-item{display:flex;align-items:center;gap:6px}
+.pie-legend-dot{width:10px;height:10px;border-radius:3px}
+
+/* 柱状图 */
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:120px;padding:10px 0;justify-content:center}
+.bar-group{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;max-width:60px}
+.bar-fill{width:100%;border-radius:6px 6px 0 0;transition:height .8s ease;min-height:4px;position:relative}
+.bar-fill .bar-val{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--text);white-space:nowrap}
+.bar-label{font-size:10px;color:var(--text-secondary);text-align:center;line-height:1.2}
+
+/* 雷达图 */
+.radar-wrap{width:200px;height:200px;margin:0 auto;position:relative}
+.radar-svg{width:100%;height:100%}
+.radar-axis{stroke:var(--border);stroke-width:1;fill:none}
+.radar-grid{stroke:var(--border);stroke-width:.5;fill:none;stroke-dasharray:3,3}
+.radar-area{fill:rgba(30,64,175,.15);stroke:var(--primary);stroke-width:2;fill-rule:evenodd;transition:d .6s ease}
+.radar-label{font-size:10px;fill:var(--text-secondary);text-anchor:middle}
+
+/* 甘特图 */
+.gantt{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.gantt-row{display:flex;align-items:center;gap:8px;font-size:12px}
+.gantt-label{width:70px;color:var(--text-secondary);flex-shrink:0;text-align:right}
+.gantt-track{flex:1;height:22px;background:var(--border);border-radius:6px;overflow:hidden;position:relative}
+.gantt-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width 1s ease;position:relative}
+.gantt-fill .gantt-text{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#fff;font-size:10px;font-weight:700;white-space:nowrap}
+
+/* 导出功能 */
+.export-bar{display:flex;gap:10px;margin:10px 0 16px;justify-content:center}
+.export-btn{flex:1;max-width:140px;padding:10px 12px;border-radius:10px;border:none;background:#fff;color:var(--primary);font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:all .15s}
+.export-btn:hover{background:var(--primary);color:#fff}
+.export-btn svg{width:16px;height:16px;vertical-align:-3px;margin-right:4px}
+
+/* 隐藏/显示 */
+.hidden{display:none}
+
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+
+/* ========== 反馈组件 ========== */
+.feedback-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 80px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-size: 24px;
+  border: none;
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.3);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feedback-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(30, 64, 175, 0.4);
+}
+
+/* 反馈弹窗 */
+.feedback-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.feedback-modal:not(.hidden) {
+  opacity: 1;
+}
+.feedback-modal.hidden {
+  display: none;
+}
+.feedback-modal-content {
+  background: #fff;
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+.feedback-modal:not(.hidden) .feedback-modal-content {
+  transform: translateY(0);
+}
+.feedback-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.feedback-header h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+}
+.feedback-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 4px;
+}
+.feedback-section {
+  margin-bottom: 16px;
+}
+.feedback-section label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.feedback-section textarea,
+.feedback-section input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  resize: vertical;
+}
+.feedback-section textarea:focus,
+.feedback-section input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+/* 评分星星 */
+.star-rating {
+  display: flex;
+  gap: 8px;
+  font-size: 28px;
+  cursor: pointer;
+}
+.star-rating span {
+  color: #e2e8f0;
+  transition: color 0.15s;
+}
+.star-rating span.active,
+.star-rating span:hover {
+  color: #f59e0b;
+}
+
+/* 反馈类型按钮 */
+.feedback-types {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.type-btn {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.type-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* 提交按钮 */
+.feedback-submit {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.feedback-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(30, 64, 175, 0.25);
+}
+
+/* Toast 提示 */
+.feedback-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(15, 23, 42, 0.9);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  z-index: 1002;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.feedback-toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+</style>
+  <!-- 导出功能：打印样式优化 -->
+  <style media="print">
+    body{background:#fff;padding:0}
+    .container{max-width:100%;padding:10px}
+    .header{padding:12px 0}
+    .header h1{font-size:18px}
+    .header p,.func-grid,.form-grid,.btn{display:none}
+    .card{box-shadow:none;border:1px solid #ccc;margin-bottom:8px;page-break-inside:avoid}
+    .card-title{font-size:14px}
+    .table{font-size:10px}
+    .table th,.table td{padding:4px}
+    .pie-chart{width:140px;height:140px}
+    .pie-center .num{font-size:22px}
+    .bar-chart{height:80px}
+    .radar-wrap{width:160px;height:160px}
+    .gantt-fill .gantt-text{font-size:8px}
+  </style>
+</head>
+<body>
+<div class="container" id="mainContainer">
+  <div class="header">
+    <div class="logo">🏛️</div>
+    <h1>财富保全规划</h1>
+    <p>家族信托 · 保险架构 · 税务筹划 · 资产隔离 · 代际传承</p>
+  </div>
+
+  <!-- 性能优化：骨架屏（首屏加载前显示） -->
+  <div id="skeleton" style="display:none">
+    <div style="background:#fff;border-radius:10px;padding:16px;margin-bottom:14px;height:120px">
+      <div style="width:40%;height:16px;background:#e2e8f0;border-radius:4px;margin-bottom:12px"></div>
+      <div style="width:80%;height:12px;background:#e2e8f0;border-radius:4px;margin-bottom:8px"></div>
+      <div style="width:60%;height:12px;background:#e2e8f0;border-radius:4px"></div>
+    </div>
+  </div>
+
+  <!-- 功能选择 -->
+  <div class="func-grid" id="funcGrid">
+    <div class="func-card active" data-scene="trust"><div class="emoji">🏛️</div><div class="name">家族信托</div></div>
+    <div class="func-card" data-scene="insurance"><div class="emoji">🛡️</div><div class="name">保险架构</div></div>
+    <div class="func-card" data-scene="tax"><div class="emoji">💵</div><div class="name">税务筹划</div></div>
+    <div class="func-card" data-scene="isolation"><div class="emoji">🔒</div><div class="name">资产隔离</div></div>
+    <div class="func-card" data-scene="succession"><div class="emoji">🌳</div><div class="name">代际传承</div></div>
+    <div class="func-card" data-scene="menu"><div class="emoji">📋</div><div class="name">使用说明</div></div>
+    <div class="func-card" data-scene="perf"><div class="emoji">📊</div><div class="name">性能监控</div></div>
+  </div>
+
+  <!-- 导出功能栏 -->
+  <div id="exportBar" class="export-bar" style="display:none">
+    <button class="export-btn" onclick="exportToPDF()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      导出PDF
+    </button>
+    <button class="export-btn" onclick="exportToCSV()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      导出CSV
+    </button>
+    <button class="export-btn" onclick="shareToWeChat()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+      分享微信
+    </button>
+  </div>
+
+  <!-- ========== 家族信托 ========== -->
+  <div id="scene-trust" class="scene">
+    <div class="card">
+      <div class="card-title"><span class="icon">🏛️</span>家族信托定制</div>
+      <div class="form-grid">
+        <div class="form-item full">
+          <label>资产规模</label>
+          <select id="trustAsset"><option value="3000">3000万</option><option value="5000" selected>5000万</option><option value="10000">1亿</option><option value="30000">3亿</option><option value="100000">10亿+</option></select>
+        </div>
+        <div class="form-item">
+          <label>信托目的</label>
+          <select id="trustPurpose"><option value="传承">资产传承</option><option value="隔离">债务隔离</option><option value="税务">税务优化</option><option value="婚姻">婚姻保护</option></select>
+        </div>
+        <div class="form-item">
+          <label>受益人数量</label>
+          <select id="trustBeneficiary"><option value="1">1位</option><option value="2" selected>2位</option><option value="3">3位</option><option value="4">4位+</option></select>
+        </div>
+        <div class="form-item">
+          <label>存续期</label>
+          <select id="trustDuration"><option value="20">20年</option><option value="30" selected>30年</option><option value="50">50年</option><option value="99">永续</option></select>
+        </div>
+      </div>
+      <button class="btn" onclick="generateTrust()">生成信托方案</button>
+    </div>
+    <div id="trustResult" class="hidden"></div>
+  </div>
+
+  <!-- ========== 保险架构 ========== -->
+  <div id="scene-insurance" class="scene hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">🛡️</span>保险架构设计</div>
+      <div class="form-grid">
+        <div class="form-item">
+          <label>家庭角色</label>
+          <select id="insRole"><option value="企业主" selected>企业主</option><option value="配偶">配偶</option><option value="子女">子女</option><option value="父母">父母</option></select>
+        </div>
+        <div class="form-item">
+          <label>年收入（万）</label>
+          <input type="number" id="insIncome" value="300" placeholder="例如：300">
+        </div>
+        <div class="form-item">
+          <label>年龄</label>
+          <input type="number" id="insAge" value="45" placeholder="例如：45">
+        </div>
+        <div class="form-item">
+          <label>已有保单</label>
+          <select id="insExisting"><option value="0">0份</option><option value="1">1份</option><option value="2">2份+</option></select>
+        </div>
+      </div>
+      <button class="btn" onclick="generateInsurance()">生成保险方案</button>
+    </div>
+    <div id="insResult" class="hidden"></div>
+  </div>
+
+  <!-- ========== 税务筹划 ========== -->
+  <div id="scene-tax" class="scene hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">💵</span>税务筹划方案</div>
+      <div class="form-grid">
+        <div class="form-item">
+          <label>年收入（万）</label>
+          <input type="number" id="taxIncome" value="500" placeholder="例如：500">
+        </div>
+        <div class="form-item">
+          <label>资产类型</label>
+          <select id="taxAsset"><option value="房产">房产</option><option value="股权">股权</option><option value="现金">现金</option><option value="综合" selected>综合</option></select>
+        </div>
+        <div class="form-item">
+          <label>筹划目标</label>
+          <select id="taxGoal"><option value="节税">节税</option><option value="传承">传承</option><option value="综合优化" selected>综合优化</option></select>
+        </div>
+        <div class="form-item">
+          <label>税务区域</label>
+          <select id="taxRegion"><option value="境内" selected>境内</option><option value="离岸">离岸</option><option value="香港">香港</option></select>
+        </div>
+      </div>
+      <button class="btn" onclick="generateTax()">生成税务方案</button>
+    </div>
+    <div id="taxResult" class="hidden"></div>
+  </div>
+
+  <!-- ========== 资产隔离 ========== -->
+  <div id="scene-isolation" class="scene hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">🔒</span>资产隔离规划</div>
+      <div class="form-grid">
+        <div class="form-item">
+          <label>企业类型</label>
+          <select id="isoType"><option value="制造业">制造业</option><option value="科技互联网">科技互联网</option><option value="金融业">金融业</option><option value="房地产">房地产</option><option value="零售消费">零售消费</option></select>
+        </div>
+        <div class="form-item">
+          <label>家庭资产（万）</label>
+          <input type="number" id="isoAsset" value="5000" placeholder="例如：5000">
+        </div>
+        <div class="form-item">
+          <label>风险类型</label>
+          <select id="isoRisk"><option value="债务风险">债务风险</option><option value="婚姻风险">婚姻风险</option><option value="经营风险">经营风险</option></select>
+        </div>
+        <div class="form-item">
+          <label>时间紧迫度</label>
+          <select id="isoUrgency"><option value="紧急（<1年）">紧急（<1年）</option><option value="近期（1-3年）">近期（1-3年）</option><option value="计划（3-5年）" selected>计划（3-5年）</option><option value="长期（>5年）">长期（>5年）</option></select>
+        </div>
+      </div>
+      <button class="btn" onclick="generateIsolation()">生成隔离方案</button>
+    </div>
+    <div id="isoResult" class="hidden"></div>
+  </div>
+
+  <!-- ========== 代际传承 ========== -->
+  <div id="scene-succession" class="scene hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">🌳</span>代际传承规划</div>
+      <div class="form-grid">
+        <div class="form-item">
+          <label>子女年龄</label>
+          <input type="number" id="succAge" value="18" placeholder="例如：18">
+        </div>
+        <div class="form-item">
+          <label>资产规模（万）</label>
+          <input type="number" id="succAsset" value="5000" placeholder="例如：5000">
+        </div>
+        <div class="form-item">
+          <label>传承目标</label>
+          <select id="succGoal"><option value="保持控制权">保持控制权</option><option value="生活保障">生活保障</option><option value="税务优化">税务优化</option><option value="避免纠纷">避免纠纷</option></select>
+        </div>
+        <div class="form-item">
+          <label>子女数量</label>
+          <select id="succChildren"><option value="1">1位</option><option value="2" selected>2位</option><option value="3">3位+</option></select>
+        </div>
+      </div>
+      <button class="btn" onclick="generateSuccession()">生成分阶段方案</button>
+    </div>
+    <div id="succResult" class="hidden"></div>
+  </div>
+
+  <!-- ========== 性能监控面板 ========== -->
+  <div id="scene-perf" class="scene hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span>性能监控</div>
+      <div id="perfContent"></div>
+    </div>
+  </div>
+
+  <!-- ========== 使用说明 ========== -->
+  <div id="scene-menu" class="scene hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span>使用说明</div>
+      <div class="advice-list">
+        <div class="advice-item"><div class="bullet">1</div><div>选择上方功能卡片，进入对应场景</div></div>
+        <div class="advice-item"><div class="bullet">2</div><div>填写或选择参数，点击生成按钮</div></div>
+        <div class="advice-item"><div class="bullet">3</div><div>查看定制方案、费用估算、时间规划</div></div>
+        <div class="advice-item"><div class="bullet">4</div><div>同一输入多次查询，结果保持一致</div></div>
+      </div>
+      <div style="margin-top:12px;font-size:12px;color:var(--text-secondary)">
+        💡 企微端同样支持参数化输入，如：<br>
+        "家族信托 资产5000万 传承 3位受益人"<br>
+        "保险架构 企业主 年收入300万 45岁"
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 反馈弹窗 ========== -->
+<button id="feedbackFab" class="feedback-fab hidden" aria-label="用户反馈">💬</button>
+
+<div id="feedbackModal" class="feedback-modal hidden">
+  <div class="feedback-modal-content">
+    <div class="feedback-header">
+      <h3>📝 用户反馈</h3>
+      <button type="button" class="feedback-close" onclick="closeFeedback()">✕</button>
+    </div>
+    <form id="feedbackForm" onsubmit="submitFeedback(event)">
+      <div class="feedback-section">
+        <label>整体体验评分</label>
+        <div class="star-rating" id="starRating">
+          <span data-val="1">☆</span><span data-val="2">☆</span>
+          <span data-val="3">☆</span><span data-val="4">☆</span>
+          <span data-val="5">☆</span>
+        </div>
+      </div>
+      <div class="feedback-section">
+        <label>反馈类型</label>
+        <div class="feedback-types">
+          <button type="button" class="type-btn" data-type="feature">💡 功能建议</button>
+          <button type="button" class="type-btn" data-type="bug">🐛 Bug反馈</button>
+          <button type="button" class="type-btn" data-type="ux">🎨 体验问题</button>
+          <button type="button" class="type-btn" data-type="other">📝 其他</button>
+        </div>
+      </div>
+      <div class="feedback-section">
+        <label>详细描述</label>
+        <textarea id="feedbackDesc" rows="4" placeholder="请描述您遇到的问题或建议..."></textarea>
+      </div>
+      <div class="feedback-section">
+        <label>联系方式（可选，便于我们回访）</label>
+        <input type="text" id="feedbackContact" placeholder="手机号 / 邮箱 / 企业微信">
+      </div>
+      <input type="hidden" id="feedbackScene" value="">
+      <input type="hidden" id="feedbackPath" value="">
+      <button type="submit" class="feedback-submit">提交反馈</button>
+    </form>
+  </div>
+</div>
+
+<div id="feedbackToast" class="feedback-toast"></div>
+
+<script>
+// ============ 确定性随机引擎 ============
+function makeSeed(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return Math.abs(hash);
+}
+function rand(seed, n, lo, hi) {
+  return lo + Math.floor(Math.abs((seed / (n + 1)) % 1) * (hi - lo + 1));
+}
+
+// ============ 导出功能 ============
+function showExportBar() {
+  const bar = document.getElementById('exportBar');
+  if (bar) bar.style.display = 'flex';
+}
+function hideExportBar() {
+  const bar = document.getElementById('exportBar');
+  if (bar) bar.style.display = 'none';
+}
+function exportToPDF() {
+  window.print();
+}
+function exportToCSV() {
+  const activeScene = document.querySelector('.scene:not(.hidden)');
+  if (!activeScene) return;
+  const resultDiv = activeScene.querySelector('div[id$="Result"]');
+  if (!resultDiv) return;
+  const tables = resultDiv.querySelectorAll('table');
+  if (tables.length === 0) {
+    alert('当前没有可导出的数据表格');
+    return;
+  }
+  let csv = '\uFEFF';
+  tables.forEach((table, idx) => {
+    const caption = table.closest('.card')?.querySelector('.result-title')?.textContent || ('表格' + (idx + 1));
+    csv += '"' + caption.replace(/"/g, '""') + '"\n';
+    const rows = table.querySelectorAll('tr');
+    rows.forEach(row => {
+      const cells = row.querySelectorAll('th, td');
+      const line = Array.from(cells).map(cell => {
+        let text = cell.textContent.replace(/\s+/g, ' ').trim();
+        text = text.replace(/"/g, '""');
+        return '"' + text + '"';
+      }).join(',');
+      csv += line + '\n';
+    });
+    csv += '\n';
+  });
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const sceneName = activeScene.id.replace('scene-', '');
+  a.href = url;
+  a.download = '财富保全方案_' + sceneName + '_' + new Date().toLocaleDateString('zh-CN').replace(/\//g, '-') + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function shareToWeChat() {
+  if (typeof wx !== 'undefined' && wx.ready) {
+    wx.ready(function() {
+      wx.updateAppMessageShareData({
+        title: document.querySelector('meta[property="og:title"]')?.content || '财富保全规划 — DemoBank AI',
+        desc: document.querySelector('meta[property="og:description"]')?.content || '家族信托、保险架构、税务筹划一站式智能规划',
+        link: window.location.href,
+        imgUrl: '',
+        success: function() { alert('分享内容已设置，请在微信中发送给朋友'); },
+        fail: function() { fallbackCopyUrl(); }
+      });
+    });
+  } else {
+    fallbackCopyUrl();
+  }
+}
+function fallbackCopyUrl() {
+  const url = window.location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(function() {
+      alert('链接已复制到剪贴板，请在微信中粘贴分享给好友');
+    }).catch(function() {
+      prompt('请复制以下链接分享到微信：', url);
+    });
+  } else {
+    prompt('请复制以下链接分享到微信：', url);
+  }
+}
+
+function frand(seed, n, lo, hi) {
+  return +(lo + Math.abs((seed / (n + 1)) % 1) * (hi - lo)).toFixed(1);
+}
+function formatWan(val) {
+  if (val >= 10000) return (val / 10000).toFixed(1) + '亿';
+  return val + '万';
+}
+
+// ============ 场景切换 ============
+const funcCards = document.querySelectorAll('.func-card');
+funcCards.forEach(card => {
+  card.addEventListener('click', () => {
+    funcCards.forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    const scene = card.dataset.scene;
+    hideExportBar();
+    document.querySelectorAll('.scene').forEach(s => s.classList.add('hidden'));
+    document.getElementById('scene-' + scene).classList.remove('hidden');
+    if (scene === 'perf' && typeof perfMonitor !== 'undefined') {
+      document.getElementById('perfContent').innerHTML = perfMonitor.report();
+    }
+  });
+});
+
+// ============ 图表工具函数 ============
+function renderPieChart(data, title) {
+  const colors = ['#1e40af','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6'];
+  const total = data.reduce((s,d)=>s+d.value,0);
+  let acc = 0, grads = [];
+  data.forEach((d,i)=>{
+    const pct = d.value/total;
+    grads.push(`${colors[i%colors.length]} ${acc*360}deg ${(acc+pct)*360}deg`);
+    acc += pct;
+  });
+  const legend = data.map((d,i)=>`<div class="pie-legend-item"><div class="pie-legend-dot" style="background:${colors[i%colors.length]}"></div><span>${d.name} ${Math.round(d.value/total*100)}%</span></div>`).join('');
+  return `<div class="card"><div class="result-title">${title}</div><div class="pie-chart" style="background:conic-gradient(${grads.join(',')})"><div class="pie-center"><div class="num">${total>=10000?(total/10000).toFixed(1)+'亿':total+'万'}</div><div class="label">总规模</div></div></div><div class="pie-legend">${legend}</div></div>`;
+}
+
+function renderBarChart(data, title) {
+  const max = Math.max(...data.map(d=>d.value));
+  const colors = ['#1e40af','#0ea5e9','#10b981','#f59e0b'];
+  const bars = data.map((d,i)=>{
+    const h = Math.max(8, Math.round(d.value/max*100));
+    return `<div class="bar-group"><div class="bar-fill" style="height:${h}px;background:${colors[i%colors.length]}"><span class="bar-val">${d.value}万</span></div><div class="bar-label">${d.name}</div></div>`;
+  }).join('');
+  return `<div class="card"><div class="result-title">${title}</div><div class="bar-chart">${bars}</div></div>`;
+}
+
+function renderRadarChart(data, title) {
+  const n = data.length, cx=100, cy=100, r=80;
+  const max = Math.max(...data.map(d=>d.value));
+  let pts=[];
+  for(let i=0;i<n;i++){
+    const angle = (Math.PI*2*i/n)-Math.PI/2;
+    const rr = r*(data[i].value/max);
+    pts.push(`${cx+rr*Math.cos(angle)},${cy+rr*Math.sin(angle)}`);
+  }
+  let axes='', labels='', grids='';
+  for(let i=0;i<n;i++){
+    const angle = (Math.PI*2*i/n)-Math.PI/2;
+    const x2=cx+r*Math.cos(angle), y2=cy+r*Math.sin(angle);
+    axes += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" class="radar-axis"/>`;
+    const lx=cx+(r+14)*Math.cos(angle), ly=cy+(r+14)*Math.sin(angle);
+    labels += `<text x="${lx}" y="${ly+4}" class="radar-label">${data[i].name}</text>`;
+  }
+  for(let ratio of [.25,.5,.75]){
+    let gp=[];
+    for(let i=0;i<n;i++){
+      const angle=(Math.PI*2*i/n)-Math.PI/2;
+      gp.push(`${cx+r*ratio*Math.cos(angle)},${cy+r*ratio*Math.sin(angle)}`);
+    }
+    grids += `<polygon points="${gp.join(' ')}" class="radar-grid"/>`;
+  }
+  return `<div class="card"><div class="result-title">${title}</div><div class="radar-wrap"><svg viewBox="0 0 200 200" class="radar-svg">${grids}${axes}<polygon points="${pts.join(' ')}" class="radar-area"/>${labels}</svg></div></div>`;
+}
+
+function renderGantt(data, title) {
+  const totalWeeks = Math.max(...data.map(d=>d.start+d.duration));
+  const rows = data.map(d=>{
+    const left = (d.start/totalWeeks)*100;
+    const width = (d.duration/totalWeeks)*100;
+    return `<div class="gantt-row"><div class="gantt-label">${d.name}</div><div class="gantt-track"><div class="gantt-fill" style="left:${left}%;width:${width}%;background:linear-gradient(90deg,${d.color},${d.color}88)"><span class="gantt-text">${d.duration}周</span></div></div></div>`;
+  }).join('');
+  return `<div class="card"><div class="result-title">${title}</div><div class="gantt">${rows}</div></div>`;
+}
+
+// ============ 用户反馈系统 ============
+const FeedbackStore = {
+  KEY: 'feedback_records',
+  MAX_STORED: 50,
+  getAll() {
+    try {
+      return JSON.parse(localStorage.getItem(this.KEY) || '[]');
+    } catch {
+      return [];
+    }
+  },
+  save(feedback) {
+    const records = this.getAll();
+    records.unshift(feedback);
+    if (records.length > this.MAX_STORED) {
+      records.length = this.MAX_STORED;
+    }
+    localStorage.setItem(this.KEY, JSON.stringify(records));
+  }
+};
+
+let currentRating = 0;
+let currentType = 'other';
+
+function openFeedbackModal() {
+  const modal = document.getElementById('feedbackModal');
+  if (!modal) return;
+  // 自动填充当前场景
+  const activeCard = document.querySelector('.func-card.active');
+  const scene = activeCard ? activeCard.dataset.scene : 'unknown';
+  const sceneInput = document.getElementById('feedbackScene');
+  if (sceneInput) sceneInput.value = scene;
+  const pathInput = document.getElementById('feedbackPath');
+  if (pathInput) pathInput.value = window.location.pathname + window.location.hash;
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFeedback() {
+  const modal = document.getElementById('feedbackModal');
+  if (modal) modal.classList.add('hidden');
+  document.body.style.overflow = '';
+  // 重置表单
+  currentRating = 0;
+  currentType = 'other';
+  updateStars(0);
+  document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+  const desc = document.getElementById('feedbackDesc');
+  if (desc) desc.value = '';
+  const contact = document.getElementById('feedbackContact');
+  if (contact) contact.value = '';
+}
+
+function updateStars(val) {
+  const stars = document.querySelectorAll('#starRating span');
+  stars.forEach(s => {
+    const v = +s.dataset.val;
+    s.textContent = v <= val ? '★' : '☆';
+    s.classList.toggle('active', v <= val);
+  });
+}
+
+function showToast(message) {
+  let toast = document.getElementById('feedbackToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'feedbackToast';
+    toast.className = 'feedback-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function submitFeedback(event) {
+  event.preventDefault();
+  const desc = document.getElementById('feedbackDesc');
+  const description = desc ? desc.value.trim() : '';
+  if (!description && currentRating === 0) {
+    showToast('请填写描述或选择评分');
+    return;
+  }
+  const feedback = {
+    id: `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+    source: 'h5',
+    timestamp: Date.now(),
+    scene: document.getElementById('feedbackScene')?.value || 'unknown',
+    rating: currentRating,
+    type: currentType,
+    description: description,
+    contact: document.getElementById('feedbackContact')?.value.trim() || '',
+    env: {
+      ua: navigator.userAgent,
+      screen: `${window.screen.width}x${window.screen.height}`,
+      platform: /iPhone|iPad|iPod/.test(navigator.userAgent) ? 'iOS' :
+                /Android/.test(navigator.userAgent) ? 'Android' : 'PC',
+    },
+    status: 'pending',
+    handling: [],
+  };
+  FeedbackStore.save(feedback);
+  showToast('✅ 反馈提交成功，感谢您的建议！');
+  closeFeedback();
+}
+
+// 绑定星星点击
+document.addEventListener('DOMContentLoaded', function() {
+  const starContainer = document.getElementById('starRating');
+  if (starContainer) {
+    starContainer.querySelectorAll('span').forEach(star => {
+      star.addEventListener('click', function() {
+        currentRating = +this.dataset.val;
+        updateStars(currentRating);
+      });
+    });
+  }
+  // 绑定类型按钮
+  document.querySelectorAll('.type-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentType = this.dataset.type;
+    });
+  });
+  // 显示浮动按钮
+  const fab = document.getElementById('feedbackFab');
+  if (fab) fab.classList.remove('hidden');
+});
+
+// ============ 1. 家族信托 ============
+function generateTrust() {
+  const asset = +document.getElementById('trustAsset').value;
+  const purpose = document.getElementById('trustPurpose').value;
+  const beneficiary = +document.getElementById('trustBeneficiary').value;
+  const duration = +document.getElementById('trustDuration').value;
+  const input = `trust_${asset}_${purpose}_${beneficiary}_${duration}`;
+  const seed = makeSeed(input);
+
+  const setupRate = frand(seed, 1, 0.5, 2.0);
+  const annualRate = frand(seed, 2, 0.3, 1.0);
+  const setupFee = Math.max(100, Math.round(asset * setupRate / 100));
+  const annualFee = Math.max(30, Math.round(asset * annualRate / 100));
+  const total10y = setupFee + annualFee * 10;
+
+  const architectures = [
+    {name:'境内家族信托', fit:'资产在国内，税务居民', gate:'1000万起', adv:'监管透明、操作便捷'},
+    {name:'离岸家族信托', fit:'资产全球化配置', gate:'3000万起', adv:'隐私保护、灵活度高'},
+    {name:'保险金信托2.0', fit:'高杠杆传承、低成本入门', gate:'500万起', adv:'杠杆效应、分期投入'},
+    {name:'慈善信托+家族信托', fit:'家族精神传承+税务优化', gate:'2000万起', adv:'公益+传承双重目标'},
+  ];
+  const rec = architectures[rand(seed, 3, 0, architectures.length - 1)];
+
+  const timeline = [
+    {time:'第1-2周', desc:'明确信托目的、梳理资产、确定受益人'},
+    {time:'第3-4周', desc:'选择受托机构、设计分配条款、保护人设置'},
+    {time:'第5-6周', desc:'资产权属核查、法律风险评估、税务影响分析'},
+    {time:'第7-8周', desc:'信托契约起草、受益人协议、保护人协议'},
+    {time:'第9-12周', desc:'资金/股权/房产过户、登记备案'},
+    {time:'第13-16周', desc:'信托备案、银行开户、资产托管'},
+  ];
+
+  let html = `<div class="card"><div class="result-title">📋 客户参数</div>`;
+  html += `<table class="table"><tr><th>参数</th><th>值</th></tr>`;
+  html += `<tr><td>资产规模</td><td><b>${formatWan(asset)}</b></td></tr>`;
+  html += `<tr><td>信托目的</td><td>${purpose}</td></tr>`;
+  html += `<tr><td>受益人</td><td><b>${beneficiary}位</b></td></tr>`;
+  html += `<tr><td>存续期</td><td><b>${duration}年</b></td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">💰 费用估算</div>`;
+  html += `<table class="table"><tr><th>费用项目</th><th>金额</th><th>费率</th></tr>`;
+  html += `<tr><td>设立费</td><td>${setupFee}万</td><td>${setupRate}%</td></tr>`;
+  html += `<tr><td>年度管理费</td><td>${annualFee}万</td><td>${annualRate}%</td></tr>`;
+  html += `<tr><td><b>10年总成本</b></td><td><b>${total10y}万</b></td><td>—</td></tr></table></div>`;
+
+  // 图表：资产配置饼图
+  const pieData = [
+    {name:'信托资产', value: Math.round(asset * 0.60)},
+    {name:'备用金', value: Math.round(asset * 0.15)},
+    {name:'流动性资产', value: Math.round(asset * 0.10)},
+    {name:'保险配置', value: Math.round(asset * 0.10)},
+    {name:'其他', value: Math.round(asset * 0.05)},
+  ];
+  html += renderPieChart(pieData, '📊 资产配置建议');
+
+  html += `<div class="card"><div class="result-title">🏗️ 推荐架构：${rec.name}</div>`;
+  html += `<table class="table"><tr><th>维度</th><th>详情</th></tr>`;
+  html += `<tr><td>适用场景</td><td>${rec.fit}</td></tr>`;
+  html += `<tr><td>设立门槛</td><td>${rec.gate}</td></tr>`;
+  html += `<tr><td>核心优势</td><td>${rec.adv}</td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">📅 流程时间表（16周）</div><div class="timeline">`;
+  timeline.forEach(t => {
+    html += `<div class="timeline-item"><div class="time">${t.time}</div><div class="desc">${t.desc}</div></div>`;
+  });
+  html += `</div></div>`;
+
+  html += `<div class="card"><div class="result-title">💡 关键建议</div><div class="advice-list">`;
+  const advices = [
+    '建议先完成资产权属梳理，确保装入信托的资产无抵押、无查封',
+    '受益人分配建议设置条件触发机制（如学业完成、结婚、创业）',
+    '保护人条款建议预留调整空间，以应对未来政策变化',
+    '离岸信托需关注CRS申报义务，建议同步规划税务居民身份',
+    '保险金信托2.0可作为入门方案，后续升级至家族信托',
+  ];
+  const used = new Set();
+  for (let i = 0; i < 3; i++) {
+    let idx = rand(seed, 30 + i, 0, advices.length - 1);
+    if (used.has(idx)) idx = (idx + 1) % advices.length;
+    used.add(idx);
+    html += `<div class="advice-item"><div class="bullet">${i+1}</div><div>${advices[idx]}</div></div>`;
+  }
+  html += `</div></div>`;
+
+  document.getElementById('trustResult').innerHTML = html;
+  document.getElementById('trustResult').classList.remove('hidden');
+  showExportBar();
+}
+
+// ============ 2. 保险架构 ============
+function generateInsurance() {
+  const role = document.getElementById('insRole').value;
+  const income = +document.getElementById('insIncome').value;
+  const age = +document.getElementById('insAge').value;
+  const existing = +document.getElementById('insExisting').value;
+  const input = `ins_${role}_${income}_${age}_${existing}`;
+  const seed = makeSeed(input);
+
+  let life, critical, medical;
+  if (role === '企业主') {
+    life = Math.round(income * rand(seed, 5, 5, 10));
+    critical = Math.round(income * rand(seed, 6, 2, 3));
+    medical = 500 + rand(seed, 7, 0, 500);
+  } else if (role === '配偶') {
+    life = Math.round(income * rand(seed, 8, 3, 5));
+    critical = Math.round(income * rand(seed, 9, 1, 2));
+    medical = 300 + rand(seed, 10, 0, 200);
+  } else if (role === '子女') {
+    life = rand(seed, 11, 50, 100);
+    critical = Math.round(income * rand(seed, 12, 0, 1));
+    medical = 100 + rand(seed, 13, 0, 200);
+  } else {
+    life = Math.round(income * rand(seed, 14, 3, 5));
+    critical = Math.round(income * rand(seed, 15, 1, 2));
+    medical = 200 + rand(seed, 16, 0, 300);
+  }
+  const premiumLife = Math.round(life * frand(seed, 17, 0.5, 1.5));
+  const premiumCritical = Math.round(critical * frand(seed, 18, 0.8, 2.0));
+  const premiumMedical = Math.round(medical * frand(seed, 19, 0.05, 0.15));
+  const totalPremium = premiumLife + premiumCritical + premiumMedical;
+
+  let html = `<div class="card"><div class="result-title">📋 客户参数</div>`;
+  html += `<table class="table"><tr><th>参数</th><th>值</th></tr>`;
+  html += `<tr><td>家庭角色</td><td><b>${role}</b></td></tr>`;
+  html += `<tr><td>年收入</td><td><b>${income}万</b></td></tr>`;
+  html += `<tr><td>年龄</td><td><b>${age}岁</b></td></tr>`;
+  html += `<tr><td>已有保单</td><td>${existing}份</td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">📊 保额建议矩阵</div>`;
+  html += `<table class="table"><tr><th>险种</th><th>建议保额</th><th>年保费</th><th>优先级</th></tr>`;
+  html += `<tr><td>终身寿险</td><td><b>${life}万</b></td><td>${premiumLife}万</td><td>⭐⭐⭐⭐⭐</td></tr>`;
+  html += `<tr><td>重疾险</td><td><b>${critical}万</b></td><td>${premiumCritical}万</td><td>⭐⭐⭐⭐</td></tr>`;
+  html += `<tr><td>高端医疗</td><td><b>${medical}万</b></td><td>${premiumMedical}万</td><td>⭐⭐⭐⭐</td></tr>`;
+  html += `<tr><td><b>合计</b></td><td><b>${life+critical+medical}万</b></td><td><b>${totalPremium}万/年</b></td><td>—</td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">🏗️ 架构设计</div>`;
+  if (role === '企业主') {
+    html += `<p><b>1. 投保人架构</b></p><p>企业主本人为被保险人，配偶为投保人。保单现金价值不属于被保险人遗产，可隔离债务。</p>`;
+    html += `<p><b>2. 杠杆测算</b></p><p>终身寿险杠杆：${life}/${premiumLife} = <b>${(life/premiumLife).toFixed(1)}倍</b></p>`;
+  } else if (role === '配偶') {
+    html += `<p><b>1. 投保人架构</b></p><p>配偶为被保险人，企业主为投保人。家庭责任共担，保障配偶生活质量。</p>`;
+    html += `<p><b>2. 年金规划</b></p><p>建议配置年金险，每月领取约${Math.round(income * 0.08)}万（替代收入的8%）。</p>`;
+  } else {
+    html += `<p><b>1. 投保人架构</b></p><p>${role}为被保险人，父母为投保人。父母出资的保单视为赠与，子女享有独立财产权。</p>`;
+    html += `<p><b>2. 教育金规划</b></p><p>预估总费用：${rand(seed, 50, 80, 200)}万（国内）/ ${rand(seed, 51, 150, 300)}万（海外）。</p>`;
+  }
+  html += `</div>`;
+
+  html += `<div class="card"><div class="result-title">💡 关键建议</div><div class="advice-list">`;
+  const advices = [
+    '建议投保时间早于债务发生至少2年，避免恶意投保被撤销',
+    '保单架构建议预留变更空间，应对婚姻状态变化',
+    'CRS背景下，境外保单现金价值需申报，建议境内优先配置',
+    '企业主建议将保单与企业资产分离，避免公私混同',
+    '定期审视保单架构，建议每3年复盘一次',
+  ];
+  const used = new Set();
+  for (let i = 0; i < 3; i++) {
+    let idx = rand(seed, 40 + i, 0, advices.length - 1);
+    if (used.has(idx)) idx = (idx + 1) % advices.length;
+    used.add(idx);
+    html += `<div class="advice-item"><div class="bullet">${i+1}</div><div>${advices[idx]}</div></div>`;
+  }
+  html += `</div></div>`;
+
+  document.getElementById('insResult').innerHTML = html;
+  document.getElementById('insResult').classList.remove('hidden');
+  showExportBar();
+}
+
+// ============ 3. 税务筹划 ============
+function generateTax() {
+  const income = +document.getElementById('taxIncome').value;
+  const assetType = document.getElementById('taxAsset').value;
+  const goal = document.getElementById('taxGoal').value;
+  const region = document.getElementById('taxRegion').value;
+  const input = `tax_${income}_${assetType}_${goal}_${region}`;
+  const seed = makeSeed(input);
+
+  let strategies;
+  if (assetType === '房产') {
+    strategies = [
+      {name:'房产赠与+回租', save:rand(seed,60,50,200), risk:'低', desc:'直系亲属赠与免契税，回租保留使用权'},
+      {name:'家族信托持有房产', save:rand(seed,61,100,500), risk:'中', desc:'信托持有规避遗产税，需缴纳房产税'},
+      {name:'置换低税区房产', save:rand(seed,62,30,150), risk:'低', desc:'优化资产配置，降低持有税负'},
+    ];
+  } else if (assetType === '股权') {
+    strategies = [
+      {name:'股权家族信托', save:rand(seed,63,200,1000), risk:'中', desc:'信托持有股权，分红不征遗产税'},
+      {name:'持股平台优化', save:rand(seed,64,100,500), risk:'低', desc:'有限合伙+家族信托双层架构'},
+      {name:'税务居民身份规划', save:rand(seed,65,150,800), risk:'高', desc:'优化税务居民身份，适用低税率地区'},
+    ];
+  } else if (assetType === '现金') {
+    strategies = [
+      {name:'慈善信托', save:rand(seed,66,50,300), risk:'低', desc:'捐赠抵扣12%应纳税所得额'},
+      {name:'保险年金', save:rand(seed,67,30,200), risk:'低', desc:'税优健康险+年金递延纳税'},
+      {name:'跨境资金池', save:rand(seed,68,100,600), risk:'中', desc:'利用FT账户/离岸架构优化汇兑税负'},
+    ];
+  } else {
+    strategies = [
+      {name:'综合家族信托', save:rand(seed,69,150,800), risk:'中', desc:'一站式架构，涵盖多类资产'},
+      {name:'慈善+保险组合', save:rand(seed,70,80,400), risk:'低', desc:'公益目标+税务优化双重收益'},
+      {name:'离岸架构+境内信托', save:rand(seed,71,200,1000), risk:'高', desc:'全球化配置，综合税负最低化'},
+    ];
+  }
+  const totalSave = strategies.reduce((a, b) => a + b.save, 0);
+  const rateBefore = frand(seed, 72, 35, 45);
+  const rateAfter = Math.max(10, +(rateBefore - frand(seed, 73, 5, 15)).toFixed(1));
+
+  let html = `<div class="card"><div class="result-title">📋 客户参数</div>`;
+  html += `<table class="table"><tr><th>参数</th><th>值</th></tr>`;
+  html += `<tr><td>年收入</td><td><b>${income}万</b></td></tr>`;
+  html += `<tr><td>资产类型</td><td>${assetType}</td></tr>`;
+  html += `<tr><td>筹划目标</td><td>${goal}</td></tr>`;
+  html += `<tr><td>税务区域</td><td>${region}</td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">📊 节税策略矩阵</div>`;
+  html += `<table class="table"><tr><th>策略</th><th>预计节税</th><th>风险</th><th>说明</th></tr>`;
+  strategies.forEach(s => {
+    html += `<tr><td>${s.name}</td><td>${s.save}万/年</td><td>${s.risk}</td><td>${s.desc}</td></tr>`;
+  });
+  html += `<tr><td><b>合计</b></td><td><b>${totalSave}万/年</b></td><td>—</td><td>—</td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">📈 税负优化效果</div>`;
+  html += `<table class="table"><tr><th>指标</th><th>优化前</th><th>优化后</th><th>改善</th></tr>`;
+  html += `<tr><td>综合税率</td><td>${rateBefore}%</td><td><b>${rateAfter}%</b></td><td>↓${(rateBefore-rateAfter).toFixed(1)}%</td></tr>`;
+  html += `<tr><td>年节税金额</td><td>—</td><td><b>${totalSave}万</b></td><td>—</td></tr>`;
+  html += `<tr><td>10年累计节税</td><td>—</td><td><b>${totalSave*10}万</b></td><td>—</td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">💡 关键建议</div><div class="advice-list">`;
+  const advices = [
+    '建议提前3-5年开始税务筹划，避免临时抱佛脚',
+    '家族信托设立需在税务居民身份确定前完成，否则效果大打折扣',
+    '境内优先利用税优健康险（2400元/年）、企业年金等合规工具',
+    '离岸架构建议配合专业税务顾问，确保符合反避税规则',
+    '每年4月个税汇算清缴时，建议复盘全年税务筹划效果',
+  ];
+  const used = new Set();
+  for (let i = 0; i < 3; i++) {
+    let idx = rand(seed, 80 + i, 0, advices.length - 1);
+    if (used.has(idx)) idx = (idx + 1) % advices.length;
+    used.add(idx);
+    html += `<div class="advice-item"><div class="bullet">${i+1}</div><div>${advices[idx]}</div></div>`;
+  }
+  html += `</div></div>`;
+
+  document.getElementById('taxResult').innerHTML = html;
+  document.getElementById('taxResult').classList.remove('hidden');
+  showExportBar();
+}
+
+// ============ 4. 资产隔离 ============
+function generateIsolation() {
+  const type = document.getElementById('isoType').value;
+  const asset = +document.getElementById('isoAsset').value;
+  const risk = document.getElementById('isoRisk').value;
+  const urgency = document.getElementById('isoUrgency').value;
+  const input = `iso_${type}_${asset}_${risk}_${urgency}`;
+  const seed = makeSeed(input);
+
+  const tools = [
+    {name:'家族信托', isolation:5, cost:'高', time:'6-12个月', best:'债务+婚姻+传承'},
+    {name:'保险金信托', isolation:4, cost:'中', time:'2-4个月', best:'债务+传承'},
+    {name:'离岸公司', isolation:4, cost:'高', time:'3-6个月', best:'税务+隐私'},
+    {name:'婚前协议', isolation:3, cost:'低', time:'1-2周', best:'婚姻风险'},
+    {name:'人寿保险', isolation:3, cost:'低', time:'1-2个月', best:'债务风险'},
+    {name:'赠与', isolation:2, cost:'低', time:'1-2周', best:'提前布局'},
+  ];
+
+  let recommended, timeline;
+  if (risk === '债务风险') {
+    recommended = ['家族信托','保险金信托','人寿保险'];
+    timeline = [
+      {time:'立即', desc:'梳理家庭资产清单，区分企业资产与家庭资产'},
+      {time:'1-3个月', desc:'设立家庭备用金账户，独立于企业账户'},
+      {time:'3-6个月', desc:'配置人寿保险，指定家庭成员为受益人'},
+      {time:'6-12个月', desc:'设立家族信托，将核心资产装入信托'},
+      {time:'持续', desc:'企业融资时避免个人担保，或限制担保金额'},
+    ];
+  } else if (risk === '婚姻风险') {
+    recommended = ['婚前协议','家族信托','赠与'];
+    timeline = [
+      {time:'立即', desc:'梳理婚前个人财产，保留权属证明'},
+      {time:'婚前', desc:'签署婚前协议，明确财产归属（可选）'},
+      {time:'婚后1-3个月', desc:'父母出资购房/购车，登记在自己子女名下'},
+      {time:'婚后6-12个月', desc:'设立家族信托，子女为受益人'},
+      {time:'持续', desc:'避免婚后财产混同，保留独立账户'},
+    ];
+  } else {
+    recommended = ['家族信托','离岸公司','保险金信托'];
+    timeline = [
+      {time:'1-3个月', desc:'完成资产权属梳理，确认无抵押/查封'},
+      {time:'3-6个月', desc:'设立家族信托，装入核心资产'},
+      {time:'6-12个月', desc:'配置离岸架构，优化税务居民身份'},
+      {time:'12-18个月', desc:'完善保护人/监察人条款，预留调整空间'},
+      {time:'持续', desc:'每年复盘隔离效果，应对政策变化'},
+    ];
+  }
+
+  let html = `<div class="card"><div class="result-title">📋 客户参数</div>`;
+  html += `<table class="table"><tr><th>参数</th><th>值</th></tr>`;
+  html += `<tr><td>企业类型</td><td>${type}</td></tr>`;
+  html += `<tr><td>家庭资产</td><td><b>${formatWan(asset)}</b></td></tr>`;
+  html += `<tr><td>风险类型</td><td>${risk}</td></tr>`;
+  html += `<tr><td>时间紧迫度</td><td>${urgency}</td></tr></table></div>`;
+
+  // 图表：风险评估雷达图
+  const radarData = [
+    {name:'债务风险', value: risk==='债务风险'?90:rand(seed,91,30,70)},
+    {name:'婚姻风险', value: risk==='婚姻风险'?85:rand(seed,92,20,60)},
+    {name:'经营风险', value: risk==='经营风险'?80:rand(seed,93,40,75)},
+    {name:'税务风险', value: rand(seed,94,30,70)},
+    {name:'传承风险', value: rand(seed,95,40,80)},
+    {name:'流动性风险', value: rand(seed,96,20,50)},
+  ];
+  html += renderRadarChart(radarData, '📊 多维风险评估');
+
+  html += `<div class="card"><div class="result-title">🛡️ 隔离工具对比</div>`;
+  html += `<table class="table"><tr><th>工具</th><th>隔离强度</th><th>成本</th><th>时间</th><th>推荐</th></tr>`;
+  tools.forEach(t => {
+    const stars = '⭐'.repeat(t.isolation) + '☆'.repeat(5 - t.isolation);
+    const rec = recommended.includes(t.name) ? '✅' : '';
+    html += `<tr><td>${t.name}</td><td>${stars}</td><td>${t.cost}</td><td>${t.time}</td><td>${rec}</td></tr>`;
+  });
+  html += `</table></div>`;
+
+  html += `<div class="card"><div class="result-title">📅 实施时间线</div><div class="timeline">`;
+  timeline.forEach(t => {
+    html += `<div class="timeline-item"><div class="time">${t.time}</div><div class="desc">${t.desc}</div></div>`;
+  });
+  html += `</div></div>`;
+
+  html += `<div class="card"><div class="result-title">💡 关键建议</div><div class="advice-list">`;
+  const advices = [
+    '企业主建议预留6-12个月缓冲期，避免在债务敏感期操作',
+    '家族信托装入的资产建议为"干净资产"（无抵押、无查封、权属清晰）',
+    '婚姻隔离建议婚前完成，婚后操作难度和法律风险显著增加',
+    '离岸架构需关注CRS申报义务，确保合规不触碰法律红线',
+    '隔离方案建议配合遗嘱/保险，形成多层保护网',
+  ];
+  const used = new Set();
+  for (let i = 0; i < 3; i++) {
+    let idx = rand(seed, 90 + i, 0, advices.length - 1);
+    if (used.has(idx)) idx = (idx + 1) % advices.length;
+    used.add(idx);
+    html += `<div class="advice-item"><div class="bullet">${i+1}</div><div>${advices[idx]}</div></div>`;
+  }
+  html += `</div></div>`;
+
+  document.getElementById('isoResult').innerHTML = html;
+  document.getElementById('isoResult').classList.remove('hidden');
+  showExportBar();
+}
+
+// ============ 5. 代际传承 ============
+function generateSuccession() {
+  const age = +document.getElementById('succAge').value;
+  const asset = +document.getElementById('succAsset').value;
+  const goal = document.getElementById('succGoal').value;
+  const children = +document.getElementById('succChildren').value;
+  const input = `succ_${age}_${asset}_${goal}_${children}`;
+  const seed = makeSeed(input);
+
+  let phase1, p1Tools, p1Budget;
+  if (age < 18) {
+    phase1 = '未成年阶段（0-18岁）';
+    p1Tools = ['教育金保险','家族信托（子女为受益人）','监护人指定'];
+    p1Budget = Math.round(asset * frand(seed, 100, 0.05, 0.15));
+  } else if (age < 30) {
+    phase1 = '成年初期（18-30岁）';
+    p1Tools = ['家族信托（附条件分配）','创业基金','婚产隔离'];
+    p1Budget = Math.round(asset * frand(seed, 101, 0.1, 0.2));
+  } else {
+    phase1 = '成熟阶段（30岁+）';
+    p1Tools = ['家族信托（完全分配）','股权继承','家族宪法'];
+    p1Budget = Math.round(asset * frand(seed, 102, 0.2, 0.4));
+  }
+  const p2Budget = Math.round(asset * frand(seed, 103, 0.3, 0.5));
+  const p3Budget = Math.round(asset * frand(seed, 104, 0.2, 0.4));
+
+  const allTools = [
+    {name:'遗嘱', cost:'低', flex:'⭐⭐⭐', control:'⭐', risk:'遗嘱纠纷'},
+    {name:'家族信托', cost:'高', flex:'⭐⭐⭐⭐⭐', control:'⭐⭐⭐⭐⭐', risk:'设立成本'},
+    {name:'保险+信托', cost:'中', flex:'⭐⭐⭐', control:'⭐⭐⭐', risk:'杠杆不足'},
+    {name:'家族宪法', cost:'高', flex:'⭐⭐⭐⭐', control:'⭐⭐⭐⭐', risk:'执行难度'},
+    {name:'股权家族化', cost:'中', flex:'⭐⭐', control:'⭐⭐⭐⭐', risk:'流动性受限'},
+    {name:'慈善基金会', cost:'高', flex:'⭐⭐⭐', control:'⭐⭐', risk:'监管合规'},
+  ];
+  const recTool = allTools[rand(seed, 105, 0, allTools.length - 1)];
+
+  let html = `<div class="card"><div class="result-title">📋 客户参数</div>`;
+  html += `<table class="table"><tr><th>参数</th><th>值</th></tr>`;
+  html += `<tr><td>子女年龄</td><td><b>${age}岁</b></td></tr>`;
+  html += `<tr><td>资产规模</td><td><b>${formatWan(asset)}</b></td></tr>`;
+  html += `<tr><td>传承目标</td><td>${goal}</td></tr>`;
+  html += `<tr><td>子女数量</td><td><b>${children}位</b></td></tr></table></div>`;
+
+
+  // 图表：传承阶段甘特图
+  const ganttData = [
+    {name:'教育保障', start:0, duration:18, color:'#1e40af'},
+    {name:'婚姻隔离', start:20, duration:5, color:'#0ea5e9'},
+    {name:'经营权交接', start:28, duration:22, color:'#10b981'},
+    {name:'股权传承', start:30, duration:25, color:'#f59e0b'},
+    {name:'家族治理', start:35, duration:30, color:'#ef4444'},
+  ];
+  html += renderGantt(ganttData, '📊 传承阶段时间规划');
+
+  html += `<div class="card"><div class="result-title">📅 分阶段传承方案</div>`;
+  html += `<p><b>阶段一：${phase1}</b></p>`;
+  html += `<table class="table"><tr><th>项目</th><th>详情</th></tr>`;
+  html += `<tr><td>推荐工具</td><td>${p1Tools.join('、')}</td></tr>`;
+  html += `<tr><td>预算分配</td><td><b>${p1Budget}万</b>（${(p1Budget/asset*100).toFixed(1)}%）</td></tr>`;
+  html += `<tr><td>核心目标</td><td>${age < 18 ? '教育保障+资产隔离' : age < 30 ? '创业支持+婚姻保护' : '控制权交接+能力提升'}</td></tr></table>`;
+  html += `<p><b>阶段二：中期传承（30-50岁）</b></p>`;
+  html += `<table class="table"><tr><th>项目</th><th>详情</th></tr>`;
+  html += `<tr><td>推荐工具</td><td>股权家族化、家族委员会、接班人培养</td></tr>`;
+  html += `<tr><td>预算分配</td><td><b>${p2Budget}万</b>（${(p2Budget/asset*100).toFixed(1)}%）</td></tr>`;
+  html += `<tr><td>核心目标</td><td>经营权交接+家族治理</td></tr></table>`;
+  html += `<p><b>阶段三：完全交接（50岁+）</b></p>`;
+  html += `<table class="table"><tr><th>项目</th><th>详情</th></tr>`;
+  html += `<tr><td>推荐工具</td><td>家族宪法执行、股权完全转让、慈善基金会</td></tr>`;
+  html += `<tr><td>预算分配</td><td><b>${p3Budget}万</b>（${(p3Budget/asset*100).toFixed(1)}%）</td></tr>`;
+  html += `<tr><td>核心目标</td><td>完全交接+家族精神传承</td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">🏆 推荐工具：${recTool.name}</div>`;
+  html += `<table class="table"><tr><th>维度</th><th>评价</th></tr>`;
+  html += `<tr><td>成本</td><td>${recTool.cost}</td></tr>`;
+  html += `<tr><td>灵活性</td><td>${recTool.flex}</td></tr>`;
+  html += `<tr><td>控制权保留</td><td>${recTool.control}</td></tr>`;
+  html += `<tr><td>主要风险</td><td>${recTool.risk}</td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">⚠️ 风险预警</div>`;
+  html += `<table class="table"><tr><th>风险</th><th>等级</th><th>说明</th></tr>`;
+  html += `<tr><td>🔴 婚变风险</td><td>高</td><td>子女婚后继承的财产变为夫妻共同财产，建议婚前完成信托设立</td></tr>`;
+  html += `<tr><td>🟡 挥霍风险</td><td>中</td><td>大额财产一次性继承可能被挥霍，建议设置条件触发分配</td></tr>`;
+  html += `<tr><td>🟡 债务风险</td><td>中</td><td>继承遗产同时继承债务（放弃继承需书面声明）</td></tr>`;
+  html += `<tr><td>🔴 税负风险</td><td>高</td><td>遗产税开征后传承成本大幅增加，建议提前3-5年布局</td></tr>`;
+  html += `<tr><td>🔴 纠纷风险</td><td>高</td><td>多子女家庭易出现继承纠纷，建议家族宪法明确规则</td></tr></table></div>`;
+
+  html += `<div class="card"><div class="result-title">💡 关键建议</div><div class="advice-list">`;
+  const advices = [
+    '建议子女18岁前完成家族信托设立，婚变隔离效果最佳',
+    '家族宪法建议涵盖股权继承规则、家族委员会决策机制、退出机制',
+    '接班人培养建议从基层做起，避免空降导致家族企业动荡',
+    '多子女家庭建议明确"长子继承+其他子女补偿"或"均分+表决权集中"方案',
+    '慈善基金会可作为家族精神传承载体，同时享受税务优惠',
+  ];
+  const used = new Set();
+  for (let i = 0; i < 3; i++) {
+    let idx = rand(seed, 110 + i, 0, advices.length - 1);
+    if (used.has(idx)) idx = (idx + 1) % advices.length;
+    used.add(idx);
+    html += `<div class="advice-item"><div class="bullet">${i+1}</div><div>${advices[idx]}</div></div>`;
+  }
+  html += `</div></div>`;
+
+  document.getElementById('succResult').innerHTML = html;
+  document.getElementById('succResult').classList.remove('hidden');
+  showExportBar();
+}
+
+// ============ 性能监控 ============
+const perfMonitor = {
+  marks: {},
+  
+  start(label) {
+    this.marks[label] = performance.now();
+  },
+  
+  end(label) {
+    const start = this.marks[label];
+    if (!start) return null;
+    const duration = Math.round(performance.now() - start);
+    delete this.marks[label];
+    this.save({ label, duration, timestamp: Date.now() });
+    return duration;
+  },
+  
+  save(record) {
+    const KEY = 'perf_records';
+    const records = JSON.parse(localStorage.getItem(KEY) || '[]');
+    records.unshift(record);
+    if (records.length > 200) records.length = 200;
+    localStorage.setItem(KEY, JSON.stringify(records));
+  },
+  
+  getStats(label, limit = 50) {
+    const KEY = 'perf_records';
+    const records = JSON.parse(localStorage.getItem(KEY) || '[]')
+      .filter(r => r.label === label)
+      .slice(0, limit)
+      .map(r => r.duration)
+      .sort((a, b) => a - b);
+    
+    if (records.length === 0) return null;
+    const p50 = records[Math.floor(records.length * 0.5)];
+    const p95 = records[Math.floor(records.length * 0.95)] || records[records.length - 1];
+    const avg = Math.round(records.reduce((a, b) => a + b, 0) / records.length);
+    
+    return { count: records.length, p50, p95, avg };
+  },
+  
+  report() {
+    const labels = ['generateTrust', 'generateInsurance', 'generateTax', 'generateIsolation', 'generateSuccession', 'pageLoad'];
+    let html = '<div class="card"><div class="result-title">📊 性能监控面板</div><table class="table">';
+    html += '<tr><th>操作</th><th>次数</th><th>平均</th><th>P50</th><th>P95</th></tr>';
+    
+    labels.forEach(label => {
+      const stats = this.getStats(label);
+      if (stats) {
+        html += `<tr><td>${label}</td><td>${stats.count}</td><td>${stats.avg}ms</td><td>${stats.p50}ms</td><td>${stats.p95}ms</td></tr>`;
+      }
+    });
+    html += '</table></div>';
+    return html;
+  }
+};
+
+// 页面加载性能
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const nav = performance.getEntriesByType('navigation')[0];
+    if (nav) {
+      perfMonitor.save({
+        label: 'pageLoad',
+        duration: Math.round(nav.loadEventEnd - nav.startTime),
+        timestamp: Date.now()
+      });
+    }
+  }, 0);
+});
+
+// 拦截 generate 函数添加性能监控
+const originalFunctions = {};
+['generateTrust', 'generateInsurance', 'generateTax', 'generateIsolation', 'generateSuccession'].forEach(name => {
+  originalFunctions[name] = window[name];
+  window[name] = function(...args) {
+    perfMonitor.start(name);
+    const result = originalFunctions[name].apply(this, args);
+    perfMonitor.end(name);
+    return result;
+  };
+});
+</script>
+<script>
+// ============ 性能优化：Service Worker 缓存 ============
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
+    self.addEventListener('install', e => self.skipWaiting());
+    self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+    self.addEventListener('fetch', e => {
+      e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(f => {
+        const c = f.clone();
+        caches.open('wealth-v1').then(cache => cache.put(e.request, c));
+        return f;
+      })));
+    });
+  `)).catch(() => {});
+}
+
+// ============ 缓存策略：localStorage 缓存结果 ============
+const Cache = {
+  get(key) { try { const r = localStorage.getItem('wp_' + key); return r ? JSON.parse(r) : null; } catch(e) { return null; } },
+  set(key, val, ttl=3600000) { try { localStorage.setItem('wp_' + key, JSON.stringify({v:val,t:Date.now(),ttl})); } catch(e) {} },
+  valid(item) { return item && (Date.now() - item.t) < item.ttl; }
+};
+
+// ============ 性能优化：IntersectionObserver 懒加载结果区 ============
+const lazyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('lazy-loaded'); lazyObserver.unobserve(entry.target); }
+  });
+});
+</script>
+</body>
+</html>
