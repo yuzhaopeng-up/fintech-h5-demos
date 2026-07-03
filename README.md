@@ -98,6 +98,7 @@ These demos are part of the **Agent Skill Ecosystem**:
 | [teleagent-skills](https://github.com/yuzhaopeng-up/teleagent-skills) | General business skills |
 | [agent-cluster-comm](https://github.com/yuzhaopeng-up/agent-cluster-comm) | Agent cluster communication |
 | **fintech-h5-demos** (this repo) | Financial dashboard demos |
+| [soe-compliant-office](https://github.com/yuzhaopeng-up/soe-compliant-office) | SOE-compliant office skills (GB/T 9704, audit trail) |
 
 ## Contributing
 
