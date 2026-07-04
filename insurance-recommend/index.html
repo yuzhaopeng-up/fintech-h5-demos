@@ -1,0 +1,712 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>保险智能推荐 | FinAIAI</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI保险智能推荐，保障缺口分析+产品对比+保费估算，3分钟快速规划家庭保障方案。">
+    <meta name="keywords" content="保险推荐,保障缺口分析,重疾险,医疗险,寿险,意外险,年金险,防癌险,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/insurance-recommend">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/insurance-recommend">
+    <meta property="og:title" content="保险智能推荐 | FinAIAI">
+    <meta property="og:description" content="保障缺口分析+产品对比+保费估算，3分钟快速规划家庭保障方案。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "保险智能推荐 | FinAIAI",
+        "description": "FinAIAI保险智能推荐，保障缺口分析+产品对比+保费估算，3分钟快速规划家庭保障方案。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CNY"},
+        "provider": {"@type": "Organization", "name": "FinAIAI", "url": "https://www.longma-ai.com"}
+    }
+    </script>
+
+    <!-- Performance Hints -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <meta name="theme-color" content="#0F172A">
+
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #3B82F6;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --purple: #7C3AED;
+            --teal: #14B8A6;
+            --bg: #F1F5F9;
+            --card: #FFFFFF;
+            --text: #0F172A;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 18px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.07);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0F172A, #1E3A5F);
+            color: white;
+            padding: 18px 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.25);
+        }
+
+        .header-inner { display: flex; align-items: center; gap: 12px; max-width: 720px; margin: 0 auto; }
+        .header-avatar { width: 44px; height: 44px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .header-info h1 { font-size: 17px; font-weight: 900; }
+        .header-info .sub { font-size: 12px; opacity: 0.75; }
+
+        .content { max-width: 720px; margin: 0 auto; padding: 12px 16px 100px; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; white-space: nowrap; cursor: pointer; border: none; background: var(--card); color: var(--muted); box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.2s; flex-shrink: 0; }
+        .tab.active { background: var(--primary); color: white; }
+
+        /* Cards */
+        .card { background: var(--card); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow); }
+        .card-title { font-size: 14px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .card-title::before { content: ''; width: 3px; height: 14px; background: var(--accent); border-radius: 2px; }
+
+        /* Chat */
+        .chat-list { max-height: 400px; overflow-y: auto; }
+        .msg { display: flex; gap: 10px; margin-bottom: 12px; }
+        .msg.user { flex-direction: row-reverse; }
+        .avatar { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; background: var(--bot-bg); }
+        .msg.user .avatar { background: #DBEAFE; }
+        .bubble { max-width: 78%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.6; word-break: break-word; }
+        .msg.bot .bubble { background: #F8FAFC; border-bottom-left-radius: 4px; }
+        .msg.user .bubble { background: var(--primary); color: white; border-bottom-right-radius: 4px; }
+
+        /* Intent tag */
+        .intent-tag { display: inline-block; background: rgba(59,130,246,0.1); color: var(--accent); padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-bottom: 6px; }
+
+        /* Info form */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .info-item { background: var(--bg); border-radius: 12px; padding: 12px; }
+        .info-item .label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+        .info-item .value { font-size: 15px; font-weight: 800; color: var(--text); }
+        .info-item .value.empty { color: var(--muted); font-weight: 400; font-size: 13px; }
+
+        /* Gap chart */
+        .gap-bar { margin-bottom: 10px; }
+        .gap-bar-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+        .gap-bar-track { height: 10px; background: var(--bg); border-radius: 5px; overflow: hidden; }
+        .gap-bar-fill { height: 100%; border-radius: 5px; transition: width 0.6s ease; }
+
+        /* Product cards */
+        .product-card { border: 1.5px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 10px; transition: all 0.2s; }
+        .product-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(59,130,246,0.12); }
+        .product-card.priority-1 { border-left: 4px solid var(--danger); }
+        .product-card.priority-2 { border-left: 4px solid var(--warning); }
+        .product-card.priority-3 { border-left: 4px solid var(--success); }
+        .product-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .product-name { font-weight: 800; font-size: 15px; }
+        .product-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 8px; }
+        .badge-urgent { background: #FEE2E2; color: #991B1B; }
+        .badge-recommend { background: #DBEAFE; color: #1E40AF; }
+        .badge-optional { background: #D1FAE5; color: #065F46; }
+        .product-desc { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+        .product-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .product-metric { background: var(--bg); border-radius: 10px; padding: 8px; text-align: center; }
+        .product-metric .val { font-size: 16px; font-weight: 900; }
+        .product-metric .lbl { font-size: 10px; color: var(--muted); }
+        .product-features { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+        .feature-tag { background: var(--bg); color: var(--muted); font-size: 11px; padding: 2px 8px; border-radius: 8px; }
+
+        /* Calculator */
+        .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .calc-label { font-size: 13px; color: var(--muted); width: 60px; flex-shrink: 0; }
+        .calc-slider { flex: 1; -webkit-appearance: none; height: 6px; border-radius: 3px; background: var(--bg); outline: none; }
+        .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); cursor: pointer; }
+        .calc-value { font-size: 15px; font-weight: 800; color: var(--accent); width: 60px; text-align: right; flex-shrink: 0; }
+        .calc-result { background: var(--bg); border-radius: 12px; padding: 16px; text-align: center; margin-top: 16px; }
+        .calc-result .premium { font-size: 36px; font-weight: 900; color: var(--accent); }
+        .calc-result .unit { font-size: 14px; color: var(--muted); }
+
+        /* Quick buttons */
+        .quick-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .qbtn { padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; border: 1.5px solid var(--border); background: var(--card); cursor: pointer; transition: all 0.15s; }
+        .qbtn:active { transform: scale(0.96); }
+        .qbtn:hover { border-color: var(--accent); color: var(--accent); background: #EEF2FF; }
+
+        /* Input box */
+        .input-box { position: fixed; bottom: 0; left: 0; right: 0; padding: 12px 16px 20px; background: var(--bg); z-index: 90; border-top: 1px solid var(--border); }
+        .input-inner { max-width: 720px; margin: 0 auto; display: flex; gap: 10px; align-items: flex-end; }
+        .input-field { flex: 1; border: 1.5px solid var(--border); border-radius: 24px; padding: 12px 18px; font-size: 15px; outline: none; background: var(--card); transition: border-color 0.2s; font-family: inherit; min-height: 48px; resize: none; max-height: 120px; overflow-y: auto; line-height: 1.5; }
+        .input-field:focus { border-color: var(--accent); }
+        .send-btn { width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: white; border: none; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 12px rgba(59,130,246,0.3); transition: transform 0.15s; }
+        .send-btn:active { transform: scale(0.93); }
+
+        /* Progress */
+        .progress-steps { display: flex; gap: 4px; margin-bottom: 12px; }
+        .progress-step { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+        .progress-step.done { background: var(--success); }
+        .progress-step.active { background: var(--accent); }
+
+        /* Footer */
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--muted); }
+        .back-home { display: block; text-align: center; padding: 16px; font-size: 13px; color: var(--muted); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-inner">
+            <div class="header-avatar">🛡️</div>
+            <div class="header-info">
+                <h1>保险智能推荐</h1>
+                <div class="sub">保障缺口分析 · 产品推荐 · 保费估算</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Tab nav -->
+        <div class="tabs">
+            <button class="tab active" data-tab="chat">💬 对话咨询</button>
+            <button class="tab" data-tab="gap">📊 保障缺口</button>
+            <button class="tab" data-tab="products">📋 产品列表</button>
+            <button class="tab" data-tab="calc">🧮 保费计算</button>
+        </div>
+
+        <!-- ========== Chat Tab ========== -->
+        <div id="tab-chat">
+            <div class="card">
+                <div class="card-title">👤 信息收集</div>
+                <div class="info-grid" id="customerInfo">
+                    <div class="info-item">
+                        <div class="label">年龄</div>
+                        <div class="value" id="infoAge">—</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">性别</div>
+                        <div class="value" id="infoGender">—</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">婚姻</div>
+                        <div class="value" id="infoMarried">—</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">子女</div>
+                        <div class="value" id="infoChildren">—</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">年收入</div>
+                        <div class="value" id="infoIncome">—</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">已有保险</div>
+                        <div class="value" id="infoExisting">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">💬 对话记录</div>
+                <div class="chat-list" id="chatList">
+                    <div class="msg bot">
+                        <div class="avatar">🛡️</div>
+                        <div class="bubble">
+                            <div class="intent-tag">🛡️ 保险顾问</div>
+                            您好！我是FinAIAI保险顾问 🛡️<br><br>
+                            请告诉我您的基本情况，我来帮您分析保障缺口：<br>
+                            • 年龄和性别<br>
+                            • 婚姻状况<br>
+                            • 年收入<br>
+                            • 已有保险（医保/重疾等）<br><br>
+                            <b>直接说「30岁男已婚年收入30万已有医保」</b>即可一步到位！
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick buttons -->
+            <div class="quick-btns" id="quickBtns">
+                <button class="qbtn" onclick="sendQuick('30岁男已婚孩子1岁年收入30万已有医保')">30岁男/30万</button>
+                <button class="qbtn" onclick="sendQuick('35岁女未婚年收入20万什么都没有')">35岁女/20万</button>
+                <button class="qbtn" onclick="sendQuick('40岁男已婚2个孩子年收入50万有房贷80万')">40岁男/50万/房贷</button>
+                <button class="qbtn" onclick="sendQuick('50岁女已婚孩子已成年年收入15万有重疾险')">50岁女/15万</button>
+            </div>
+
+            <!-- Result card -->
+            <div class="card" id="resultCard" style="display:none;">
+                <div class="card-title">📋 推荐方案</div>
+                <div id="resultContent"></div>
+            </div>
+        </div>
+
+        <!-- ========== Gap Tab ========== -->
+        <div id="tab-gap" style="display:none;">
+            <div class="card" id="gapCard">
+                <div class="card-title">📊 保障缺口分析</div>
+                <div id="gapContent">
+                    <div style="text-align:center;padding:32px;color:var(--muted);font-size:14px;">
+                        请先在对话中提供您的基本信息，系统将自动分析保障缺口
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== Products Tab ========== -->
+        <div id="tab-products" style="display:none;">
+            <div class="card">
+                <div class="card-title">📋 保险产品一览</div>
+                <div id="productsList"></div>
+            </div>
+        </div>
+
+        <!-- ========== Calculator Tab ========== -->
+        <div id="tab-calc" style="display:none;">
+            <div class="card">
+                <div class="card-title">🧮 保费计算器</div>
+                <div class="calc-row">
+                    <span class="calc-label">年龄</span>
+                    <input type="range" class="calc-slider" id="calcAge" min="18" max="60" value="30" oninput="updateCalc()">
+                    <span class="calc-value" id="calcAgeVal">30岁</span>
+                </div>
+                <div class="calc-row">
+                    <span class="calc-label">保额(万)</span>
+                    <input type="range" class="calc-slider" id="calcCoverage" min="10" max="200" value="50" oninput="updateCalc()">
+                    <span class="calc-value" id="calcCoverageVal">50万</span>
+                </div>
+                <div class="calc-row">
+                    <span class="calc-label">保障期限</span>
+                    <input type="range" class="calc-slider" id="calcTerm" min="10" max="终身" value="30" oninput="updateCalc()">
+                    <span class="calc-value" id="calcTermVal">30年</span>
+                </div>
+                <div class="calc-row">
+                    <span class="calc-label">产品类型</span>
+                    <select class="calc-slider" id="calcProduct" style="flex:1;border:1.5px solid var(--border);border-radius:12px;padding:8px;font-size:14px;" onchange="updateCalc()">
+                        <option value="定期寿险">定期寿险</option>
+                        <option value="终身寿险">终身寿险</option>
+                        <option value="重疾险">重疾险</option>
+                        <option value="意外险">意外险</option>
+                    </select>
+                    <span class="calc-value" id="calcProductVal">—</span>
+                </div>
+                <div class="calc-result">
+                    <div class="premium" id="calcPremium">—</div>
+                    <div class="unit">元/年</div>
+                    <div style="font-size:12px;color:var(--muted);margin-top:8px;" id="calcNote">—</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Input -->
+    <div class="input-box">
+        <div class="input-inner">
+            <textarea class="input-field" id="msgInput" placeholder="描述您的情况，如：30岁男已婚年收入30万已有医保" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"></textarea>
+            <button class="send-btn" onclick="sendMsg()">➤</button>
+        </div>
+    </div>
+
+    <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ========== Insurance Data ==========
+        var PRODUCTS = {
+            "定期寿险": {
+                desc: "保障期内身故/全残赔付，保费低，杠杆高",
+                features: ["低保费高保障", "灵活定期", "适合家庭支柱"],
+                suitable: ["家庭经济支柱", "有房贷压力", "收入较高但保费预算有限"],
+                pricePer10w: {18: 28, 26: 45, 36: 88, 46: 165},
+                color: "#EF4444"
+            },
+            "终身寿险": {
+                desc: "保障终身，带储蓄性质，资产传承",
+                features: ["保障终身", "财富传承", "现金价值累积"],
+                suitable: ["高净值人群", "财富传承需求", "子女教育规划"],
+                pricePer10w: {18: 120, 26: 145, 36: 190, 46: 280},
+                color: "#7C3AED"
+            },
+            "重疾险": {
+                desc: "确诊约定重疾即赔付，保额一次性给付",
+                features: ["确诊即赔", "覆盖治疗+收入损失", "多次赔付可选"],
+                suitable: ["家庭经济支柱", "有子女教育压力", "无社保/医疗险"],
+                pricePer10w: {18: 65, 26: 120, 36: 220, 46: 380},
+                color: "#F59E0B"
+            },
+            "百万医疗险": {
+                desc: "报销型医疗险，年保费低，保障额度高",
+                features: ["低保费高保额", "不限社保目录", "含质子重离子"],
+                suitable: ["所有人", "作为医保补充", "大病风险覆盖"],
+                pricePer10w: {18: 220, 26: 220, 36: 380, 46: 850},
+                color: "#10B981"
+            },
+            "意外险": {
+                desc: "意外身故/伤残/医疗综合保障",
+                features: ["保费极低", "综合意外保障", "含意外医疗"],
+                suitable: ["经常出差", "有车一族", "家庭支柱"],
+                pricePer10w: {18: 30, 26: 30, 36: 45, 46: 80},
+                color: "#3B82F6"
+            },
+            "年金险": {
+                desc: "强制储蓄+复利增值，养老/教育规划",
+                features: ["复利增值", "强制储蓄", "专款专用"],
+                suitable: ["养老规划", "子女教育金", "月光族强制储蓄"],
+                pricePer10w: {18: 1200, 26: 1350, 36: 1550, 46: 1550},
+                color: "#14B8A6"
+            },
+            "防癌险": {
+                desc: "专项保障癌症，符合老年投保，健康告知宽松",
+                features: ["健康告知宽松", "三高可投保", "专项防癌"],
+                suitable: ["老年人", "三高人群", "有家族癌症史"],
+                pricePer10w: {18: 0, 26: 0, 36: 0, 46: 180, 56: 280, 66: 420},
+                color: "#EC4899"
+            }
+        };
+
+        // ========== State ==========
+        var customer = {
+            age: null,
+            gender: null,
+            married: null,
+            children: 0,
+            income: null,
+            existing: [],
+            mortgage: 0,
+        };
+        var recommendations = [];
+
+        // ========== Tab switching ==========
+        document.querySelectorAll('.tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                var tabId = tab.dataset.tab;
+                document.querySelectorAll('[id^="tab-"]').forEach(function(d) { d.style.display = 'none'; });
+                document.getElementById('tab-' + tabId).style.display = 'block';
+            });
+        });
+
+        // ========== Parse user input ==========
+        function parseCustomer(text) {
+            var result = Object.assign({}, customer);
+
+            // Age
+            var ageMatch = text.match(/(\d{2})\s*岁/);
+            if (ageMatch) result.age = parseInt(ageMatch[1]);
+
+            // Gender
+            if (/男|先生/.test(text) && !(/女|女士/.test(text))) result.gender = '男';
+            else if (/女|女士/.test(text)) result.gender = '女';
+
+            // Married
+            if (/已婚|结婚/.test(text)) result.married = true;
+            else if (/未婚|单身/.test(text)) result.married = false;
+
+            // Children
+            var childMatch = text.match(/孩子(\d+)个|(\d+)\s*个孩子/);
+            if (childMatch) result.children = parseInt(childMatch[1] || childMatch[2]);
+
+            // Income
+            var incMatch = text.match(/年收入?\s*(\d+(?:\.\d+)?)\s*(万|元|k|K)/);
+            if (incMatch) {
+                var val = parseFloat(incMatch[1]);
+                result.income = (incMatch[2] === '万') ? val * 10000 : val;
+            }
+
+            // Existing
+            var existing = [];
+            if (/医保|社保/.test(text)) existing.push('医保');
+            if (/寿险/.test(text)) existing.push('寿险');
+            if (/重疾/.test(text)) existing.push('重疾险');
+            if (/医疗|百万医疗/.test(text)) existing.push('医疗险');
+            if (/意外/.test(text)) existing.push('意外险');
+            if (/年金|养老/.test(text)) existing.push('年金险');
+            if (/没有|什么都没|都没/.test(text)) existing = [];
+            result.existing = existing;
+
+            // Mortgage
+            var mortMatch = text.match(/房贷\s*(\d+(?:\.\d+)?)\s*(万|元)/);
+            if (mortMatch) {
+                result.mortgage = parseFloat(mortMatch[1]) * (mortMatch[2] === '万' ? 10000 : 1);
+            } else if (/无房贷|没房贷|没负债/.test(text)) {
+                result.mortgage = 0;
+            }
+
+            return result;
+        }
+
+        // ========== Calculate gap ==========
+        function calculateGap(c) {
+            if (!c.age || !c.income) return [];
+            var income = c.income;
+
+            // Life insurance gap
+            var lifeNeed = (c.children > 0 ? income * 10 : income * 5);
+            lifeNeed += c.mortgage;
+            var lifeExisting = c.existing.includes('寿险') ? 300000 : 0;
+            var lifeGap = Math.max(0, lifeNeed - lifeExisting);
+
+            // Critical illness gap
+            var ciNeed = 400000 + income * 2;
+            var ciExisting = c.existing.includes('重疾险') ? 300000 : 0;
+            var ciGap = Math.max(0, ciNeed - ciExisting);
+
+            // Medical gap
+            var medGap = c.existing.includes('医疗险') ? 0 : 100000;
+
+            // Accident gap
+            var accNeed = income * 5;
+            var accExisting = c.existing.includes('意外险') ? 100000 : 0;
+            var accGap = Math.max(0, accNeed - accExisting);
+
+            return [
+                { type: '定期寿险', gap: lifeGap, priority: lifeGap > 0 && c.children > 0 ? 1 : 3, reason: '家庭支柱保障' },
+                { type: '重疾险', gap: ciGap, priority: ciGap > 0 ? 2 : 4, reason: '健康风险覆盖' },
+                { type: '百万医疗险', gap: medGap, priority: medGap > 0 ? 1 : 5, reason: '医保补充' },
+                { type: '意外险', gap: accGap, priority: accGap > 0 ? 2 : 5, reason: '意外风险保障' },
+            ].filter(function(r) { return r.gap > 0; })
+              .sort(function(a, b) { return a.priority - b.priority; });
+        }
+
+        // ========== Get price ==========
+        function getPrice(productName, age) {
+            var product = PRODUCTS[productName];
+            if (!product) return 0;
+            var priceMap = product.pricePer10w;
+            var keys = Object.keys(priceMap).map(function(k) { return parseInt(k); }).sort(function(a, b) { return a - b; });
+            var price = 0;
+            for (var i = 0; i < keys.length; i++) {
+                if (keys[i] >= age) {
+                    price = priceMap[keys[i]];
+                    break;
+                }
+                price = priceMap[keys[i]];
+            }
+            return price;
+        }
+
+        // ========== Render info panel ==========
+        function updateInfoPanel() {
+            document.getElementById('infoAge').textContent = customer.age ? customer.age + '岁' : '—';
+            document.getElementById('infoAge').className = 'value' + (customer.age ? '' : ' empty');
+
+            document.getElementById('infoGender').textContent = customer.gender || '—';
+            document.getElementById('infoGender').className = 'value' + (customer.gender ? '' : ' empty');
+
+            document.getElementById('infoMarried').textContent =
+                customer.married === true ? '已婚' : customer.married === false ? '未婚' : '—';
+            document.getElementById('infoMarried').className = 'value' + (customer.married !== null ? '' : ' empty');
+
+            document.getElementById('infoChildren').textContent = customer.children > 0 ? customer.children + '个孩子' : '—';
+            document.getElementById('infoChildren').className = 'value' + (customer.children > 0 ? '' : ' empty');
+
+            document.getElementById('infoIncome').textContent = customer.income ? (customer.income / 10000).toFixed(0) + '万' : '—';
+            document.getElementById('infoIncome').className = 'value' + (customer.income ? '' : ' empty');
+
+            document.getElementById('infoExisting').textContent = customer.existing.length > 0 ? customer.existing.join(', ') : '无';
+            document.getElementById('infoExisting').className = 'value' + (customer.existing.length > 0 ? '' : ' empty');
+        }
+
+        // ========== Add chat message ==========
+        function addMsg(html, isUser) {
+            var chatList = document.getElementById('chatList');
+            var div = document.createElement('div');
+            div.className = 'msg ' + (isUser ? 'user' : 'bot');
+            div.innerHTML = '<div class="avatar">' + (isUser ? '👤' : '🛡️') + '</div>' +
+                '<div class="bubble' + (isUser ? '' : '') + '">' + html + '</div>';
+            chatList.appendChild(div);
+            chatList.scrollTop = chatList.scrollHeight;
+        }
+
+        // ========== Render recommendations ==========
+        function renderRecommendations() {
+            var gaps = calculateGap(customer);
+            recommendations = gaps;
+
+            if (gaps.length === 0) {
+                document.getElementById('resultCard').style.display = 'none';
+                return;
+            }
+
+            var html = '';
+            var maxPremium = customer.income ? customer.income * 0.10 : 0;
+
+            gaps.forEach(function(gap) {
+                var product = PRODUCTS[gap.type];
+                var coverage = Math.min(gap.gap, 5000000);
+                var pricePer10w = getPrice(gap.type, customer.age || 30);
+                var premium = Math.round((coverage / 100000) * pricePer10w);
+                var priorityClass = gap.priority === 1 ? 'priority-1' : gap.priority === 2 ? 'priority-2' : 'priority-3';
+                var badgeClass = gap.priority === 1 ? 'badge-urgent' : gap.priority === 2 ? 'badge-recommend' : 'badge-optional';
+                var badgeText = gap.priority === 1 ? '优先配置' : gap.priority === 2 ? '建议配置' : '可选';
+
+                html += '<div class="product-card ' + priorityClass + '">';
+                html += '<div class="product-header">';
+                html += '<span class="product-name">' + gap.type + '</span>';
+                html += '<span class="product-badge ' + badgeClass + '">' + badgeText + '</span>';
+                html += '</div>';
+                html += '<div class="product-desc">' + product.desc + '</div>';
+                html += '<div class="product-metrics">';
+                html += '<div class="product-metric"><div class="val" style="color:' + product.color + '">' + (coverage/10000).toFixed(0) + '万</div><div class="lbl">推荐保额</div></div>';
+                html += '<div class="product-metric"><div class="val" style="color:' + product.color + '">' + premium.toLocaleString() + '元</div><div class="lbl">年缴保费</div></div>';
+                html += '<div class="product-metric"><div class="val" style="color:var(--muted)">' + (premium > maxPremium ? '⚠️超标' : '✓在预算') + '</div><div class="lbl">预算评估</div></div>';
+                html += '</div>';
+                html += '<div class="product-features">';
+                product.features.forEach(function(f) {
+                    html += '<span class="feature-tag">' + f + '</span>';
+                });
+                html += '</div></div>';
+            });
+
+            document.getElementById('resultContent').innerHTML = html;
+            document.getElementById('resultCard').style.display = 'block';
+
+            // Also update gap tab
+            renderGapChart(gaps);
+        }
+
+        // ========== Render gap chart ==========
+        function renderGapChart(gaps) {
+            if (!gaps || gaps.length === 0) return;
+            var html = '';
+            var maxGap = Math.max.apply(null, gaps.map(function(g) { return g.gap; }));
+            var colors = { '定期寿险': '#EF4444', '重疾险': '#F59E0B', '百万医疗险': '#10B981', '意外险': '#3B82F6' };
+
+            gaps.forEach(function(gap) {
+                var pct = maxGap > 0 ? (gap.gap / maxGap * 100).toFixed(0) : 0;
+                var color = colors[gap.type] || '#64748B';
+                html += '<div class="gap-bar">';
+                html += '<div class="gap-bar-label"><span>' + gap.type + '</span><span style="font-weight:700;">' + (gap.gap/10000).toFixed(0) + '万</span></div>';
+                html += '<div class="gap-bar-track"><div class="gap-bar-fill" style="width:' + pct + '%;background:' + color + '"></div></div>';
+                html += '</div>';
+            });
+
+            document.getElementById('gapContent').innerHTML = html;
+        }
+
+        // ========== Render products list ==========
+        function renderProducts() {
+            var html = '';
+            Object.keys(PRODUCTS).forEach(function(name) {
+                var p = PRODUCTS[name];
+                html += '<div class="product-card">';
+                html += '<div class="product-header">';
+                html += '<span class="product-name">' + name + '</span>';
+                html += '</div>';
+                html += '<div class="product-desc">' + p.desc + '</div>';
+                html += '<div class="product-features">';
+                p.features.forEach(function(f) { html += '<span class="feature-tag">' + f + '</span>'; });
+                html += '</div>';
+                html += '<div style="margin-top:8px;font-size:12px;color:var(--muted);">适用：' + p.suitable.join('、') + '</div>';
+                html += '</div>';
+            });
+            document.getElementById('productsList').innerHTML = html;
+        }
+
+        // ========== Calculator ==========
+        window.updateCalc = function() {
+            var age = parseInt(document.getElementById('calcAge').value);
+            var coverage = parseInt(document.getElementById('calcCoverage').value);
+            var term = document.getElementById('calcTerm').value;
+            var productName = document.getElementById('calcProduct').value;
+
+            document.getElementById('calcAgeVal').textContent = age + '岁';
+            document.getElementById('calcCoverageVal').textContent = coverage + '万';
+            document.getElementById('calcTermVal').textContent = term === '终身' ? '终身' : term + '年';
+
+            var pricePer10w = getPrice(productName, age);
+            var premium = Math.round((coverage / 10) * pricePer10w);
+            document.getElementById('calcPremium').textContent = premium.toLocaleString();
+            document.getElementById('calcNote').textContent = '以' + age + '岁为例，每10万保额对应约' + pricePer10w + '元/年';
+        };
+
+        // ========== Send message ==========
+        window.sendMsg = function() {
+            var input = document.getElementById('msgInput');
+            var text = input.value.trim();
+            if (!text) return;
+            input.value = '';
+            input.style.height = 'auto';
+
+            addMsg(text, true);
+
+            // Update customer info
+            customer = parseCustomer(text);
+            updateInfoPanel();
+
+            // Generate response
+            setTimeout(function() {
+                var gaps = calculateGap(customer);
+
+                if (!customer.age || !customer.income) {
+                    // Need more info
+                    var missing = [];
+                    if (!customer.age) missing.push('年龄');
+                    if (!customer.income) missing.push('年收入');
+                    addMsg('好的，了解了 👌<br><br>还缺一些信息：<b>' + missing.join('、') + '</b><br><br>请补充告诉我～<br>比如：「30岁男，年收入20万」', false);
+                    return;
+                }
+
+                // Got enough info
+                if (customer.existing.length === 0 && gaps.length > 0) {
+                    // Has gaps but no existing insurance
+                    addMsg('好的，' + customer.age + '岁' + customer.gender + '性，年收入' + (customer.income/10000).toFixed(0) + '万<br><br>检测到您有以下保障缺口，正在为您分析...', false);
+                } else {
+                    addMsg('好的，正在为您分析保障缺口...', false);
+                }
+
+                // Show recommendations after delay
+                setTimeout(function() {
+                    renderRecommendations();
+
+                    if (gaps.length === 0) {
+                        addMsg('✅ 根据您提供的信息，您的保障已经比较充足了！<br><br>如果想了解具体产品，可以直接告诉我险种名称，如：「重疾险多少钱」「定期寿险怎么买」', false);
+                    } else {
+                        var summary = '📊 ' + customer.age + '岁' + (customer.gender === '男' ? '男性' : '女性') + '，年收入' + (customer.income/10000).toFixed(0) + '万\n\n';
+                        summary += '发现' + gaps.length + '项保障缺口，已为您生成推荐方案（见下方📋推荐方案）';
+                        addMsg(summary.replace(/\n/g, '<br>'), false);
+                    }
+                }, 600);
+            }, 300);
+        };
+
+        window.sendQuick = function(text) {
+            document.getElementById('msgInput').value = text;
+            sendMsg();
+        };
+
+        // ========== Init ==========
+        renderProducts();
+        updateCalc();
+    })();
+    </script>
+</body>
+</html>
