@@ -1,0 +1,523 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI智能核保，7维评估模型+风险分层+定价建议，秒级完成承保决策。">
+    <meta name="keywords" content="智能核保,核保评估,风险分层,保险科技,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/insurance-underwriting">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/insurance-underwriting">
+    <meta property="og:title" content="智能核保评估 | FinAIAI">
+    <meta property="og:description" content="FinAIAI智能核保，7维评估模型+风险分层+定价建议，秒级完成承保决策。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/insurance-underwriting.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="智能核保评估 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI智能核保，7维评估模型+风险分层+定价建议，秒级完成承保决策。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/insurance-underwriting.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "智能核保评估 | FinAIAI",
+        "description": "FinAIAI智能核保，7维评估模型+风险分层+定价建议，秒级完成承保决策。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>智能核保评估 | FinAIAI</title>
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--primary:#2563eb;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--info:#06b6d4;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--radius:14px;--shadow:0 4px 20px rgba(0,0,0,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:40px}
+.container{max-width:420px;margin:0 auto;padding:16px}
+
+/* 头部 */
+.header{text-align:center;padding:24px 0 16px}
+.header .logo{width:56px;height:56px;margin:0 auto 12px;border-radius:18px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;box-shadow:0 8px 24px rgba(37,99,235,.25)}
+.header h1{font-size:22px;font-weight:800;background:linear-gradient(135deg,#2563eb,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header p{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* 卡片 */
+.card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow);animation:fadeIn .5s ease forwards;opacity:0;transform:translateY(12px)}
+.card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}.card:nth-child(5){animation-delay:.2s}
+.card-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.card-title .icon{font-size:18px}
+
+/* 表单 */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-item{display:flex;flex-direction:column;gap:4px}
+.form-item.full{grid-column:1/-1}
+.form-item label{font-size:12px;color:var(--muted);font-weight:500}
+.form-item input,.form-item select{padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:#fff;-webkit-appearance:none;appearance:none}
+.form-item input:focus,.form-item select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.form-item .hint{font-size:11px;color:#94a3b8;margin-top:2px}
+
+/* 多选标签 */
+.tag-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tag{cursor:pointer;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:13px;transition:all .15s;user-select:none}
+.tag:hover{border-color:var(--primary);color:var(--primary)}
+.tag.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* 按钮 */
+.btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(37,99,235,.3);transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn-secondary{background:#f1f5f9;color:var(--text);box-shadow:none;margin-top:10px}
+
+/* 评分圆环 */
+.score-wrap{display:flex;flex-direction:column;align-items:center;padding:20px 0}
+.score-circle{width:140px;height:140px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--success) 0deg,var(--success) var(--score-deg),#e2e8f0 var(--score-deg),#e2e8f0 360deg)}
+.score-circle::before{content:'';position:absolute;width:110px;height:110px;border-radius:50%;background:#fff}
+.score-inner{position:relative;z-index:1;text-align:center}
+.score-num{font-size:36px;font-weight:800;line-height:1}
+.score-label{font-size:12px;color:var(--muted);margin-top:2px}
+.score-status{font-size:14px;font-weight:700;margin-top:8px;padding:4px 14px;border-radius:999px}
+.score-status.green{background:#d1fae5;color:#065f46}
+.score-status.yellow{background:#fef3c7;color:#92400e}
+.score-status.orange{background:#ffedd5;color:#9a3412}
+.score-status.red{background:#fee2e2;color:#991b1b}
+
+/* 维度评估 */
+.dim-list{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.dim-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border)}
+.dim-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.dim-icon.green{background:#d1fae5}.dim-icon.yellow{background:#fef3c7}.dim-icon.red{background:#fee2e2}
+.dim-info{flex:1}
+.dim-name{font-size:13px;font-weight:600}
+.dim-desc{font-size:11px;color:var(--muted)}
+.dim-score{font-size:13px;font-weight:700}
+.dim-score.green{color:var(--success)}.dim-score.yellow{color:var(--warning)}.dim-score.red{color:var(--danger)}
+
+/* 结论卡片 */
+.conclusion{padding:16px;border-radius:12px;text-align:center;margin-top:14px}
+.conclusion.green{background:linear-gradient(135deg,#d1fae5,#ecfdf5);border:1px solid #a7f3d0}
+.conclusion.yellow{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fde68a}
+.conclusion.orange{background:linear-gradient(135deg,#ffedd5,#fff7ed);border:1px solid #fed7aa}
+.conclusion.red{background:linear-gradient(135deg,#fee2e2,#fef2f2);border:1px solid #fecaca}
+.conclusion-icon{font-size:32px;margin-bottom:6px}
+.conclusion-title{font-size:16px;font-weight:800;margin-bottom:4px}
+.conclusion-desc{font-size:13px;color:var(--muted)}
+.conclusion-surcharge{font-size:20px;font-weight:800;color:var(--danger);margin-top:6px}
+
+/* 建议列表 */
+.advice-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.advice-item{display:flex;gap:8px;padding:10px 12px;background:#f8fafc;border-radius:10px;border-left:3px solid var(--primary);font-size:13px}
+.advice-item .bullet{width:18px;height:18px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* 产品推荐 */
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.product-card{padding:12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border);text-align:center}
+.product-card .name{font-size:13px;font-weight:700;margin-bottom:4px}
+.product-card .coverage{font-size:11px;color:var(--muted)}
+.product-card .premium{font-size:14px;font-weight:800;color:var(--primary);margin-top:6px}
+
+/* 隐藏/显示 */
+.hidden{display:none}
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+</style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">🏥</div>
+    <h1>智能核保助手</h1>
+    <p>多维度风险评估 · 智能核保决策 · 产品精准匹配</p>
+  </div>
+
+  <!-- 录入表单 -->
+  <div class="card" id="formCard">
+    <div class="card-title"><span class="icon">📝</span>被保险人信息</div>
+    <div class="form-grid">
+      <div class="form-item">
+        <label>年龄</label>
+        <input type="number" id="age" placeholder="25-65" min="0" max="120">
+        <div class="hint">18-65岁可承保</div>
+      </div>
+      <div class="form-item">
+        <label>BMI</label>
+        <input type="number" id="bmi" placeholder="20-30" step="0.1" min="10" max="60">
+        <div class="hint">标准范围 18.5-28</div>
+      </div>
+      <div class="form-item">
+        <label>收缩压 (mmHg)</label>
+        <input type="number" id="sys" placeholder="120" min="80" max="220">
+      </div>
+      <div class="form-item">
+        <label>舒张压 (mmHg)</label>
+        <input type="number" id="dia" placeholder="80" min="50" max="140">
+      </div>
+      <div class="form-item full">
+        <label>吸烟史</label>
+        <div class="tag-group" id="smokeTags">
+          <span class="tag active" data-val="no">不吸烟</span>
+          <span class="tag" data-val="yes">吸烟</span>
+          <span class="tag" data-val="quit">已戒烟</span>
+        </div>
+      </div>
+      <div class="form-item full">
+        <label>职业</label>
+        <select id="occupation">
+          <option value="">请选择职业</option>
+          <option value="low">公务员 / 教师 / 医生 / 会计 / 文员</option>
+          <option value="mid">销售 / 司机 / 厨师 / 工程师</option>
+          <option value="high">建筑工人 / 矿工 / 消防员 / 高空作业 / 渔民</option>
+          <option value="other">其他</option>
+        </select>
+      </div>
+      <div class="form-item full">
+        <label>既往病史（多选）</label>
+        <div class="tag-group" id="historyTags">
+          <span class="tag" data-val="无">无病史</span>
+          <span class="tag" data-val="高血压">高血压</span>
+          <span class="tag" data-val="糖尿病">糖尿病</span>
+          <span class="tag" data-val="心脏病">心脏病</span>
+          <span class="tag" data-val="癌症">癌症/肿瘤</span>
+          <span class="tag" data-val="其他">其他慢性病</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn" onclick="evaluateUW()">🚀 开始智能核保评估</button>
+  </div>
+
+  <!-- 评估结果 -->
+  <div id="resultArea" class="hidden">
+    <!-- 评分 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span>健康评分</div>
+      <div class="score-wrap">
+        <div class="score-circle" id="scoreCircle">
+          <div class="score-inner">
+            <div class="score-num" id="scoreNum">--</div>
+            <div class="score-label">/100</div>
+          </div>
+        </div>
+        <div class="score-status" id="scoreStatus">--</div>
+      </div>
+    </div>
+
+    <!-- 维度详情 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">🔍</span>评估详情</div>
+      <div class="dim-list" id="dimList"></div>
+    </div>
+
+    <!-- 核保结论 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span>核保结论</div>
+      <div class="conclusion" id="conclusionBox">
+        <div class="conclusion-icon" id="conclusionIcon">✅</div>
+        <div class="conclusion-title" id="conclusionTitle">--</div>
+        <div class="conclusion-desc" id="conclusionDesc">--</div>
+        <div class="conclusion-surcharge hidden" id="surchargeText"></div>
+      </div>
+    </div>
+
+    <!-- 专家建议 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">💡</span>专家建议</div>
+      <div class="advice-list" id="adviceList"></div>
+    </div>
+
+    <!-- 产品推荐 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">🛡️</span>推荐产品</div>
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+
+    <button class="btn btn-secondary" onclick="resetForm()">🔄 重新评估</button>
+  </div>
+</div>
+
+<script>
+// 标签交互
+document.querySelectorAll('.tag-group').forEach(g=>{
+  g.addEventListener('click',e=>{
+    if(!e.target.classList.contains('tag'))return;
+    if(g.id==='historyTags'){e.target.classList.toggle('active');return;}
+    g.querySelectorAll('.tag').forEach(t=>t.classList.remove('active'));
+    e.target.classList.add('active');
+  });
+});
+
+function getSmoke(){return document.querySelector('#smokeTags .tag.active')?.dataset.val||'no';}
+function getHistory(){
+  const arr=[];
+  document.querySelectorAll('#historyTags .tag.active').forEach(t=>arr.push(t.dataset.val));
+  return arr.length?arr:['无'];
+}
+
+function evaluateUW(){
+  const age=parseInt(document.getElementById('age').value)||0;
+  const bmi=parseFloat(document.getElementById('bmi').value)||0;
+  const sys=parseInt(document.getElementById('sys').value)||0;
+  const dia=parseInt(document.getElementById('dia').value)||0;
+  const occ=document.getElementById('occupation').value;
+  const smoke=getSmoke();
+  const history=getHistory();
+
+  if(!age||!bmi||!sys||!dia||!occ){
+    alert('请填写完整信息');return;
+  }
+
+  // 评分逻辑（完全复刻后端规则）
+  let score=100;
+  const dims=[];
+
+  // 年龄
+  if(age<18||age>65){score-=30;dims.push({icon:'🎂',name:'年龄',desc:`${age}岁 — 不在承保范围(18-65)`,score:-30,color:'red'});}
+  else if(age>50){score-=15;dims.push({icon:'🎂',name:'年龄',desc:`${age}岁 — 偏大，需加费`,score:-15,color:'yellow'});}
+  else{dims.push({icon:'🎂',name:'年龄',desc:`${age}岁 — 合规`,score:0,color:'green'});}
+
+  // BMI
+  if(bmi<18.5||bmi>28){score-=20;dims.push({icon:'⚖️',name:'BMI',desc:`${bmi} — 异常(标准18.5-28)`,score:-20,color:'yellow'});}
+  else{dims.push({icon:'⚖️',name:'BMI',desc:`${bmi} — 正常`,score:0,color:'green'});}
+
+  // 血压
+  if(sys>140||dia>90){score-=25;dims.push({icon:'🩸',name:'血压',desc:`${sys}/${dia} — 偏高(标准≤140/90)`,score:-25,color:'yellow'});}
+  else{dims.push({icon:'🩸',name:'血压',desc:`${sys}/${dia} — 正常`,score:0,color:'green'});}
+
+  // 吸烟
+  if(smoke==='yes'){score-=15;dims.push({icon:'🚬',name:'吸烟史',desc:'吸烟 — 费率上浮20%',score:-15,color:'yellow'});}
+  else if(smoke==='quit'){dims.push({icon:'🚭',name:'吸烟史',desc:'已戒烟 — 良好',score:0,color:'green'});}
+  else{dims.push({icon:'🚭',name:'吸烟史',desc:'不吸烟 — 良好',score:0,color:'green'});}
+
+  // 职业
+  if(occ==='high'){score-=25;dims.push({icon:'👷',name:'职业',desc:'高风险职业 — 需加费',score:-25,color:'yellow'});}
+  else if(occ==='mid'){score-=10;dims.push({icon:'👔',name:'职业',desc:'中风险职业 — 轻微加费',score:-10,color:'yellow'});}
+  else if(occ==='low'){dims.push({icon:'👔',name:'职业',desc:'低风险职业 — 正常',score:0,color:'green'});}
+  else{dims.push({icon:'👔',name:'职业',desc:'其他职业 — 未识别',score:0,color:'green'});}
+
+  // 既往病史
+  const hasDisease=history.some(h=>h!=='无');
+  if(hasDisease){
+    const diseases=history.filter(h=>h!=='无').join('、');
+    score-=30;
+    dims.push({icon:'📋',name:'既往病史',desc:`${diseases} — 可能加费或除外`,score:-30,color:'red'});
+  }else{dims.push({icon:'📋',name:'既往病史',desc:'无病史 — 良好',score:0,color:'green'});}
+
+  score=Math.max(0,score);
+
+  // 结论
+  let conclusion={},advice=[],products=[];
+  if(score>=80){
+    conclusion={icon:'✅',title:'标准体承保',desc:'客户健康状况良好，可按标准费率承保',cls:'green',surcharge:0};
+    advice=['客户健康状况良好，可按标准费率承保','建议推荐终身保障型产品，锁定长期费率','可附加保费豁免条款，增强保障'];
+    products=[{name:'重疾险',coverage:'30-100万',premium:'¥3,000-10,000/年'},{name:'医疗险',coverage:'100-600万',premium:'¥200-2,000/年'}];
+  }else if(score>=60){
+    const sur=Math.floor(10+Math.random()*40);
+    conclusion={icon:'🟡',title:'加费承保',desc:`客户存在部分风险因素，需加费${sur}%`,cls:'yellow',surcharge:sur};
+    advice=[`客户存在风险因素，需加费${sur}%承保`,'建议推荐定期型产品降低保费压力','可考虑降低保额或缩短保障期限'];
+    products=[{name:'定期寿险',coverage:'50-200万',premium:`¥${(1500*(1+sur/100)).toFixed(0)}-5,000/年`},{name:'医疗险',coverage:'100-600万',premium:'¥300-3,000/年'}];
+  }else if(score>=40){
+    conclusion={icon:'🟠',title:'除外责任承保',desc:'客户存在特定风险，需除外相关责任',cls:'orange',surcharge:0};
+    advice=['客户存在特定风险，需除外相关责任承保','建议明确告知除外条款内容','可考虑投保其他无关联的险种'];
+    products=[{name:'意外险',coverage:'10-100万',premium:'¥100-800/年'},{name:'年金险',coverage:'按需定制',premium:'¥1万+/年'}];
+  }else{
+    conclusion={icon:'❌',title:'延期/拒保',desc:'客户风险过高，建议延期或转人工核保',cls:'red',surcharge:0};
+    advice=['客户风险过高，建议延期或拒保','如客户坚持，建议转人工核保','建议客户改善健康状况后重新评估'];
+    products=[{name:'惠民保',coverage:'基本医保补充',premium:'¥100-300/年'},{name:'意外险',coverage:'10-50万',premium:'¥50-300/年'}];
+  }
+
+  // 渲染
+  document.getElementById('formCard').classList.add('hidden');
+  document.getElementById('resultArea').classList.remove('hidden');
+  window.scrollTo(0,0);
+
+  // 评分圆环
+  const deg=(score/100)*360;
+  const circle=document.getElementById('scoreCircle');
+  circle.style.setProperty('--score-deg',deg+'deg');
+  let color='var(--success)';
+  if(score<40)color='var(--danger)';
+  else if(score<60)color='var(--warning)';
+  else if(score<80)color='#f59e0b';
+  circle.style.background=`conic-gradient(${color} 0deg,${color} ${deg}deg,#e2e8f0 ${deg}deg,#e2e8f0 360deg)`;
+
+  document.getElementById('scoreNum').textContent=score;
+  const st=document.getElementById('scoreStatus');
+  if(score>=80){st.textContent='🟢 标准体';st.className='score-status green';}
+  else if(score>=60){st.textContent='🟡 加费体';st.className='score-status yellow';}
+  else if(score>=40){st.textContent='🟠 除外体';st.className='score-status orange';}
+  else{st.textContent='🔴 延期/拒保';st.className='score-status red';}
+
+  // 维度列表
+  document.getElementById('dimList').innerHTML=dims.map(d=>`
+    <div class="dim-item">
+      <div class="dim-icon ${d.color}">${d.icon}</div>
+      <div class="dim-info">
+        <div class="dim-name">${d.name}</div>
+        <div class="dim-desc">${d.desc}</div>
+      </div>
+      <div class="dim-score ${d.color}">${d.score===0?'✅ OK':d.score+'分'}</div>
+    </div>
+  `).join('');
+
+  // 结论
+  const box=document.getElementById('conclusionBox');
+  box.className='conclusion '+conclusion.cls;
+  document.getElementById('conclusionIcon').textContent=conclusion.icon;
+  document.getElementById('conclusionTitle').textContent=conclusion.title;
+  document.getElementById('conclusionDesc').textContent=conclusion.desc;
+  const surEl=document.getElementById('surchargeText');
+  if(conclusion.surcharge>0){surEl.textContent=`💰 加费比例: +${conclusion.surcharge}%`;surEl.classList.remove('hidden');}
+  else{surEl.classList.add('hidden');}
+
+  // 建议
+  document.getElementById('adviceList').innerHTML=advice.map((a,i)=>`
+    <div class="advice-item"><div class="bullet">${i+1}</div><div>${a}</div></div>
+  `).join('');
+
+  // 产品
+  document.getElementById('productGrid').innerHTML=products.map(p=>`
+    <div class="product-card">
+      <div class="name">${p.name}</div>
+      <div class="coverage">${p.coverage}</div>
+      <div class="premium">${p.premium}</div>
+    </div>
+  `).join('');
+}
+
+function resetForm(){
+  document.getElementById('formCard').classList.remove('hidden');
+  document.getElementById('resultArea').classList.add('hidden');
+  window.scrollTo(0,0);
+}
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const profileContainer = document.querySelector('.customer-profile, #customer-profile, [data-type="customer"]');
+    if (profileContainer) {
+        const result = await LongmaAPI.customer.getProfile('C001');
+        if (result.success && result.data) {
+            renderCustomerProfile(profileContainer, result.data);
+        }
+    }
+    
+    const recContainer = document.querySelector('.recommendations, #recommendations, [data-type="recommendations"]');
+    if (recContainer) {
+        const result = await LongmaAPI.customer.getRecommendations('C001');
+        if (result.success && result.data) {
+            renderRecommendations(recContainer, result.data);
+        }
+    }
+});
+
+function renderCustomerProfile(container, data) {
+    let html = `<div class="api-profile-card">
+        <h3>${data.name} (ID: ${data.customer_id})</h3>
+        <p>年龄: ${data.age}岁 | 风险偏好: ${data.risk_preference}</p>
+        <p>总资产: ${LongmaAPI.utils.formatMoney(data.assets)}</p>
+        <div class="api-holdings"><h4>持仓分布</h4>`;
+    data.holdings.forEach(h => {
+        html += `<div class="api-holding-item">
+            <span>${h.type}</span>
+            <span>${LongmaAPI.utils.formatMoney(h.amount)}</span>
+            <span>${(h.ratio * 100).toFixed(1)}%</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    container.innerHTML = html;
+}
+
+function renderRecommendations(container, data) {
+    let html = '<div class="api-recommendations"><h4>产品推荐</h4>';
+    data.products.forEach(p => {
+        html += `<div class="api-product-card">
+            <span class="name">${p.name}</span>
+            <span class="type">${p.type}</span>
+            <span class="match">匹配度: ${p.match}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
