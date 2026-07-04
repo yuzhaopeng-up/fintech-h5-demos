@@ -1,0 +1,466 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI基金销售助手，产品对比+适配推荐+异议处理，助力基金销售转化。">
+    <meta name="keywords" content="基金销售,基金推荐,产品对比,销售助手,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/fund-sales">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/fund-sales">
+    <meta property="og:title" content="基金销售助手 | FinAIAI">
+    <meta property="og:description" content="FinAIAI基金销售助手，产品对比+适配推荐+异议处理，助力基金销售转化。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/fund-sales.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="基金销售助手 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI基金销售助手，产品对比+适配推荐+异议处理，助力基金销售转化。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/fund-sales.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "基金销售助手 | FinAIAI",
+        "description": "FinAIAI基金销售助手，产品对比+适配推荐+异议处理，助力基金销售转化。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>基金销售助手 | FinAIAI</title>
+  <style>
+    :root { --primary:#2563eb; --success:#10b981; --warning:#f59e0b; --danger:#ef4444;
+      --bg:#f1f5f9; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+      --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06);
+      --shadow-lg:0 14px 44px rgba(37,99,235,.18); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; padding-bottom:env(safe-area-inset-bottom,0); }
+    .wrap { max-width:720px; margin:0 auto; padding:16px; }
+    .hero { background:linear-gradient(135deg,#0f172a,#2563eb); color:#fff; border-radius:24px; padding:28px 22px;
+      box-shadow:var(--shadow-lg); position:relative; overflow:hidden; }
+    .hero h1 { font-size:24px; font-weight:900; margin-bottom:4px; position:relative; }
+    .hero .sub { opacity:.85; font-size:13px; position:relative; }
+    .section-title { font-size:18px; font-weight:900; margin:28px 0 14px; display:flex; align-items:center; gap:8px; }
+    .section-title .dot { width:8px; height:8px; border-radius:50%; background:var(--primary); }
+    .profile-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .profile-card { background:var(--card); border:2px solid var(--border); border-radius:14px; padding:12px 8px;
+      text-align:center; cursor:pointer; transition:.2s; }
+    .profile-card:hover { border-color:#bfdbfe; transform:translateY(-2px); box-shadow:var(--shadow); }
+    .profile-card.active { border-color:var(--primary); background:#eff6ff; }
+    .profile-card .emoji { font-size:24px; margin-bottom:4px; }
+    .profile-card .name { font-size:13px; font-weight:800; }
+    .input-box { background:var(--card); border-radius:16px; padding:16px; box-shadow:var(--shadow); margin-top:12px; }
+    .input-box input { width:100%; border:1px solid var(--border); border-radius:12px; padding:12px 14px;
+      font-size:15px; outline:none; }
+    .input-box input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+    .run-btn { width:100%; border:none; background:linear-gradient(135deg,var(--primary),#1d4ed8); color:#fff;
+      padding:14px; border-radius:14px; font-size:16px; font-weight:800; cursor:pointer; margin-top:12px;
+      box-shadow:0 4px 16px rgba(37,99,235,.3); }
+    .run-btn:disabled { opacity:.6; cursor:not-allowed; }
+    .loading { display:none; text-align:center; padding:40px 20px; }
+    .loading.active { display:block; }
+    .spinner { width:48px; height:48px; border:4px solid rgba(37,99,235,.15); border-top-color:var(--primary);
+      border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 16px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .result { display:none; }
+    .result.active { display:block; animation:fadeIn .5s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+    .pitch-card { background:var(--card); border-radius:20px; padding:20px; box-shadow:var(--shadow); margin-bottom:12px; }
+    .pitch-card h3 { font-size:16px; margin-bottom:10px; }
+    .pitch-text { font-size:14px; line-height:1.8; background:#f8fafc; border-radius:12px; padding:14px; }
+    .fund-grid { display:grid; grid-template-columns:1fr; gap:10px; }
+    .fund-item { background:#f8fafc; border-radius:14px; padding:14px; border-left:4px solid var(--primary); }
+    .fund-item .name { font-weight:800; font-size:15px; margin-bottom:4px; }
+    .fund-item .meta { font-size:12px; color:var(--muted); }
+    .tag { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; margin-right:4px; }
+    .tag-blue { background:#dbeafe; color:#1e40af; }
+    .tag-green { background:#d1fae5; color:#065f46; }
+    .tag-orange { background:#fed7aa; color:#92400e; }
+    .objection-card { background:linear-gradient(135deg,#fef3c7,#fffbeb); border-radius:16px; padding:16px; margin-top:10px; }
+    .objection-card .title { font-weight:800; font-size:14px; color:#92400e; margin-bottom:8px; }
+    .objection-card .resp { font-size:13px; line-height:1.7; }
+    .back-home { display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--primary);
+      text-decoration:none; font-size:14px; font-weight:700; }
+    @media(max-width:520px){ .profile-grid{grid-template-columns:repeat(2,1fr);} }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <script src="../chart-manager.js" defer></script>
+    <script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>🎯 基金销售话术</h1>
+    <div class="sub">保险/银行业 · 基金销售 · 客群匹配 · 异议处理</div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>选择客户画像</div>
+  <div class="profile-grid" id="profileGrid">
+    <div class="profile-card active" data-profile="conservative" onclick="selectProfile(this)">
+      <div class="emoji">🛡️</div><div class="name">保守型</div>
+    </div>
+    <div class="profile-card" data-profile="steady" onclick="selectProfile(this)">
+      <div class="emoji">🟢</div><div class="name">稳健型</div>
+    </div>
+    <div class="profile-card" data-profile="balanced" onclick="selectProfile(this)">
+      <div class="emoji">🟡</div><div class="name">平衡型</div>
+    </div>
+    <div class="profile-card" data-profile="growth" onclick="selectProfile(this)">
+      <div class="emoji">🟠</div><div class="name">成长型</div>
+    </div>
+    <div class="profile-card" data-profile="aggressive" onclick="selectProfile(this)">
+      <div class="emoji">🔴</div><div class="name">积极型</div>
+    </div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>输入客户需求</div>
+  <div class="input-box">
+    <input type="text" id="queryInput" placeholder="如：35岁白领，想稳健理财，担心风险" value="">
+    <button class="run-btn" id="runBtn" onclick="generatePitch()">✨ 生成销售话术</button>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>AI正在分析客户画像并生成话术...</p>
+  </div>
+
+  <div class="result" id="result">
+    <div class="section-title"><span class="dot"></span>客户画像分析</div>
+    <div class="pitch-card" id="profileCard"></div>
+
+    <div class="section-title"><span class="dot"></span>AI定制话术</div>
+    <div class="pitch-card">
+      <div class="pitch-text" id="pitchText"></div>
+    </div>
+
+    <div class="section-title"><span class="dot"></span>推荐产品</div>
+  <div style="position:relative;height:220px;margin-bottom:12px;">
+    <canvas id="fundRiskRadar" data-chart="fundRiskRadar"></canvas>
+  </div>
+  <div class="fund-grid" id="fundGrid"></div>
+
+    <div class="section-title"><span class="dot"></span>异议处理锦囊</div>
+    <div id="objectionGrid"></div>
+
+    <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  let selectedProfile = 'conservative';
+  function selectProfile(el){
+    document.querySelectorAll('.profile-card').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    selectedProfile = el.dataset.profile;
+  }
+  window.selectProfile = selectProfile;
+
+  function cyrb128(str){
+    let h1=1779033703,h2=3144134277,h3=1013904242,h4=2773480762;
+    for(let i=0,k;i<str.length;i++){
+      k=str.charCodeAt(i);
+      h1=h2^Math.imul(h1^k,597399067);
+      h2=h3^Math.imul(h2^k,2869860233);
+      h3=h4^Math.imul(h3^k,951274213);
+      h4=h1^Math.imul(h4^k,2716044179);
+    }
+    h1=Math.imul(h3^(h1>>>18),597399067);
+    h2=Math.imul(h4^(h2>>>22),2869860233);
+    h3=Math.imul(h1^(h3>>>17),951274213);
+    h4=Math.imul(h2^(h4>>>19),2716044179);
+    return [(h1^h2^h3^h4)>>>0,(h2^h1)>>>0,(h3^h1)>>>0,(h4^h1)>>>0];
+  }
+  function sfc32(a,b,c,d){
+    return function(){
+      a>>>=0;b>>>=0;c>>>=0;d>>>=0;
+      let t=(a+b)|0;
+      a=b^b>>>9;
+      b=c+(c<<3)|0;
+      c=(c<<21)|(c>>>11);
+      d=d+1|0;
+      t=t+d|0;
+      c=c+t|0;
+      return (t>>>0)/4294967296;
+    };
+  }
+  function createRng(seed){ const s=cyrb128(seed); return sfc32(s[0],s[1],s[2],s[3]); }
+
+  const profiles = {
+    conservative: { name:'保守型', emoji:'🛡️', features:['厌恶亏损','追求保本','资金短期使用'],
+      strategy:'先保障本金安全，再追求稳健增值', ratio:'货币40% + 短债60%',
+      funds:[{name:'xx宝货币A',cat:'货币基金',risk:1,return:'2%-2.5%',hold:'随时',tags:['随存随取','T+0快赎']},
+             {name:'xx短债C',cat:'债券基金',risk:2,return:'3%-4%',hold:'6个月+',tags:['短久期','波动小']}] },
+    steady: { name:'稳健型', emoji:'🟢', features:['可接受小波动','追求跑赢通胀','中期资金'],
+      strategy:'债券为主，固收+为辅，少量指数', ratio:'短债30% + 固收+50% + 指数20%',
+      funds:[{name:'xx短债C',cat:'债券基金',risk:2,return:'3%-4%',hold:'6个月+',tags:['短久期','波动小']},
+             {name:'xx固收+',cat:'固收+',risk:2,return:'3.5%-5%',hold:'1年+',tags:['攻守兼备','季度正收益']},
+             {name:'xx沪深300增强',cat:'指数基金',risk:3,return:'5%-10%',hold:'3年+',tags:['量化增强','低费率']}] },
+    balanced: { name:'平衡型', emoji:'🟡', features:['能承受中等波动','追求长期增值','有投资经验'],
+      strategy:'股债平衡，核心+卫星', ratio:'固收+30% + 指数40% + 混合30%',
+      funds:[{name:'xx固收+',cat:'固收+',risk:2,return:'3.5%-5%',hold:'1年+',tags:['攻守兼备']},
+             {name:'xx沪深300增强',cat:'指数基金',risk:3,return:'5%-10%',hold:'3年+',tags:['量化增强']},
+             {name:'xx中证500增强',cat:'指数基金',risk:3,return:'6%-12%',hold:'3年+',tags:['中小盘成长']}] },
+    growth: { name:'成长型', emoji:'🟠', features:['可承受较大波动','追求较高收益','长期投资'],
+      strategy:'权益为主，定投平滑波动', ratio:'指数40% + 混合/主题40% + QDII20%',
+      funds:[{name:'xx中证500增强',cat:'指数基金',risk:3,return:'6%-12%',hold:'3年+',tags:['中小盘成长']},
+             {name:'xx科技主题',cat:'主题基金',risk:4,return:'8%-15%',hold:'3年+',tags:['半导体/AI','高成长']},
+             {name:'xx全球精选',cat:'QDII',risk:4,return:'7%-12%',hold:'3年+',tags:['全球配置','汇率对冲']}] },
+    aggressive: { name:'积极型', emoji:'🔴', features:['追求高收益','能承受大幅回撤','专业投资者'],
+      strategy:'主动权益+主题+全球配置', ratio:'混合30% + 主题30% + QDII20% + 指数20%',
+      funds:[{name:'xx科技主题',cat:'主题基金',risk:4,return:'8%-15%',hold:'3年+',tags:['半导体/AI','高成长']},
+             {name:'xx偏股混合',cat:'股票基金',risk:4,return:'8%-15%',hold:'3年+',tags:['精选个股','灵活调仓']},
+             {name:'xx全球精选',cat:'QDII',risk:4,return:'7%-12%',hold:'3年+',tags:['全球配置']}] },
+  };
+
+  const objections = {
+    '收益太低': '货币基金是流动性工具，可先满足日常备用金需求，剩余资金再配置债基/固收+来提升整体收益。',
+    '风险太大': '投资有风险，但我们可以通过分散配置和定投来降低风险。建议从固收+或指数基金开始，逐步了解市场。',
+    '不懂基金': '没关系，基金就是让专业的人帮您理财。货币基金和短债基金风险很低，跟银行理财差不多，可以先试试。',
+    '还不如炒股': '炒股需要花大量时间研究，基金由专业基金经理管理，更适合没时间盯盘的投资者。而且基金分散投资，单只股票暴雷风险更低。',
+    '费用高': '主动型基金确实有管理费，但指数基金费率很低（0.5%左右）。长期来看，优秀基金的超额收益远超费率成本。',
+    '现在不是好时机': '市场无法预测，但定投可以帮我们平滑择时风险。越跌越买，反而能降低成本。',
+  };
+
+  function generatePitch(){
+    const query = document.getElementById('queryInput').value.trim() || '稳健型客户';
+    document.getElementById('loading').classList.add('active');
+    document.getElementById('result').classList.remove('active');
+    document.getElementById('runBtn').disabled = true;
+    setTimeout(()=>{
+      const seed = selectedProfile + '_' + query;
+      const rng = createRng(seed);
+      const p = profiles[selectedProfile];
+      const randInt = (min,max)=>Math.floor(rng()*(max-min+1))+min;
+
+      // Profile card
+      document.getElementById('profileCard').innerHTML = `
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <div style="font-size:36px;">${p.emoji}</div>
+          <div>
+            <div style="font-size:18px;font-weight:900;">${p.name}客户画像</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:2px;">${p.features.join(' · ')}</div>
+          </div>
+        </div>
+        <div style="font-size:13px;line-height:1.8;">
+          <div><strong>推荐策略：</strong>${p.strategy}</div>
+          <div><strong>建议配置：</strong>${p.ratio}</div>
+        </div>
+      `;
+
+      // Pitch text
+      const pitches = [
+        `您好！根据您的${p.name}风险特征，我建议采用"${p.strategy}"的配置思路。${p.ratio}的组合既能控制波动，又能获得${p.funds[p.funds.length-1].return}的预期收益。我们可以先从低风险产品开始，逐步建立投资习惯。`,
+        `理解您对资金安全的重视。作为${p.name}投资者，核心目标是${p.features[0]}。我为您精选了${p.funds.length}只匹配产品，风险等级从${p.funds[0].risk}到${p.funds[p.funds.length-1].risk}，您可以根据舒适度灵活选择。`,
+        `针对您的需求，我建议采用"核心+卫星"策略：核心仓位(${p.ratio.split('+')[0]})确保稳健底仓，卫星仓位(${p.ratio.split('+').slice(1).join('+')})捕捉成长机会。这样既安心，又不错过市场机遇。`
+      ];
+      document.getElementById('pitchText').textContent = pitches[randInt(0,2)];
+
+      // Funds
+      // Register risk radar chart
+      const riskLevels = p.funds.map(f => f.risk);
+      const riskLabels = ['货币基金','短债基金','固收+','指数增强','主题/QDII'];
+      const riskColors = ['rgba(16,185,129,0.7)','rgba(37,99,235,0.7)','rgba(245,158,11,0.7)','rgba(139,92,246,0.7)','rgba(239,68,68,0.7)'];
+
+      window.__chartManager = window.__chartManager || new LongmaChartManager({cdnCheckTimeout:2000});
+      window.__chartManager.register('fundRiskRadar', {
+        type: 'radar',
+        selector: '#fundRiskRadar',
+        lazy: false,
+        data: {
+          labels: riskLabels.slice(0, p.funds.length),
+          datasets: [{
+            label: '风险等级',
+            data: riskLevels.map(r => r * 20),
+            backgroundColor: 'rgba(37,99,235,0.15)',
+            borderColor: 'rgba(37,99,235,0.8)',
+            pointBackgroundColor: 'rgba(37,99,235,0.8)',
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            r: {
+              beginAtZero: true,
+              max: 5,
+              ticks: { stepSize: 1, display: false },
+              pointLabels: { font: { size: 10 } }
+            }
+          }
+        }
+      });
+      window.__chartManager.initAll();
+
+      document.getElementById('fundGrid').innerHTML = p.funds.map(f=>`
+        <div class="fund-item">
+          <div class="name">${f.name} <span style="font-size:12px;color:var(--muted);font-weight:400;">${f.cat}</span></div>
+          <div class="meta">
+            <span class="tag tag-blue">风险${f.risk}</span>
+            <span class="tag tag-green">预期${f.return}</span>
+            <span class="tag tag-orange">建议持有${f.hold}</span>
+            ${f.tags.map(t=>`<span class="tag" style="background:#f3e8ff;color:#6b21a8;">${t}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      // Objections
+      const objKeys = Object.keys(objections);
+      const numObj = randInt(2,4);
+      const used = new Set();
+      const selObjs = [];
+      for(let i=0;i<numObj && used.size<objKeys.length;i++){
+        const idx = randInt(0,objKeys.length-1);
+        if(used.has(idx)) continue;
+        used.add(idx);
+        selObjs.push({q:objKeys[idx],a:objections[objKeys[idx]]});
+      }
+      document.getElementById('objectionGrid').innerHTML = selObjs.map(o=>`
+        <div class="objection-card">
+          <div class="title">❓ 客户异议：${o.q}</div>
+          <div class="resp">💬 ${o.a}</div>
+        </div>
+      `).join('');
+
+      document.getElementById('loading').classList.remove('active');
+      document.getElementById('result').classList.add('active');
+      document.getElementById('runBtn').disabled = false;
+    },1000);
+  }
+  window.generatePitch = generatePitch;
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    // 自动加载股票数据
+    const stockContainer = document.querySelector('.stock-data, #stock-data, [data-type="stocks"]');
+    if (stockContainer) {
+        const result = await LongmaAPI.stocks.list();
+        if (result.success && result.data) {
+            renderStockList(stockContainer, result.data);
+        }
+    }
+    
+    // 自动加载基金数据
+    const fundContainer = document.querySelector('.fund-data, #fund-data, [data-type="funds"]');
+    if (fundContainer) {
+        const result = await LongmaAPI.funds.get('110022');
+        if (result.success && result.data) {
+            renderFundCard(fundContainer, result.data);
+        }
+    }
+});
+
+function renderStockList(container, stocks) {
+    let html = '<div class="api-stock-list">';
+    stocks.forEach(stock => {
+        const changeClass = stock.change >= 0 ? 'up' : 'down';
+        const changeSign = stock.change >= 0 ? '+' : '';
+        html += `<div class="api-stock-item ${changeClass}">
+            <span class="code">${stock.code}</span>
+            <span class="name">${stock.name}</span>
+            <span class="price">¥${stock.price.toFixed(2)}</span>
+            <span class="change">${changeSign}${(stock.change * 100).toFixed(2)}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function renderFundCard(container, fund) {
+    container.innerHTML = `<div class="api-fund-card">
+        <h4>${fund.name}</h4>
+        <p>净值: ¥${fund.nav.toFixed(3)}</p>
+        <p>日涨跌: ${fund.change > 0 ? '+' : ''}${(fund.change * 100).toFixed(2)}%</p>
+        <p>风险等级: ${fund.risk}</p>
+    </div>`;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
