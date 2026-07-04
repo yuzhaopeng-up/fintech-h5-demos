@@ -1,0 +1,876 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>账户查询 | FinAIAI</title>
+    <meta name="description" content="FinAIAI账户查询，余额/流水/转账/还款/理财一站式服务，随时随地安全便捷。">
+    <meta name="keywords" content="账户查询,FinAI银行,余额查询,交易流水,转账汇款,信用卡还款,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/account-query">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/account-query">
+    <meta property="og:title" content="账户查询 | FinAIAI">
+    <meta property="og:description" content="余额/流水/转账/还款/理财，随时随地安全便捷。">
+    <meta property="og:site_name" content="FinAIAI">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "账户查询 | FinAIAI",
+        "description": "FinAIAI账户查询，余额/流水/转账/还款/理财一站式服务。",
+        "applicationCategory": "FinancialApplication",
+        "operatingSystem": "Web",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CNY"},
+        "provider": {"@type": "Organization", "name": "FinAIAI", "url": "https://www.longma-ai.com"}
+    }
+    </script>
+    <link rel="preconnect" href="//cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <meta name="theme-color" content="#0F172A">
+
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #2563EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --purple: #7C3AED;
+            --bg: #F1F5F9;
+            --card: #FFFFFF;
+            --text: #0F172A;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+            --radius: 18px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0F172A, #1E3A5F);
+            color: white;
+            padding: 18px 16px 22px;
+            border-radius: 0 0 28px 28px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.25);
+        }
+        .header-top {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+        }
+        .header-icon {
+            width: 44px; height: 44px; background: rgba(255,255,255,0.15);
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; flex-shrink: 0;
+        }
+        .header-info h1 { font-size: 18px; font-weight: 900; }
+        .header-info p { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+        .verify-badge {
+            margin-left: auto; padding: 4px 12px; border-radius: 20px;
+            font-size: 12px; font-weight: 700;
+        }
+        .verify-badge.unverified { background: rgba(239,68,68,0.3); color: #FCA5A5; }
+        .verify-badge.verified { background: rgba(16,185,129,0.3); color: #86EFAC; }
+
+        /* Stats */
+        .stats-row {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.15); border-radius: 14px;
+            padding: 12px 8px; text-align: center;
+        }
+        .stat-card .val { font-size: 20px; font-weight: 900; }
+        .stat-card .lbl { font-size: 11px; opacity: 0.85; margin-top: 2px; }
+
+        /* Content */
+        .content { max-width: 720px; margin: 0 auto; padding: 16px 16px 100px; }
+
+        /* Verify form */
+        .verify-form {
+            background: var(--card); border-radius: var(--radius);
+            padding: 20px; box-shadow: var(--shadow); margin-bottom: 16px;
+        }
+        .form-title { font-size: 15px; font-weight: 800; margin-bottom: 16px; text-align: center; }
+        .form-row { margin-bottom: 14px; }
+        .form-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+        .form-input {
+            width: 100%; border: 1.5px solid var(--border); border-radius: 12px;
+            padding: 12px 14px; font-size: 15px; outline: none;
+            transition: border-color 0.2s; font-family: inherit; background: var(--card);
+        }
+        .form-input:focus { border-color: var(--accent); }
+        .verify-btn {
+            width: 100%; border: none; padding: 16px; border-radius: 14px;
+            background: linear-gradient(135deg, #0F172A, #1E3A5F);
+            color: white; font-size: 16px; font-weight: 900; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.3); transition: transform 0.15s;
+        }
+        .verify-btn:active { transform: scale(0.98); }
+        .verify-btn:disabled { background: var(--muted); cursor: not-allowed; }
+
+        /* Account selector */
+        .account-tabs { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; }
+        .account-tabs::-webkit-scrollbar { display: none; }
+        .acc-tab {
+            padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 700;
+            white-space: nowrap; cursor: pointer; border: none;
+            background: var(--card); color: var(--muted); box-shadow: var(--shadow);
+            transition: all 0.2s; flex-shrink: 0; display: flex; align-items: center; gap: 4px;
+        }
+        .acc-tab.active { background: var(--primary); color: white; }
+
+        /* Account balance card */
+        .balance-card {
+            background: linear-gradient(135deg, #0F172A, #1E3A5F);
+            border-radius: 24px; padding: 24px; color: white;
+            margin-bottom: 16px; position: relative; overflow: hidden;
+        }
+        .balance-card.ccard {
+            background: linear-gradient(135deg, #1E3A5F, #2563EB);
+        }
+        .balance-card.wcard {
+            background: linear-gradient(135deg, #065F46, #10B981);
+        }
+        .balance-card.lcard {
+            background: linear-gradient(135deg, #92400E, #D97706);
+        }
+        .balance-bg-circle {
+            position: absolute; right: -40px; top: -40px;
+            width: 200px; height: 200px; border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+        .balance-type { font-size: 13px; opacity: 0.85; margin-bottom: 8px; }
+        .balance-account { font-size: 12px; opacity: 0.7; margin-bottom: 16px; font-family: 'Courier New', monospace; }
+        .balance-amount { font-size: 32px; font-weight: 900; margin-bottom: 6px; }
+        .balance-label { font-size: 12px; opacity: 0.7; }
+        .balance-badges {
+            display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap;
+        }
+        .balance-badge {
+            background: rgba(255,255,255,0.15); color: white;
+            padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;
+        }
+
+        /* Quick actions */
+        .quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+        .action-btn {
+            background: var(--card); border-radius: 14px; padding: 14px 8px;
+            text-align: center; box-shadow: var(--shadow); cursor: pointer;
+            border: none; transition: transform 0.15s;
+        }
+        .action-btn:active { transform: scale(0.95); }
+        .action-icon { font-size: 24px; margin-bottom: 4px; }
+        .action-label { font-size: 11px; color: var(--muted); font-weight: 600; }
+
+        /* Section */
+        .section-title {
+            font-size: 14px; font-weight: 700; margin-bottom: 12px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .section-title::before {
+            content: ''; width: 3px; height: 14px; background: var(--accent); border-radius: 2px;
+        }
+
+        /* Transaction list */
+        .tx-list { background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .tx-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 16px; border-bottom: 1px solid var(--border);
+        }
+        .tx-item:last-child { border-bottom: none; }
+        .tx-icon {
+            width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; font-size: 18px;
+        }
+        .tx-info { flex: 1; }
+        .tx-desc { font-size: 14px; font-weight: 600; }
+        .tx-date { font-size: 12px; color: var(--muted); }
+        .tx-amount { font-size: 15px; font-weight: 900; white-space: nowrap; }
+        .tx-amount.income { color: var(--success); }
+        .tx-amount.expense { color: var(--text); }
+
+        /* Wealth products */
+        .product-list { background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .product-item {
+            padding: 14px 16px; border-bottom: 1px solid var(--border);
+        }
+        .product-item:last-child { border-bottom: none; }
+        .product-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .product-name { font-size: 14px; font-weight: 800; }
+        .product-yield { font-size: 14px; font-weight: 900; color: var(--success); }
+        .product-amount { font-size: 13px; color: var(--muted); }
+
+        /* Loan info */
+        .loan-card {
+            background: var(--card); border-radius: var(--radius);
+            padding: 16px; box-shadow: var(--shadow); margin-bottom: 16px;
+        }
+        .loan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+        .loan-cell { background: var(--bg); border-radius: 12px; padding: 12px; text-align: center; }
+        .loan-cell .val { font-size: 18px; font-weight: 900; }
+        .loan-cell .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+        /* Chat */
+        .chat-section { background: var(--card); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+        .chat-list { max-height: 280px; overflow-y: auto; margin-bottom: 12px; }
+        .msg { display: flex; gap: 10px; margin-bottom: 12px; }
+        .msg.user { flex-direction: row-reverse; }
+        .avatar {
+            width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; font-size: 16px;
+        }
+        .bubble {
+            max-width: 78%; padding: 10px 14px; border-radius: 16px;
+            font-size: 14px; line-height: 1.6; word-break: break-word;
+        }
+        .msg.bot .bubble { background: #F8FAFC; border-bottom-left-radius: 4px; }
+        .msg.user .bubble { background: var(--primary); color: white; border-bottom-right-radius: 4px; }
+        .intent-tag {
+            display: inline-block; background: rgba(37,99,235,0.1); color: var(--accent);
+            padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-bottom: 4px;
+        }
+
+        .quick-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .qbtn {
+            padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+            border: 1.5px solid var(--border); background: var(--card); cursor: pointer;
+            transition: all 0.15s; color: var(--text);
+        }
+        .qbtn:hover { border-color: var(--accent); color: var(--accent); background: #EEF2FF; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 6px; margin-bottom: 16px; overflow-x: auto; }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab {
+            padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 700;
+            white-space: nowrap; cursor: pointer; border: none;
+            background: var(--card); color: var(--muted); box-shadow: var(--shadow);
+            transition: all 0.2s; flex-shrink: 0;
+        }
+        .tab.active { background: var(--primary); color: white; }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.8); color: white; padding: 12px 24px;
+            border-radius: 24px; font-size: 14px; font-weight: 600;
+            z-index: 300; white-space: nowrap; pointer-events: none;
+        }
+
+        /* Footer */
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--muted); }
+
+        /* Hidden */
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-top">
+            <div class="header-icon">🏦</div>
+            <div class="header-info">
+                <h1>账户查询中心</h1>
+                <p>余额 · 流水 · 转账 · 还款</p>
+            </div>
+            <div class="verify-badge unverified" id="verifyBadge">未认证</div>
+        </div>
+        <div class="stats-row" id="statsRow">
+            <div class="stat-card">
+                <div class="val" id="statBalance">—</div>
+                <div class="lbl">账户余额</div>
+            </div>
+            <div class="stat-card">
+                <div class="val" id="statQuota">—</div>
+                <div class="lbl">信用/可用</div>
+            </div>
+            <div class="stat-card">
+                <div class="val" id="statAccount">—</div>
+                <div class="lbl">账户类型</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" id="tabHome" onclick="switchTab('home')">🏠 首页</button>
+            <button class="tab" id="tabTx" onclick="switchTab('tx')">📊 流水</button>
+            <button class="tab" id="tabWealth" onclick="switchTab('wealth')">📈 理财</button>
+            <button class="tab" id="tabLoan" onclick="switchTab('loan')">🏦 贷款</button>
+            <button class="tab" id="tabChat" onclick="switchTab('chat')">💬 助手</button>
+        </div>
+
+        <!-- ========== Home Tab ========== -->
+        <div id="sectionHome">
+            <!-- Verify form -->
+            <div id="verifySection">
+                <div class="verify-form">
+                    <div class="form-title">🔐 身份验证</div>
+                    <div class="form-row">
+                        <div class="form-label">姓名</div>
+                        <input type="text" class="form-input" id="vName" placeholder="请输入真实姓名">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">手机号</div>
+                        <input type="tel" class="form-input" id="vPhone" placeholder="请输入绑定手机号">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">身份证后4位</div>
+                        <input type="text" class="form-input" id="vId" placeholder="请输入身份证后4位" maxlength="4">
+                    </div>
+                    <button class="verify-btn" id="verifyBtn" onclick="doVerify()" disabled>请完善信息</button>
+                </div>
+            </div>
+
+            <!-- Account display (hidden until verified) -->
+            <div id="accountSection" class="hidden">
+                <!-- Account selector -->
+                <div class="account-tabs" id="accountTabs"></div>
+
+                <!-- Balance card -->
+                <div class="balance-card" id="balanceCard">
+                    <div class="balance-bg-circle"></div>
+                    <div class="balance-type" id="accTypeName">—</div>
+                    <div class="balance-account" id="accNo">—</div>
+                    <div class="balance-amount" id="accBalance">—</div>
+                    <div class="balance-label" id="accBalanceLabel">余额</div>
+                    <div class="balance-badges" id="accBadges"></div>
+                </div>
+
+                <!-- Quick actions -->
+                <div class="quick-actions">
+                    <button class="action-btn" onclick="showSection('tx')">
+                        <div class="action-icon">📜</div>
+                        <div class="action-label">流水</div>
+                    </button>
+                    <button class="action-btn" onclick="showToast('转账功能开发中')">
+                        <div class="action-icon">📤</div>
+                        <div class="action-label">转账</div>
+                    </button>
+                    <button class="action-btn" onclick="showToast('还款功能开发中')">
+                        <div class="action-icon">💰</div>
+                        <div class="action-label">还款</div>
+                    </button>
+                    <button class="action-btn" onclick="showSection('wealth')">
+                        <div class="action-icon">📈</div>
+                        <div class="action-label">理财</div>
+                    </button>
+                </div>
+
+                <!-- Recent transactions preview -->
+                <div class="section-title">📋 最近交易</div>
+                <div class="tx-list" id="txPreview"></div>
+            </div>
+        </div>
+
+        <!-- ========== Transaction Tab ========== -->
+        <div id="sectionTx" class="hidden">
+            <div class="section-title">📊 交易流水</div>
+            <div class="tx-list" id="txFull"></div>
+        </div>
+
+        <!-- ========== Wealth Tab ========== -->
+        <div id="sectionWealth" class="hidden">
+            <div class="section-title">📈 理财账户</div>
+            <div class="loan-card" id="wealthSummary"></div>
+            <div class="section-title">📌 理财产品</div>
+            <div class="product-list" id="productList"></div>
+        </div>
+
+        <!-- ========== Loan Tab ========== -->
+        <div id="sectionLoan" class="hidden">
+            <div class="section-title">🏦 贷款账户</div>
+            <div class="loan-card" id="loanSummary"></div>
+            <div class="section-title">📋 还款记录</div>
+            <div class="tx-list" id="loanTxList"></div>
+        </div>
+
+        <!-- ========== Chat Tab ========== -->
+        <div id="sectionChat" class="hidden">
+            <div class="section-title">💬 账户助手</div>
+            <div class="chat-section">
+                <div class="chat-list" id="chatList">
+                    <div class="msg bot">
+                        <div class="avatar" style="background:#DBEAFE;">🏦</div>
+                        <div class="bubble">
+                            <div class="intent-tag">🏦 账户助手</div>
+                            您好！我是FinAIAI账户助手 🏦<br><br>
+                            请先完成身份验证（上方「首页」Tab），然后可以：<br>
+                            • 查询余额和账户信息<br>
+                            • 查看交易流水<br>
+                            • 转账汇款指引<br>
+                            • 信用卡还款<br><br>
+                            验证后直接说「查余额」「看流水」即可！
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-btns">
+                    <button class="qbtn" onclick="sendQuick('查余额')">查余额</button>
+                    <button class="qbtn" onclick="sendQuick('看流水')">看流水</button>
+                    <button class="qbtn" onclick="sendQuick('切换到信用卡')">切换信用卡</button>
+                    <button class="qbtn" onclick="sendQuick('切换到储蓄账户')">切换储蓄账户</button>
+                </div>
+                <div style="display:flex;gap:8px;align-items:flex-end;">
+                    <input type="text" class="form-input" id="chatInput" placeholder="说出您的需求..." style="flex:1;min-height:44px;resize:none;" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}">
+                    <button style="padding:12px 18px;border:none;border-radius:12px;background:var(--primary);color:white;font-weight:700;cursor:pointer;flex-shrink:0;" onclick="sendChat()">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="footer" href="../experience-center.html">← 返回H5体验中心</a>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============ Account Data ============
+        var ACCOUNTS = {
+            "储蓄账户": {
+                account_type: "活期储蓄账户",
+                account_no: "6222 **** **** 8847",
+                full_no: "622298001234568847",
+                balance: 128560.78,
+                currency: "CNY",
+                open_date: "2022-03-15",
+                icon: "💳",
+                colorClass: "",
+                transactions: [
+                    {date: "2026-06-28", desc: "转账存入", amount: +5000.00, type: "income"},
+                    {date: "2026-06-25", desc: "消费-华润万家", amount: -328.50, type: "expense"},
+                    {date: "2026-06-20", desc: "工资入账", amount: +15800.00, type: "income"},
+                    {date: "2026-06-15", desc: "转账支出-手机银行", amount: -2000.00, type: "expense"},
+                    {date: "2026-06-10", desc: "消费-中石化加油站", amount: -450.00, type: "expense"},
+                    {date: "2026-06-05", desc: "转账存入-李明", amount: +3000.00, type: "income"},
+                    {date: "2026-05-28", desc: "理财赎回", amount: +50000.00, type: "income"},
+                    {date: "2026-05-20", desc: "工资入账", amount: +15800.00, type: "income"},
+                ]
+            },
+            "信用卡账户": {
+                account_type: "龙耀白金卡",
+                account_no: "4885 **** **** 0032",
+                full_no: "4885123456780032",
+                balance: -8540.50,
+                currency: "CNY",
+                open_date: "2023-01-10",
+                quota: 50000.0,
+                used: 8540.50,
+                available: 41459.50,
+                min_repayment: 427.03,
+                bill_date: "每月15日",
+                due_date: "次月05日",
+                icon: "💳",
+                colorClass: "ccard",
+                transactions: [
+                    {date: "2026-06-28", desc: "消费-上海迪士尼", amount: -680.00, type: "expense"},
+                    {date: "2026-06-25", desc: "消费-星巴克", amount: -52.00, type: "expense"},
+                    {date: "2026-06-20", desc: "还款到账", amount: +5000.00, type: "income"},
+                    {date: "2026-06-15", desc: "消费-京东商城", amount: -1280.00, type: "expense"},
+                    {date: "2026-06-10", desc: "消费-北京SKP", amount: -3580.00, type: "expense"},
+                    {date: "2026-06-05", desc: "账单分期", amount: -5000.00, type: "expense"},
+                ]
+            },
+            "理财账户": {
+                account_type: "龙盈理财精选",
+                account_no: "8899 **** **** 1122",
+                full_no: "8899123456781122",
+                balance: 380000.00,
+                currency: "CNY",
+                open_date: "2023-06-01",
+                icon: "📈",
+                colorClass: "wcard",
+                products: [
+                    {name: "龙盈日日金", amount: 80000.00, yield_: "2.85%", type: "净值型"},
+                    {name: "龙盈月月盈", amount: 200000.00, yield_: "3.45%", type: "封闭式"},
+                    {name: "龙盈稳健债基", amount: 100000.00, yield_: "4.12%", type: "债券型"},
+                ],
+                transactions: [
+                    {date: "2026-06-20", desc: "购买-龙盈月月盈", amount: -50000.00, type: "expense"},
+                    {date: "2026-05-15", desc: "分红-龙盈稳健债基", amount: +860.00, type: "income"},
+                    {date: "2026-05-01", desc: "购买-龙盈日日金", amount: -100000.00, type: "expense"},
+                    {date: "2026-04-10", desc: "赎回-龙盈季季享", amount: +150000.00, type: "income"},
+                ]
+            },
+            "贷款账户": {
+                account_type: "个人住房贷款",
+                account_no: "5522 **** **** 3344",
+                full_no: "5522123456783344",
+                balance: -320000.00,
+                remaining: 1920000.00,
+                original_amount: 2000000.00,
+                monthly_payment: 12150.00,
+                remaining_months: 215,
+                next_due: "2026-07-20",
+                interest_rate: "4.20%",
+                icon: "🏦",
+                colorClass: "lcard",
+                transactions: [
+                    {date: "2026-06-20", desc: "还款-住房贷款", amount: -12150.00, type: "expense"},
+                    {date: "2026-05-20", desc: "还款-住房贷款", amount: -12150.00, type: "expense"},
+                    {date: "2026-04-20", desc: "还款-住房贷款", amount: -12150.00, type: "expense"},
+                    {date: "2026-03-20", desc: "还款-住房贷款", amount: -12150.00, type: "expense"},
+                    {date: "2026-02-20", desc: "还款-住房贷款", amount: -12150.00, type: "expense"},
+                ]
+            }
+        };
+
+        // ============ State ============
+        var verified = false;
+        var customerName = '';
+        var currentAccount = '储蓄账户';
+        var accountOrder = ['储蓄账户', '信用卡账户', '理财账户', '贷款账户'];
+
+        // ============ Init ============
+        window.addEventListener('load', function() {
+            renderAccountTabs();
+            setupVerifyForm();
+        });
+
+        // ============ Verify form ============
+        function setupVerifyForm() {
+            ['vName', 'vPhone', 'vId'].forEach(function(id) {
+                document.getElementById(id).addEventListener('input', checkVerifyForm);
+            });
+        }
+
+        function checkVerifyForm() {
+            var name = document.getElementById('vName').value.trim();
+            var phone = document.getElementById('vPhone').value.trim();
+            var id = document.getElementById('vId').value.trim();
+            var ok = name.length >= 1 && phone.length >= 4 && id.length >= 4;
+            var btn = document.getElementById('verifyBtn');
+            btn.disabled = !ok;
+            btn.textContent = ok ? '🔐 完成验证' : '请完善信息';
+        }
+
+        function doVerify() {
+            var name = document.getElementById('vName').value.trim();
+            var phone = document.getElementById('vPhone').value.trim();
+            var id = document.getElementById('vId').value.trim();
+            if (!name || phone.length < 4 || id.length < 4) return;
+
+            verified = true;
+            customerName = name;
+
+            // Show account section
+            document.getElementById('verifySection').classList.add('hidden');
+            document.getElementById('accountSection').classList.remove('hidden');
+            document.getElementById('verifyBadge').textContent = '已认证 ✓';
+            document.getElementById('verifyBadge').classList.remove('unverified');
+            document.getElementById('verifyBadge').classList.add('verified');
+
+            // Add welcome message to chat
+            addChatMsg('身份验证: 姓名' + name + ', 手机' + phone + ', 身份证后4位****' + id, true);
+            setTimeout(function() {
+                addChatMsg('✅ 身份验证成功！<br>欢迎回来，' + name + '！<br><br>您有以下4个账户：<br>• 储蓄账户<br>• 信用卡账户<br>• 理财账户<br>• 贷款账户<br><br>请告诉我您要查询的内容：余额/流水/转账/还款', false);
+            }, 400);
+
+            showAccount('储蓄账户');
+        }
+
+        // ============ Account tabs ============
+        function renderAccountTabs() {
+            var tabs = document.getElementById('accountTabs');
+            var html = '';
+            accountOrder.forEach(function(name) {
+                var acc = ACCOUNTS[name];
+                var isActive = name === currentAccount;
+                html += '<button class="acc-tab' + (isActive ? ' active' : '') + '" onclick="showAccount(\'' + name + '\')">' + acc.icon + ' ' + name.replace('账户', '') + '</button>';
+            });
+            tabs.innerHTML = html;
+        }
+
+        // ============ Show account ============
+        window.showAccount = function(name) {
+            currentAccount = name;
+            renderAccountTabs();
+            renderAccountBalance();
+            renderTxPreview();
+
+            // Update stats
+            var acc = ACCOUNTS[name];
+            document.getElementById('statBalance').textContent = formatAmount(acc.balance, acc.currency);
+            document.getElementById('statAccount').textContent = name.replace('账户', '');
+
+            if (name === '信用卡账户') {
+                document.getElementById('statQuota').textContent = formatAmount(acc.available, acc.currency);
+            } else if (name === '贷款账户') {
+                document.getElementById('statQuota').textContent = formatAmount(acc.monthly_payment, acc.currency) + '/月';
+            } else if (name === '理财账户') {
+                document.getElementById('statQuota').textContent = acc.products.length + '只产品';
+            } else {
+                document.getElementById('statQuota').textContent = '—';
+            }
+        };
+
+        function renderAccountBalance() {
+            var acc = ACCOUNTS[currentAccount];
+            var card = document.getElementById('balanceCard');
+            card.className = 'balance-card ' + (acc.colorClass || '');
+
+            document.getElementById('accTypeName').textContent = acc.account_type;
+            document.getElementById('accNo').textContent = acc.account_no;
+
+            if (currentAccount === '信用卡账户') {
+                document.getElementById('accBalance').textContent = formatAmount(acc.balance, acc.currency);
+                document.getElementById('accBalanceLabel').textContent = '账单欠款';
+                document.getElementById('accBadges').innerHTML =
+                    '<span class="balance-badge">额度 ¥' + formatAmount(acc.quota, acc.currency) + '</span>' +
+                    '<span class="balance-badge">可用 ¥' + formatAmount(acc.available, acc.currency) + '</span>' +
+                    '<span class="balance-badge">最低还款 ¥' + formatAmount(acc.min_repayment, acc.currency) + '</span>';
+            } else if (currentAccount === '贷款账户') {
+                document.getElementById('accBalance').textContent = formatAmount(acc.remaining, acc.currency);
+                document.getElementById('accBalanceLabel').textContent = '剩余本金';
+                document.getElementById('accBadges').innerHTML =
+                    '<span class="balance-badge">月供 ¥' + formatAmount(acc.monthly_payment, acc.currency) + '</span>' +
+                    '<span class="balance-badge">年利率 ' + acc.interest_rate + '</span>' +
+                    '<span class="balance-badge">剩余' + acc.remaining_months + '期</span>';
+            } else if (currentAccount === '理财账户') {
+                document.getElementById('accBalance').textContent = formatAmount(acc.balance, acc.currency);
+                document.getElementById('accBalanceLabel').textContent = '总资产';
+                document.getElementById('accBadges').innerHTML = '<span class="balance-badge">3只理财产品</span>';
+            } else {
+                document.getElementById('accBalance').textContent = formatAmount(acc.balance, acc.currency);
+                document.getElementById('accBalanceLabel').textContent = '账户余额';
+                var level = acc.balance > 10000 ? '🟢 余额充足' : acc.balance > 1000 ? '🟡 余额一般' : '🔴 余额较低';
+                document.getElementById('accBadges').innerHTML = '<span class="balance-badge">' + level + '</span>';
+            }
+        }
+
+        // ============ Transactions ============
+        function renderTxPreview() {
+            var acc = ACCOUNTS[currentAccount];
+            var txList = document.getElementById('txPreview');
+            var txs = acc.transactions.slice(0, 5);
+            var html = '';
+            txs.forEach(function(tx) {
+                var iconBg = tx.type === 'income' ? '#D1FAE5' : '#FEE2E2';
+                var iconColor = tx.type === 'income' ? '#10B981' : '#EF4444';
+                var icon = tx.type === 'income' ? '📥' : '📤';
+                var amountStr = tx.type === 'income' ?
+                    '+¥' + Math.abs(tx.amount).toLocaleString('zh-CN', {minimumFractionDigits: 2}) :
+                    '-¥' + Math.abs(tx.amount).toLocaleString('zh-CN', {minimumFractionDigits: 2});
+                html += '<div class="tx-item">';
+                html += '<div class="tx-icon" style="background:' + iconBg + ';">' + icon + '</div>';
+                html += '<div class="tx-info"><div class="tx-desc">' + tx.desc + '</div><div class="tx-date">' + tx.date + '</div></div>';
+                html += '<div class="tx-amount ' + tx.type + '">' + amountStr + '</div>';
+                html += '</div>';
+            });
+            txList.innerHTML = html || '<div style="padding:24px;text-align:center;color:var(--muted);font-size:14px;">暂无交易记录</div>';
+        }
+
+        // ============ Wealth ============
+        function renderWealth() {
+            var acc = ACCOUNTS['理财账户'];
+            var summary = document.getElementById('wealthSummary');
+            summary.innerHTML = '<div style="text-align:center;"><div style="font-size:13px;color:var(--muted);margin-bottom:4px;">总资产</div><div style="font-size:32px;font-weight:900;color:var(--success);">' + formatAmount(acc.balance, acc.currency) + '</div></div>';
+
+            var list = document.getElementById('productList');
+            var html = '';
+            acc.products.forEach(function(p) {
+                html += '<div class="product-item">';
+                html += '<div class="product-header"><span class="product-name">' + p.name + '</span><span class="product-yield">' + p.yield_ + '</span></div>';
+                html += '<div class="product-amount">持有金额：' + formatAmount(p.amount, acc.currency) + ' | 类型：' + p.type + '</div>';
+                html += '</div>';
+            });
+            list.innerHTML = html;
+        }
+
+        // ============ Loan ============
+        function renderLoan() {
+            var acc = ACCOUNTS['贷款账户'];
+            var summary = document.getElementById('loanSummary');
+            summary.innerHTML =
+                '<div style="text-align:center;margin-bottom:12px;"><div style="font-size:13px;color:var(--muted);">贷款余额</div><div style="font-size:28px;font-weight:900;color:var(--danger);">' + formatAmount(acc.remaining, acc.currency) + '</div></div>' +
+                '<div class="loan-grid">' +
+                '<div class="loan-cell"><div class="val">¥' + formatAmount(acc.monthly_payment, acc.currency) + '</div><div class="lbl">月供</div></div>' +
+                '<div class="loan-cell"><div class="val">' + acc.interest_rate + '</div><div class="lbl">年利率</div></div>' +
+                '<div class="loan-cell"><div class="val">' + acc.remaining_months + '期</div><div class="lbl">剩余期数</div></div>' +
+                '<div class="loan-cell"><div class="val" style="font-size:13px;">' + acc.next_due + '</div><div class="lbl">下次还款</div></div>' +
+                '</div>';
+
+            var txList = document.getElementById('loanTxList');
+            var txs = acc.transactions;
+            var html = '';
+            txs.forEach(function(tx) {
+                html += '<div class="tx-item">';
+                html += '<div class="tx-icon" style="background:#FEE2E2;">🏦</div>';
+                html += '<div class="tx-info"><div class="tx-desc">' + tx.desc + '</div><div class="tx-date">' + tx.date + '</div></div>';
+                html += '<div class="tx-amount expense">-¥' + Math.abs(tx.amount).toLocaleString('zh-CN', {minimumFractionDigits: 2}) + '</div>';
+                html += '</div>';
+            });
+            txList.innerHTML = html;
+        }
+
+        // ============ Full transactions ============
+        function renderFullTx() {
+            var acc = ACCOUNTS[currentAccount];
+            var txList = document.getElementById('txFull');
+            var txs = acc.transactions;
+            var html = '';
+            txs.forEach(function(tx) {
+                var iconBg = tx.type === 'income' ? '#D1FAE5' : '#FEE2E2';
+                var icon = tx.type === 'income' ? '📥' : '📤';
+                var amountStr = tx.type === 'income' ?
+                    '+¥' + Math.abs(tx.amount).toLocaleString('zh-CN', {minimumFractionDigits: 2}) :
+                    '-¥' + Math.abs(tx.amount).toLocaleString('zh-CN', {minimumFractionDigits: 2});
+                html += '<div class="tx-item">';
+                html += '<div class="tx-icon" style="background:' + iconBg + ';">' + icon + '</div>';
+                html += '<div class="tx-info"><div class="tx-desc">' + tx.desc + '</div><div class="tx-date">' + tx.date + '</div></div>';
+                html += '<div class="tx-amount ' + tx.type + '">' + amountStr + '</div>';
+                html += '</div>';
+            });
+            txList.innerHTML = html || '<div style="padding:24px;text-align:center;color:var(--muted);">暂无交易记录</div>';
+        }
+
+        // ============ Tab switching ============
+        window.switchTab = function(tab) {
+            ['home', 'tx', 'wealth', 'loan', 'chat'].forEach(function(t) {
+                document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.toggle('active', t === tab);
+                document.getElementById('section' + t.charAt(0).toUpperCase() + t.slice(1)).classList.toggle('hidden', t !== tab);
+            });
+
+            if (tab === 'wealth') renderWealth();
+            else if (tab === 'loan') renderLoan();
+            else if (tab === 'tx') renderFullTx();
+        };
+
+        window.showSection = function(name) {
+            var tabMap = {tx: 'tx', wealth: 'wealth', loan: 'loan'};
+            if (tabMap[name]) switchTab(tabMap[name]);
+        };
+
+        // ============ Helpers ============
+        function formatAmount(val, currency) {
+            var sym = {CNY: '¥', USD: '$', EUR: '€'}[currency] || '¥';
+            var v = Math.abs(val);
+            return sym + v.toLocaleString('zh-CN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        // ============ Chat ============
+        function addChatMsg(html, isUser) {
+            var list = document.getElementById('chatList');
+            var div = document.createElement('div');
+            div.className = 'msg ' + (isUser ? 'user' : 'bot');
+            div.innerHTML = '<div class="avatar" style="background:' + (isUser ? '#DBEAFE' : '#F1F5F9') + ';">' + (isUser ? '👤' : '🏦') + '</div>' +
+                '<div class="bubble">' + (isUser ? '' : '<div class="intent-tag">🏦 账户助手</div>') + html + '</div>';
+            list.appendChild(div);
+            list.scrollTop = list.scrollHeight;
+        }
+
+        function processChat(text) {
+            if (!verified) {
+                return '🔐 请先完成身份验证（切换到「首页」Tab填写验证信息）';
+            }
+
+            text = text.toLowerCase();
+
+            if (/余额|还有多少钱|剩多少/.test(text)) {
+                var acc = ACCOUNTS[currentAccount];
+                return '📊 <b>' + currentAccount + '</b><br>余额：' + formatAmount(acc.balance, acc.currency) + '<br>账号：' + acc.account_no;
+            }
+
+            if (/流水|交易明细|交易记录|收支|账单/.test(text)) {
+                switchTab('tx');
+                return '📊 已切换到交易流水，请查看上方列表';
+            }
+
+            if (/切换.*储蓄/.test(text)) {
+                showAccount('储蓄账户');
+                return '✅ 已切换到储蓄账户';
+            }
+
+            if (/切换.*信用/.test(text)) {
+                showAccount('信用卡账户');
+                return '✅ 已切换到信用卡账户';
+            }
+
+            if (/切换.*理财/.test(text)) {
+                showAccount('理财账户');
+                switchTab('wealth');
+                return '✅ 已切换到理财账户';
+            }
+
+            if (/切换.*贷款/.test(text)) {
+                showAccount('贷款账户');
+                switchTab('loan');
+                return '✅ 已切换到贷款账户';
+            }
+
+            if (/转账|汇款/.test(text)) {
+                return '📤 <b>转账汇款</b><br>请提供以下信息：<br>1️⃣ 收款人姓名<br>2️⃣ 收款账户<br>3️⃣ 转账金额<br><br>示例：「转账1000元，收款人张三」';
+            }
+
+            if (/还款|还钱/.test(text)) {
+                if (currentAccount !== '信用卡账户') {
+                    showAccount('信用卡账户');
+                }
+                var cc = ACCOUNTS['信用卡账户'];
+                return '💳 <b>龙耀白金卡还款</b><br>账单欠款：' + formatAmount(Math.abs(cc.balance), cc.currency) +
+                    '<br>最低还款额：' + formatAmount(cc.min_repayment, cc.currency) +
+                    '<br>到期还款日：' + cc.due_date +
+                    '<br><br>回复数字选择：<br>1️⃣ 全额还款<br>2️⃣ 最低还款<br>3️⃣ 部分还款（输入金额）';
+            }
+
+            if (/帮助|help|怎么用/.test(text)) {
+                return '📋 <b>账户助手使用指南</b><br><br>' +
+                    '<b>查余额</b> — 查询当前账户余额<br>' +
+                    '<b>看流水</b> — 查看交易明细<br>' +
+                    '<b>切换到XX账户</b> — 储蓄/信用/理财/贷款<br>' +
+                    '<b>转账</b> — 转账汇款指引<br>' +
+                    '<b>还款</b> — 信用卡还款<br><br>' +
+                    '直接说出您的需求即可！';
+            }
+
+            return '收到！我理解您想查询「' + text + '」，请尝试：<br>• 查余额<br>• 看流水<br>• 切换账户<br>• 转账/还款';
+        }
+
+        window.sendChat = function() {
+            var input = document.getElementById('chatInput');
+            var text = input.value.trim();
+            if (!text) return;
+            input.value = '';
+            addChatMsg('<div style="font-size:15px;">' + text + '</div>', true);
+            setTimeout(function() {
+                addChatMsg(processChat(text), false);
+            }, 300);
+        };
+
+        window.sendQuick = function(text) {
+            addChatMsg('<div style="font-size:15px;">' + text + '</div>', true);
+            setTimeout(function() {
+                addChatMsg(processChat(text), false);
+            }, 300);
+        };
+
+        // ============ Toast ============
+        window.showToast = function(msg) {
+            var t = document.createElement('div');
+            t.className = 'toast';
+            t.textContent = msg;
+            document.body.appendChild(t);
+            setTimeout(function() {
+                t.style.opacity = '0';
+                t.style.transition = 'opacity 0.3s';
+                setTimeout(function() { if (t.parentNode) t.parentNode.removeChild(t); }, 300);
+            }, 2000);
+        };
+    })();
+    </script>
+</body>
+</html>
