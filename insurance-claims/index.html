@@ -1,0 +1,638 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI智能理赔审核，AI反欺诈检测+材料识别+责任认定，提升理赔效率与准确性。">
+    <meta name="keywords" content="智能理赔,理赔审核,反欺诈,保险科技,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/insurance-claims">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/insurance-claims">
+    <meta property="og:title" content="智能理赔审核 | FinAIAI">
+    <meta property="og:description" content="FinAIAI智能理赔审核，AI反欺诈检测+材料识别+责任认定，提升理赔效率与准确性。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/insurance-claims.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="智能理赔审核 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI智能理赔审核，AI反欺诈检测+材料识别+责任认定，提升理赔效率与准确性。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/insurance-claims.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "智能理赔审核 | FinAIAI",
+        "description": "FinAIAI智能理赔审核，AI反欺诈检测+材料识别+责任认定，提升理赔效率与准确性。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>智能理赔审核 | FinAIAI</title>
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--primary:#2563eb;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--info:#06b6d4;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--radius:14px;--shadow:0 4px 20px rgba(0,0,0,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:40px}
+.container{max-width:420px;margin:0 auto;padding:16px}
+
+/* 头部 */
+.header{text-align:center;padding:24px 0 16px}
+.header .logo{width:56px;height:56px;margin:0 auto 12px;border-radius:18px;background:linear-gradient(135deg,#ef4444,#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;box-shadow:0 8px 24px rgba(239,68,68,.25)}
+.header h1{font-size:22px;font-weight:800;background:linear-gradient(135deg,#ef4444,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header p{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* 卡片 */
+.card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow);animation:fadeIn .5s ease forwards;opacity:0;transform:translateY(12px)}
+.card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}.card:nth-child(5){animation-delay:.2s}
+.card-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.card-title .icon{font-size:18px}
+
+/* 险种选择 */
+.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.type-card{cursor:pointer;padding:14px;border-radius:12px;border:2px solid var(--border);background:#fff;text-align:center;transition:all .15s}
+.type-card:hover{border-color:var(--primary)}
+.type-card.active{border-color:var(--primary);background:linear-gradient(135deg,#eff6ff,#eef2ff);box-shadow:0 2px 8px rgba(37,99,235,.12)}
+.type-card .emoji{font-size:28px;margin-bottom:6px}
+.type-card .name{font-size:14px;font-weight:700}
+.type-card .desc{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* 表单 */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-item{display:flex;flex-direction:column;gap:4px}
+.form-item.full{grid-column:1/-1}
+.form-item label{font-size:12px;color:var(--muted);font-weight:500}
+.form-item input,.form-item select{padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:#fff}
+.form-item input:focus,.form-item select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+
+/* 材料清单 */
+.material-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.material-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border);cursor:pointer;transition:all .15s}
+.material-item:hover{background:#f1f5f9}
+.material-item.checked{background:#ecfdf5;border-color:#a7f3d0}
+.material-item .check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:all .15s}
+.material-item.checked .check{background:var(--success);border-color:var(--success);color:#fff}
+.material-item .name{flex:1;font-size:13px}
+.material-item .status{font-size:11px;font-weight:600;color:var(--muted)}
+.material-item.checked .status{color:var(--success)}
+
+/* 完成度条 */
+.progress-wrap{margin-top:12px}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:4px}
+.progress-bar{height:8px;background:var(--border);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--success),#34d399);transition:width .4s ease}
+
+/* 欺诈风险维度 */
+.fraud-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.fraud-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border);cursor:pointer}
+.fraud-item:hover{background:#f1f5f9}
+.fraud-item.active{background:#fef2f2;border-color:#fecaca}
+.fraud-item .toggle{width:40px;height:22px;border-radius:999px;background:#e2e8f0;position:relative;flex-shrink:0;transition:background .2s}
+.fraud-item.active .toggle{background:var(--danger)}
+.fraud-item .toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;left:2px;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.fraud-item.active .toggle::after{transform:translateX(18px)}
+.fraud-item .info{flex:1}
+.fraud-item .name{font-size:13px;font-weight:600}
+.fraud-item .impact{font-size:11px;color:var(--muted)}
+.fraud-item .score{font-size:12px;font-weight:700;color:var(--danger);min-width:30px;text-align:right}
+
+/* 评分圆环 */
+.score-wrap{display:flex;flex-direction:column;align-items:center;padding:20px 0}
+.score-circle{width:140px;height:140px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;transition:background .5s}
+.score-circle::before{content:'';position:absolute;width:110px;height:110px;border-radius:50%;background:#fff}
+.score-inner{position:relative;z-index:1;text-align:center}
+.score-num{font-size:36px;font-weight:800;line-height:1}
+.score-label{font-size:12px;color:var(--muted);margin-top:2px}
+.score-status{font-size:14px;font-weight:700;margin-top:8px;padding:4px 14px;border-radius:999px}
+.score-status.green{background:#d1fae5;color:#065f46}
+.score-status.yellow{background:#fef3c7;color:#92400e}
+.score-status.red{background:#fee2e2;color:#991b1b}
+
+/* 结论卡片 */
+.conclusion{padding:16px;border-radius:12px;text-align:center;margin-top:14px}
+.conclusion.green{background:linear-gradient(135deg,#d1fae5,#ecfdf5);border:1px solid #a7f3d0}
+.conclusion.yellow{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fde68a}
+.conclusion.red{background:linear-gradient(135deg,#fee2e2,#fef2f2);border:1px solid #fecaca}
+.conclusion-icon{font-size:32px;margin-bottom:6px}
+.conclusion-title{font-size:16px;font-weight:800;margin-bottom:4px}
+.conclusion-desc{font-size:13px;color:var(--muted)}
+.conclusion-amount{font-size:22px;font-weight:800;color:var(--success);margin-top:8px}
+.conclusion-days{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* 建议列表 */
+.advice-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.advice-item{display:flex;gap:8px;padding:10px 12px;background:#f8fafc;border-radius:10px;border-left:3px solid var(--primary);font-size:13px}
+.advice-item .bullet{width:18px;height:18px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* 风险标记 */
+.flag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.flag-item{padding:6px 12px;border-radius:999px;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;font-size:12px;font-weight:600}
+
+/* 按钮 */
+.btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#ef4444,#7c3aed);color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(239,68,68,.3);transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn-secondary{background:#f1f5f9;color:var(--text);box-shadow:none;margin-top:10px}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+
+/* 信息栏 */
+.info-bar{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.info-item{padding:10px;background:#f8fafc;border-radius:10px;text-align:center;border:1px solid var(--border)}
+.info-item .val{font-size:16px;font-weight:800;color:var(--text)}
+.info-item .label{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* 隐藏/显示 */
+.hidden{display:none}
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+</style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">📉</div>
+    <h1>智能理赔审核</h1>
+    <p>材料完整性检查 · 欺诈风险评估 · 智能审核决策</p>
+  </div>
+
+  <!-- 险种选择 -->
+  <div class="card" id="formArea">
+    <div class="card-title"><span class="icon">🔗</span>选择理赔类型</div>
+    <div class="type-grid">
+      <div class="type-card" data-type="重疾险" onclick="selectType(this)">
+        <div class="emoji">🏥</div>
+        <div class="name">重疾险</div>
+        <div class="desc">确诊即赔 · 重大疾病</div>
+      </div>
+      <div class="type-card" data-type="医疗险" onclick="selectType(this)">
+        <div class="emoji">💊</div>
+        <div class="name">医疗险</div>
+        <div class="desc">住院报销 · 医疗费用</div>
+      </div>
+      <div class="type-card" data-type="意外险" onclick="selectType(this)">
+        <div class="emoji">🚨</div>
+        <div class="name">意外险</div>
+        <div class="desc">事故伤害 · 意外身故</div>
+      </div>
+      <div class="type-card" data-type="寿险" onclick="selectType(this)">
+        <div class="emoji">👤</div>
+        <div class="name">寿险</div>
+        <div class="desc">身故赔付 · 死亡理赔</div>
+      </div>
+    </div>
+
+    <!-- 理赔信息 -->
+    <div style="margin-top:16px">
+      <div class="form-grid">
+        <div class="form-item">
+          <label>申请金额（元）</label>
+          <input type="number" id="claimAmount" placeholder="例如 50000" min="1000">
+        </div>
+        <div class="form-item">
+          <label>投保时长（年）</label>
+          <input type="number" id="policyYears" placeholder="例如 2" min="0" max="50">
+        </div>
+      </div>
+    </div>
+
+    <!-- 材料清单 -->
+    <div class="card-title" style="margin-top:20px"><span class="icon">📋</span>材料完整性检查 <span id="matProgressText" style="margin-left:auto;font-size:12px;color:var(--muted);font-weight:500">0/4</span></div>
+    <div class="material-list" id="materialList"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="matProgressBar" style="width:0%"></div></div>
+    </div>
+
+    <!-- 欺诈风险评估 -->
+    <div class="card-title" style="margin-top:20px"><span class="icon">🚨</span>欺诈风险评估 <span id="fraudScoreText" style="margin-left:auto;font-size:12px;color:var(--muted);font-weight:500">0/100</span></div>
+    <div class="fraud-list" id="fraudList"></div>
+
+    <button class="btn" id="evalBtn" onclick="evaluateClaim()" disabled>🔍 开始智能审核</button>
+  </div>
+
+  <!-- 结果区域 -->
+  <div id="resultArea" class="hidden">
+    <!-- 基本信息 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">📄</span>理赔信息</div>
+      <div class="info-bar">
+        <div class="info-item"><div class="val" id="resClaimId">--</div><div class="label">理赔编号</div></div>
+        <div class="info-item"><div class="val" id="resDate">--</div><div class="label">审核日期</div></div>
+        <div class="info-item"><div class="val" id="resType">--</div><div class="label">理赔类型</div></div>
+        <div class="info-item"><div class="val" id="resAmount">--</div><div class="label">申请金额</div></div>
+      </div>
+    </div>
+
+    <!-- 材料审核结果 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">✅</span>材料完整性检查</div>
+      <div class="material-list" id="resultMaterialList"></div>
+    </div>
+
+    <!-- 欺诈评分 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span>欺诈风险评分</div>
+      <div class="score-wrap">
+        <div class="score-circle" id="fraudCircle">
+          <div class="score-inner">
+            <div class="score-num" id="fraudNum">--</div>
+            <div class="score-label">/100</div>
+          </div>
+        </div>
+        <div class="score-status" id="fraudStatus">--</div>
+      </div>
+      <div class="flag-list hidden" id="flagList"></div>
+    </div>
+
+    <!-- 审核结论 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span>审核结论</div>
+      <div class="conclusion" id="conclusionBox">
+        <div class="conclusion-icon" id="conclusionIcon">✅</div>
+        <div class="conclusion-title" id="conclusionTitle">--</div>
+        <div class="conclusion-desc" id="conclusionDesc">--</div>
+        <div class="conclusion-amount hidden" id="conclusionAmount"></div>
+        <div class="conclusion-days hidden" id="conclusionDays"></div>
+      </div>
+    </div>
+
+    <!-- 后续建议 -->
+    <div class="card">
+      <div class="card-title"><span class="icon">💡</span>后续建议</div>
+      <div class="advice-list" id="adviceList"></div>
+    </div>
+
+    <button class="btn btn-secondary" onclick="resetForm()">🔄 重新审核</button>
+  </div>
+</div>
+
+<script>
+// 数据
+const MATERIALS={
+  "重疾险":["诊断证明","病理报告","身份证复印件","银行卡复印件"],
+  "医疗险":["医疗费用清单","发票原件","出院小结","病历资料"],
+  "意外险":["事故证明","医疗记录","身份证明","受益人关系证明"],
+  "寿险":["死亡证明","户籍注销证明","受益人身份证明","保单原件"]
+};
+const FRAUD_ITEMS=[
+  {name:"短期内多次理赔",impact:"频繁理赔可能存在欺诈意图",score:15},
+  {name:"事故时间与投保时间接近",impact:"可能为逆选投保",score:20},
+  {name:"医疗费用异常偏高",impact:"费用超出同类案件平均水平",score:18},
+  {name:"诊断与伤情不符",impact:"诊断记录存在矛盾",score:22},
+  {name:"第三方证言矛盾",impact:"证言内容互相冲突",score:16},
+  {name:"历史有拒赔记录",impact:"曾因材料问题被拒赔",score:12},
+  {name:"多家公司同时投保",impact:"可能存在套取保险金风险",score:14},
+  {name:"材料有涂改痕迹",impact:"签字/日期/金额存在修改",score:19}
+];
+
+let selectedType="";
+let checkedMaterials=new Set();
+let activeFraud=new Set();
+
+// 初始化
+function init(){
+  renderFraudList();
+}
+
+function selectType(el){
+  document.querySelectorAll('.type-card').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  selectedType=el.dataset.type;
+  checkedMaterials.clear();
+  renderMaterialList();
+  updateBtnState();
+}
+
+function renderMaterialList(){
+  const list=document.getElementById('materialList');
+  if(!selectedType){list.innerHTML='<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">请先选择理赔类型</div>';updateMatProgress();return;}
+  const mats=MATERIALS[selectedType];
+  list.innerHTML=mats.map((m,i)=>`
+    <div class="material-item ${checkedMaterials.has(i)?'checked':''}" onclick="toggleMaterial(${i})">
+      <div class="check">${checkedMaterials.has(i)?'✓':''}</div>
+      <div class="name">${m}</div>
+      <div class="status">${checkedMaterials.has(i)?'已提交':'待提交'}</div>
+    </div>
+  `).join('');
+  updateMatProgress();
+}
+
+function toggleMaterial(idx){
+  if(checkedMaterials.has(idx))checkedMaterials.delete(idx);else checkedMaterials.add(idx);
+  renderMaterialList();
+  updateBtnState();
+}
+
+function updateMatProgress(){
+  if(!selectedType){document.getElementById('matProgressText').textContent='0/0';document.getElementById('matProgressBar').style.width='0%';return;}
+  const total=MATERIALS[selectedType].length;
+  const checked=checkedMaterials.size;
+  const pct=total?Math.round((checked/total)*100):0;
+  document.getElementById('matProgressText').textContent=`${checked}/${total}`;
+  document.getElementById('matProgressBar').style.width=pct+'%';
+}
+
+function renderFraudList(){
+  const list=document.getElementById('fraudList');
+  list.innerHTML=FRAUD_ITEMS.map((f,i)=>`
+    <div class="fraud-item ${activeFraud.has(i)?'active':''}" onclick="toggleFraud(${i})">
+      <div class="toggle"></div>
+      <div class="info">
+        <div class="name">${f.name}</div>
+        <div class="impact">${f.impact}</div>
+      </div>
+      <div class="score">+${f.score}</div>
+    </div>
+  `).join('');
+  updateFraudScore();
+}
+
+function toggleFraud(idx){
+  if(activeFraud.has(idx))activeFraud.delete(idx);else activeFraud.add(idx);
+  renderFraudList();
+}
+
+function updateFraudScore(){
+  let score=0;
+  activeFraud.forEach(i=>score+=FRAUD_ITEMS[i].score);
+  score=Math.min(100,score);
+  document.getElementById('fraudScoreText').textContent=`${score}/100`;
+}
+
+function updateBtnState(){
+  const amount=document.getElementById('claimAmount').value;
+  const btn=document.getElementById('evalBtn');
+  btn.disabled=!(selectedType && amount && checkedMaterials.size>0);
+}
+
+document.getElementById('claimAmount').addEventListener('input',updateBtnState);
+document.getElementById('policyYears').addEventListener('input',updateBtnState);
+
+function evaluateClaim(){
+  if(!selectedType)return;
+  const amount=parseInt(document.getElementById('claimAmount').value)||0;
+  const years=parseInt(document.getElementById('policyYears').value)||0;
+
+  // 计算欺诈分数
+  let fraudScore=0;
+  activeFraud.forEach(i=>fraudScore+=FRAUD_ITEMS[i].score);
+  fraudScore=Math.min(100,fraudScore);
+  // 若无风险指标且材料完整，给一个基础分
+  if(fraudScore===0 && checkedMaterials.size===MATERIALS[selectedType].length){
+    fraudScore=Math.floor(Math.random()*15); // 低风险 0-14
+  }else if(fraudScore===0){
+    fraudScore=Math.floor(Math.random()*20)+15; // 材料不全 带来一定风险 15-34
+  }
+
+  // 生成理赔编号
+  const now=new Date();
+  const claimId=`CLM${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}${Math.floor(1000+Math.random()*9000)}`;
+  const dateStr=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+
+  // 材料审核
+  const mats=MATERIALS[selectedType];
+  const matResults=mats.map((m,i)=>({name:m,checked:checkedMaterials.has(i)}));
+
+  // 风险标记
+  const flags=[];
+  activeFraud.forEach(i=>flags.push(FRAUD_ITEMS[i].name));
+  // 若风险低但材料不全，添加材料风险标记
+  if(checkedMaterials.size<mats.length && fraudScore<=40){
+    flags.push("材料不完整");
+    fraudScore=Math.max(fraudScore,25);
+  }
+  // 投保时间过短
+  if(years<1 && selectedType!=="意外险"){
+    flags.push("投保时间过短");
+    fraudScore=Math.min(100,fraudScore+15);
+  }
+
+  // 三级结论
+  let conclusion={},advice=[],payAmount=0,days=0;
+  if(fraudScore>70){
+    conclusion={icon:'❌',title:'调查延期',desc:'存在多项欺诈嫌疑，需进一步调查',cls:'red'};
+    advice=['完善理赔材料电子化归档','加强高风险案件人工复核','调取医疗机构原始记录进行核实'];
+  }else if(fraudScore>40){
+    conclusion={icon:'🟡',title:'补充材料',desc:'存在部分疑点，需补充证明材料',cls:'yellow'};
+    advice=['根据风险标记补充对应证明材料','提供第三方专业机构鉴定报告','加强客户沟通，核实事故经过'];
+  }else{
+    conclusion={icon:'✅',title:'快速赔付',desc:'审核通过，建议快速理赔',cls:'green'};
+    payAmount=Math.floor(amount*0.95);
+    days=Math.floor(Math.random()*3)+1;
+    advice=['完善理赔材料电子化归档','加强高风险案件人工复核','定期更新欺诈识别模型'];
+  }
+
+  // 渲染结果
+  document.getElementById('formArea').classList.add('hidden');
+  document.getElementById('resultArea').classList.remove('hidden');
+  window.scrollTo(0,0);
+
+  // 信息栏
+  document.getElementById('resClaimId').textContent=claimId;
+  document.getElementById('resDate').textContent=dateStr;
+  document.getElementById('resType').textContent=selectedType;
+  document.getElementById('resAmount').textContent='¥'+amount.toLocaleString();
+
+  // 材料结果
+  document.getElementById('resultMaterialList').innerHTML=matResults.map(r=>`
+    <div class="material-item ${r.checked?'checked':''}" style="cursor:default">
+      <div class="check">${r.checked?'✓':'✗'}</div>
+      <div class="name">${r.name}</div>
+      <div class="status">${r.checked?'已提交':'缺失'}</div>
+    </div>
+  `).join('');
+
+  // 欺诈评分
+  const deg=(fraudScore/100)*360;
+  let color='var(--success)';
+  if(fraudScore>70)color='var(--danger)';
+  else if(fraudScore>40)color='var(--warning)';
+  const circle=document.getElementById('fraudCircle');
+  circle.style.background=`conic-gradient(${color} 0deg,${color} ${deg}deg,#e2e8f0 ${deg}deg,#e2e8f0 360deg)`;
+  document.getElementById('fraudNum').textContent=fraudScore;
+  const fs=document.getElementById('fraudStatus');
+  if(fraudScore>70){fs.textContent='🔴 高风险';fs.className='score-status red';}
+  else if(fraudScore>40){fs.textContent='🟡 中风险';fs.className='score-status yellow';}
+  else{fs.textContent='🟢 低风险';fs.className='score-status green';}
+
+  // 风险标记
+  const flagList=document.getElementById('flagList');
+  if(flags.length>0){
+    flagList.innerHTML=flags.map(f=>`<div class="flag-item">${f}</div>`).join('');
+    flagList.classList.remove('hidden');
+  }else{
+    flagList.classList.add('hidden');
+  }
+
+  // 结论
+  const box=document.getElementById('conclusionBox');
+  box.className='conclusion '+conclusion.cls;
+  document.getElementById('conclusionIcon').textContent=conclusion.icon;
+  document.getElementById('conclusionTitle').textContent=conclusion.title;
+  document.getElementById('conclusionDesc').textContent=conclusion.desc;
+  const amtEl=document.getElementById('conclusionAmount');
+  const daysEl=document.getElementById('conclusionDays');
+  if(payAmount>0){
+    amtEl.textContent='💰 建议赔付: ¥'+payAmount.toLocaleString();
+    amtEl.classList.remove('hidden');
+    daysEl.textContent=`⏰ 预计到账: ${days}个工作日`;
+    daysEl.classList.remove('hidden');
+  }else{
+    amtEl.classList.add('hidden');
+    daysEl.classList.add('hidden');
+  }
+
+  // 建议
+  document.getElementById('adviceList').innerHTML=advice.map((a,i)=>`
+    <div class="advice-item"><div class="bullet">${i+1}</div><div>${a}</div></div>
+  `).join('');
+}
+
+function resetForm(){
+  document.getElementById('formArea').classList.remove('hidden');
+  document.getElementById('resultArea').classList.add('hidden');
+  document.getElementById('claimAmount').value='';
+  document.getElementById('policyYears').value='';
+  document.querySelectorAll('.type-card').forEach(c=>c.classList.remove('active'));
+  selectedType='';
+  checkedMaterials.clear();
+  activeFraud.clear();
+  renderMaterialList();
+  renderFraudList();
+  updateBtnState();
+  window.scrollTo(0,0);
+}
+
+init();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const profileContainer = document.querySelector('.customer-profile, #customer-profile, [data-type="customer"]');
+    if (profileContainer) {
+        const result = await LongmaAPI.customer.getProfile('C001');
+        if (result.success && result.data) {
+            renderCustomerProfile(profileContainer, result.data);
+        }
+    }
+    
+    const recContainer = document.querySelector('.recommendations, #recommendations, [data-type="recommendations"]');
+    if (recContainer) {
+        const result = await LongmaAPI.customer.getRecommendations('C001');
+        if (result.success && result.data) {
+            renderRecommendations(recContainer, result.data);
+        }
+    }
+});
+
+function renderCustomerProfile(container, data) {
+    let html = `<div class="api-profile-card">
+        <h3>${data.name} (ID: ${data.customer_id})</h3>
+        <p>年龄: ${data.age}岁 | 风险偏好: ${data.risk_preference}</p>
+        <p>总资产: ${LongmaAPI.utils.formatMoney(data.assets)}</p>
+        <div class="api-holdings"><h4>持仓分布</h4>`;
+    data.holdings.forEach(h => {
+        html += `<div class="api-holding-item">
+            <span>${h.type}</span>
+            <span>${LongmaAPI.utils.formatMoney(h.amount)}</span>
+            <span>${(h.ratio * 100).toFixed(1)}%</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    container.innerHTML = html;
+}
+
+function renderRecommendations(container, data) {
+    let html = '<div class="api-recommendations"><h4>产品推荐</h4>';
+    data.products.forEach(p => {
+        html += `<div class="api-product-card">
+            <span class="name">${p.name}</span>
+            <span class="type">${p.type}</span>
+            <span class="match">匹配度: ${p.match}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
