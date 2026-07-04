@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI智能客服，10类意图识别+知识库检索+情感分析，提供有温度的服务。">
+    <meta name="keywords" content="智能客服,意图识别,情感分析,客户服务,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/customer-service">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/customer-service">
+    <meta property="og:title" content="智能客服中心 | FinAIAI">
+    <meta property="og:description" content="FinAIAI智能客服，10类意图识别+知识库检索+情感分析，提供有温度的服务。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/customer-service.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="智能客服中心 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI智能客服，10类意图识别+知识库检索+情感分析，提供有温度的服务。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/customer-service.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "智能客服中心 | FinAIAI",
+        "description": "FinAIAI智能客服，10类意图识别+知识库检索+情感分析，提供有温度的服务。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>智能客服中心 | FinAIAI</title>
+  <style>
+    :root { --primary:#2563eb; --success:#10b981; --warning:#f59e0b; --danger:#ef4444; --purple:#8b5cf6;
+      --bg:#f1f5f9; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+      --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; }
+    .wrap { max-width:720px; margin:0 auto; padding:16px; }
+    .hero { background:linear-gradient(135deg,#4c1d95,#7c3aed); color:#fff; border-radius:24px; padding:28px 22px;
+      box-shadow:0 14px 44px rgba(124,58,237,.18); }
+    .hero h1 { font-size:24px; font-weight:900; margin-bottom:4px; }
+    .hero .sub { opacity:.85; font-size:13px; }
+    .chat-wrap { background:var(--card); border-radius:20px; padding:16px; box-shadow:var(--shadow); margin-top:16px;
+      min-height:300px; max-height:500px; overflow-y:auto; }
+    .msg { display:flex; gap:10px; margin:12px 0; }
+    .msg.user { flex-direction:row-reverse; }
+    .avatar { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:16px; flex-shrink:0; }
+    .msg.bot .avatar { background:#eff6ff; }
+    .msg.user .avatar { background:var(--primary); color:#fff; }
+    .bubble { max-width:80%; padding:12px 14px; border-radius:16px; font-size:14px; line-height:1.6; }
+    .msg.bot .bubble { background:#f8fafc; border-bottom-left-radius:4px; }
+    .msg.user .bubble { background:var(--primary); color:#fff; border-bottom-right-radius:4px; }
+    .intent-tag { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700;
+      background:#dbeafe; color:#1e40af; margin-bottom:6px; }
+    .input-box { display:flex; gap:8px; margin-top:12px; }
+    .input-box input { flex:1; border:1px solid var(--border); border-radius:14px; padding:12px 14px;
+      font-size:15px; outline:none; }
+    .input-box input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+    .send-btn { border:none; background:var(--primary); color:#fff; border-radius:14px; padding:12px 20px;
+      font-size:15px; font-weight:800; cursor:pointer; }
+    .quick-btns { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .qbtn { border:1px solid var(--border); background:#fff; border-radius:999px; padding:6px 14px;
+      font-size:12px; font-weight:700; color:var(--text); cursor:pointer; transition:.2s; }
+    .qbtn:hover { border-color:var(--primary); background:#eff6ff; color:var(--primary); }
+    .back-home { display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--primary);
+      text-decoration:none; font-size:14px; font-weight:700; }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>🎧 保险智能客服</h1>
+    <div class="sub">银行保险业 · 智能客服 · 意图识别 · FAQ匹配</div>
+  </div>
+
+  <div class="chat-wrap" id="chatBox">
+    <div class="msg bot">
+      <div class="avatar">🐟</div>
+      <div class="bubble">您好！我是FinAIAI智能客服，请问有什么可以帮助您的？您可以咨询：开户、贷款、理财、信用卡、保险、转账等问题。</div>
+    </div>
+  </div>
+
+  <div class="quick-btns">
+    <button class="qbtn" onclick="sendQuick('开户需要什么材料')">开户资料</button>
+    <button class="qbtn" onclick="sendQuick('贷款怎么申请')">贷款申请</button>
+    <button class="qbtn" onclick="sendQuick('理财产品有哪些')">理财产品</button>
+    <button class="qbtn" onclick="sendQuick('信用卡推荐')">信用卡</button>
+    <button class="qbtn" onclick="sendQuick('保险怎么买')">保险业务</button>
+    <button class="qbtn" onclick="sendQuick('转账限额')">转账限额</button>
+  </div>
+
+  <div class="input-box">
+    <input type="text" id="msgInput" placeholder="输入您的问题..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <button class="send-btn" onclick="sendMsg()">发送</button>
+  </div>
+
+  <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+</div>
+
+<script>
+(function(){
+  const faq = {
+    "开户":{intent:"开户咨询",emoji:"🏦",category:"零售业务",priority:"高",answer:"开设银行账户请准备：身份证原件+复印件、本人实名手机号。如需开通企业账户还需营业执照等对公材料。"},
+    "贷款":{intent:"贷款申请",emoji:"💰",category:"信贷业务",priority:"高",answer:"我行提供多种贷款产品：信用贷款（最高50万，利率4.35%起）、抵押贷款（住房/商铺抵押，利率3.85%起）、经营贷款（企业主专享）。请问您需要哪种？"},
+    "理财":{intent:"理财产品",emoji:"📈",category:"财富管理",priority:"中",answer:"我行理财品种丰富：活期理财（如意宝，灵活申赎）、定期理财（90-365天，业绩比较基准3.5%-4.5%）、净值型理财（基金组合，分散风险）。请问您倾向哪种风格？"},
+    "信用卡":{intent:"信用卡",emoji:"💳",category:"零售业务",priority:"中",answer:"我行信用卡推荐：普卡（免年费，适合日常消费）、金卡（机场贵宾厅+加油返现）、白金卡（机场CIP+健康服务+境外免货币转换费）。请问您感兴趣哪款？"},
+    "保险":{intent:"保险业务",emoji:"🛡️",category:"保险业务",priority:"高",answer:"我行代销保险包括：年金险（养老规划，稳健增值）、重疾险（确诊即赔，保障全面）、终身寿险（财富传承，杠杆传承）。请问您想了解哪类产品？"},
+    "转账":{intent:"信息查询",emoji:"🔍",category:"支付结算",priority:"中",answer:"手机银行转账：登录后点击转账→输入收款人信息→确认转账。单笔限额500万，日累计2000万。同行转账实时到账，跨行工作时间即时到账。"},
+    "利息":{intent:"信息查询",emoji:"🔍",category:"存贷款",priority:"低",answer:"我行存款利率：活期0.3%/年，整存整取3个月1.4%、6个月1.6%、1年期1.95%、2年期2.25%（各地可能有差异，以网点公布为准）。"},
+    "密码":{intent:"信息查询",emoji:"🔍",category:"账户安全",priority:"中",answer:"密码遗忘请携带身份证至任意网点重置。也可通过手机银行-忘记密码在线重置（需绑定手机号和实名认证）。"},
+    "投诉":{intent:"投诉处理",emoji:"⚠️",category:"客服投诉",priority:"紧急",answer:"非常抱歉给您带来不便。您的投诉已记录，我们会在24小时内由专员联系您。如果是紧急问题，请拨打98XXX热线直接联系。"},
+    "不满":{intent:"投诉处理",emoji:"⚠️",category:"客服投诉",priority:"紧急",answer:"非常抱歉未能让您满意。您的反馈对我们非常重要，我会立即转交给客服专员处理。"},
+    "赔付":{intent:"理赔服务",emoji:"💵",category:"保险业务",priority:"高",answer:"理赔流程：准备材料→提交申请→审核调查→赔付到账。常见理赔材料包括：诊断证明、费用清单、身份证。我行承诺小额理赔T+1到账。"}
+  };
+
+  const departments = {
+    "零售业务": {name:"零售业务部",emoji:"🏦",wait:"约3分钟",expertise:["开户","开卡","存款","转账","ATM"]},
+    "信贷业务": {name:"信贷业务部",emoji:"💰",wait:"约5分钟",expertise:["贷款","抵押","信用卡申请","贷后"]},
+    "财富管理": {name:"财富管理部",emoji:"📈",wait:"约5分钟",expertise:["理财","基金","股票","退休规划"]},
+    "保险业务": {name:"保险业务部",emoji:"🛡️",wait:"约8分钟",expertise:["保险","重疾险","年金险","理赔"]},
+    "支付结算": {name:"支付结算部",emoji:"🔍",wait:"约2分钟",expertise:["转账","汇款","支付宝","微信支付"]},
+    "客服投诉": {name:"客服投诉部",emoji:"⚠️",wait:"立即",expertise:["投诉","建议","批评","投诉"]},
+    "账户安全": {name:"账户安全部",emoji:"🔐",wait:"约3分钟",expertise:["密码","铭忘","安全","登录"]},
+    "存贷款": {name:"存贷款部",emoji:"💵",wait:"约3分钟",expertise:["存款","利息","定期","活期"]},
+  };
+
+  function analyzeSentiment(q){
+    const neg = /(不好|差|不满|生气|投诉|欺骗|骗人|渣|垃圾|无语|疯了|讨厌)/;
+    const pos = /(好|棒|谢谢|满意|赞|不错|很帮助)/;
+    if(neg.test(q)) return {label:"负面",emoji:"😢",color:"#ef4444",level:"高"};
+    if(pos.test(q)) return {label:"正面",emoji:"😊",color:"#10b981",level:"低"};
+    return {label:"中性",emoji:"😐",color:"#f59e0b",level:"中"};
+  }
+
+  function findAnswer(q){
+    for(const [k,v] of Object.entries(faq)){
+      if(q.includes(k)) return v;
+    }
+    return {intent:"闲聊",emoji:"💬",category:"通用客服",priority:"低",answer:"您好！我是FinAIAI智能客服，请问有什么可以帮助您的？您可以咨询：开户、贷款、理财、信用卡、保险、转账等问题。"};
+  }
+
+  function getDepartment(category){
+    return departments[category] || departments["通用客服"];
+  }
+
+  function addMsg(text,isUser){
+    const div = document.createElement('div');
+    div.className = 'msg '+(isUser?'user':'bot');
+    div.innerHTML = `<div class="avatar">${isUser?'👤':'🐟'}</div><div class="bubble">${text}</div>`;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function addCard(html){
+    const div = document.createElement('div');
+    div.className = 'msg bot';
+    div.innerHTML = `<div class="avatar">📊</div><div class="bubble" style="max-width:92%;background:#fff;border:1px solid var(--border);padding:0;overflow:hidden;">${html}</div>`;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  window.sendMsg = function(){
+    const input = document.getElementById('msgInput');
+    const q = input.value.trim(); if(!q) return;
+    addMsg(q,true); input.value='';
+
+    setTimeout(()=>{
+      const ans = findAnswer(q);
+      const sentiment = analyzeSentiment(q);
+      const dept = getDepartment(ans.category);
+
+      // 1. 意图识别标签
+      addMsg(`<span class="intent-tag">${ans.emoji} ${ans.intent}</span><br>${ans.answer}`,false);
+
+      // 2. 情绪分析卡片
+      const emotionHtml = `
+        <div style="padding:14px;">
+          <div style="font-weight:800;font-size:14px;margin-bottom:10px;">📊 智能分析</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+            <div style="background:#f8fafc;border-radius:10px;padding:10px;text-align:center;">
+              <div style="font-size:20px;margin-bottom:4px;">${sentiment.emoji}</div>
+              <div style="font-size:12px;color:var(--muted);">情绪</div>
+              <div style="font-weight:800;color:${sentiment.color};">${sentiment.label}</div>
+            </div>
+            <div style="background:#f8fafc;border-radius:10px;padding:10px;text-align:center;">
+              <div style="font-size:20px;margin-bottom:4px;">${dept.emoji}</div>
+              <div style="font-size:12px;color:var(--muted);">建议分流</div>
+              <div style="font-weight:800;">${dept.name}</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;font-size:12px;color:var(--muted);">
+            预估等待时间：<span style="font-weight:800;color:var(--primary);">${dept.wait}</span>｜
+            优先级：<span style="font-weight:800;color:${ans.priority==='紧急'?'#ef4444':ans.priority==='高'?'#f59e0b':'#64748b'}">${ans.priority}</span>
+          </div>
+        </div>`;
+      addCard(emotionHtml);
+
+      // 3. 如果是投诉/负面情绪，添加安抚话术
+      if(ans.priority==='紧急' || sentiment.level==='高'){
+        addMsg("🙏 非常抱歉给您带来了不好的体验。我已经将您的问题标记为重点跟进，会有专员在1小时内主动联系您。如果您需要立即协助，请拨打 955XX 热线。",false);
+      }
+    },600);
+  };
+
+  window.sendQuick = function(q){
+    addMsg(q,true);
+    setTimeout(()=>{
+      const ans = findAnswer(q);
+      const sentiment = analyzeSentiment(q);
+      const dept = getDepartment(ans.category);
+      addMsg(`<span class="intent-tag">${ans.emoji} ${ans.intent}</span><br>${ans.answer}`,false);
+
+      const emotionHtml = `
+        <div style="padding:14px;">
+          <div style="font-weight:800;font-size:14px;margin-bottom:10px;">📊 智能分析</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+            <div style="background:#f8fafc;border-radius:10px;padding:10px;text-align:center;">
+              <div style="font-size:20px;margin-bottom:4px;">${sentiment.emoji}</div>
+              <div style="font-size:12px;color:var(--muted);">情绪</div>
+              <div style="font-weight:800;color:${sentiment.color};">${sentiment.label}</div>
+            </div>
+            <div style="background:#f8fafc;border-radius:10px;padding:10px;text-align:center;">
+              <div style="font-size:20px;margin-bottom:4px;">${dept.emoji}</div>
+              <div style="font-size:12px;color:var(--muted);">建议分流</div>
+              <div style="font-weight:800;">${dept.name}</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;font-size:12px;color:var(--muted);">
+            预估等待时间：<span style="font-weight:800;color:var(--primary);">${dept.wait}</span>｜
+            优先级：<span style="font-weight:800;color:${ans.priority==='紧急'?'#ef4444':ans.priority==='高'?'#f59e0b':'#64748b'}">${ans.priority}</span>
+          </div>
+        </div>`;
+      addCard(emotionHtml);
+    },500);
+  };
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const profileContainer = document.querySelector('.customer-profile, #customer-profile, [data-type="customer"]');
+    if (profileContainer) {
+        const result = await LongmaAPI.customer.getProfile('C001');
+        if (result.success && result.data) {
+            renderCustomerProfile(profileContainer, result.data);
+        }
+    }
+    
+    const recContainer = document.querySelector('.recommendations, #recommendations, [data-type="recommendations"]');
+    if (recContainer) {
+        const result = await LongmaAPI.customer.getRecommendations('C001');
+        if (result.success && result.data) {
+            renderRecommendations(recContainer, result.data);
+        }
+    }
+});
+
+function renderCustomerProfile(container, data) {
+    let html = `<div class="api-profile-card">
+        <h3>${data.name} (ID: ${data.customer_id})</h3>
+        <p>年龄: ${data.age}岁 | 风险偏好: ${data.risk_preference}</p>
+        <p>总资产: ${LongmaAPI.utils.formatMoney(data.assets)}</p>
+        <div class="api-holdings"><h4>持仓分布</h4>`;
+    data.holdings.forEach(h => {
+        html += `<div class="api-holding-item">
+            <span>${h.type}</span>
+            <span>${LongmaAPI.utils.formatMoney(h.amount)}</span>
+            <span>${(h.ratio * 100).toFixed(1)}%</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    container.innerHTML = html;
+}
+
+function renderRecommendations(container, data) {
+    let html = '<div class="api-recommendations"><h4>产品推荐</h4>';
+    data.products.forEach(p => {
+        html += `<div class="api-product-card">
+            <span class="name">${p.name}</span>
+            <span class="type">${p.type}</span>
+            <span class="match">匹配度: ${p.match}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
