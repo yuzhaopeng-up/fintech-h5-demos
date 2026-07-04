@@ -63,7 +63,9 @@ python -m http.server 8080
 |------|------------|
 | [financial-ai-skills](https://github.com/yuzhaopeng-up/financial-ai-skills) | 104 financial AI skills |
 | [skill-framework](https://github.com/yuzhaopeng-up/skill-framework) | L0-L4 skill governance framework |
-| [soe-compliant-office](https://github.com/yuzhaopeng-up/soe-compliant-office) | 17 SOE-compliant office skills |
+| [soe-compliant-office](https://github.com/yuzhaopeng-up/soe-compliant-office) |
+| [regulated-rag](https://github.com/yuzhaopeng-up/regulated-rag) | Zero-dependency RAG for regulated industries |
+ 17 SOE-compliant office skills |
 | [teleagent-skills](https://github.com/yuzhaopeng-up/teleagent-skills) | 5 general business skills |
 | [agent-cluster-comm](https://github.com/yuzhaopeng-up/agent-cluster-comm) | 5 agent cluster communication skills |
 | **fintech-h5-demos** (this repo) | 12 zero-dependency financial H5 demos |
