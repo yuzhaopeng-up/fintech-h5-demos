@@ -1,0 +1,455 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI零售营销场景，客群分析+精准营销+话术生成，提升银行零售业务竞争力。">
+    <meta name="keywords" content="零售营销,客群分析,精准营销,银行营销,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/scenario-retail">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/scenario-retail">
+    <meta property="og:title" content="零售营销场景 | FinAIAI">
+    <meta property="og:description" content="FinAIAI零售营销场景，客群分析+精准营销+话术生成，提升银行零售业务竞争力。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/scenario-retail.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="零售营销场景 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI零售营销场景，客群分析+精准营销+话术生成，提升银行零售业务竞争力。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/scenario-retail.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "零售营销场景 | FinAIAI",
+        "description": "FinAIAI零售营销场景，客群分析+精准营销+话术生成，提升银行零售业务竞争力。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>零售营销场景 | FinAIAI</title>
+  <style>
+    :root { --primary:#2563eb; --success:#10b981; --warning:#f59e0b; --danger:#ef4444; --purple:#8b5cf6;
+      --bg:#f1f5f9; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+      --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; }
+    .wrap { max-width:720px; margin:0 auto; padding:16px; }
+    .hero { background:linear-gradient(135deg,#ea580c,#f59e0b); color:#fff; border-radius:24px; padding:28px 22px;
+      box-shadow:0 14px 44px rgba(234,88,12,.18); }
+    .hero h1 { font-size:24px; font-weight:900; margin-bottom:4px; }
+    .hero .sub { opacity:.85; font-size:13px; }
+    .section-title { font-size:18px; font-weight:900; margin:28px 0 14px; display:flex; align-items:center; gap:8px; }
+    .section-title .dot { width:8px; height:8px; border-radius:50%; background:var(--primary); }
+    .card { background:var(--card); border-radius:20px; padding:20px; box-shadow:var(--shadow); margin-bottom:12px; }
+    .card h3 { font-size:16px; margin-bottom:10px; }
+    .input-box { background:var(--card); border-radius:16px; padding:16px; box-shadow:var(--shadow); }
+    .input-box select, .input-box input { width:100%; border:1px solid var(--border); border-radius:12px; padding:12px 14px;
+      font-size:15px; outline:none; margin-bottom:10px; }
+    .run-btn { width:100%; border:none; background:linear-gradient(135deg,#ea580c,#f59e0b); color:#fff;
+      padding:14px; border-radius:14px; font-size:16px; font-weight:800; cursor:pointer;
+      box-shadow:0 4px 16px rgba(234,88,12,.3); }
+    .run-btn:disabled { opacity:.6; }
+    .loading { display:none; text-align:center; padding:40px; }
+    .loading.active { display:block; }
+    .spinner { width:48px; height:48px; border:4px solid rgba(234,88,12,.15); border-top-color:#ea580c;
+      border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 16px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .result { display:none; }
+    .result.active { display:block; animation:fadeIn .5s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+    .tag { display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; font-weight:700; margin:0 4px 4px 0; }
+    .tag-blue { background:#dbeafe; color:#1e40af; }
+    .tag-green { background:#d1fae5; color:#065f46; }
+    .tag-orange { background:#fed7aa; color:#92400e; }
+    .tag-red { background:#fee2e2; color:#991b1b; }
+    .tag-purple { background:#f3e8ff; color:#6b21a8; }
+    .metric-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px; }
+    .metric { background:#f8fafc; border-radius:14px; padding:14px; text-align:center; }
+    .metric b { display:block; font-size:20px; }
+    .metric span { font-size:11px; color:var(--muted); }
+    .pitch-box { background:#fffbeb; border-radius:16px; padding:16px; margin-top:10px; font-size:14px; line-height:1.8; }
+    .pitch-box .title { font-weight:800; color:#92400e; margin-bottom:6px; }
+    .back-home { display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--primary);
+      text-decoration:none; font-size:14px; font-weight:700; }
+    .customer-card { padding:12px; background:#f8fafc; border-radius:12px; margin:6px 0; cursor:pointer; transition:.2s; border:2px solid transparent; }
+    .customer-card:hover { border-color:#bfdbfe; }
+    .customer-card.active { border-color:var(--primary); background:#eff6ff; }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>🛒 零售营销</h1>
+    <div class="sub">银行业 · 客户筛选 · 画像分析 · 营销话术生成 · 异议处理</div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>客户筛选</div>
+  <div class="input-box">
+    <select id="segment">
+      <option value="all">全部客群</option>
+      <option value="大众">大众客群</option>
+      <option value="富裕">富裕客群</option>
+      <option value="高净值">高净值客群</option>
+      <option value="私行">私行客户</option>
+    </select>
+    <select id="need">
+      <option value="all">全部需求</option>
+      <option value="资产传承">资产传承</option>
+      <option value="养老规划">养老规划</option>
+      <option value="购房准备">购房准备</option>
+      <option value="子女教育">子女教育</option>
+      <option value="企业融资">企业融资</option>
+    </select>
+    <button class="run-btn" onclick="filterCustomers()">🔍 筛选客户</button>
+  </div>
+
+  <div class="card" id="customerListCard" style="display:none;">
+    <h3>👤 客户列表</h3>
+    <div id="customerList"></div>
+  </div>
+
+  <div class="loading" id="loading"><div class="spinner"></div><p>正在生成营销方案...</p></div>
+
+  <div class="result" id="result"></div>
+
+  <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+</div>
+
+<script>
+(function(){
+  function cyrb128(str) {
+    let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+    for (let i = 0, k; i < str.length; i++) {
+      k = str.charCodeAt(i);
+      h1 = h2 ^ Math.imul(h1 ^ k, 597399067); h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+      h3 = h4 ^ Math.imul(h3 ^ k, 951274213);  h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+    }
+    h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067) ^ (h2 >>> 22);
+    h2 = Math.imul(h4 ^ (h2 >>> 18), 2869860233) ^ (h3 >>> 22);
+    h3 = Math.imul(h1 ^ (h3 >>> 18), 951274213)  ^ (h4 >>> 22);
+    h4 = Math.imul(h2 ^ (h4 >>> 18), 2716044179) ^ (h1 >>> 22);
+    return [h1>>>0, h2>>>0, h3>>>0, h4>>>0];
+  }
+  function sfc32(a,b,c,d) {
+    return function(){
+      a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
+      var t = (a + b) | 0;
+      a = b ^ b >>> 9;
+      b = c + (c << 3) | 0;
+      c = (c << 21) | (c >>> 11);
+      d = (d + 1) | 0;
+      t = (t + d) | 0;
+      c = (c + t) | 0;
+      return (t >>> 0) / 4294967296;
+    }
+  }
+  function createRng(seed){ const s=cyrb128(seed); return sfc32(s[0],s[1],s[2],s[3]); }
+
+  function generateCustomers(segment, need) {
+    const seed = segment + '|' + need + '|2026';
+    const rng = createRng(seed);
+    const count = 4 + Math.floor(rng() * 5); // 4-8个客户
+    const familyNames = ['王','李','张','刘','陈','杨','黄','赵','周','吴','徐','孙','马','朱','胡'];
+    const givenNames = ['伟','芳','娜','秀英','敏','静','丽','强','军','洋','勇','艳','杰','楠','琴','霖'];
+    const segments = ['大众','富裑','高净值','私行'];
+    const needs = ['资产传承','养老规划','购房准备','子女教育','企业融资'];
+    const risks = ['积极型','稳健型','平衡型','保守型','成长型'];
+    const products = [['基金'],['理财','保险'],['股票基金','私募'],['定投','保险'],['私募','信拖'],['理财','基金'],['短债','定投'],['信拖','股权']];
+    const channels = ['手机银行','微信银行','专属顾问','线下+微信'];
+
+    const list = [];
+    for(let i=0;i<count;i++){
+      const fn = familyNames[Math.floor(rng()*familyNames.length)];
+      const gn = givenNames[Math.floor(rng()*givenNames.length)];
+      let seg = segment==='all' ? segments[Math.floor(rng()*segments.length)] : segment;
+      let ned = need==='all' ? needs[Math.floor(rng()*needs.length)] : need;
+      let aumBase = seg==='私行'?800 : seg==='高净值'?400 : seg==='富裑'?150 : 30;
+      let aum = Math.round(aumBase + rng()*aumBase*0.8);
+      let age = seg==='私行'?50+Math.floor(rng()*15) : seg==='高净值'?38+Math.floor(rng()*15) : seg==='富裑'?30+Math.floor(rng()*18) : 25+Math.floor(rng()*12);
+      list.push({
+        name: fn+gn, age, segment: seg, aum,
+        products: products[Math.floor(rng()*products.length)],
+        risk: risks[Math.floor(rng()*risks.length)],
+        need: ned,
+        channel: channels[Math.floor(rng()*channels.length)]
+      });
+    }
+    return list;
+  }
+
+  let customers = [];
+  let selectedCust = null;
+
+  function getRecommendations(c) {
+    const recs = {
+      "资产传承":{product:"家族信托+终身寿险",feature:"税务优化与财富代际传承",script:`${c.name}先生/女士，您的资产规模已达${c.aum}万，建议配置家族信托组合，实现财富的稳妥传承。`},
+      "养老规划":{product:"年金险+目标日期基金",feature:"确保退休后稳定现金流",script:`${c.name}先生/女士，考虑到您${c.age}岁的年龄，建议开始配置养老组合，确保退休生活品质。`},
+      "企业融资":{product:"经营贷款+海外配置",feature:"满足企业发展与海外布局",script:`${c.name}先生/女士，针对您的企业融资需求，我们提供专属企业金融方案。`},
+      "购房准备":{product:"短债基金+定投计划",feature:"稳健增值且保持流动性",script:`${c.name}先生/女士，买房是大事，建议通过短债基金+定投组合稳步积累首付。`},
+      "子女教育":{product:"教育金定投+教育储蓄",feature:"从小学到大学全覆盖",script:`${c.name}先生/女士，子女教育金需要提早规划，我们有专门的教育金组合方案。`}
+    };
+    return recs[c.need] || {product:"定制化财富管理方案",feature:"根据您的需求定制",script:`${c.name}先生/女士，我们可以为您提供定制化的财富管理服务。`};
+  }
+
+  function getObjections(c) {
+    const objections = {
+      "积极型":[
+        {q:"这个产品收益不高啊",a:"理解您追求高收益，但这个组合在控制风险的同时能够实现稳健增值，长期复利更可观。"},
+        {q:"我自己投股票更赚",a:"股票投资确实有机会获得高收益，但专业管理能够帮您分散风险，避免单一股票的波动风险。"}
+      ],
+      "稳健型":[
+        {q:"利息太低了",a:"虽然单一利率不高，但通过组合配置可以在保证安全的前提下获得更好的综合收益。"},
+        {q:"我只信任存款",a:"存款是最安全的，但通货膨胀会侵蚀购买力。适当配置一部分低风险产品可以跟上通胈增长。"}
+      ],
+      "平衡型":[
+        {q:"股市不好会不会亏",a:"我们的平衡组合配置了债券和权益类资产，股市下跌时债券端可以起到稳定器的作用。"},
+        {q:"管理费太高",a:"管理费对应的是专业的投研团队和风控系统，长期看能够帮您获得超额收益。"}
+      ],
+      "保守型":[
+        {q:"不如存款安全",a:"存款安全性确实高，但收益率较低。我们推荐的组合在保持流动性的同时收益更优。"},
+        {q:"我不懂投资",a:"完全理解，我们的产品由专业团队管理，您只需了解风险和收益特征即可。"}
+      ],
+      "成长型":[
+        {q:"这个风险大不大",a:"成长型产品确实有一定波动，但我们会通过分散配置控制风险，长期看收益很可观。"},
+        {q:"我想再看看",a:"没问题，您可以先了解。我发一份详细的产品说明给您，方便时随时联系我。"}
+      ]
+    };
+    return objections[c.risk] || objections["平衡型"];
+  }
+
+  window.filterCustomers = function(){
+    const segment = document.getElementById('segment').value;
+    const need = document.getElementById('need').value;
+    customers = generateCustomers(segment, need);
+    selectedCust = null;
+
+    const listDiv = document.getElementById('customerList');
+    if(customers.length === 0) {
+      listDiv.innerHTML = '<div style="text-align:center;color:var(--muted);padding:20px;">未找到匹配的客户</div>';
+    } else {
+      listDiv.innerHTML = customers.map((c,i) => `
+        <div class="customer-card ${selectedCust===c.name?'active':''}" data-name="${c.name}" onclick="selectCustomer(this)">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:800;font-size:15px;">${c.name} <span style="font-size:12px;color:var(--muted);font-weight:400;">${c.age}岁</span></div>
+              <div style="font-size:12px;color:var(--muted);margin-top:2px;">AUM ${c.aum}万 · ${c.need}</div>
+            </div>
+            <div style="text-align:right;">
+              <span class="tag ${c.segment==='私行'?'tag-red':c.segment==='高净值'?'tag-orange':'tag-green'}">${c.segment}</span>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px;">${c.risk}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    document.getElementById('customerListCard').style.display = 'block';
+    document.getElementById('result').classList.remove('active');
+  };
+
+  window.selectCustomer = function(el){
+    selectedCust = el.dataset.name;
+    document.querySelectorAll('.customer-card').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    generateScript();
+  };
+
+  function generateScript(){
+    const c = customers.find(x=>x.name===selectedCust);
+    if(!c) return;
+
+    document.getElementById('loading').classList.add('active');
+    document.getElementById('result').classList.remove('active');
+
+    setTimeout(()=>{
+      const rec = getRecommendations(c);
+      const objections = getObjections(c);
+
+      document.getElementById('result').innerHTML = `
+        <div class="card">
+          <h3>👤 ${c.name} 客户画像</h3>
+          <div class="metric-grid">
+            <div class="metric"><b style="color:var(--primary);">${c.aum}万</b><span>AUM</span></div>
+            <div class="metric"><b style="color:var(--success);">${c.age}岁</b><span>年龄</span></div>
+            <div class="metric"><b style="color:var(--warning);">${c.segment}</b><span>客群</span></div>
+            <div class="metric"><b style="color:var(--purple);">${c.risk}</b><span>风险</span></div>
+            <div class="metric"><b style="color:var(--danger);">${c.products.length}只</b><span>持有产品</span></div>
+            <div class="metric"><b style="color:var(--primary);">${c.channel}</b><span>偏好渠道</span></div>
+          </div>
+          <div style="margin-top:10px;">
+            <span class="tag tag-blue">${c.need}</span>
+            ${c.products.map(p=>`<span class="tag tag-green">${p}</span>`).join('')}
+          </div>
+        </div>
+
+        <div class="pitch-box">
+          <div class="title">🎯 营销推荐</div>
+          <div><strong>推荐产品：</strong>${rec.product}</div>
+          <div><strong>产品特点：</strong>${rec.feature}</div>
+        </div>
+
+        <div class="pitch-box">
+          <div class="title">🗣️ 开场话术</div>
+          <div style="background:#fff;padding:12px;border-radius:10px;border-left:4px solid var(--primary);">${rec.script}</div>
+        </div>
+
+        <div class="pitch-box">
+          <div class="title">🛡️ 异议处理锦囊</div>
+          ${objections.map(o=>`
+            <div style="margin:10px 0;padding:10px;background:#fff;border-radius:10px;">
+              <div style="font-weight:700;color:#92400e;margin-bottom:4px;">客户：${o.q}</div>
+              <div style="color:#1e40af;">回应：${o.a}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="card">
+          <h3>📋 触达建议</h3>
+          <div style="font-size:14px;line-height:1.8;">
+            <div>• <strong>推荐渠道：</strong>${c.channel}（匹配客户偏好）</div>
+            <div>• <strong>推荐时机：</strong>${c.age<35?'工作日晚上19:00-21:00':c.age>50?'工作日上午9:00-11:00':'周末下午14:00-17:00'}</div>
+            <div>• <strong>跟进频率：</strong>${c.segment==='私行'?'每周一次专属回访':c.segment==='高净值'?'每月一次电话关怀':'每季度一次触达'}</div>
+            <div>• <strong>成单概率：</strong>${c.segment==='私行'?'高':c.segment==='高净值'?'较高':c.segment==='富裕'?'中':'4'}（基于客群历史数据）</div>
+          </div>
+        </div>`;
+
+      document.getElementById('loading').classList.remove('active');
+      document.getElementById('result').classList.add('active');
+    },600);
+  }
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    // 自动加载股票数据
+    const stockContainer = document.querySelector('.stock-data, #stock-data, [data-type="stocks"]');
+    if (stockContainer) {
+        const result = await LongmaAPI.stocks.list();
+        if (result.success && result.data) {
+            renderStockList(stockContainer, result.data);
+        }
+    }
+    
+    // 自动加载基金数据
+    const fundContainer = document.querySelector('.fund-data, #fund-data, [data-type="funds"]');
+    if (fundContainer) {
+        const result = await LongmaAPI.funds.get('110022');
+        if (result.success && result.data) {
+            renderFundCard(fundContainer, result.data);
+        }
+    }
+});
+
+function renderStockList(container, stocks) {
+    let html = '<div class="api-stock-list">';
+    stocks.forEach(stock => {
+        const changeClass = stock.change >= 0 ? 'up' : 'down';
+        const changeSign = stock.change >= 0 ? '+' : '';
+        html += `<div class="api-stock-item ${changeClass}">
+            <span class="code">${stock.code}</span>
+            <span class="name">${stock.name}</span>
+            <span class="price">¥${stock.price.toFixed(2)}</span>
+            <span class="change">${changeSign}${(stock.change * 100).toFixed(2)}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function renderFundCard(container, fund) {
+    container.innerHTML = `<div class="api-fund-card">
+        <h4>${fund.name}</h4>
+        <p>净值: ¥${fund.nav.toFixed(3)}</p>
+        <p>日涨跌: ${fund.change > 0 ? '+' : ''}${(fund.change * 100).toFixed(2)}%</p>
+        <p>风险等级: ${fund.risk}</p>
+    </div>`;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
