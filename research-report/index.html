@@ -1,0 +1,709 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI智能研报生成，基于AI大模型自动分析市场动态、财务数据、行业趋势，支持日/周/月报自动生成。">
+    <meta name="keywords" content="智能研报,AI分析,市场研报,财务分析,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/research-report">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/research-report">
+    <meta property="og:title" content="智能研报生成 | FinAIAI">
+    <meta property="og:description" content="FinAIAI智能研报生成，基于AI大模型自动分析市场动态、财务数据、行业趋势，支持日/周/月报自动生成。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/research-report.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="智能研报生成 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI智能研报生成，基于AI大模型自动分析市场动态、财务数据、行业趋势，支持日/周/月报自动生成。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/research-report.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "智能研报生成 | FinAIAI",
+        "description": "FinAIAI智能研报生成，基于AI大模型自动分析市场动态、财务数据、行业趋势，支持日/周/月报自动生成。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>智能研报生成 | FinAIAI</title>
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #dbeafe;
+      --accent: #0ea5e9;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --border: #e2e8f0;
+      --radius: 10px;
+      --shadow: 0 1px 2px rgba(0,0,0,0.06), 0 4px 10px rgba(0,0,0,0.04);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .container { max-width: 680px; margin: 0 auto; padding: 16px; }
+    header { text-align: center; padding: 24px 0 12px; }
+    header .logo {
+      width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 14px; display: inline-flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 22px; margin-bottom: 10px; box-shadow: var(--shadow);
+    }
+    header h1 { font-size: 20px; font-weight: 700; }
+    header p { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+
+    .card {
+      background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 16px; margin-bottom: 12px; animation: fadeUp 0.4s ease both;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(10px);} to { opacity:1; transform:translateY(0);} }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display:block; font-size:13px; font-weight:500; color:var(--text-secondary); margin-bottom:6px; }
+    .form-group select, .form-group input {
+      width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px;
+      font-size:15px; background:#fff; color:var(--text); outline:none;
+      transition:border-color 0.2s; -webkit-appearance:none; appearance:none;
+    }
+    .form-group select:focus, .form-group input:focus { border-color: var(--primary); box-shadow:0 0 0 3px var(--primary-light); }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .btn {
+      display:block; width:100%; padding:12px; border:none; border-radius:10px;
+      font-size:16px; font-weight:600; text-align:center; cursor:pointer; transition:transform 0.1s;
+    }
+    .btn:active { transform:scale(0.98); }
+    .btn-primary { background:linear-gradient(135deg,var(--primary),#1d4ed8); color:#fff; }
+    .btn-outline { background:#fff; color:var(--primary); border:1.5px solid var(--primary); }
+    .hidden { display:none !important; }
+
+    .loading { display:flex; align-items:center; justify-content:center; gap:8px; padding:24px; color:var(--text-secondary); font-size:14px; }
+    .spinner { width:18px; height:18px; border:2px solid var(--border); border-top-color:var(--primary); border-radius:50%; animation:spin 0.8s linear infinite; }
+    @keyframes spin { to{transform:rotate(360deg);} }
+
+    /* Report styles */
+    .report-cover { text-align:center; padding: 24px 8px; border-bottom: 2px solid var(--primary); margin-bottom: 20px; }
+    .report-cover h2 { font-size: 22px; font-weight: 800; color: var(--primary); letter-spacing: 1px; }
+    .report-cover .subtitle { font-size: 14px; color: var(--text-secondary); margin-top: 8px; }
+    .report-cover .meta { display:flex; justify-content:center; gap: 16px; margin-top: 14px; flex-wrap:wrap; font-size: 12px; color: #64748b; }
+    .report-cover .badge {
+      display:inline-block; padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
+      background: #dcfce7; color: #15803d; margin-top: 10px;
+    }
+    .report-cover .badge.hold { background: #fef9c3; color: #a16207; }
+    .report-cover .badge.sell { background: #fee2e2; color: #b91c1c; }
+
+    .toc {
+      position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+      z-index: 10; border-bottom: 1px solid var(--border); padding: 10px 0; margin: 0 -16px 16px;
+      display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-left: 16px;
+    }
+    .toc::-webkit-scrollbar { display:none; }
+    .toc a {
+      white-space: nowrap; font-size: 12px; padding: 6px 12px; border-radius: 20px;
+      background: #f1f5f9; color: var(--text-secondary); text-decoration: none; font-weight: 500;
+    }
+    .toc a.active { background: var(--primary); color: #fff; }
+
+    .section { margin-bottom: 28px; scroll-margin-top: 60px; }
+    .section-title {
+      font-size: 16px; font-weight: 700; color: var(--primary);
+      display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-title span { font-size: 18px; }
+    .section p { font-size: 14px; color: var(--text-secondary); margin-bottom: 10px; text-align: justify; }
+
+    .bullet-list { list-style: none; padding: 0; }
+    .bullet-list li {
+      position: relative; padding-left: 18px; font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;
+    }
+    .bullet-list li::before {
+      content: ''; position: absolute; left: 0; top: 9px; width: 7px; height: 7px;
+      border-radius: 50%; background: var(--accent);
+    }
+
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+    .data-table th, .data-table td { padding: 10px 8px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { font-weight: 600; color: var(--text); background: #f8fafc; }
+    .data-table td { color: var(--text-secondary); }
+    .data-table .num { font-family: "SF Mono", monospace; font-weight: 600; color: var(--primary); }
+    .data-table .up { color: #16a34a; }
+    .data-table .down { color: #dc2626; }
+
+    .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .risk-item {
+      background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 12px;
+    }
+    .risk-item .level { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+    .risk-item .desc { font-size: 12px; color: var(--text-secondary); }
+    .risk-low { color: #15803d; }
+    .risk-mid { color: #a16207; }
+    .risk-high { color: #b91c1c; }
+
+    .recommend-box {
+      background: linear-gradient(135deg, #eff6ff, #f0f9ff); border: 1px solid #bfdbfe;
+      border-radius: 10px; padding: 16px; text-align: center;
+    }
+    .recommend-box .target { font-size: 28px; font-weight: 800; color: var(--primary); }
+    .recommend-box .label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+    .recommend-box .horizon { font-size: 13px; color: var(--text); margin-top: 10px; font-weight: 600; }
+
+    .chart-placeholder {
+      height: 160px; background: linear-gradient(180deg, #f8fafc, #f1f5f9); border-radius: 8px;
+      border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary); font-size: 13px; margin: 10px 0;
+    }
+
+    .floating-actions {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+      border-top: 1px solid var(--border); padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      display: flex; gap: 10px; z-index: 100;
+    }
+    .floating-actions .btn { flex: 1; font-size: 14px; padding: 10px; }
+
+    @media print {
+      .floating-actions, .card:first-of-type, .toc, header { display: none !important; }
+      body { background: #fff; }
+      .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    }
+  </style>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">📑</div>
+      <h1>智能研报生成器</h1>
+      <p>选择行业与公司，AI 自动生成专业投研报告</p>
+    </header>
+
+    <div class="card" id="inputCard">
+      <div class="form-group">
+        <label>行业板块</label>
+        <select id="industry" onchange="updateCompanies()">
+          <option value="new_energy">新能源</option>
+          <option value="semiconductor">半导体</option>
+          <option value="pharma">医药生物</option>
+          <option value="consumption">大消费</option>
+          <option value="finance">金融科技</option>
+          <option value="ai">人工智能</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>目标公司</label>
+        <select id="company">
+          <option value="catl">宁德时代 (300750)</option>
+          <option value="byd">比亚迪 (002594)</option>
+          <option value="longi">隆基绿能 (601012)</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>报告年度</label>
+          <select id="year">
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>报告深度</label>
+          <select id="depth">
+            <option value="standard">标准版</option>
+            <option value="deep">深度版</option>
+            <option value="brief">简版</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="genBtn" onclick="generateReport()">⚡ 生成研报</button>
+    </div>
+
+    <div class="loading hidden" id="loadingArea">
+      <div class="spinner"></div>
+      <span>AI 研究员正在撰写报告...</span>
+    </div>
+
+    <div id="reportArea" class="hidden">
+      <div class="card" style="animation-delay:0.05s">
+        <div class="report-cover">
+          <h2 id="rTitle">宁德时代深度研究报告</h2>
+          <div class="subtitle" id="rSubtitle">新能源动力电池行业龙头 | 2026年度投资策略</div>
+          <div class="meta">
+            <span>📅 <span id="rDate">2026-06-07</span></span>
+            <span>🏢 FinAI研究院</span>
+            <span>👤 AI分析师</span>
+          </div>
+          <div class="badge" id="rRating">买入</div>
+        </div>
+      </div>
+
+      <div class="toc" id="tocNav">
+        <a href="#sec-summary" class="active">摘要</a>
+        <a href="#sec-industry">行业</a>
+        <a href="#sec-company">公司</a>
+        <a href="#sec-finance">财务</a>
+        <a href="#sec-scenario">情景</a>
+        <a href="#sec-risk">风险</a>
+        <a href="#sec-tracking">跟踪</a>
+        <a href="#sec-advice">建议</a>
+      </div>
+
+      <div class="card" id="sec-summary" style="animation-delay:0.1s">
+        <div class="section">
+          <div class="section-title"><span>🎯</span> 投资摘要</div>
+          <ul class="bullet-list" id="summaryList">
+            <li>全球动力电池市占率连续 5 年第一，2025 年出货量超 350GWh，份额约 37%。</li>
+            <li>储能业务成为第二增长曲线，2025 年收入占比提升至 18%，毛利率高于动力电池 5-8pct。</li>
+            <li>技术护城河深厚：麒麟电池、神行电池量产落地，能量密度与快充性能行业领先。</li>
+            <li>海外工厂（德国、匈牙利）产能爬坡顺利，预计 2027 年海外收入占比突破 35%。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" id="sec-industry" style="animation-delay:0.15s">
+        <div class="section">
+          <div class="section-title"><span>🏭</span> 行业分析</div>
+          <p id="industryText">
+            全球新能源汽车渗透率突破 45%，动力电池行业进入「量稳价升」阶段。固态电池、磷酸锰铁锂、46系大圆柱等新技术路线并行发展，技术迭代加速。
+            中国供应链在全球占主导，但欧美本地化政策（IRA、欧盟电池法）倒逼海外建厂。
+          </p>
+          <div class="chart-placeholder">📊 行业增速趋势图（占位）</div>
+        </div>
+      </div>
+
+      <div class="card" id="sec-company" style="animation-delay:0.2s">
+        <div class="section">
+          <div class="section-title"><span>🏢</span> 公司分析</div>
+          <p id="companyText">
+            宁德时代作为全球动力电池龙头，具备「技术+规模+客户」三维壁垒。客户覆盖特斯拉、宝马、奔驰、蔚来、理想等主流车企。
+            研发投入连续多年超 100 亿元，专利储备量行业第一。供应链管理能力强，锂资源布局完善，成本优势显著。
+          </p>
+          <div class="chart-placeholder">📈 公司市占率变化图（占位）</div>
+        </div>
+      </div>
+
+      <div class="card" id="sec-finance" style="animation-delay:0.25s">
+        <div class="section">
+          <div class="section-title"><span>💰</span> 财务分析</div>
+          <table class="data-table">
+            <thead><tr><th>指标</th><th>2024A</th><th>2025E</th><th>2026E</th></tr></thead>
+            <tbody id="financeTable">
+              <tr><td>营业收入（亿元）</td><td class="num">4,009</td><td class="num">4,850</td><td class="num up">5,680</td></tr>
+              <tr><td>归母净利润（亿元）</td><td class="num">441</td><td class="num">520</td><td class="num up">635</td></tr>
+              <tr><td>毛利率</td><td class="num">22.3%</td><td class="num">23.1%</td><td class="num up">24.0%</td></tr>
+              <tr><td>ROE</td><td class="num">18.5%</td><td class="num">19.2%</td><td class="num up">20.1%</td></tr>
+              <tr><td>资产负债率</td><td class="num">62.1%</td><td class="num">60.5%</td><td class="num down">58.0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" id="sec-risk" style="animation-delay:0.3s">
+        <div class="section">
+          <div class="section-title"><span>⚠️</span> 风险评估</div>
+          <div class="risk-grid" id="riskGrid">
+            <div class="risk-item">
+              <div class="level risk-mid">竞争加剧 ⚡</div>
+              <div class="desc">二线电池厂（中创新航、亿纬锂能）份额提升，价格战风险。</div>
+            </div>
+            <div class="risk-item">
+              <div class="level risk-high">地缘政治 🔥</div>
+              <div class="desc">欧美贸易保护政策趋严，海外建厂面临审批与补贴不确定性。</div>
+            </div>
+            <div class="risk-item">
+              <div class="level risk-low">技术迭代 🔄</div>
+              <div class="desc">固态电池技术路线可能颠覆现有液态电池格局。</div>
+            </div>
+            <div class="risk-item">
+              <div class="level risk-mid">原材料波动 📉</div>
+              <div class="desc">碳酸锂、镍、钴价格周期性波动影响毛利率稳定性。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="sec-advice" style="animation-delay:0.35s">
+        <div class="section">
+          <div class="section-title"><span>💡</span> 投资建议</div>
+          <div class="recommend-box">
+            <div class="target" id="targetPrice">¥268.00</div>
+            <div class="label">6个月目标价</div>
+            <div class="horizon" id="horizonText">评级：买入 | 投资期限：6-12个月 | 预期收益：+22%</div>
+          </div>
+          <p style="margin-top:14px;font-size:13px;color:var(--text-secondary);" id="adviceText">
+            维持「买入」评级。公司全球化布局进入收获期，储能业务打开第二增长曲线，技术溢价持续兑现。
+            当前估值处于历史中枢偏下位置，具备较高安全边际。建议逢低分批建仓，重点关注 Q3 海外工厂产能释放进度。
+          </p>
+        </div>
+      </div>
+
+      <div class="card" id="sec-scenario" style="animation-delay:0.38s">
+        <div class="section">
+          <div class="section-title"><span>📊</span> 三情景预测</div>
+          <div id="scenarioSummary" style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;" id="scenarioGrid">
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:#15803d;margin-bottom:6px;" id="sBullLabel">🟢乐观</div>
+              <div style="font-size:11px;color:#64748b;margin-bottom:4px;" id="sBullProb">概率 20%</div>
+              <div style="font-size:12px;font-weight:600;color:#15803d;margin-bottom:4px;" id="sBullRev">营收 +40%</div>
+              <div style="font-size:11px;color:#64748b;" id="sBullPE">PE目标 38x</div>
+              <div style="font-size:12px;font-weight:700;color:#15803d;margin-top:6px;" id="sBullSpace">↑+35%</div>
+            </div>
+            <div style="background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:#a16207;margin-bottom:6px;" id="sBaseLabel">🟡基准</div>
+              <div style="font-size:11px;color:#64748b;margin-bottom:4px;" id="sBaseProb">概率 55%</div>
+              <div style="font-size:12px;font-weight:600;color:#a16207;margin-bottom:4px;" id="sBaseRev">营收 +22%</div>
+              <div style="font-size:11px;color:#64748b;" id="sBasePE">PE目标 28x</div>
+              <div style="font-size:12px;font-weight:700;color:#a16207;margin-top:6px;" id="sBaseSpace">≈0%</div>
+            </div>
+            <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:#b91c1c;margin-bottom:6px;" id="sBearLabel">🔴悲观</div>
+              <div style="font-size:11px;color:#64748b;margin-bottom:4px;" id="sBearProb">概率 25%</div>
+              <div style="font-size:12px;font-weight:600;color:#b91c1c;margin-bottom:4px;" id="sBearRev">营收 +5%</div>
+              <div style="font-size:11px;color:#64748b;" id="sBearPE">PE目标 20x</div>
+              <div style="font-size:12px;font-weight:700;color:#b91c1c;margin-top:6px;" id="sBearSpace">↓-30%</div>
+            </div>
+          </div>
+          <div id="scenarioDetail" style="margin-top:10px;"></div>
+        </div>
+      </div>
+
+      <div class="card" id="sec-tracking" style="animation-delay:0.40s">
+        <div class="section">
+          <div class="section-title"><span>🔍</span> 后续跟踪指标</div>
+          <div id="trackingList" style="display:flex;flex-direction:column;gap:8px;"></div>
+        </div>
+      </div>
+
+      <div class="card" id="sec-evidence" style="animation-delay:0.42s">
+        <div class="section">
+          <div class="section-title"><span>🔗</span> 证据链与数据来源</div>
+          <div id="evidenceList" style="display:flex;flex-direction:column;gap:8px;"></div>
+        </div>
+      </div>
+
+      <div style="height:80px;"></div>
+    </div>
+  </div>
+
+  <div class="floating-actions hidden" id="floatActions">
+    <button class="btn btn-outline" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆️ 顶部</button>
+    <button class="btn btn-primary" onclick="window.print()">🖨️ 导出PDF</button>
+  </div>
+
+  <script src="deep_research.js" defer></script>
+  <script>
+    const companyMap = {
+      new_energy: [
+        {v:'catl',t:'宁德时代 (300750)'},{v:'byd',t:'比亚迪 (002594)'},{v:'longi',t:'隆基绿能 (601012)'}
+      ],
+      semiconductor: [
+        {v:'smic',t:'中芯国际 (688981)'},{v:'huali',t:'华虹公司 (688347)'},{v:'will',t:'韦尔股份 (603501)'}
+      ],
+      pharma: [
+        {v:'hengrui',t:'恒瑞医药 (600276)'},{v:'wuxi',t:'药明康德 (603259)'},{v:'pz',t:'片仔癀 (600436)'}
+      ],
+      consumption: [
+        {v:'maotai',t:'贵州茅台 (600519)'},{v:'wuliangye',t:'五粮液 (000858)'},{v:'haixin',t:'海尔智家 (600690)'}
+      ],
+      finance: [
+        {v:'pingan',t:'中国BankD (601318)'},{v:'nbcb',t:'宁波银行 (002142)'},{v:'east',t:'东方财富 (300059)'}
+      ],
+      ai: [
+        {v:'baidu',t:'百度集团 (09888)'},{v:'iflytek',t:'科大讯飞 (002230)'},{v:'cambricon',t:'寒武纪 (688256)'}
+      ]
+    };
+
+    function updateCompanies() {
+      const ind = document.getElementById('industry').value;
+      const sel = document.getElementById('company');
+      sel.innerHTML = (companyMap[ind]||[]).map(c=>`<option value="${c.v}">${c.t}</option>`).join('');
+    }
+
+    const reportDB = {
+      catl: {
+        title:'宁德时代深度研究报告',
+        subtitle:'新能源动力电池行业龙头',
+        rating:'买入', badgeClass:'',
+        summary:[
+          '全球动力电池市占率连续 5 年第一，2025 年出货量超 350GWh，份额约 37%。',
+          '储能业务成为第二增长曲线，2025 年收入占比提升至 18%，毛利率高于动力电池 5-8pct。',
+          '技术护城河深厚：麒麟电池、神行电池量产落地，能量密度与快充性能行业领先。',
+          '海外工厂（德国、匈牙利）产能爬坡顺利，预计 2027 年海外收入占比突破 35%。'
+        ],
+        industry:'全球新能源汽车渗透率突破 45%，动力电池行业进入「量稳价升」阶段。固态电池、磷酸锰铁锂、46系大圆柱等新技术路线并行发展。中国供应链在全球占主导，但欧美本地化政策（IRA、欧盟电池法）倒逼海外建厂。',
+        company:'宁德时代作为全球动力电池龙头，具备「技术+规模+客户」三维壁垒。客户覆盖特斯拉、宝马、奔驰、蔚来、理想等主流车企。研发投入连续多年超 100 亿元，专利储备量行业第一。',
+        finance:[
+          ['营业收入（亿元）','4,009','4,850','5,680'],
+          ['归母净利润（亿元）','441','520','635'],
+          ['毛利率','22.3%','23.1%','24.0%'],
+          ['ROE','18.5%','19.2%','20.1%'],
+          ['资产负债率','62.1%','60.5%','58.0%']
+        ],
+        risks:[
+          {level:'risk-mid',title:'竞争加剧 ⚡',desc:'二线电池厂份额提升，价格战风险。'},
+          {level:'risk-high',title:'地缘政治 🔥',desc:'欧美贸易保护政策趋严，海外建厂面临审批与补贴不确定性。'},
+          {level:'risk-low',title:'技术迭代 🔄',desc:'固态电池技术路线可能颠覆现有液态电池格局。'},
+          {level:'risk-mid',title:'原材料波动 📉',desc:'碳酸锂、镍、钴价格周期性波动影响毛利率。'}
+        ],
+        target:'¥268.00', horizon:'评级：买入 | 期限：6-12个月 | 预期收益：+22%',
+        advice:'维持「买入」评级。公司全球化布局进入收获期，储能业务打开第二增长曲线。当前估值处于历史中枢偏下位置，具备较高安全边际。建议逢低分批建仓。'
+      },
+      byd: {
+        title:'比亚迪深度研究报告',
+        subtitle:'新能源汽车垂直整合之王',
+        rating:'买入', badgeClass:'',
+        summary:[
+          '2025 年新能源汽车销量突破 450 万辆，全球第一，规模效应持续释放。',
+          '「迪链」垂直整合模式覆盖电池、电机、电控、芯片，成本优势行业罕见。',
+          '高端品牌「仰望」与「方程豹」上量，推动 ASP 与毛利率双升。',
+          '出海战略提速，东南亚、欧洲、拉美市场进入渠道扩张期。'
+        ],
+        industry:'全球新能源汽车市场进入「电动化下半场」，智能化与品牌高端化成为竞争焦点。中国品牌在全球份额持续提升，但面临欧盟反补贴调查等贸易壁垒。',
+        company:'比亚迪是全球唯一掌握电池、电机、电控及车规级芯片核心技术的新能源车企。DM-i 超级混动与 e 平台 3.0 技术领先，产品矩阵覆盖 7-100 万元价格带。',
+        finance:[
+          ['营业收入（亿元）','7,723','9,100','10,500'],
+          ['归母净利润（亿元）','403','520','680'],
+          ['毛利率','21.0%','22.5%','23.8%'],
+          ['ROE','18.2%','19.5%','21.0%'],
+          ['资产负债率','59.8%','58.0%','56.5%']
+        ],
+        risks:[
+          {level:'risk-mid',title:'价格战 🏷️',desc:'特斯拉及新势力降价挤压利润空间。'},
+          {level:'risk-mid',title:'出海政策 🌍',desc:'欧盟反补贴税及本地化生产要求增加成本。'},
+          {level:'risk-low',title:'智能化 🚗',desc:'智驾能力相对华为、小鹏仍有差距，需持续投入。'},
+          {level:'risk-mid',title:'产能消化 🏭',desc:'新建产能爬坡速度不及预期风险。'}
+        ],
+        target:'¥368.00', horizon:'评级：买入 | 期限：6-12个月 | 预期收益：+18%',
+        advice:'维持「买入」评级。比亚迪的规模优势与技术垂直整合壁垒难以复制，高端化与出海打开长期空间。建议作为新能源核心仓位配置。'
+      },
+      smic: {
+        title:'中芯国际深度研究报告',
+        subtitle:'国产晶圆代工中流砥柱',
+        rating:'增持', badgeClass:'hold',
+        summary:[
+          '中国大陆技术最先进、规模最大的晶圆代工企业，28nm 及以上成熟制程产能利用率维持高位。',
+          '国产替代需求旺盛，国内芯片设计公司订单饱满，客户粘性持续增强。',
+          '资本开支聚焦成熟制程扩产，北京、深圳、上海新厂陆续投产。',
+          '受限于先进制程设备进口管制，短期技术迭代受限，但成熟制程盈利模型清晰。'
+        ],
+        industry:'全球半导体周期触底回升，AI 算力芯片与汽车电子需求强劲。中国晶圆代工行业在成熟制程领域加速追赶，但 7nm 以下先进制程仍受设备禁运制约。',
+        company:'中芯国际是中国大陆晶圆代工龙头，技术覆盖 0.35μm 至 14nm。在成熟制程（28nm/40nm/55nm）具备成本与产能优势，是国产芯片设计公司的首选代工伙伴。',
+        finance:[
+          ['营业收入（亿元）','578','680','790'],
+          ['归母净利润（亿元）','48','62','78'],
+          ['毛利率','18.5%','20.0%','21.5%'],
+          ['ROE','4.8%','5.8%','6.8%'],
+          ['资产负债率','35.0%','38.0%','40.0%']
+        ],
+        risks:[
+          {level:'risk-high',title:'设备禁运 🔒',desc:'EUV 等先进设备进口受限，技术追赶受阻。'},
+          {level:'risk-mid',title:'周期波动 📊',desc:'半导体行业强周期性影响产能利用率与定价。'},
+          {level:'risk-mid',title:'地缘冲突 🌏',desc:'中美关系不确定性影响供应链稳定。'},
+          {level:'risk-low',title:'竞争加剧 ⚔️',desc:'华虹、晶合集成等国内同行扩产竞争激烈。'}
+        ],
+        target:'¥68.50', horizon:'评级：增持 | 期限：12个月 | 预期收益：+15%',
+        advice:'给予「增持」评级。中芯国际是国产半导体产业链的基石，成熟制程基本盘稳固。建议作为半导体板块核心配置，关注先进制程突破进展。'
+      }
+    };
+
+    function generateReport() {
+      const company = document.getElementById('company').value;
+      const year = document.getElementById('year').value;
+      const btn = document.getElementById('genBtn');
+      btn.disabled = true;
+      document.getElementById('loadingArea').classList.remove('hidden');
+      document.getElementById('reportArea').classList.add('hidden');
+      document.getElementById('floatActions').classList.add('hidden');
+
+      setTimeout(() => {
+        // 使用深度研报数据（deep_research.js）
+        const db = getReportData(company);
+        document.getElementById('loadingArea').classList.add('hidden');
+        document.getElementById('reportArea').classList.remove('hidden');
+        document.getElementById('floatActions').classList.remove('hidden');
+        btn.disabled = false;
+
+        // 封面
+        document.getElementById('rTitle').textContent = db.company + ' 深度投研报告';
+        document.getElementById('rSubtitle').textContent = db.industry + ' | ' + year + '年度投资策略';
+        document.getElementById('rDate').textContent = new Date().toISOString().slice(0,10);
+        const badge = document.getElementById('rRating');
+        badge.textContent = db.investment_rating;
+        badge.className = 'badge ' + (getRatingClass(db.investment_rating) === 'buy' ? '' : (getRatingClass(db.investment_rating) === 'hold' ? 'hold' : 'sell'));
+
+        // 投资摘要
+        document.getElementById('summaryList').innerHTML = db.executive_summary.map(s=>`<li>${s}</li>`).join('');
+
+        // 行业分析
+        const ia = db.industry_analysis;
+        document.getElementById('industryText').textContent =
+          ia.prosperity_explanation + ' ' + ia.policy_environment + ' ' + ia.demand_trend;
+
+        // 公司分析
+        const ca = db.company_analysis;
+        document.getElementById('companyText').textContent =
+          ca.competitive_position + ' ' + ca.moat_level + '。' +
+          (ca.growth_drivers||[]).slice(0,2).join('；');
+
+        // 财务表格
+        const fa = db.financial_analysis;
+        const mt = fa.metrics_table || {};
+        const finRows = [
+          ['营业收入（亿元）', '—', '—', '—'],
+          ['净利润（亿元）', '—', '—', '—'],
+          ['毛利率', '—', '—', '—'],
+          ['ROE', '—', '—', '—'],
+          ['资产负债率', '—', '—', '—'],
+        ];
+        // 填充真实数据
+        const revVal = mt['营业收入（亿元）'] || '—';
+        const profVal = mt['净利润（亿元）'] || '—';
+        const gmVal = mt['毛利率（%）'] || '—';
+        const roeVal = mt['ROE（%）'] || '—';
+        const deVal = mt['资产负债率（%）'] || '—';
+        document.getElementById('financeTable').innerHTML = `
+          <tr><td>营业收入（亿元）</td><td class="num">${revVal}</td><td class="num">—</td><td class="num up">—</td></tr>
+          <tr><td>净利润（亿元）</td><td class="num">${profVal}</td><td class="num">—</td><td class="num up">—</td></tr>
+          <tr><td>毛利率</td><td class="num">${gmVal}</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>ROE</td><td class="num">${roeVal}</td><td class="num">—</td><td class="num up">—</td></tr>
+          <tr><td>资产负债率</td><td class="num">${deVal}</td><td class="num">—</td><td class="num down">—</td></tr>
+        `;
+
+        // 风险网格
+        const topRisks = (db.risk_factors||[]).slice(0,4);
+        document.getElementById('riskGrid').innerHTML = topRisks.map(r=>`
+          <div class="risk-item">
+            <div class="level ${getRiskClass(r.level)}">${r.level} ${r.risk}</div>
+            <div class="desc">${r.assessment||r.risk}</div>
+          </div>
+        `).join('');
+
+        // 投资建议
+        const va = db.valuation_analysis;
+        document.getElementById('targetPrice').textContent = 'PE ' + va.pe_ttm + 'x';
+        document.getElementById('horizonText').textContent =
+          '评级：' + db.investment_rating + ' | 置信度：' + db.confidence + '% | ' + db.horizon;
+        document.getElementById('adviceText').textContent =
+          db.rating_explanation + '。' + (db.suitable_investor||'') + '。' +
+          va.valuation_summary;
+
+        // ── 深度研报新模块 ──
+
+        // 三情景预测
+        const sf = db.scenario_forecast || {};
+        if (sf.summary) {
+          document.getElementById('scenarioSummary').textContent = sf.summary;
+        }
+        const bull = sf.bull || {};
+        const base = sf.base || {};
+        const bear = sf.bear || {};
+        document.getElementById('sBullLabel').textContent = '🟢' + (bull.scenario||'乐观');
+        document.getElementById('sBullProb').textContent = '概率 ' + (bull.probability||'20%');
+        document.getElementById('sBullRev').textContent = '营收 ' + (bull.revenue_growth||'—');
+        document.getElementById('sBullPE').textContent = 'PE ' + (bull.target_pe||'—');
+        document.getElementById('sBullSpace').textContent = bull.upside_pct || '—';
+        document.getElementById('sBaseLabel').textContent = '🟡' + (base.scenario||'基准');
+        document.getElementById('sBaseProb').textContent = '概率 ' + (base.probability||'55%');
+        document.getElementById('sBaseRev').textContent = '营收 ' + (base.revenue_growth||'—');
+        document.getElementById('sBasePE').textContent = 'PE ' + (base.target_pe||'—');
+        document.getElementById('sBaseSpace').textContent = base.upside_pct || '0%';
+        document.getElementById('sBearLabel').textContent = '🔴' + (bear.scenario||'悲观');
+        document.getElementById('sBearProb').textContent = '概率 ' + (bear.probability||'25%');
+        document.getElementById('sBearRev').textContent = '营收 ' + (bear.revenue_growth||'—');
+        document.getElementById('sBearPE').textContent = 'PE ' + (bear.target_pe||'—');
+        document.getElementById('sBearSpace').textContent = bear.downside_pct || '—';
+
+        // 跟踪指标
+        const tracking = db.tracking_indicators || [];
+        document.getElementById('trackingList').innerHTML = tracking.map(t=>`
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:8px;background:#f8fafc;border-radius:6px;border:1px solid var(--border);">
+            <span style="font-size:14px;">🔍</span>
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:600;color:var(--text);">${t.name}</div>
+              <div style="font-size:11px;color:#64748b;margin-top:2px;">${t.frequency} · ${t.importance} · ${t.current_status}</div>
+            </div>
+          </div>
+        `).join('');
+
+        // 证据链
+        const evidence = db.evidence_chain || [];
+        document.getElementById('evidenceList').innerHTML = evidence.map(e=>`
+          <div style="padding:8px;background:#f8fafc;border-radius:6px;border-left:3px solid ${e.type==='data'?'#0ea5e9':e.type==='policy'?'#8b5cf6':e.type==='comparison'?'#f59e0b':'#64748b'};border-color:${e.type==='data'?'#0ea5e9':e.type==='policy'?'#8b5cf6':e.type==='comparison'?'#f59e0b':'#64748b'};padding-left:10px;">
+            <div style="font-size:11px;font-weight:700;color:${e.type==='data'?'#0ea5e9':e.type==='policy'?'#8b5cf6':e.type==='comparison'?'#f59e0b':'#64748b'};margin-bottom:2px;">[${(e.type||'FACT').toUpperCase()}] 来源：${e.source||'未知'}（权重 ${e.weight||1.0}）</div>
+            <div style="font-size:12px;color:var(--text-secondary);">${e.content||''}</div>
+          </div>
+        `).join('');
+
+        window.scrollTo({top: document.getElementById('reportArea').offsetTop - 20, behavior:'smooth'});
+      }, 1200);
+    }
+
+    // TOC active state
+    document.addEventListener('scroll', () => {
+      const sections = ['sec-summary','sec-industry','sec-company','sec-finance','sec-scenario','sec-risk','sec-tracking','sec-advice'];
+      const nav = document.querySelectorAll('.toc a');
+      let cur = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top < 120) cur = id;
+      });
+      nav.forEach(a => a.classList.toggle('active', a.getAttribute('href')==='#'+cur));
+    });
+  </script>
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
