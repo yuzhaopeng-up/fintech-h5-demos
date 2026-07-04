@@ -1,0 +1,860 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>投资组合仪表盘 | FinAIAI</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI投资组合仪表盘，实时展示资产配置、收益走势、持仓分析、风险指标，支持多维度可视化分析。">
+    <meta name="keywords" content="投资组合,资产配置,收益分析,风险指标,持仓分析,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/portfolio-dashboard">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/portfolio-dashboard">
+    <meta property="og:title" content="投资组合仪表盘 | FinAIAI">
+    <meta property="og:description" content="实时展示资产配置、收益走势、持仓分析、风险指标。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+
+    <link rel="preconnect" href="//cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js" defer></script>
+    <script src="../chart-manager.js" defer></script>
+
+    <style>
+        :root {
+            --primary: #2563EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --dark: #1E293B;
+            --gray: #64748B;
+            --light: #F1F5F9;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --border: #E2E8F0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1E40AF, #3B82F6);
+            color: white;
+            padding: 20px 16px 24px;
+            border-radius: 0 0 24px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .header-date {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .summary-card {
+            background: rgba(255,255,255,0.15);
+            border-radius: var(--radius);
+            padding: 12px 10px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .summary-card .label {
+            font-size: 11px;
+            opacity: 0.85;
+            margin-bottom: 4px;
+        }
+
+        .summary-card .value {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .summary-card .sub {
+            font-size: 10px;
+            opacity: 0.75;
+            margin-top: 2px;
+        }
+
+        .summary-card .value.up { color: #86EFAC; }
+        .summary-card .value.down { color: #FCA5A5; }
+
+        /* Main Content */
+        .content {
+            padding: 16px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Section */
+        .section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 3px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Charts Grid */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-container {
+            position: relative;
+            height: 220px;
+        }
+
+        .chart-container.tall {
+            height: 280px;
+        }
+
+        /* Holdings Table */
+        .holdings-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .holdings-table th {
+            background: var(--light);
+            padding: 8px 6px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 11px;
+            color: var(--gray);
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .holdings-table td {
+            padding: 10px 6px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .holdings-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .holdings-table tr:hover {
+            background: #F8FAFC;
+        }
+
+        .ticker {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .name {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .up { color: var(--success); font-weight: 600; }
+        .down { color: var(--danger); font-weight: 600; }
+        .neutral { color: var(--warning); }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-success { background: #D1FAE5; color: #065F46; }
+        .badge-danger { background: #FEE2E2; color: #991B1B; }
+        .badge-warning { background: #FEF3C7; color: #92400E; }
+
+        /* Risk Bar */
+        .risk-bar-container {
+            margin-bottom: 8px;
+        }
+
+        .risk-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .risk-bar {
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .risk-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* Allocations */
+        .allocation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .allocation-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .allocation-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .allocation-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .allocation-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .allocation-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        .allocation-bar {
+            height: 6px;
+            background: var(--light);
+            border-radius: 3px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .allocation-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 11px;
+            color: var(--gray);
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Refresh Button */
+        .refresh-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .refresh-btn.spinning {
+            animation: spin 0.8s linear infinite;
+        }
+
+        /* Metric cards row */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .metrics-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 12px 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .metric-card .label {
+            font-size: 11px;
+            color: var(--gray);
+            margin-bottom: 4px;
+        }
+
+        .metric-card .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .metric-card .change {
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            text-align: center;
+            padding: 8px;
+            font-size: 11px;
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-top">
+            <div>
+                <h1>📊 投资组合仪表盘</h1>
+                <div class="header-date" id="currentDate"></div>
+            </div>
+            <button class="refresh-btn" id="refreshBtn" title="刷新数据">🔄</button>
+        </div>
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="label">总资产</div>
+                <div class="value" id="totalAsset">加载中...</div>
+                <div class="sub" id="totalChange"></div>
+            </div>
+            <div class="summary-card">
+                <div class="label">今日收益</div>
+                <div class="value" id="todayReturn">—</div>
+                <div class="sub" id="todayPct"></div>
+            </div>
+            <div class="summary-card">
+                <div class="label">累计收益</div>
+                <div class="value" id="totalReturn">—</div>
+                <div class="sub" id="totalPct"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Key Metrics -->
+        <div class="metrics-row" id="metricsRow">
+            <div class="metric-card">
+                <div class="label">年化收益</div>
+                <div class="value" id="annReturn">—</div>
+                <div class="change" id="annChange"></div>
+            </div>
+            <div class="metric-card">
+                <div class="label">夏普比率</div>
+                <div class="value" id="sharpe">—</div>
+                <div class="change" id="sharpeChange"></div>
+            </div>
+            <div class="metric-card">
+                <div class="label">最大回撤</div>
+                <div class="value" id="maxDrawdown">—</div>
+                <div class="change" id="maxDDChange"></div>
+            </div>
+            <div class="metric-card">
+                <div class="label">波动率</div>
+                <div class="value" id="volatility">—</div>
+                <div class="change" id="volChange"></div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="section">
+            <div class="section-title">收益走势</div>
+            <div class="chart-container tall">
+                <canvas id="trendChart" data-chart="trendChart"></canvas>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="section">
+                <div class="section-title">资产配置</div>
+                <div class="chart-container">
+                    <canvas id="allocationChart" data-chart="allocationChart"></canvas>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title">风险指标</div>
+                <div class="chart-container">
+                    <canvas id="riskChart" data-chart="riskChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Holdings -->
+        <div class="section">
+            <div class="section-title">持仓明细</div>
+            <div style="overflow-x: auto;">
+                <table class="holdings-table" id="holdingsTable">
+                    <thead>
+                        <tr>
+                            <th>标的</th>
+                            <th>持仓金额</th>
+                            <th>市值</th>
+                            <th>收益率</th>
+                            <th>权重</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="holdingsBody">
+                        <tr><td colspan="6"><div class="loading"><div class="loading-spinner"></div>加载持仓数据...</div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Risk Details -->
+        <div class="section">
+            <div class="section-title">风险分析</div>
+            <div id="riskDetails">
+                <div class="risk-bar-container">
+                    <div class="risk-bar-label">
+                        <span>市场风险</span>
+                        <span id="marketRiskValue">—</span>
+                    </div>
+                    <div class="risk-bar">
+                        <div class="risk-bar-fill" id="marketRiskBar" style="width:0%; background: var(--warning);"></div>
+                    </div>
+                </div>
+                <div class="risk-bar-container">
+                    <div class="risk-bar-label">
+                        <span>信用风险</span>
+                        <span id="creditRiskValue">—</span>
+                    </div>
+                    <div class="risk-bar">
+                        <div class="risk-bar-fill" id="creditRiskBar" style="width:0%; background: var(--success);"></div>
+                    </div>
+                </div>
+                <div class="risk-bar-container">
+                    <div class="risk-bar-label">
+                        <span>流动性风险</span>
+                        <span id="liquidityRiskValue">—</span>
+                    </div>
+                    <div class="risk-bar">
+                        <div class="risk-bar-fill" id="liquidityRiskBar" style="width:0%; background: var(--primary);"></div>
+                    </div>
+                </div>
+                <div class="risk-bar-container">
+                    <div class="risk-bar-label">
+                        <span>综合风险等级</span>
+                        <span id="overallRiskValue">—</span>
+                    </div>
+                    <div class="risk-bar">
+                        <div class="risk-bar-fill" id="overallRiskBar" style="width:0%; background: var(--danger);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Allocation List -->
+        <div class="section">
+            <div class="section-title">配置明细</div>
+            <div class="allocation-list" id="allocationList"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        数据仅供参考，投资有风险，决策需谨慎。FinAIAI · 更新于 <span id="updateTime">—</span>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============ 示例数据 ============
+        const PORTFOLIO_DATA = {
+            summary: {
+                totalAsset: '1,285.6万',
+                totalAssetValue: 12856000,
+                todayReturn: '+32,580',
+                todayPct: '+1.25%',
+                totalReturn: '+185.6万',
+                totalPct: '+16.87%',
+                annReturn: '12.45%',
+                sharpe: '1.82',
+                maxDrawdown: '-8.32%',
+                volatility: '15.6%',
+            },
+            trend: {
+                labels: ['2026-01', '2026-02', '2026-03', '2026-04', '2026-05', '2026-06'],
+                portfolio: [100, 103.2, 108.5, 105.8, 112.3, 116.87],
+                benchmark: [100, 102.1, 105.3, 103.8, 108.2, 110.5],
+            },
+            allocation: {
+                labels: ['股票', '债券', '基金', '现金', '其他'],
+                values: [45, 25, 18, 7, 5],
+                colors: ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#64748B'],
+            },
+            holdings: [
+                { ticker: '贵州茅台', code: '600519.SH', amount: 2800000, market: 2856000, return: 2.0, weight: 22.2, type: 'stock' },
+                { ticker: '宁德时代', code: '300750.SZ', amount: 1800000, market: 1926000, return: 7.0, weight: 15.0, type: 'stock' },
+                { ticker: '招商银行', code: '600036.SH', amount: 1200000, market: 1176000, return: -2.0, weight: 9.1, type: 'stock' },
+                { ticker: '易方达消费', code: '110022.OF', amount: 900000, market: 945000, return: 5.0, weight: 7.4, type: 'fund' },
+                { ticker: '沪深300ETF', code: '510300.SH', amount: 600000, market: 624000, return: 4.0, weight: 4.9, type: 'fund' },
+                { ticker: '国债ETF', code: '511010.SH', amount: 500000, market: 505000, return: 1.0, weight: 3.9, type: 'bond' },
+            ],
+            risk: {
+                marketRisk: 62,
+                creditRisk: 28,
+                liquidityRisk: 35,
+                overallRisk: 42,
+            }
+        };
+
+        // ============ 初始化图表管理器 ============
+        window.addEventListener('load', function() {
+            // 初始化日期
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('zh-CN', {
+                year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
+            });
+            document.getElementById('updateTime').textContent = new Date().toLocaleTimeString('zh-CN');
+
+            // 初始化图表管理器
+            window.__chartManager = new LongmaChartManager({ cdnCheckTimeout: 2000 });
+
+            // 注册图表
+            registerCharts();
+
+            // 初始化管理器
+            window.__chartManager.initAll();
+
+            // 渲染数据
+            renderSummary(PORTFOLIO_DATA.summary);
+            renderHoldings(PORTFOLIO_DATA.holdings);
+            renderAllocations(PORTFOLIO_DATA.allocation);
+            renderRiskBars(PORTFOLIO_DATA.risk);
+
+            // 刷新按钮
+            document.getElementById('refreshBtn').addEventListener('click', function() {
+                var btn = this;
+                btn.classList.add('spinning');
+                setTimeout(function() {
+                    btn.classList.remove('spinning');
+                }, 1000);
+            });
+        });
+
+        // ============ 注册图表 ============
+        function registerCharts() {
+            // 收益趋势
+            window.__chartManager.register('trendChart', {
+                type: 'line',
+                selector: '#trendChart',
+                lazy: false,
+                data: {
+                    labels: PORTFOLIO_DATA.trend.labels,
+                    datasets: [
+                        {
+                            label: '组合收益',
+                            data: PORTFOLIO_DATA.trend.portfolio,
+                            borderColor: '#3B82F6',
+                            backgroundColor: 'rgba(59,130,246,0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#3B82F6',
+                        },
+                        {
+                            label: '基准(沪深300)',
+                            data: PORTFOLIO_DATA.trend.benchmark,
+                            borderColor: '#94A3B8',
+                            backgroundColor: 'transparent',
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 3,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 12, font: { size: 11 } }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { callback: function(v) { return v; } },
+                            grid: { color: 'rgba(0,0,0,0.04)' }
+                        }
+                    }
+                }
+            });
+
+            // 资产配置饼图
+            window.__chartManager.register('allocationChart', {
+                type: 'doughnut',
+                selector: '#allocationChart',
+                lazy: false,
+                data: {
+                    labels: PORTFOLIO_DATA.allocation.labels,
+                    datasets: [{
+                        data: PORTFOLIO_DATA.allocation.values,
+                        backgroundColor: PORTFOLIO_DATA.allocation.colors,
+                        borderWidth: 2,
+                        borderColor: '#FFFFFF',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: { boxWidth: 10, font: { size: 11 }, padding: 8 }
+                        }
+                    }
+                }
+            });
+
+            // 风险雷达图
+            window.__chartManager.register('riskChart', {
+                type: 'radar',
+                selector: '#riskChart',
+                lazy: false,
+                data: {
+                    labels: ['市场风险', '信用风险', '流动性风险', '操作风险', '合规风险'],
+                    datasets: [{
+                        label: '当前组合',
+                        data: [
+                            PORTFOLIO_DATA.risk.marketRisk,
+                            PORTFOLIO_DATA.risk.creditRisk,
+                            PORTFOLIO_DATA.risk.liquidityRisk,
+                            30,
+                            15
+                        ],
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59,130,246,0.15)',
+                        pointBackgroundColor: '#3B82F6',
+                        pointRadius: 3,
+                    },
+                    {
+                        label: '基准',
+                        data: [50, 50, 50, 50, 50],
+                        borderColor: '#CBD5E1',
+                        backgroundColor: 'rgba(203,213,225,0.1)',
+                        borderDash: [4, 4],
+                        pointRadius: 0,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { stepSize: 25, font: { size: 9 }, display: false },
+                            pointLabels: { font: { size: 10 } }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 10, font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ============ 渲染函数 ============
+        function renderSummary(data) {
+            var totalEl = document.getElementById('totalAsset');
+            var todayEl = document.getElementById('todayReturn');
+            var todayPctEl = document.getElementById('todayPct');
+            var totalRetEl = document.getElementById('totalReturn');
+            var totalPctEl = document.getElementById('totalPct');
+
+            totalEl.textContent = data.totalAsset;
+            todayEl.textContent = data.todayReturn;
+            todayEl.className = 'value ' + (data.todayReturn.startsWith('+') ? 'up' : 'down');
+            todayPctEl.textContent = data.todayPct;
+            todayPctEl.className = 'sub ' + (data.todayPct.startsWith('+') ? 'up' : 'down');
+
+            totalRetEl.textContent = data.totalReturn;
+            totalRetEl.className = 'value ' + (data.totalReturn.startsWith('+') ? 'up' : 'down');
+            totalPctEl.textContent = data.totalPct;
+            totalPctEl.className = 'sub ' + (data.totalPct.startsWith('+') ? 'up' : 'down');
+
+            document.getElementById('annReturn').textContent = data.annReturn;
+            document.getElementById('sharpe').textContent = data.sharpe;
+            document.getElementById('maxDrawdown').textContent = data.maxDrawdown;
+            document.getElementById('volatility').textContent = data.volatility;
+        }
+
+        function renderHoldings(holdings) {
+            var tbody = document.getElementById('holdingsBody');
+            var html = '';
+            holdings.forEach(function(h) {
+                var retClass = h.return >= 0 ? 'up' : 'down';
+                var retSign = h.return >= 0 ? '+' : '';
+                html += '<tr>' +
+                    '<td><div class="ticker">' + h.ticker + '</div><div class="name">' + h.code + '</div></td>' +
+                    '<td>' + formatMoney(h.amount) + '</td>' +
+                    '<td>' + formatMoney(h.market) + '</td>' +
+                    '<td class="' + retClass + '">' + retSign + h.return.toFixed(2) + '%</td>' +
+                    '<td>' + h.weight.toFixed(1) + '%</td>' +
+                    '<td><button class="badge badge-warning" style="cursor:pointer;font-size:10px;padding:2px 6px;border:none;" onclick="alert(\'分析 ' + h.ticker + '\')">分析</button></td>' +
+                    '</tr>';
+            });
+            tbody.innerHTML = html;
+        }
+
+        function renderAllocations(allocation) {
+            var list = document.getElementById('allocationList');
+            var html = '';
+            allocation.labels.forEach(function(label, i) {
+                var pct = allocation.values[i];
+                var color = allocation.colors[i];
+                html += '<div class="allocation-item">' +
+                    '<div class="allocation-dot" style="background:' + color + '"></div>' +
+                    '<div class="allocation-info">' +
+                    '<div class="allocation-name">' + label + '</div>' +
+                    '<div class="allocation-meta"><span>' + pct + '%</span><span>' + formatMoney(PORTFOLIO_DATA.summary.totalAssetValue * pct / 100) + '</span></div>' +
+                    '<div class="allocation-bar"><div class="allocation-bar-fill" style="width:' + pct + '%;background:' + color + '"></div></div>' +
+                    '</div></div>';
+            });
+            list.innerHTML = html;
+        }
+
+        function renderRiskBars(risk) {
+            var setBar = function(idBar, idValue, value, color) {
+                var bar = document.getElementById(idBar);
+                var val = document.getElementById(idValue);
+                if (bar) { bar.style.width = value + '%'; bar.style.background = color; }
+                if (val) { val.textContent = value + '分'; }
+            };
+
+            setBar('marketRiskBar', 'marketRiskValue', risk.marketRisk, '#F59E0B');
+            setBar('creditRiskBar', 'creditRiskValue', risk.creditRisk, '#10B981');
+            setBar('liquidityRiskBar', 'liquidityRiskValue', risk.liquidityRisk, '#3B82F6');
+
+            var overallColor = risk.overallRisk < 30 ? '#10B981' : risk.overallRisk < 60 ? '#F59E0B' : '#EF4444';
+            var overallLabel = risk.overallRisk < 30 ? '低风险' : risk.overallRisk < 60 ? '中风险' : '高风险';
+            setBar('overallRiskBar', 'overallRiskValue', risk.overallRisk, overallColor);
+            document.getElementById('overallRiskValue').textContent = overallLabel;
+        }
+
+        // ============ 工具函数 ============
+        function formatMoney(amount) {
+            if (amount >= 100000000) {
+                return (amount / 100000000).toFixed(2) + '亿';
+            } else if (amount >= 10000) {
+                return (amount / 10000).toFixed(0) + '万';
+            }
+            return amount.toLocaleString('zh-CN');
+        }
+    })();
+    </script>
+</body>
+</html>
