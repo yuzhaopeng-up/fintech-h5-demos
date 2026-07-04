@@ -1,0 +1,488 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI财富场景规划，养老规划+教育金+购房规划，定制化财务方案。">
+    <meta name="keywords" content="财富规划,养老规划,教育金,购房规划,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/scenario-wealth">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/scenario-wealth">
+    <meta property="og:title" content="财富场景规划 | FinAIAI">
+    <meta property="og:description" content="FinAIAI财富场景规划，养老规划+教育金+购房规划，定制化财务方案。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/scenario-wealth.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="财富场景规划 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI财富场景规划，养老规划+教育金+购房规划，定制化财务方案。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/scenario-wealth.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "财富场景规划 | FinAIAI",
+        "description": "FinAIAI财富场景规划，养老规划+教育金+购房规划，定制化财务方案。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>财富场景规划 | FinAIAI</title>
+  <style>
+    :root { --primary:#2563eb; --success:#10b981; --warning:#f59e0b; --danger:#ef4444; --purple:#8b5cf6;
+      --bg:#f1f5f9; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+      --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06);
+      --shadow-lg:0 14px 44px rgba(124,58,237,.18); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; }
+    .wrap { max-width:720px; margin:0 auto; padding:16px; }
+    .hero { background:linear-gradient(135deg,#7c3aed,#a855f7); color:#fff; border-radius:24px; padding:28px 22px;
+      box-shadow:var(--shadow-lg); }
+    .hero h1 { font-size:24px; font-weight:900; margin-bottom:4px; }
+    .hero .sub { opacity:.85; font-size:13px; }
+    .section-title { font-size:18px; font-weight:900; margin:28px 0 14px; display:flex; align-items:center; gap:8px; }
+    .section-title .dot { width:8px; height:8px; border-radius:50%; background:var(--primary); }
+    .card { background:var(--card); border-radius:20px; padding:20px; box-shadow:var(--shadow); margin-bottom:12px; }
+    .card h3 { font-size:16px; margin-bottom:10px; }
+    .input-box { background:var(--card); border-radius:16px; padding:16px; box-shadow:var(--shadow); }
+    .input-box input, .input-box select { width:100%; border:1px solid var(--border); border-radius:12px; padding:12px 14px;
+      font-size:15px; outline:none; margin-bottom:10px; }
+    .input-box input:focus, .input-box select:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+    .run-btn { width:100%; border:none; background:linear-gradient(135deg,#7c3aed,#a855f7); color:#fff;
+      padding:14px; border-radius:14px; font-size:16px; font-weight:800; cursor:pointer;
+      box-shadow:0 4px 16px rgba(124,58,237,.3); }
+    .run-btn:disabled { opacity:.6; }
+    .loading { display:none; text-align:center; padding:40px; }
+    .loading.active { display:block; }
+    .spinner { width:48px; height:48px; border:4px solid rgba(124,58,237,.15); border-top-color:#7c3aed;
+      border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 16px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .result { display:none; }
+    .result.active { display:block; animation:fadeIn .5s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+    .metric-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px; }
+    .metric { background:#f8fafc; border-radius:14px; padding:14px; text-align:center; }
+    .metric b { display:block; font-size:20px; }
+    .metric span { font-size:11px; color:var(--muted); }
+    .alloc-row { display:flex; align-items:center; gap:10px; margin:8px 0; padding:10px; background:#f8fafc; border-radius:10px; }
+    .alloc-bar-wrap { flex:1; height:10px; background:#e2e8f0; border-radius:5px; overflow:hidden; }
+    .alloc-bar { height:100%; border-radius:5px; }
+    .product-item { display:flex; gap:10px; padding:10px; background:#f8fafc; border-radius:10px; margin:6px 0; }
+    .product-code { background:var(--primary); color:#fff; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:800; }
+    .scenario-table { width:100%; border-collapse:collapse; font-size:13px; }
+    .scenario-table th { background:#f8fafc; padding:8px; text-align:left; font-weight:800; color:var(--muted); }
+    .scenario-table td { padding:8px; border-bottom:1px solid var(--border); }
+    .back-home { display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--primary);
+      text-decoration:none; font-size:14px; font-weight:700; }
+    .rebalance-tag { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; margin-right:4px; }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>💎 财富管理</h1>
+    <div class="sub">银行业 · 财富管理 · 资产配置 · 投资组合 · 再平衡策略</div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>风险评估</div>
+  <div class="input-box">
+    <select id="riskType">
+      <option value="conservative">保守型</option>
+      <option value="steady">稳健型</option>
+      <option value="balanced" selected>平衡型</option>
+      <option value="growth">成长型</option>
+      <option value="aggressive">积极型</option>
+    </select>
+    <input type="number" id="aum" placeholder="可投资资产（万元）" value="500">
+    <input type="number" id="age" placeholder="年龄" value="40">
+    <select id="horizon">
+      <option value="short">短期（1-3年）</option>
+      <option value="medium" selected>中期（3-5年）</option>
+      <option value="long">长期（5年以上）</option>
+    </select>
+    <button class="run-btn" id="runBtn" onclick="genWealth()">💎 生成财富管理方案</button>
+  </div>
+
+  <div class="loading" id="loading"><div class="spinner"></div><p>正在生成定制化财富管理方案...</p></div>
+
+  <div class="result" id="result"></div>
+
+  <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+</div>
+
+<script>
+(function(){
+  function cyrb128(str){
+    let h1=1779033703,h2=3144134277,h3=1013904242,h4=2773480762;
+    for(let i=0,k;i<str.length;i++){
+      k=str.charCodeAt(i);
+      h1=h2^Math.imul(h1^k,597399067);
+      h2=h3^Math.imul(h2^k,2869860233);
+      h3=h4^Math.imul(h3^k,951274213);
+      h4=h1^Math.imul(h4^k,2716044179);
+    }
+    h1=Math.imul(h3^(h1>>>18),597399067);
+    h2=Math.imul(h4^(h2>>>22),2869860233);
+    h3=Math.imul(h1^(h3>>>17),951274213);
+    h4=Math.imul(h2^(h4>>>19),2716044179);
+    return [(h1^h2^h3^h4)>>>0,(h2^h1)>>>0,(h3^h1)>>>0,(h4^h1)>>>0];
+  }
+  function sfc32(a,b,c,d){
+    return function(){
+      a>>>=0;b>>>=0;c>>>=0;d>>>=0;
+      let t=(a+b)|0;
+      a=b^b>>>9;
+      b=c+(c<<3)|0;
+      c=(c<<21)|(c>>>11);
+      d=d+1|0;
+      t=t+d|0;
+      c=c+t|0;
+      return (t>>>0)/4294967296;
+    };
+  }
+  function createRng(seed){ const s=cyrb128(seed); return sfc32(s[0],s[1],s[2],s[3]); }
+
+  const riskProfiles = {
+    conservative: {name:"保守型",exp:"预期收益 3%-4%",maxDD:"最大回撤 -3%",desc:"以保本为首要目标，适合风险承受能力较低的投资者。"},
+    steady: {name:"稳健型",exp:"预期收益 4%-6%",maxDD:"最大回撤 -5%",desc:"在控制风险的基础上追求稳健增值。"},
+    balanced: {name:"平衡型",exp:"预期收益 6%-8%",maxDD:"最大回撤 -12%",desc:"股债平衡，适合能承受中等波动的投资者。"},
+    growth: {name:"成长型",exp:"预期收益 8%-12%",maxDD:"最大回撤 -20%",desc:"以权益为主，适合追求较高收益的投资者。"},
+    aggressive: {name:"积极型",exp:"预期收益 10%-15%",maxDD:"最大回撤 -30%",desc:"高风险高收益，适合风险承受能力强的专业投资者。"}
+  };
+
+  window.genWealth = function(){
+    const type = document.getElementById('riskType').value;
+    const aum = parseFloat(document.getElementById('aum').value) || 500;
+    const age = parseInt(document.getElementById('age').value) || 40;
+    const horizon = document.getElementById('horizon').value;
+    const p = riskProfiles[type];
+
+    document.getElementById('loading').classList.add('active');
+    document.getElementById('result').classList.remove('active');
+    document.getElementById('runBtn').disabled = true;
+
+    setTimeout(()=>{
+      const seed = type + '_' + aum + '_' + age + '_' + horizon;
+      const rng = createRng(seed);
+
+      // 战略资产配置 SAA
+      let saa;
+      if(type === 'conservative') {
+        saa = [{name:"货币基金",ratio:20,color:"#2563eb",amount:Math.round(aum*0.2)},
+               {name:"短债基金",ratio:35,color:"#10b981",amount:Math.round(aum*0.35)},
+               {name:"中长债基金",ratio:30,color:"#06b6d4",amount:Math.round(aum*0.30)},
+               {name:"固收+组合",ratio:15,color:"#f59e0b",amount:Math.round(aum*0.15)}];
+      } else if(type === 'steady') {
+        saa = [{name:"货币基金",ratio:10,color:"#2563eb",amount:Math.round(aum*0.10)},
+               {name:"短债基金",ratio:25,color:"#10b981",amount:Math.round(aum*0.25)},
+               {name:"中长债基金",ratio:30,color:"#06b6d4",amount:Math.round(aum*0.30)},
+               {name:"固收+组合",ratio:20,color:"#f59e0b",amount:Math.round(aum*0.20)},
+               {name:"指数基金",ratio:15,color:"#8b5cf6",amount:Math.round(aum*0.15)}];
+      } else if(type === 'balanced') {
+        saa = [{name:"货币基金",ratio:5,color:"#2563eb",amount:Math.round(aum*0.05)},
+               {name:"短债基金",ratio:15,color:"#10b981",amount:Math.round(aum*0.15)},
+               {name:"中长债基金",ratio:20,color:"#06b6d4",amount:Math.round(aum*0.20)},
+               {name:"固收+组合",ratio:20,color:"#f59e0b",amount:Math.round(aum*0.20)},
+               {name:"指数基金",ratio:25,color:"#8b5cf6",amount:Math.round(aum*0.25)},
+               {name:"股票基金",ratio:15,color:"#ef4444",amount:Math.round(aum*0.15)}];
+      } else if(type === 'growth') {
+        saa = [{name:"货币基金",ratio:5,color:"#2563eb",amount:Math.round(aum*0.05)},
+               {name:"短债基金",ratio:10,color:"#10b981",amount:Math.round(aum*0.10)},
+               {name:"指数基金",ratio:30,color:"#8b5cf6",amount:Math.round(aum*0.30)},
+               {name:"股票基金",ratio:30,color:"#ef4444",amount:Math.round(aum*0.30)},
+               {name:"主题基金",ratio:25,color:"#f59e0b",amount:Math.round(aum*0.25)}];
+      } else {
+        saa = [{name:"货币基金",ratio:5,color:"#2563eb",amount:Math.round(aum*0.05)},
+               {name:"指数基金",ratio:25,color:"#8b5cf6",amount:Math.round(aum*0.25)},
+               {name:"股票基金",ratio:35,color:"#ef4444",amount:Math.round(aum*0.35)},
+               {name:"主题基金",ratio:25,color:"#f59e0b",amount:Math.round(aum*0.25)},
+               {name:"港股通基金",ratio:10,color:"#06b6d4",amount:Math.round(aum*0.10)}];
+      }
+
+      // 具体产品推荐
+      const products = {
+        conservative:[
+          {code:"华夏货币A",name:"华夏货币增利",type:"货币型",risk:"低",ret:"2.1%"},
+          {code:"华夏短债A",name:"华夏短债债券",type:"债券型",risk:"低",ret:"3.5%"},
+          {code:"易方达信用债A",name:"易方达信用债主体",type:"债券型",risk:"低",ret:"4.2%"},
+          {code:"招商银行理财",name:"BankA理财稳健",type:"固收+",risk:"中低",ret:"4.8%"}
+        ],
+        steady:[
+          {code:"华夏短债A",name:"华夏短债债券",type:"债券型",risk:"低",ret:"3.5%"},
+          {code:"易方达信用债A",name:"易方达信用债主体",type:"债券型",risk:"低",ret:"4.2%"},
+          {code:"招商银行理财",name:"BankA理财稳健",type:"固收+",risk:"中低",ret:"4.8%"},
+          {code:"易方达深严·深圳100ETF",name:"深证指数增强",type:"股票型",risk:"中",ret:"8.5%"}
+        ],
+        balanced:[
+          {code:"易方达信用债A",name:"易方达信用债主体",type:"债券型",risk:"低",ret:"4.2%"},
+          {code:"招商银行理财",name:"BankA理财稳健",type:"固收+",risk:"中低",ret:"4.8%"},
+          {code:"易方达深严·深圳100ETF",name:"深证指数增强",type:"股票型",risk:"中",ret:"8.5%"},
+          {code:"嘉实中证红利指数A",name:"红利指数增强",type:"股票型",risk:"中",ret:"7.2%"},
+          {code:"易方达中证宏观指数A",name:"中证全指指数增强",type:"股票型",risk:"中",ret:"6.8%"}
+        ],
+        growth:[
+          {code:"易方达深严·深圳100ETF",name:"深证指数增强",type:"股票型",risk:"中",ret:"8.5%"},
+          {code:"嘉实中证红利指数A",name:"红利指数增强",type:"股票型",risk:"中",ret:"7.2%"},
+          {code:"易方达新能源汽车A",name:"新能源汽车主题",type:"股票型",risk:"高",ret:"15.3%"},
+          {code:"易方达中证半导体A",name:"半导体主题",type:"股票型",risk:"高",ret:"18.2%"},
+          {code:"易方达中证全指指数A",name:"中证全指指数增强",type:"股票型",risk:"中",ret:"6.8%"}
+        ],
+        aggressive:[
+          {code:"易方达新能源汽车A",name:"新能源汽车主题",type:"股票型",risk:"高",ret:"15.3%"},
+          {code:"易方达中证半导体A",name:"半导体主题",type:"股票型",risk:"高",ret:"18.2%"},
+          {code:"易方达深严·深圳100ETF",name:"深证指数增强",type:"股票型",risk:"中",ret:"8.5%"},
+          {code:"易方达中证港股通A",name:"港股通主题",type:"股票型",risk:"高",ret:"12.1%"},
+          {code:"易方达纳斯达克100A",name:"纳斯达克100指数",type:"股票型",risk:"高",ret:"14.5%"}
+        ]
+      };
+      const selectedProducts = products[type];
+
+      // 压力测试
+      const stressTests = [
+        {scenario:"正常市场",ret: type==='conservative'?3.5:type==='steady'?5:type==='balanced'?7:type==='growth'?10:13,aumEnd:0},
+        {scenario:"轻度回调(-10%)",ret: type==='conservative'?1:type==='steady'?-2:type==='balanced'?-4:type==='growth'?-7:-10,aumEnd:0},
+        {scenario:"熊市(-25%)",ret: type==='conservative'?-1:type==='steady'?-5:type==='balanced'?-10:type==='growth'?-15:-20,aumEnd:0},
+        {scenario:"重大危机(-40%)",ret: type==='conservative'?-2:type==='steady'?-8:type==='balanced'?-15:type==='growth'?-22:-30,aumEnd:0}
+      ];
+      stressTests.forEach(t=>{
+        t.aumEnd = Math.round(aum * (1 + t.ret/100));
+      });
+
+      // 再平衡策略
+      const rebalanceFreq = type==='conservative'||type==='steady'?'半年':'季度';
+      const rebalanceThreshold = type==='conservative'||type==='steady'?'±5%':'±8%';
+
+      document.getElementById('result').innerHTML = `
+        <div class="card">
+          <h3>💎 ${p.name}财富管理方案</h3>
+          <div class="metric-grid">
+            <div class="metric"><b style="color:var(--primary);">${p.exp}</b><span>预期收益</span></div>
+            <div class="metric"><b style="color:var(--success);">${aum}万</b><span>可投资资产</span></div>
+            <div class="metric"><b style="color:var(--warning);">${p.maxDD}</b><span>风险提示</span></div>
+            <div class="metric"><b style="color:var(--purple);">${age}岁</b><span>当前年龄</span></div>
+            <div class="metric"><b style="color:var(--danger);">${rebalanceFreq}</b><span>再平衡频率</span></div>
+            <div class="metric"><b style="color:var(--primary);">${rebalanceThreshold}</b><span>偏离阈值</span></div>
+          </div>
+          <div style="margin-top:14px;font-size:14px;line-height:1.8;">${p.desc}</div>
+        </div>
+
+        <div class="card">
+          <h3>📈 战略资产配置(SAA)</h3>
+          ${saa.map(a=>`
+            <div class="alloc-row">
+              <div style="width:90px;font-weight:700;font-size:13px;">${a.name}</div>
+              <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:${a.ratio}%;background:${a.color};"></div></div>
+              <div style="width:40px;text-align:right;font-weight:800;font-size:13px;">${a.ratio}%</div>
+              <div style="width:60px;text-align:right;font-size:12px;color:var(--muted);">${a.amount}万</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="card">
+          <h3>🏷️ 具体产品推荐</h3>
+          ${selectedProducts.map(prod=>`
+            <div class="product-item">
+              <div>
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                  <span class="product-code">${prod.code}</span>
+                  <span style="font-weight:700;font-size:14px;">${prod.name}</span>
+                </div>
+                <div style="font-size:12px;color:var(--muted);">
+                  ${prod.type} · 风险${prod.risk} · 近年收益${prod.ret}
+                </div>
+              </div>
+            </div>
+          `).join('')}
+          <div style="margin-top:10px;font-size:12px;color:#92400e;background:#fef3c7;padding:8px 12px;border-radius:8px;">
+            ⚠️ 以上产品仅供参考，不构成投资建议。投资有风险，请谨慎决策。
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📊 压力测试</h3>
+          <table class="scenario-table">
+            <tr><th>市场场景</th><th>组合收益</th><th>资产总值</th><th>损失金额</th></tr>
+            ${stressTests.map(t=>`
+              <tr>
+                <td>${t.scenario}</td>
+                <td style="color:${t.ret>=0?'#059669':'#dc2626'};font-weight:800;">${t.ret>=0?'+':''}${t.ret}%</td>
+                <td>${t.aumEnd}万</td>
+                <td style="color:${t.aumEnd>=aum?'#059669':'#dc2626'}">${t.aumEnd>=aum?'+':''}${t.aumEnd-aum}万</td>
+              </tr>
+            `).join('')}
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>🔄 再平衡策略</h3>
+          <div style="font-size:14px;line-height:1.8;">
+            <div>• <strong>频率：</strong>每${rebalanceFreq}进行一次定期再平衡</div>
+            <div>• <strong>阈值：</strong>任一资产类别偏离目标配置${rebalanceThreshold}时触发再平衡</div>
+            <div>• <strong>方法：</strong>卖出超配置资产，买入低配置资产，恢复目标比例</div>
+            <div>• <strong>税务优化：</strong>优先出售持有超过1年的资产（免证个税）</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📋 管理建议</h3>
+          <div style="font-size:14px;line-height:1.8;">
+            <div style="margin:8px 0;padding:10px;background:#f8fafc;border-radius:10px;">
+              <span class="rebalance-tag" style="background:#dbeafe;color:#1e40af;">第1条</span>
+              每月定投${Math.round(aum*0.02)}万元，采用均价成本法平滑市场波动
+            </div>
+            <div style="margin:8px 0;padding:10px;background:#f8fafc;border-radius:10px;">
+              <span class="rebalance-tag" style="background:#d1fae5;color:#065f46;">第2条</span>
+              每季度检查组合表现，评估是否需要调整风险偏好
+            </div>
+            <div style="margin:8px 0;padding:10px;background:#f8fafc;border-radius:10px;">
+              <span class="rebalance-tag" style="background:#fed7aa;color:#92400e;">第3条</span>
+              年度风险评估与目标检视，根据年龄增长逐步降低权益比例
+            </div>
+            <div style="margin:8px 0;padding:10px;background:#f8fafc;border-radius:10px;">
+              <span class="rebalance-tag" style="background:#fecaca;color:#991b1b;">第4条</span>
+              重大市场变动时，保持冷静，避免追涨杀跌
+            </div>
+          </div>
+        </div>`;
+
+      document.getElementById('loading').classList.remove('active');
+      document.getElementById('result').classList.add('active');
+      document.getElementById('runBtn').disabled = false;
+    },800);
+  };
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    // 自动加载股票数据
+    const stockContainer = document.querySelector('.stock-data, #stock-data, [data-type="stocks"]');
+    if (stockContainer) {
+        const result = await LongmaAPI.stocks.list();
+        if (result.success && result.data) {
+            renderStockList(stockContainer, result.data);
+        }
+    }
+    
+    // 自动加载基金数据
+    const fundContainer = document.querySelector('.fund-data, #fund-data, [data-type="funds"]');
+    if (fundContainer) {
+        const result = await LongmaAPI.funds.get('110022');
+        if (result.success && result.data) {
+            renderFundCard(fundContainer, result.data);
+        }
+    }
+});
+
+function renderStockList(container, stocks) {
+    let html = '<div class="api-stock-list">';
+    stocks.forEach(stock => {
+        const changeClass = stock.change >= 0 ? 'up' : 'down';
+        const changeSign = stock.change >= 0 ? '+' : '';
+        html += `<div class="api-stock-item ${changeClass}">
+            <span class="code">${stock.code}</span>
+            <span class="name">${stock.name}</span>
+            <span class="price">¥${stock.price.toFixed(2)}</span>
+            <span class="change">${changeSign}${(stock.change * 100).toFixed(2)}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function renderFundCard(container, fund) {
+    container.innerHTML = `<div class="api-fund-card">
+        <h4>${fund.name}</h4>
+        <p>净值: ¥${fund.nav.toFixed(3)}</p>
+        <p>日涨跌: ${fund.change > 0 ? '+' : ''}${(fund.change * 100).toFixed(2)}%</p>
+        <p>风险等级: ${fund.risk}</p>
+    </div>`;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
