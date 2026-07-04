@@ -1,0 +1,810 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI保障需求分析，家庭风险评估+保障缺口计算+产品匹配，守护家庭财务安全。">
+    <meta name="keywords" content="保障规划,风险保障,家庭保险,保障缺口,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/protection-planning">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/protection-planning">
+    <meta property="og:title" content="保障需求分析 | FinAIAI">
+    <meta property="og:description" content="FinAIAI保障需求分析，家庭风险评估+保障缺口计算+产品匹配，守护家庭财务安全。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/protection-planning.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="保障需求分析 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI保障需求分析，家庭风险评估+保障缺口计算+产品匹配，守护家庭财务安全。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/protection-planning.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "保障需求分析 | FinAIAI",
+        "description": "FinAIAI保障需求分析，家庭风险评估+保障缺口计算+产品匹配，守护家庭财务安全。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>保障需求分析 | FinAIAI</title>
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--primary:#2563eb;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--radius:14px;--shadow:0 4px 20px rgba(0,0,0,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:40px}
+.container{max-width:420px;margin:0 auto;padding:16px}
+
+/* 头部 */
+.header{text-align:center;padding:24px 0 16px}
+.header h1{font-size:22px;font-weight:800;background:linear-gradient(135deg,#2563eb,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header p{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* 卡片 */
+.card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow);animation:fadeIn .6s ease forwards;opacity:0;transform:translateY(12px)}
+.card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}
+.card-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+/* 输入表单 */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-item{display:flex;flex-direction:column;gap:4px}
+.form-item.full{grid-column:1/-1}
+.form-item label{font-size:12px;color:var(--muted);font-weight:500}
+.form-item input,.form-item select{padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:#fff}
+.form-item input:focus,.form-item select:focus{outline:none;border-color:var(--primary)}
+
+/* 按钮 */
+.btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:16px;box-shadow:var(--shadow)}
+.btn:active{transform:scale(.98)}
+
+/* 执行摘要 */
+.summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.summary-item{padding:12px;background:#f8fafc;border-radius:10px;text-align:center;border:1px solid var(--border)}
+.summary-item .val{font-size:20px;font-weight:800;color:var(--primary)}
+.summary-item .val.danger{color:var(--danger)}
+.summary-item .val.success{color:var(--success)}
+.summary-item .label{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* 金字塔 */
+.pyramid-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:10px}
+.pyramid-layer{position:relative;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:4px;cursor:pointer;transition:transform .2s}
+.pyramid-layer:hover{transform:scale(1.02)}
+.pyramid-layer span{position:relative;z-index:1}
+.pyramid-layer .amt{position:absolute;right:8px;font-size:10px;opacity:.9}
+.pyramid-tip{width:60%;height:36px;background:linear-gradient(135deg,#ef4444,#f97316);clip-path:polygon(50% 0,100% 100%,0 100%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;color:#fff;font-size:11px;font-weight:700}
+.pyramid-layer1{width:80%;height:42px;background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.pyramid-layer2{width:90%;height:42px;background:linear-gradient(135deg,#3b82f6,#60a5fa)}
+.pyramid-layer3{width:100%;height:42px;background:linear-gradient(135deg,#10b981,#34d399)}
+.pyramid-legend{display:flex;justify-content:center;gap:12px;margin-top:8px;font-size:11px;color:var(--muted)}
+.pyramid-legend span{display:flex;align-items:center;gap:4px}
+.pyramid-dot{width:8px;height:8px;border-radius:50%}
+
+/* 缺口条形图 */
+.gap-wrap{margin-top:10px}
+.gap-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.gap-label{width:50px;font-size:12px;font-weight:600}
+.gap-bar-wrap{flex:1;height:24px;background:var(--border);border-radius:6px;overflow:hidden;position:relative}
+.gap-bar{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;color:#fff;font-size:10px;font-weight:700;transition:width .8s ease}
+.gap-bar-have{position:absolute;left:0;top:0;height:100%;background:rgba(255,255,255,.35);border-radius:6px}
+.gap-val{font-size:12px;font-weight:700;white-space:nowrap;min-width:40px;text-align:right}
+
+/* 饼图 */
+.pie-wrap{display:flex;align-items:center;gap:16px;margin-top:10px}
+.pie-chart{width:120px;height:120px;border-radius:50%;position:relative;flex-shrink:0}
+.pie-legend{flex:1;font-size:12px}
+.pie-legend-item{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.pie-dot{width:10px;height:10px;border-radius:2px}
+
+/* 情景卡片 */
+.scenario-wrap{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.scenario-card{padding:12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border);border-left:4px solid var(--primary)}
+.scenario-card.danger{border-left-color:var(--danger)}
+.scenario-card.warning{border-left-color:var(--warning)}
+.scenario-card.success{border-left-color:var(--success)}
+.scenario-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.scenario-tag{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap}
+.scenario-title{font-size:13px;font-weight:700}
+.scenario-desc{font-size:11px;color:var(--muted);margin-bottom:6px}
+.scenario-nums{display:flex;gap:12px}
+.scenario-num{font-size:11px}
+.scenario-num b{font-size:14px}
+
+/* 现金流 */
+.cashflow-wrap{margin-top:10px}
+.cashflow-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+.cashflow-row:last-child{border-bottom:none}
+.cashflow-row b{font-weight:700}
+
+/* 年度检视 */
+.review-wrap{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.review-item{padding:10px;background:#f8fafc;border-radius:10px;font-size:12px;display:flex;align-items:center;gap:8px}
+.review-item .icon{font-size:16px}
+
+/* 优先级 */
+.priority-wrap{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.priority-row{display:flex;align-items:center;gap:10px;padding:10px;background:#f8fafc;border-radius:10px;border:1px solid var(--border)}
+.priority-num{width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.priority-info{flex:1;font-size:12px}
+.priority-info b{font-size:13px}
+.priority-gap{font-size:12px;font-weight:700;color:var(--danger);white-space:nowrap}
+
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+</style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🛡️ 智能保障规划顾问</h1>
+    <p>三种保额计算法 · 缺口诊断 · 情景压力测试 · 一键生成方案</p>
+  </div>
+
+  <!-- 家庭信息输入 -->
+  <div class="card" id="sec-input">
+    <div class="card-title"><span class="dot" style="background:#3b82f6"></span>家庭信息录入</div>
+    <div class="form-grid" id="formWrap">
+      <div class="form-item"><label>姓名</label><input type="text" id="name" placeholder="张伟" value="张伟"></div>
+      <div class="form-item"><label>年龄</label><input type="number" id="age" placeholder="35" value="35"></div>
+      <div class="form-item"><label>年收入(万)</label><input type="number" id="income" placeholder="50" value="50"></div>
+      <div class="form-item"><label>房贷(万)</label><input type="number" id="mortgage" placeholder="200" value="200"></div>
+      <div class="form-item"><label>子女数</label><input type="number" id="children" placeholder="1" value="1" min="0"></div>
+      <div class="form-item"><label>婚姻状态</label>
+        <select id="spouse"><option value="1">已婚</option><option value="0">未婚</option></select>
+      </div>
+      <div class="form-item"><label>已有重疾(万)</label><input type="number" id="existCi" placeholder="0" value="0"></div>
+      <div class="form-item"><label>已有寿险(万)</label><input type="number" id="existLife" placeholder="0" value="0"></div>
+      <div class="form-item"><label>已有医疗(万)</label><input type="number" id="existMedical" placeholder="0" value="0"></div>
+      <div class="form-item"><label>已有意外(万)</label><input type="number" id="existAccident" placeholder="0" value="0"></div>
+    </div>
+    <button class="btn" onclick="generatePlan()">生成保障规划方案</button>
+  </div>
+
+  <!-- 执行摘要 -->
+  <div class="card" id="sec-summary" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#ef4444"></span>执行摘要</div>
+    <div class="summary-grid" id="summaryWrap"></div>
+  </div>
+
+  <!-- 优先级排序 -->
+  <div class="card" id="sec-priority" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#f59e0b"></span>补齐优先级</div>
+    <div class="priority-wrap" id="priorityWrap"></div>
+  </div>
+
+  <!-- 保障金字塔 -->
+  <div class="card" id="sec-pyramid" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#8b5cf6"></span>家庭保障金字塔</div>
+    <div class="pyramid-wrap" id="pyramidWrap"></div>
+  </div>
+
+  <!-- 缺口诊断 -->
+  <div class="card" id="sec-gap" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#ec4899"></span>保障缺口诊断</div>
+    <div class="gap-wrap" id="gapWrap"></div>
+  </div>
+
+  <!-- 保费结构 -->
+  <div class="card" id="sec-pie" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#06b6d4"></span>年度保费分配</div>
+    <div class="pie-wrap" id="pieWrap"></div>
+  </div>
+
+  <!-- 情景压力测试 -->
+  <div class="card" id="sec-scenario" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#f97316"></span>情景压力测试</div>
+    <div class="scenario-wrap" id="scenarioWrap"></div>
+  </div>
+
+  <!-- 家庭现金流 -->
+  <div class="card" id="sec-cashflow" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#10b981"></span>家庭现金流分析</div>
+    <div class="cashflow-wrap" id="cashflowWrap"></div>
+  </div>
+
+  <!-- 年度检视 -->
+  <div class="card" id="sec-review" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#3b82f6"></span>年度检视与续保提醒</div>
+    <div class="review-wrap" id="reviewWrap"></div>
+
+  <!-- 三种算法可视化对比 -->
+  <div class="card" id="sec-algorithms" style="display:none">
+    <h3 style="font-size:16px;margin-bottom:14px">📊 三种算法可视化对比</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">人寿法 vs 支出法 vs 余额法，三种保额计算方法对比</p>
+    <div id="algorithmsWrap"></div>
+    <div id="algorithmsDetailWrap" style="margin-top:14px"></div>
+  </div>
+
+  <!-- 理赔模拟器 -->
+  <div class="card" id="sec-claim" style="display:none">
+    <h3 style="font-size:16px;margin-bottom:14px">🏥 理赔模拟器</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">选择疾病/意外类型，输入医疗费用，输出综合理赔金额</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <div style="flex:1;min-width:140px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">重疾险保额(万)</label><input type="number" id="ciInput" value="80" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px"></div>
+      <div style="flex:1;min-width:140px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">医疗险保额(万)</label><input type="number" id="medInput" value="300" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px"></div>
+
+  <!-- 保险产品库 -->
+  <div class="card" id="sec-products" style="display:none">
+    <h3 style="font-size:16px;margin-bottom:14px">🛡️ 保险产品推荐库</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">20款保险产品，按类型筛选</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+      <button onclick="renderProducts('all')" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:12px;cursor:pointer">全部</button>
+      <button onclick="renderProducts('重疾险')" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:12px;cursor:pointer">重疾险</button>
+      <button onclick="renderProducts('定期寿险')" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:12px;cursor:pointer">定期寿险</button>
+      <button onclick="renderProducts('医疗险')" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:12px;cursor:pointer">医疗险</button>
+      <button onclick="renderProducts('意外险')" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:12px;cursor:pointer">意外险</button>
+      <button onclick="renderProducts('养老险')" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:12px;cursor:pointer">养老险</button>
+    </div>
+    <div id="productsWrap"></div>
+  </div>
+
+  <!-- 智能核保评估 -->
+  <div class="card" id="sec-underwriting" style="display:none">
+    <h3 style="font-size:16px;margin-bottom:14px">🏥 智能核保评估</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">输入年龄和健康异常，预判核保结论</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <div style="flex:1;min-width:120px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">年龄</label><input type="number" id="uwAge" value="35" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px"></div>
+      <div style="flex:2;min-width:200px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">健康异常（多选，用空格分隔）</label>
+        <select id="uwConditions" multiple style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px;height:80px">
+          <option value="高血压">高血压</option>
+          <option value="糖尿病">糖尿病</option>
+          <option value="肾结石">肾结石</option>
+          <option value="乳腺结节">乳腺结节</option>
+          <option value="甲状腺结节">甲状腺结节</option>
+          <option value="肺结节">肺结节</option>
+          <option value="肥胗">肥胗</option>
+          <option value="异常指标">异常指标</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:120px;display:flex;align-items:flex-end"><button onclick="runUnderwriting()" style="width:100%;padding:10px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">预判核保</button></div>
+    </div>
+    <div id="underwritingWrap"></div>
+  </div>
+
+      <div style="flex:1;min-width:140px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">意外险保额(万)</label><input type="number" id="accInput" value="30" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px"></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <div style="flex:1;min-width:140px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">事故类型</label>
+        <select id="incidentType" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px">
+          <option value="disease">重大疾病</option>
+          <option value="accident">意外伤害</option>
+          <option value="hospital">住院治疗</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:140px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">医疗费用(万)</label><input type="number" id="costInput" value="30" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px"></div>
+      <div style="flex:1;min-width:140px;display:flex;align-items:flex-end"><button onclick="runClaimSim()" style="width:100%;padding:10px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">计算理赔金额</button></div>
+    </div>
+    <div id="claimResultWrap"></div>
+  </div>
+
+  </div>
+
+  <!-- 尾部 -->
+  <div style="text-align:center;font-size:11px;color:var(--muted);padding:20px 0">
+    🐠 FinAIAI · 保障规划结果仅供参考，不构成保险销售建议
+  </div>
+</div>
+
+<script>
+/* ===== 核心计算逻辑 ===== */
+function generatePlan(){
+  const name = document.getElementById('name').value || '客户';
+  const age = parseInt(document.getElementById('age').value) || 35;
+  const income = parseFloat(document.getElementById('income').value) || 50;
+  const mortgage = parseFloat(document.getElementById('mortgage').value) || 0;
+  const children = parseInt(document.getElementById('children').value) || 0;
+  const spouse = parseInt(document.getElementById('spouse').value);
+  const existCi = parseFloat(document.getElementById('existCi').value) || 0;
+  const existLife = parseFloat(document.getElementById('existLife').value) || 0;
+  const existMedical = parseFloat(document.getElementById('existMedical').value) || 0;
+  const existAccident = parseFloat(document.getElementById('existAccident').value) || 0;
+
+  // 三种保额计算法
+  const doubleTenCi = income * 3;
+  const doubleTenLife = income * 10;
+  const doubleTenPremium = income * 0.10;
+
+  const remainingYears = Math.max(60 - age, 5);
+  const lifeValueLife = income * remainingYears;
+  const lifeValueCi = income * 3 + mortgage * 0.5;
+
+  const needLife = income * 10 + mortgage + children * 50 + spouse * 30;
+  const needCi = Math.max(income * 3, 50);
+  const needMedical = 300;
+  const needAccident = Math.max(income * 5, 100);
+
+  // 综合建议
+  const recCi = Math.round((doubleTenCi + lifeValueCi + needCi) / 3);
+  const recLife = Math.round((doubleTenLife + lifeValueLife + needLife) / 3);
+  const recMedical = needMedical;
+  const recAccident = needAccident;
+
+  // 缺口
+  const gapCi = Math.max(0, recCi - existCi);
+  const gapLife = Math.max(0, recLife - existLife);
+  const gapMedical = Math.max(0, recMedical - existMedical);
+  const gapAccident = Math.max(0, recAccident - existAccident);
+  const totalGap = gapCi + gapLife + gapMedical + gapAccident;
+
+  // 保费预算
+  const totalBudget = income * 0.10;
+  let ciPrem = 0, lifePrem = 0, medPrem = 0, accPrem = 0;
+  if(totalGap > 0){
+    ciPrem = totalBudget * (gapCi / totalGap) * 0.55;
+    lifePrem = totalBudget * (gapLife / totalGap) * 0.30;
+    medPrem = totalBudget * (gapMedical / totalGap) * 0.10;
+    accPrem = totalBudget * (gapAccident / totalGap) * 0.05;
+  }
+
+  // 优先级
+  const priorities = [];
+  if(gapLife > 0) priorities.push({type:'寿险', gap:gapLife, reason:'家庭责任+债务覆盖'});
+  if(gapCi > 0) priorities.push({type:'重疾险', gap:gapCi, reason:'收入补偿+医疗费用'});
+  if(gapMedical > 0) priorities.push({type:'医疗险', gap:gapMedical, reason:'百万医疗/中端医疗'});
+  if(gapAccident > 0) priorities.push({type:'意外险', gap:gapAccident, reason:'低价高保障'});
+
+  // 情景
+  const scenarios = [
+    {name:'重疾发生', tag:'🏥', color:'danger', desc:'主要家庭成员确诊重大疾病，收入中断+医疗支出', impact:-(income*0.8+30), withIns:-(income*0.8+30)+Math.min(recCi,80)},
+    {name:'意外事故', tag:'🚨', color:'warning', desc:'交通事故导致伤残，一次性赔付+收入减少', impact:-(income*0.5+20), withIns:-(income*0.5+20)+Math.min(recAccident,100)},
+    {name:'长寿风险', tag:'👴', color:'success', desc:'寿命延长至90岁，养老金储备不足', impact:-(income*0.3), withIns:-(income*0.3)+20},
+    {name:'失业/收入中断', tag:'💼', color:'success', desc:'主动收入中断6个月，家庭支出持续', impact:-(income*0.5), withIns:-(income*0.5)},
+  ];
+
+  // 现金流
+  const monthlyIncome = income / 12;
+  const monthlyExpense = monthlyIncome * 0.6;
+  const emergencyMonths = Math.max(3, Math.min(12, Math.round(age/5)));
+  const emergencyFund = monthlyExpense * emergencyMonths;
+
+  const data = {name, age, income, mortgage, children, spouse, existCi, existLife, existMedical, existAccident,
+    recCi, recLife, recMedical, recAccident, gapCi, gapLife, gapMedical, gapAccident, totalGap, totalBudget,
+    ciPrem, lifePrem, medPrem, accPrem, priorities, scenarios, monthlyIncome, monthlyExpense, emergencyMonths, emergencyFund,
+    doubleTenCi, doubleTenLife, lifeValueLife, lifeValueCi, needLife, needCi
+  };
+
+  renderSummary(data);
+  renderPriority(data);
+  renderPyramid(data);
+  renderGap(data);
+  renderPie(data);
+  renderScenario(data);
+  renderCashflow(data);
+  renderReview(data);
+
+  ['sec-summary','sec-priority','sec-pyramid','sec-gap','sec-pie','sec-scenario','sec-cashflow','sec-review']
+    .forEach(id=>document.getElementById(id).style.display='block');
+}
+
+function renderSummary(d){
+  const wrap = document.getElementById('summaryWrap');
+  wrap.innerHTML = `
+    <div class="summary-item"><div class="val danger">${d.totalGap.toFixed(0)}万</div><div class="label">保障缺口</div></div>
+    <div class="summary-item"><div class="val">${d.totalBudget.toFixed(2)}万</div><div class="label">年度保费预算</div></div>
+    <div class="summary-item"><div class="val success">${(d.totalBudget/d.income*100).toFixed(1)}%</div><div class="label">占年收入</div></div>
+    <div class="summary-item"><div class="val">${d.priorities.length}项</div><div class="label">待补齐险种</div></div>
+  `;
+}
+
+function renderPriority(d){
+  const wrap = document.getElementById('priorityWrap');
+  if(!d.priorities.length){
+    wrap.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:13px;padding:10px">✅ 已充分保障，无需补齐</div>';
+    return;
+  }
+  wrap.innerHTML = d.priorities.map((p,i)=>`
+    <div class="priority-row">
+      <div class="priority-num">${i+1}</div>
+      <div class="priority-info"><b>${p.type}</b><br><span style="color:var(--muted)">${p.reason}</span></div>
+      <div class="priority-gap">缺口 ${p.gap.toFixed(0)}万</div>
+    </div>
+  `).join('');
+}
+
+function renderPyramid(d){
+  const wrap = document.getElementById('pyramidWrap');
+  wrap.innerHTML = `
+    <div class="pyramid-tip">重疾险 ${d.recCi.toFixed(0)}万</div>
+    <div class="pyramid-layer pyramid-layer1"><span>寿险 ${d.recLife.toFixed(0)}万</span></div>
+    <div class="pyramid-layer pyramid-layer2"><span>医疗险 ${d.recMedical.toFixed(0)}万</span></div>
+    <div class="pyramid-layer pyramid-layer3"><span>意外险 ${d.recAccident.toFixed(0)}万</span></div>
+    <div class="pyramid-legend">
+      <span><div class="pyramid-dot" style="background:#f59e0b"></div>家庭责任</span>
+      <span><div class="pyramid-dot" style="background:#3b82f6"></div>医疗保障</span>
+      <span><div class="pyramid-dot" style="background:#10b981"></div>意外防护</span>
+    </div>
+  `;
+}
+
+function renderGap(d){
+  const wrap = document.getElementById('gapWrap');
+  const items = [
+    {label:'重疾', have:d.existCi, need:d.recCi, gap:d.gapCi, color:'#f59e0b'},
+    {label:'寿险', have:d.existLife, need:d.recLife, gap:d.gapLife, color:'#ef4444'},
+    {label:'医疗', have:d.existMedical, need:d.recMedical, gap:d.gapMedical, color:'#3b82f6'},
+    {label:'意外', have:d.existAccident, need:d.recAccident, gap:d.gapAccident, color:'#10b981'},
+  ];
+  const maxNeed = Math.max(...items.map(x=>x.need), 1);
+  wrap.innerHTML = items.map(it=>{
+    const pct = (it.need / maxNeed * 100);
+    const havePct = (it.have / it.need * 100);
+    return `<div class="gap-row">
+      <div class="gap-label">${it.label}</div>
+      <div class="gap-bar-wrap">
+        <div class="gap-bar" style="width:${pct}%;background:${it.color}">${it.need.toFixed(0)}万</div>
+        ${it.have>0 ? `<div class="gap-bar-have" style="width:${Math.min(havePct,100)}%"></div>` : ''}
+      </div>
+      <div class="gap-val">${it.gap>0 ? '缺口 '+it.gap.toFixed(0)+'万' : '✅ 已充分'}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderPie(d){
+  const wrap = document.getElementById('pieWrap');
+  const total = d.ciPrem + d.lifePrem + d.medPrem + d.accPrem;
+  const items = [
+    {name:'重疾险', val:d.ciPrem, color:'#f59e0b'},
+    {name:'寿险', val:d.lifePrem, color:'#ef4444'},
+    {name:'医疗险', val:d.medPrem, color:'#3b82f6'},
+    {name:'意外险', val:d.accPrem, color:'#10b981'},
+  ];
+  let cum = 0;
+  const grad = items.map(a=>{
+    const s = (cum/total)*360;
+    cum += a.val;
+    const e = (cum/total)*360;
+    return `${a.color} ${s}deg ${e}deg`;
+  }).join(',');
+  wrap.innerHTML = `
+    <div class="pie-chart" style="background:conic-gradient(${grad})"></div>
+    <div class="pie-legend">
+      ${items.map(a=>`<div class="pie-legend-item"><div class="pie-dot" style="background:${a.color}"></div><span>${a.name} ${a.val.toFixed(2)}万 (${(a.val/total*100).toFixed(0)}%)</span></div>`).join('')}
+    </div>
+  `;
+}
+
+function renderScenario(d){
+  const wrap = document.getElementById('scenarioWrap');
+  wrap.innerHTML = d.scenarios.map(s=>`
+    <div class="scenario-card ${s.color}">
+      <div class="scenario-top">
+        <span class="scenario-tag" style="background:${s.color==='danger'?'#fee2e2':s.color==='warning'?'#fef3c7':'#d1fae5'};color:${s.color==='danger'?'#991b1b':s.color==='warning'?'#92400e':'#065f46'}">${s.tag} ${s.name}</span>
+      </div>
+      <div class="scenario-desc">${s.desc}</div>
+      <div class="scenario-nums">
+        <div class="scenario-num">冲击: <b style="color:var(--danger)">${s.impact.toFixed(0)}万</b></div>
+        <div class="scenario-num">有保险后: <b style="color:${s.withIns>-20?'var(--success)':'var(--danger)'}">${s.withIns.toFixed(0)}万</b></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCashflow(d){
+  const wrap = document.getElementById('cashflowWrap');
+  wrap.innerHTML = `
+    <div class="cashflow-row"><span>月均收入</span><b>${d.monthlyIncome.toFixed(1)}万</b></div>
+    <div class="cashflow-row"><span>月均支出(估)</span><b>${d.monthlyExpense.toFixed(1)}万</b></div>
+    <div class="cashflow-row"><span>应急储备月数</span><b>${d.emergencyMonths}个月</b></div>
+    <div class="cashflow-row"><span>应急储备金额</span><b style="color:var(--primary)">${d.emergencyFund.toFixed(0)}万</b></div>
+    <div class="cashflow-row"><span>年度保费占比</span><b>${(d.totalBudget/d.income*100).toFixed(1)}%</b></div>
+  `;
+}
+
+function renderReview(d){
+  const wrap = document.getElementById('reviewWrap');
+  const triggers = [
+    {icon:'💰', text:'家庭收入变化时重新评估保障方案'},
+    {icon:'👶', text:'新增子女需要增加家庭责任保障'},
+    {icon:'🏠', text:'购房/增加房贷需要补充寿险保额'},
+    {icon:'🎓', text:'子女教育金需求影响长期财务规划'},
+    {icon:'❤️', text:'家庭成员重大健康变化需要调整保障'},
+    {icon:'🎉', text:'退休规划调整时检视年金险配置'},
+  ];
+  wrap.innerHTML = triggers.map(t=>`
+    <div class="review-item">
+      <span class="icon">${t.icon}</span>
+      <span>${t.text}</span>
+    </div>
+  `).join('');
+}
+
+function renderAlgorithms(d){
+  const wrap = document.getElementById('algorithmsWrap');
+  const detail = document.getElementById('algorithmsDetailWrap');
+  const income = d.income || 50;
+  const age = d.age || 35;
+  const debt = d.debt || 200;
+  const expense = d.expense || 30;
+  
+  // 三种算法
+  const life1 = Math.round(income * 10);
+  const life2 = Math.round(debt + expense);
+  const life3 = Math.round(income * 5 + debt * 0.5);
+  
+  const ci1 = Math.round(income * 3);
+  const ci2 = Math.round(expense * 0.8);
+  const ci3 = Math.round(income * 2 + 20);
+  
+  let html = '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">';
+  html += '<div style="flex:1;min-width:200px;padding:14px;background:linear-gradient(135deg,#dbeafe,#eff6ff);border-radius:12px"><div style="font-size:12px;color:var(--muted);margin-bottom:6px">👥 人寿法 (年收入×10倍)</div><div style="font-size:20px;font-weight:800;color:var(--primary)">'+(life1/10000).toFixed(0)+'万</div><div style="font-size:12px;color:var(--muted);margin-top:4px">重疾: '+(ci1/10000).toFixed(0)+'万</div></div>';
+  html += '<div style="flex:1;min-width:200px;padding:14px;background:linear-gradient(135deg,#dcfce7,#f0fdf4);border-radius:12px"><div style="font-size:12px;color:var(--muted);margin-bottom:6px">💰 支出法 (债务+支出)</div><div style="font-size:20px;font-weight:800;color:var(--success)">'+(life2/10000).toFixed(0)+'万</div><div style="font-size:12px;color:var(--muted);margin-top:4px">重疾: '+(ci2/10000).toFixed(0)+'万</div></div>';
+  html += '<div style="flex:1;min-width:200px;padding:14px;background:linear-gradient(135deg,#fef3c7,#fffbeb);border-radius:12px"><div style="font-size:12px;color:var(--muted);margin-bottom:6px">📈 余额法 (收入×5+债务×0.5)</div><div style="font-size:20px;font-weight:800;color:var(--warning)">'+(life3/10000).toFixed(0)+'万</div><div style="font-size:12px;color:var(--muted);margin-top:4px">重疾: '+(ci3/10000).toFixed(0)+'万</div></div>';
+  html += '</div>';
+  
+  html += '<table class="data-table"><thead><tr><th>保障类型</th><th>人寿法(万)</th><th>支出法(万)</th><th>余额法(万)</th><th>差异范围</th></tr></thead><tbody>';
+  html += '<tr><td>定期寿险</td><td>'+(life1/10000).toFixed(0)+'</td><td>'+(life2/10000).toFixed(0)+'</td><td>'+(life3/10000).toFixed(0)+'</td><td>'+Math.round(Math.abs(life1-life2)/10000)+'万</td></tr>';
+  html += '<tr><td>重疾险</td><td>'+(ci1/10000).toFixed(0)+'</td><td>'+(ci2/10000).toFixed(0)+'</td><td>'+(ci3/10000).toFixed(0)+'</td><td>'+Math.round(Math.abs(ci1-ci2)/10000)+'万</td></tr>';
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+  
+  detail.innerHTML = '<div style="padding:12px;background:#f0fdf4;border-radius:10px;font-size:13px;line-height:1.8"><b style="color:var(--success)">算法选择建议：</b><br><b>人寿法</b>：适合家庭责任重、年轻的主力收入者，确保意外时家庭10年收入不断。<br><b>支出法</b>：适合有明确债务的家庭（如房贷），保障能覆盖全部债务+未来支出。<br><b>余额法</b>：最综合的计算方法，平衡收入能力与债务压力，推荐作为参考基准。</div>';
+  document.getElementById('sec-algorithms').style.display = '';
+}
+
+function runClaimSim(){
+  const ci = parseFloat(document.getElementById('ciInput').value) || 0;
+  const med = parseFloat(document.getElementById('medInput').value) || 0;
+  const acc = parseFloat(document.getElementById('accInput').value) || 0;
+  const type = document.getElementById('incidentType').value;
+  const cost = parseFloat(document.getElementById('costInput').value) || 0;
+  
+  let ciPayout = 0, medPayout = 0, accPayout = 0;
+  let typeName = '', desc = '';
+  
+  if(type === 'disease'){
+    typeName = '重大疾病';
+    desc = '确诊重大疾病，符合重疾险赔付条件';
+    ciPayout = ci;
+    medPayout = Math.min(cost, med);
+  } else if(type === 'accident'){
+    typeName = '意外伤害';
+    desc = '意外事故导致人身伤害，涉及意外险+医疗险理赔';
+    accPayout = acc;
+    medPayout = Math.min(cost, med);
+  } else {
+    typeName = '住院治疗';
+    desc = '因疾病住院治疗，涉及医疗险理赔';
+    medPayout = Math.min(cost, med);
+  }
+  
+  const total = ciPayout + medPayout + accPayout;
+  
+  let html = '<div style="padding:14px;background:linear-gradient(135deg,#fee2e2,#fef2f2);border-radius:12px;margin-bottom:12px">';
+  html += '<div style="font-size:13px;color:var(--muted);margin-bottom:4px">'+typeName+' · '+desc+'</div>';
+  html += '<div style="font-size:24px;font-weight:800;color:var(--danger)">💰 总理赔金额: '+total.toFixed(0)+'万</div>';
+  html += '</div>';
+  
+  html += '<table class="data-table"><thead><tr><th>险种</th><th>理赔金额(万)</th><th>计算说明</th></tr></thead><tbody>';
+  if(ciPayout > 0) html += '<tr><td>重疾险</td><td style="color:var(--danger);font-weight:700">'+ciPayout.toFixed(0)+'</td><td>确诊即赔，与医疗费用无关</td></tr>';
+  if(medPayout > 0) html += '<tr><td>医疗险</td><td style="color:var(--danger);font-weight:700">'+medPayout.toFixed(0)+'</td><td>实际医疗费'+cost+'万，不超过保额'+med+'万</td></tr>';
+  if(accPayout > 0) html += '<tr><td>意外险</td><td style="color:var(--danger);font-weight:700">'+accPayout.toFixed(0)+'</td><td>意外伤残/身故一次性赔付</td></tr>';
+  if(total === 0) html += '<tr><td colspan="3" style="text-align:center;color:var(--muted)">根据当前保险配置和事故情况，未触发理赔条件</td></tr>';
+  html += '</tbody></table>';
+  
+  html += '<div style="margin-top:12px;padding:12px;background:#f0fdf4;border-radius:10px;font-size:13px;line-height:1.8"><b style="color:var(--success)">理赔提示：</b><br>• 以上为模拟结果，实际理赔以保险公司审核为准<br>• 请及时准备诊断证明、医疗费用清单、身份证等材料<br>• 重疾险通常需要确诊后的病理报告，医疗险需要发票原件</div>';
+  
+  document.getElementById('claimResultWrap').innerHTML = html;
+}
+
+
+function renderProducts(type){
+  const wrap = document.getElementById('productsWrap');
+  const all = [
+    {name:"某全能保A",type:"重疾险",company:"某保险A",age_min:0,age_max:55,coverage_max:100,premium_example:12000,rating:4.5},
+    {name:"某健康保B",type:"重疾险",company:"某保险B",age_min:18,age_max:50,coverage_max:80,premium_example:9800,rating:4.3},
+    {name:"某守护C",type:"重疾险",company:"某保险C",age_min:0,age_max:60,coverage_max:120,premium_example:15000,rating:4.7},
+    {name:"某长安D",type:"定期寿险",company:"某保险D",age_min:18,age_max:50,coverage_max:300,premium_example:5800,rating:4.2},
+    {name:"某瑞祥E",type:"定期寿险",company:"某保险E",age_min:18,age_max:55,coverage_max:500,premium_example:7200,rating:4.0},
+    {name:"某安心医疗A",type:"医疗险",company:"某保险A",age_min:0,age_max:65,coverage_max:400,premium_example:2800,rating:4.4},
+    {name:"某百万医疗B",type:"医疗险",company:"某保险F",age_min:0,age_max:70,coverage_max:600,premium_example:3500,rating:4.6},
+    {name:"某BankD万事故A",type:"意外险",company:"某保险G",age_min:1,age_max:65,coverage_max:100,premium_example:380,rating:4.1},
+    {name:"某全能保意外B",type:"意外险",company:"某保险B",age_min:18,age_max:60,coverage_max:150,premium_example:520,rating:4.3},
+    {name:"某养老金A",type:"养老险",company:"某保险H",age_min:0,age_max:60,coverage_max:0,premium_example:50000,rating:4.0},
+  ];
+  const filtered = type==='all' ? all : all.filter(p=>p.type===type);
+  let html = '<table class="data-table"><thead><tr><th>产品名称</th><th>类型</th><th>保险公司</th><th>适投年龄</th><th>最高保额</th><th>参考年费</th><th>评分</th></tr></thead><tbody>';
+  filtered.forEach(p=>{
+    const coverage = p.coverage_max > 0 ? p.coverage_max+'万' : '-';
+    html += '<tr><td>'+p.name+'</td><td>'+p.type+'</td><td>'+p.company+'</td><td>'+p.age_min+'-'+p.age_max+'</td><td>'+coverage+'</td><td>'+p.premium_example.toLocaleString()+'元</td><td>'+p.rating+'</td></tr>';
+  });
+  html += '</tbody></table>';
+  html += '<div style="margin-top:10px;font-size:12px;color:var(--muted)">共展示'+filtered.length+'款产品，完整库含20款</div>';
+  wrap.innerHTML = html;
+}
+
+const UW_RULES = {
+  "高血压":{ci:"加费+拒保",life:"加费",medical:"除外"},
+  "糖尿病":{ci:"加费+拒保",life:"加费",medical:"拒保"},
+  "肾结石":{ci:"标体",life:"标体",medical:"除外"},
+  "乳腺结节":{ci:"除外/加费",life:"标体",medical:"标体"},
+  "甲状腺结节":{ci:"标体",life:"标体",medical:"标体"},
+  "肺结节":{ci:"除外/延期",life:"延期",medical:"除外"},
+  "肥胗":{ci:"加费",life:"加费",medical:"加费"},
+  "异常指标":{ci:"延期",life:"标体",medical:"标体"},
+};
+
+function runUnderwriting(){
+  const age = parseInt(document.getElementById('uwAge').value) || 35;
+  const select = document.getElementById('uwConditions');
+  const conditions = Array.from(select.selectedOptions).map(o=>o.value);
+  
+  if(conditions.length === 0){
+    document.getElementById('underwritingWrap').innerHTML = '<div style="padding:12px;background:#fef3c7;border-radius:10px;font-size:13px;color:#92400e">请至少选择一项健康异常</div>';
+    return;
+  }
+  
+  let html = '<table class="data-table"><thead><tr><th>异常项</th><th>重疾险结论</th><th>定期寿险结论</th><th>医疗险结论</th></tr></thead><tbody>';
+  let allCi=[], allLife=[], allMed=[];
+  conditions.forEach(c=>{
+    const r = UW_RULES[c] || {ci:"待核",life:"待核",medical:"待核"};
+    allCi.push(r.ci); allLife.push(r.life); allMed.push(r.medical);
+    html += '<tr><td>'+c+'</td><td>'+r.ci+'</td><td>'+r.life+'</td><td>'+r.medical+'</td></tr>';
+  });
+  html += '</tbody></table>';
+  
+  function summarize(arr){
+    if(arr.some(x=>x.includes("拒保"))) return "拒保";
+    if(arr.some(x=>x.includes("加费"))) return "加费";
+    if(arr.some(x=>x.includes("除外"))) return "除外";
+    if(arr.some(x=>x.includes("延期"))) return "延期";
+    return "标体";
+  }
+  
+  html += '<div style="margin-top:14px;padding:14px;background:linear-gradient(135deg,#dbeafe,#eff6ff);border-radius:12px">';
+  html += '<div style="font-size:13px;color:var(--muted);margin-bottom:8px">综合核保结论</div>';
+  html += '<div style="display:flex;gap:12px;flex-wrap:wrap">';
+  html += '<div style="flex:1;min-width:100px;padding:10px;background:#fff;border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">重疾险</div><div style="font-size:18px;font-weight:800;color:var(--primary)">'+summarize(allCi)+'</div></div>';
+  html += '<div style="flex:1;min-width:100px;padding:10px;background:#fff;border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">定期寿险</div><div style="font-size:18px;font-weight:800;color:var(--primary)">'+summarize(allLife)+'</div></div>';
+  html += '<div style="flex:1;min-width:100px;padding:10px;background:#fff;border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">医疗险</div><div style="font-size:18px;font-weight:800;color:var(--primary)">'+summarize(allMed)+'</div></div>';
+  html += '</div></div>';
+  
+  if(age > 55) html += '<div style="margin-top:10px;padding:10px;background:#fef3c7;border-radius:10px;font-size:12px;color:#92400e">年龄>55岁，建议优先考虑消费型保险和养老险</div>';
+  else if(age > 45) html += '<div style="margin-top:10px;padding:10px;background:#fef3c7;border-radius:10px;font-size:12px;color:#92400e">年龄45-55岁，重疾险费率逐渐上升</div>';
+  
+  html += '<div style="margin-top:10px;padding:10px;background:#f0fdf4;border-radius:10px;font-size:12px;line-height:1.8;color:var(--success)"><b>核保提示：</b><br>• 以上为模拟结论，实际以保险公司核保审核为准<br>• 标体=按标准费率承保 | 加费=更高保费 | 除外=该疾病不赔付 | 拒保=不接受投保 | 延期=待治愈后审核</div>';
+  
+  document.getElementById('underwritingWrap').innerHTML = html;
+}
+
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 绑定AI分析按钮
+    const analyzeBtn = document.querySelector('#analyze-btn, .analyze-btn, [data-action="analyze"]');
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', async function() {
+            const input = document.querySelector('#analyze-input, .analyze-input');
+            const context = document.querySelector('#analyze-context, .analyze-context');
+            const resultContainer = document.querySelector('#analyze-result, .analyze-result');
+            
+            const prompt = input ? input.value : '';
+            const ctx = context ? context.value : '';
+            
+            if (!prompt) { alert('请输入分析内容'); return; }
+            
+            resultContainer.innerHTML = '<div class="api-loading"><div class="loading-spinner"></div><p>AI分析中...</p></div>';
+            analyzeBtn.disabled = true;
+            
+            const result = await LongmaAPI.ai.analyze(prompt, ctx);
+            analyzeBtn.disabled = false;
+            
+            if (result.success) {
+                resultContainer.innerHTML = `<div class="api-analysis-result">
+                    <h4>分析结果</h4>
+                    <div class="content">${result.data.analysis.replace(/\n/g, '<br>')}</div>
+                    <div class="meta">模型: ${result.data.model} | 时间: ${result.data.timestamp}</div>
+                </div>`;
+            } else {
+                resultContainer.innerHTML = `<div class="api-error">分析失败: ${result.error}</div>`;
+            }
+        });
+    }
+    
+    // 绑定报告生成按钮
+    const reportBtn = document.querySelector('#report-btn, .report-btn, [data-action="generate-report"]');
+    if (reportBtn) {
+        reportBtn.addEventListener('click', async function() {
+            const resultContainer = document.querySelector('#report-result, .report-result');
+            resultContainer.innerHTML = '<div class="api-loading"><div class="loading-spinner"></div><p>报告生成中...</p></div>';
+            reportBtn.disabled = true;
+            
+            const result = await LongmaAPI.ai.generateReport('general', {});
+            reportBtn.disabled = false;
+            
+            if (result.success) {
+                resultContainer.innerHTML = `<div class="api-report-result">
+                    <h4>生成的报告</h4>
+                    <div class="content">${result.data.report.replace(/\n/g, '<br>')}</div>
+                </div>`;
+            } else {
+                resultContainer.innerHTML = '<div class="api-error">报告生成失败</div>';
+            }
+        });
+    }
+});
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
