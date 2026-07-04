@@ -1,0 +1,389 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI对公账户开户辅助，自动填充+材料审核+合规检查，一键完成开户申请。">
+    <meta name="keywords" content="对公开户,账户开户,材料审核,企业开户,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/corporate-account-opening">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/corporate-account-opening">
+    <meta property="og:title" content="对公账户开户 | FinAIAI">
+    <meta property="og:description" content="FinAIAI对公账户开户辅助，自动填充+材料审核+合规检查，一键完成开户申请。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/corporate-account.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="对公账户开户 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI对公账户开户辅助，自动填充+材料审核+合规检查，一键完成开户申请。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/corporate-account.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "对公账户开户 | FinAIAI",
+        "description": "FinAIAI对公账户开户辅助，自动填充+材料审核+合规检查，一键完成开户申请。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>对公账户开户 | FinAIAI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+      background: #f5f7fa;
+      min-height: 100vh;
+      color: #333;
+    }
+    .container { max-width: 430px; margin: 0 auto; padding: 20px; }
+    .header {
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+      border-radius: 16px;
+      padding: 30px 24px;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .header h1 { font-size: 24px; margin-bottom: 8px; }
+    .header p { font-size: 14px; opacity: 0.9; }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border-left: 4px solid #1a73e8;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: #1a73e8;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .step-content { flex: 1; }
+    .step-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .step-desc { font-size: 13px; color: #666; }
+    .checklist {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #e8eaed;
+    }
+    .check-item:last-child { border-bottom: none; }
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #dadce0;
+      border-radius: 4px;
+      margin-right: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .check-box.checked {
+      background: #1a73e8;
+      border-color: #1a73e8;
+    }
+    .check-box.checked::after {
+      content: '✓';
+      color: white;
+      font-size: 12px;
+    }
+    .check-text { font-size: 14px; color: #333; }
+    .check-text.checked { text-decoration: line-through; color: #999; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 16px;
+      text-align: center;
+      text-decoration: none;
+    }
+    .progress-bar {
+      height: 8px;
+      background: #e8eaed;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+    .footer {
+      text-align: center;
+      padding: 30px 0;
+      color: #999;
+      font-size: 12px;
+    }
+  </style>
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🏢 企业开户智能助手</h1>
+      <p>AI辅助企业银行开户，材料检查与流程引导</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 开户流程</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-name">预约开户</div>
+          <div class="step-desc">在线填写企业信息，预约开户时间</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-name">材料准备</div>
+          <div class="step-desc">准备营业执照、法人身份证、公章等</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-name">现场办理</div>
+          <div class="step-desc">携带材料到银行网点办理开户</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-name">账户激活</div>
+          <div class="step-desc">领取开户许可证，激活网银</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">✅ 材料检查清单</div>
+      <div class="checklist" id="checklist">
+        <div class="check-item">
+          <div class="check-box" onclick="toggleCheck(this)"></div>
+          <div class="check-text">营业执照正副本</div>
+        </div>
+        <div class="check-item">
+          <div class="check-box" onclick="toggleCheck(this)"></div>
+          <div class="check-text">法人身份证原件及复印件</div>
+        </div>
+        <div class="check-item">
+          <div class="check-box" onclick="toggleCheck(this)"></div>
+          <div class="check-text">公章、财务章、法人章</div>
+        </div>
+        <div class="check-item">
+          <div class="check-box" onclick="toggleCheck(this)"></div>
+          <div class="check-text">公司章程</div>
+        </div>
+        <div class="check-item">
+          <div class="check-box" onclick="toggleCheck(this)"></div>
+          <div class="check-text">股东会决议</div>
+        </div>
+        <div class="check-item">
+          <div class="check-box" onclick="toggleCheck(this)"></div>
+          <div class="check-text">经营场所证明</div>
+        </div>
+        <div class="check-item">
+          <div class="check-box" onclick="toggleCheck(this)"></div>
+          <div class="check-text">税务登记证</div>
+        </div>
+        <div class="check-item">
+          <div class="check-box" onclick="toggleCheck(this)"></div>
+          <div class="check-text">组织机构代码证</div>
+        </div>
+      </div>
+      <button class="btn" onclick="checkMaterials()">AI智能检查材料完整性</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💡 开户小贴士</div>
+      <div style="font-size:14px;color:#666;line-height:1.8;">
+        <p>• 基本户只能开立一个，用于日常转账结算和现金收付</p>
+        <p>• 一般户可开立多个，用于借款转存和其他结算</p>
+        <p>• 专户用于特定用途资金专项管理</p>
+        <p>• 临时户用于临时机构或项目</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>🦞 FinAIAI · 让开户更简单</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleCheck(box) {
+      box.classList.toggle('checked');
+      box.nextElementSibling.classList.toggle('checked');
+      updateProgress();
+    }
+
+    function updateProgress() {
+      var total = document.querySelectorAll('.check-box').length;
+      var checked = document.querySelectorAll('.check-box.checked').length;
+      var percent = (checked / total * 100).toFixed(0);
+      document.getElementById('progressBar').style.width = percent + '%';
+    }
+
+    function checkMaterials() {
+      var checked = document.querySelectorAll('.check-box.checked').length;
+      var total = document.querySelectorAll('.check-box').length;
+      if (checked === total) {
+        alert('✅ 材料完整！可以前往银行办理开户。');
+      } else {
+        alert('⚠️ 还有 ' + (total - checked) + ' 项材料未准备，请继续准备。');
+      }
+    }
+  </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 绑定AI分析按钮
+    const analyzeBtn = document.querySelector('#analyze-btn, .analyze-btn, [data-action="analyze"]');
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', async function() {
+            const input = document.querySelector('#analyze-input, .analyze-input');
+            const context = document.querySelector('#analyze-context, .analyze-context');
+            const resultContainer = document.querySelector('#analyze-result, .analyze-result');
+            
+            const prompt = input ? input.value : '';
+            const ctx = context ? context.value : '';
+            
+            if (!prompt) { alert('请输入分析内容'); return; }
+            
+            resultContainer.innerHTML = '<div class="api-loading"><div class="loading-spinner"></div><p>AI分析中...</p></div>';
+            analyzeBtn.disabled = true;
+            
+            const result = await LongmaAPI.ai.analyze(prompt, ctx);
+            analyzeBtn.disabled = false;
+            
+            if (result.success) {
+                resultContainer.innerHTML = `<div class="api-analysis-result">
+                    <h4>分析结果</h4>
+                    <div class="content">${result.data.analysis.replace(/\n/g, '<br>')}</div>
+                    <div class="meta">模型: ${result.data.model} | 时间: ${result.data.timestamp}</div>
+                </div>`;
+            } else {
+                resultContainer.innerHTML = `<div class="api-error">分析失败: ${result.error}</div>`;
+            }
+        });
+    }
+    
+    // 绑定报告生成按钮
+    const reportBtn = document.querySelector('#report-btn, .report-btn, [data-action="generate-report"]');
+    if (reportBtn) {
+        reportBtn.addEventListener('click', async function() {
+            const resultContainer = document.querySelector('#report-result, .report-result');
+            resultContainer.innerHTML = '<div class="api-loading"><div class="loading-spinner"></div><p>报告生成中...</p></div>';
+            reportBtn.disabled = true;
+            
+            const result = await LongmaAPI.ai.generateReport('general', {});
+            reportBtn.disabled = false;
+            
+            if (result.success) {
+                resultContainer.innerHTML = `<div class="api-report-result">
+                    <h4>生成的报告</h4>
+                    <div class="content">${result.data.report.replace(/\n/g, '<br>')}</div>
+                </div>`;
+            } else {
+                resultContainer.innerHTML = '<div class="api-error">报告生成失败</div>';
+            }
+        });
+    }
+});
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
