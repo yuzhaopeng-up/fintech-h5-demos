@@ -1,0 +1,907 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI全球资产配置，区域分布+货币对冲+再平衡策略，科学的跨市场投资方案。">
+    <meta name="keywords" content="全球配置,资产配置,货币对冲,投资组合,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/asset-allocation">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/asset-allocation">
+    <meta property="og:title" content="全球资产配置 | FinAIAI">
+    <meta property="og:description" content="FinAIAI全球资产配置，区域分布+货币对冲+再平衡策略，科学的跨市场投资方案。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/asset-allocation.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="全球资产配置 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI全球资产配置，区域分布+货币对冲+再平衡策略，科学的跨市场投资方案。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/asset-allocation.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "全球资产配置 | FinAIAI",
+        "description": "FinAIAI全球资产配置，区域分布+货币对冲+再平衡策略，科学的跨市场投资方案。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>全球资产配置 | FinAIAI</title>
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--primary:#2563eb;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--radius:14px;--shadow:0 4px 20px rgba(0,0,0,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:40px}
+.container{max-width:420px;margin:0 auto;padding:16px}
+
+/* 头部 */
+.header{text-align:center;padding:24px 0 16px}
+.header h1{font-size:22px;font-weight:800;background:linear-gradient(135deg,#2563eb,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header p{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* 卡片 */
+.card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow);animation:fadeIn .6s ease forwards;opacity:0;transform:translateY(12px)}
+.card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}.card:nth-child(5){animation-delay:.2s}
+.card-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+/* KYC评测 */
+.kyc-wrap{display:flex;flex-direction:column;gap:12px}
+.kyc-item{padding:12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border)}
+.kyc-item .label{font-size:12px;color:var(--muted);margin-bottom:6px}
+.kyc-item .options{display:flex;gap:8px;flex-wrap:wrap}
+.kyc-btn{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:#fff;font-size:13px;cursor:pointer;transition:all .2s}
+.kyc-btn:hover{border-color:var(--primary);color:var(--primary)}
+.kyc-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* 配置结果 */
+.result-top{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.result-ring{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+.result-ring svg{position:absolute;transform:rotate(-90deg)}
+.result-info h4{margin:0;font-size:14px}.result-info p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+
+/* 配置表格 */
+.alloc-table{width:100%;border-collapse:collapse;font-size:12px}
+.alloc-table th{background:#f8fafc;padding:8px;text-align:left;font-weight:600;border-bottom:1px solid var(--border)}
+.alloc-table td{padding:8px;border-bottom:1px solid var(--border)}
+.alloc-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;max-width:80px}
+.alloc-bar-inner{height:100%;border-radius:3px}
+
+/* 饼图 */
+.pie-wrap{display:flex;align-items:center;gap:16px;margin-top:10px}
+.pie-chart{width:120px;height:120px;border-radius:50%;position:relative;flex-shrink:0}
+.pie-legend{flex:1;font-size:12px}
+.pie-legend-item{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.pie-dot{width:10px;height:10px;border-radius:2px}
+
+/* 有效边界曲线 */
+.ef-wrap{margin-top:10px}
+.ef-chart{height:180px;background:#f8fafc;border-radius:10px;position:relative;overflow:hidden}
+.ef-point{position:absolute;width:8px;height:8px;border-radius:50%;transform:translate(-50%,-50%)}
+.ef-label{position:absolute;font-size:9px;color:var(--muted);transform:translate(-50%,0);white-space:nowrap}
+.ef-axis{position:absolute;font-size:9px;color:var(--muted)}
+
+/* 回撤曲线 */
+.dd-wrap{margin-top:10px}
+.dd-chart{height:140px;background:#f8fafc;border-radius:10px;position:relative}
+
+/* 热力图 */
+.heat-wrap{margin-top:10px}
+.heat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.heat-cell{padding:8px;text-align:center;border-radius:6px;font-size:11px;font-weight:600}
+.heat-label{font-size:10px;color:var(--muted);text-align:center;margin-top:2px}
+
+/* 情景分析 */
+.scenario-wrap{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.scenario-row{display:flex;align-items:center;gap:10px;padding:10px;background:#f8fafc;border-radius:10px;border:1px solid var(--border)}
+.scenario-tag{padding:3px 10px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap}
+.scenario-info{flex:1;font-size:12px}
+.scenario-val{font-size:14px;font-weight:700;white-space:nowrap}
+
+/* 压力测试 */
+.stress-wrap{margin-top:10px}
+.stress-slider{display:flex;flex-direction:column;gap:10px}
+.stress-item label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
+.stress-item input[type=range]{width:100%;margin-top:4px}
+.stress-result{padding:10px;background:#f8fafc;border-radius:10px;margin-top:10px;font-size:12px}
+
+/* 按钮 */
+.btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:16px;box-shadow:var(--shadow)}
+.btn:active{transform:scale(.98)}
+
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+</style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📊 智能资产配置专家</h1>
+    <p>马科维茨优化 · 风险收益平衡 · 一键生成方案</p>
+  </div>
+
+  <!-- KYC评测 -->
+  <div class="card" id="sec-kyc">
+    <div class="card-title"><span class="dot" style="background:#3b82f6"></span>KYC风险偏好评测</div>
+    <div class="kyc-wrap" id="kycWrap"></div>
+    <button class="btn" onclick="generateAllocation()">生成配置方案</button>
+  </div>
+
+  <!-- 配置结果 -->
+  <div class="card" id="sec-result" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#10b981"></span>最优配置方案</div>
+    <div id="resultWrap"></div>
+  </div>
+
+  <!-- 配置比例 -->
+  <div class="card" id="sec-pie" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#f59e0b"></span>资产配置比例</div>
+    <div class="pie-wrap" id="pieWrap"></div>
+  </div>
+
+  <!-- 情景分析 -->
+  <div class="card" id="sec-scenario" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#8b5cf6"></span>情景与压力测试</div>
+    <div class="scenario-wrap" id="scenarioWrap"></div>
+  </div>
+
+  <!-- 压力测试交互 -->
+  <div class="card" id="sec-stress" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#ef4444"></span>压力测试工坊</div>
+    <div class="stress-wrap" id="stressWrap"></div>
+  </div>
+
+  <!-- 有效边界曲线 -->
+  <div class="card" id="sec-ef" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#06b6d4"></span>有效边界曲线</div>
+    <div class="ef-wrap" id="efWrap"></div>
+  </div>
+
+  <!-- 相关性热力图 -->
+  <div class="card" id="sec-heat" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#f97316"></span>资产相关性热力图</div>
+    <div class="heat-wrap" id="heatWrap"></div>
+  </div>
+
+  <!-- 回撤曲线 -->
+  <div class="card" id="sec-dd" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#ec4899"></span>回撤曲线</div>
+    <div class="dd-wrap" id="ddWrap"></div>
+  </div>
+
+  <!-- 再平衡监控 -->
+  <div class="card" id="sec-rebalance" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#6366f1"></span>再平衡监控</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px">目标配置 vs 当前实际配置</div>
+    <div id="rebalanceWrap"></div>
+    <div style="margin-top:10px;padding:10px;background:#eef2ff;border-radius:10px;font-size:12px;color:#3730a3">
+      <b>📝 再平衡建议：</b><span id="rebalanceAdvice">等待生成配置方案后显示</span>
+    </div>
+  </div>
+
+  <!-- Brinson归因分析 -->
+  <div class="card" id="sec-brinson" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#14b8a6"></span>Brinson归因分析</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px">配置效应 + 选股效应 + 交互效应</div>
+    <div id="brinsonWrap"></div>
+  </div>
+
+  <!-- 市场事件驱动调仓 -->
+  <div class="card" id="sec-events" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#f43f5e"></span>市场事件驱动</div>
+    <div id="eventsWrap"></div>
+  </div>
+
+  <!-- AI理财顾问追问 -->
+  <div class="card" id="sec-agent" style="display:none">
+    <div class="card-title"><span class="dot" style="background:#8b5cf6"></span>AI理财顾问</div>
+    <div id="agentChat" style="min-height:80px;font-size:13px;color:var(--muted)">
+      <div style="margin-bottom:8px"><b>🤖 你好，我是你的AI理财顾问。</b></div>
+
+  <!-- 回测引擎 -->
+  <div class="card" id="sec-backtest" style="display:none">
+    <h3 style="font-size:16px;margin-bottom:14px">📊 历史回测引擎</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">如果5年前按此配置投入，现在收益多少？</p>
+    <div id="backtestWrap"></div>
+    <div id="backtestCompareWrap" style="margin-top:14px"></div>
+  </div>
+
+  <!-- 定投 vs 一次性 -->
+  <div class="card" id="sec-dca" style="display:none">
+    <h3 style="font-size:16px;margin-bottom:14px">📈 定投 vs 一次性对比</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">同一配置下，定投曲线 vs 一次性投入曲线并列对比</p>
+    <div id="dcaWrap"></div>
+    <div id="dcaAnalysisWrap" style="margin-top:14px"></div>
+  </div>
+
+  <!-- 个人养老金税延 -->
+  <div class="card" id="sec-pension" style="display:none">
+    <h3 style="font-size:16px;margin-bottom:14px">🏠 个人养老金税延规划</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">每年存入12000，税延+复利终值计算</p>
+    <div id="pensionWrap"></div>
+    <div id="pensionBreakdownWrap" style="margin-top:14px"></div>
+
+  <!-- 基金产品库 -->
+  <div class="card" id="sec-funds" style="display:none">
+    <h3 style="font-size:16px;margin-bottom:14px">📊 基金产品推荐库</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">20只真实基金产品，按风险偏好筛选</p>
+    <div id="fundsWrap"></div>
+  </div>
+
+  <!-- 交互式个人养老金计算器 -->
+  <div class="card" id="sec-pension-calc" style="display:none">
+    <h3 style="font-size:16px;margin-bottom:14px">🏠 个人养老金计算器</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">自定义年度存入、边际税率、投资年限、年化收益</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <div style="flex:1;min-width:120px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">年度存入(万)</label><input type="number" id="pensionAnnual" value="1.2" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px"></div>
+      <div style="flex:1;min-width:120px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">边际税率(%)</label><input type="number" id="pensionTax" value="20" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px"></div>
+      <div style="flex:1;min-width:120px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">投资年限</label><input type="number" id="pensionYears" value="20" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px"></div>
+      <div style="flex:1;min-width:120px"><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">年化收益(%)</label><input type="number" id="pensionReturn" value="6" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px"></div>
+      <div style="flex:1;min-width:120px;display:flex;align-items:flex-end"><button onclick="runPensionCalc()" style="width:100%;padding:10px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">重新计算</button></div>
+    </div>
+    <div id="pensionCalcWrap"></div>
+  </div>
+
+  </div>
+
+      <div>已为您生成配置方案，请问还有什么可以帮您？</div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <button class="kyc-btn" onclick="agentAsk('为什么不多配点股票？')">为什么不多配点股票？</button>
+      <button class="kyc-btn" onclick="agentAsk('压力测试下会亏多少？')">压力测试会亏多少？</button>
+      <button class="kyc-btn" onclick="agentAsk('给我一个定投计划')">给一个定投计划</button>
+    </div>
+  </div>
+
+  <!-- 尾部 -->
+  <div style="text-align:center;font-size:11px;color:var(--muted);padding:20px 0">
+    🐠 FinAIAI · 配置结果仅供参考，不构成投资建议
+  </div>
+</div>
+
+<script>
+/* ===== KYC题库 ===== */
+const kycQuestions = [
+  {id:'age',label:'年龄段',options:['<30岁','30-45岁','45-55岁','>55岁']},
+  {id:'income',label:'年收入',options:['<20万','20-50万','50-100万','>100万']},
+  {id:'horizon',label:'投资期限',options:['<1年','1-3年','3-5年','>5年']},
+  {id:'loss',label:'能接受的单次最大亏损',options:['<5%','5-10%','10-20%','>20%']},
+  {id:'goal',label:'投资目标',options:['保值','稳健增值','追求高收益','激进增长']},
+];
+
+const kycState = {};
+
+function renderKYC(){
+  const wrap = document.getElementById('kycWrap');
+  wrap.innerHTML = kycQuestions.map(q=>{
+    return '<div class="kyc-item"><div class="label">'+q.label+'</div><div class="options">'+q.options.map((opt,i)=>
+      '<button class="kyc-btn '+(kycState[q.id]===i?'active':'')+'" onclick="setKYC(\''+q.id+'\','+i+')">'+opt+'</button>'
+    ).join('')+'</div></div>';
+  }).join('');
+}
+
+function setKYC(key,idx){kycState[key]=idx;
+function renderBacktest(cfg){
+  const wrap = document.getElementById('backtestWrap');
+  const compare = document.getElementById('backtestCompareWrap');
+  const years = 5;
+  const hist = {
+    bond:[5.2,4.8,5.5,6.1,5.8], mix:[8.5,7.2,9.1,10.5,8.8],
+    stock:[12.5,8.0,15.2,22.0,18.5], cash:[3.5,3.2,3.8,4.5,4.2]
+  };
+  let val = 100, path = [{year:0,value:100,return:0}], annual = [];
+  for(let i=0;i<years;i++){
+    let ret = (cfg.bond||0)/100*hist.bond[i] + (cfg.mix||0)/100*hist.mix[i] + (cfg.stock||0)/100*hist.stock[i] + (cfg.cash||0)/100*hist.cash[i];
+    val *= (1+ret/100);
+    path.push({year:2020+i,value:Math.round(val*100)/100,return:Math.round(ret*100)/100});
+    annual.push({year:2020+i,return:Math.round(ret*100)/100,value:Math.round(val*100)/100});
+  }
+  const totalRet = Math.round((val-100)/100*10000)/100;
+  const annualized = Math.round((Math.pow(val/100,1/years)-1)*10000)/100;
+  const maxDD = Math.min(...annual.map(a=>a.return));
+  
+  let html = '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#dbeafe,#eff6ff);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">初始投入</div><div style="font-size:18px;font-weight:800;color:var(--primary)">100万</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#dcfce7,#f0fdf4);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">回测终值</div><div style="font-size:18px;font-weight:800;color:var(--success)">'+val.toFixed(2)+'万</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#fef3c7,#fffbeb);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">总收益率</div><div style="font-size:18px;font-weight:800;color:var(--warning)">'+(totalRet>=0?'+':'')+totalRet+'%</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#fee2e2,#fef2f2);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">年化收益率</div><div style="font-size:18px;font-weight:800;color:var(--danger)">'+annualized+'%</div></div>';
+  html += '</div>';
+  
+  html += '<table class="data-table"><thead><tr><th>年份</th><th>组合年化收益</th><th>组合累计价值(万)</th><th>评价</th></tr></thead><tbody>';
+  annual.forEach(a=>{
+    const evalText = a.return>15?'大年':a.return>0?'小年':'亏损';
+    html += '<tr><td>'+a.year+'</td><td style="color:'+(a.return>=0?'var(--success)':'var(--danger)')+'">'+(a.return>=0?'+':'')+a.return+'%</td><td>'+a.value.toFixed(2)+'</td><td>'+evalText+'</td></tr>';
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+  
+  // Benchmark comparison
+  let benchHtml = '<h4 style="font-size:14px;margin-bottom:10px">与单一资产对比</h4><table class="data-table"><thead><tr><th>对比项</th><th>初始100万终值(万)</th><th>差异</th></tr></thead><tbody>';
+  const labels = {bond:'全部债券型',mix:'全部混合型',stock:'全部股票型',cash:'全部货币市场'};
+  for(let k in hist){
+    let v=100; for(let i=0;i<years;i++) v*=(1+hist[k][i]/100);
+    const diff = v-val;
+    benchHtml += '<tr><td>'+labels[k]+'</td><td>'+v.toFixed(2)+'</td><td style="color:'+(diff>0?'var(--success)':'var(--danger)')+'">'+(diff>0?'超过':'落后')+' '+Math.abs(diff).toFixed(2)+'万</td></tr>';
+  }
+  benchHtml += '</tbody></table>';
+  compare.innerHTML = benchHtml;
+  document.getElementById('sec-backtest').style.display = '';
+}
+
+function renderDCA(cfg){
+  const wrap = document.getElementById('dcaWrap');
+  const analysis = document.getElementById('dcaAnalysisWrap');
+  const monthly = 5000, years = 10, months = years*12;
+  let dcaVal=0, dcaCost=0, lumpVal=600000, lumpCost=600000;
+  const dcaPath=[{year:0,value:lumpVal,cost:lumpCost}], lumpPath=[{year:0,value:lumpVal,cost:lumpCost}];
+  for(let m=1;m<=months;m++){
+    dcaCost += monthly;
+    const monthlyRet = 0.008 + (Math.sin(m)*0.02);
+    dcaVal = (dcaVal+monthly)*(1+monthlyRet);
+    lumpVal = lumpVal*(1+monthlyRet);
+    if(m%12===0){
+      dcaPath.push({year:m/12,value:Math.round(dcaVal),cost:Math.round(dcaCost)});
+      lumpPath.push({year:m/12,value:Math.round(lumpVal),cost:Math.round(lumpCost)});
+    }
+  }
+  const dcaRet = Math.round((dcaVal-dcaCost)/dcaCost*10000)/100;
+  const lumpRet = Math.round((lumpVal-lumpCost)/lumpCost*10000)/100;
+  const winner = dcaVal>lumpVal?'定投':'一次性';
+  
+  let html = '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#dbeafe,#eff6ff);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">总投入</div><div style="font-size:18px;font-weight:800;color:var(--primary)">'+(monthly*months/10000).toFixed(0)+'万</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#dcfce7,#f0fdf4);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">定投终值</div><div style="font-size:18px;font-weight:800;color:var(--success)">'+Math.round(dcaVal).toLocaleString()+'元</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#fef3c7,#fffbeb);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">一次性终值</div><div style="font-size:18px;font-weight:800;color:var(--warning)">'+Math.round(lumpVal).toLocaleString()+'元</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#fee2e2,#fef2f2);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">胜出方</div><div style="font-size:18px;font-weight:800;color:var(--danger)">'+winner+'</div></div>';
+  html += '</div>';
+  
+  html += '<table class="data-table"><thead><tr><th>年份</th><th>定投累计价值(元)</th><th>一次性累计价值(元)</th><th>差异(元)</th></tr></thead><tbody>';
+  for(let i=0;i<dcaPath.length;i++){
+    const diff = dcaPath[i].value - lumpPath[i].value;
+    html += '<tr><td>第'+dcaPath[i].year+'年</td><td>'+dcaPath[i].value.toLocaleString()+'</td><td>'+lumpPath[i].value.toLocaleString()+'</td><td style="color:'+(diff>=0?'var(--success)':'var(--danger)')+'">'+(diff>=0?'+':'')+diff.toLocaleString()+'</td></tr>';
+  }
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+  
+  analysis.innerHTML = '<div style="padding:12px;background:#f0fdf4;border-radius:10px;font-size:13px;line-height:1.8"><b style="color:var(--success)">定投优势分析：</b><br>1. <b>平滑成本</b>：定投通过定期投入平滑了市场波动，避免了一次性投入在高点的风险。<br>2. <b>心理压力</b>：定投每月投入金额较小，即使市场下跌也不会对整体生活质量造成重大影响。<br>3. <b>复利效应</b>：定投从第一个月开始就让资金工作，尽早享受复利增值。</div>';
+  document.getElementById('sec-dca').style.display = '';
+}
+
+function renderPension(cfg){
+  const wrap = document.getElementById('pensionWrap');
+  const breakdown = document.getElementById('pensionBreakdownWrap');
+  const annual = 1.2, taxRate = 0.20, years = 20;
+  const annualTaxSaved = annual * taxRate;
+  let pensionVal = 0;
+  const path = [];
+  for(let y=1;y<=years;y++){
+    pensionVal = (pensionVal + annual) * 1.06;
+    if(y%5===0 || y===1) path.push({year:y,value:Math.round(pensionVal*100)/100});
+  }
+  const totalContrib = annual * years;
+  const totalTaxSaved = annualTaxSaved * years;
+  const gains = pensionVal - totalContrib;
+  
+  let html = '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#dbeafe,#eff6ff);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">每年存入</div><div style="font-size:18px;font-weight:800;color:var(--primary)">'+annual.toFixed(1)+'万</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#dcfce7,#f0fdf4);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">每年节税</div><div style="font-size:18px;font-weight:800;color:var(--success)">'+annualTaxSaved.toFixed(2)+'万</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#fef3c7,#fffbeb);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">'+years+'年累计节税</div><div style="font-size:18px;font-weight:800;color:var(--warning)">'+totalTaxSaved.toFixed(2)+'万</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#fee2e2,#fef2f2);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">'+years+'年后账户价值</div><div style="font-size:18px;font-weight:800;color:var(--danger)">'+pensionVal.toFixed(2)+'万</div></div>';
+  html += '</div>';
+  
+  html += '<table class="data-table"><thead><tr><th>年份</th><th>账户累计价值(万)</th></tr></thead><tbody>';
+  path.forEach(p=>{
+    html += '<tr><td>第'+p.year+'年</td><td style="color:var(--primary);font-weight:700">'+p.value.toFixed(2)+'</td></tr>';
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+  
+  breakdown.innerHTML = '<table class="data-table"><thead><tr><th>项目</th><th>金额(万)</th><th>占比</th></tr></thead><tbody>'+
+    '<tr><td>本金累计存入</td><td>'+totalContrib.toFixed(2)+'</td><td>'+(totalContrib/pensionVal*100).toFixed(1)+'%</td></tr>'+
+    '<tr><td>投资收益</td><td>'+gains.toFixed(2)+'</td><td>'+(gains/pensionVal*100).toFixed(1)+'%</td></tr>'+
+    '<tr><td>税延收益</td><td>'+totalTaxSaved.toFixed(2)+'</td><td>-</td></tr>'+
+    '<tr style="font-weight:700"><td>账户累计</td><td>'+pensionVal.toFixed(2)+'</td><td>100%</td></tr>'+
+    '</tbody></table>'+
+    '<div style="margin-top:12px;padding:12px;background:#f0fdf4;border-radius:10px;font-size:13px;line-height:1.8"><b style="color:var(--success)">投入建议：</b><br>1. 每年存满上限1.2万，充分享受税延。<br>2. 选择低费率养老目标基金降低长期成本。<br>3. 达到退休年龄后取出，计入综合所得额交税，但通常处于低税率档次。</div>';
+  document.getElementById('sec-pension').style.display = '';
+}
+
+renderKYC();}
+
+/* ===== 数据生成 ===== */
+function rand(seed,min,max){const x=Math.sin(seed)*10000;return min+(x-Math.floor(x))*(max-min);}
+
+function generateAllocationData(){
+  const seed = Object.values(kycState).reduce((a,b)=>a*10+b,12345);
+  const riskLevel = Math.min(3,Math.floor(rand(seed,0,4)));
+  const labels = ['保守型','稳健型','次进型','激进型'];
+  const configs = [
+    {bond:80,mix:15,stock:3,cash:2,expected:3.8,vol:2.1},
+    {bond:55,mix:30,stock:12,cash:3,expected:5.5,vol:4.8},
+    {bond:30,mix:35,stock:30,cash:5,expected:7.2,vol:8.5},
+    {bond:10,mix:25,stock:55,cash:10,expected:9.8,vol:14.2},
+  ];
+  const cfg = configs[riskLevel];
+
+  const assets = [
+    {name:'债券型基金',type:'bond',weight:cfg.bond,ret:rand(seed+100,2.5,4.5),vol:rand(seed+101,1,3),color:'#10b981'},
+    {name:'混合型基金',type:'mix',weight:cfg.mix,ret:rand(seed+200,4,7),vol:rand(seed+201,3,6),color:'#3b82f6'},
+    {name:'股票型基金',type:'stock',weight:cfg.stock,ret:rand(seed+300,8,14),vol:rand(seed+301,12,20),color:'#f59e0b'},
+    {name:'货币市场',type:'cash',weight:cfg.cash,ret:rand(seed+400,1.5,2.5),vol:rand(seed+401,0.1,0.5),color:'#8b5cf6'},
+  ];
+
+  const efPoints = [];
+  for(let i=0;i<=20;i++){
+    const w = i/20;
+    const ret = 2.5 + w*12;
+    const vol = 1.5 + w*w*18;
+    efPoints.push({ret,vol,risk:w});
+  }
+
+  const drawdown = [];
+  let peak = 100;
+  let nav = 100;
+  for(let m=0;m<36;m++){
+    const monthly_ret = rand(seed+500+m,-5,8);
+    nav *= (1+monthly_ret/100);
+    peak = Math.max(peak, nav);
+    const dd = ((nav - peak)/peak)*100;
+    drawdown.push({month:m+1,value:dd,nav:Math.round(nav,1)});
+  }
+
+  const corr = [
+    [1.00,0.35,0.15,0.05],
+    [0.35,1.00,0.65,0.10],
+    [0.15,0.65,1.00,0.08],
+    [0.05,0.10,0.08,1.00],
+  ];
+
+  const scenarios = [
+    {name:'牛市',tag:'🚀',tagColor:'#d1fae5',tagText:'#065f46',stockRet:22,bondRet:3,desc:'股市上涨+债市平稳'},
+    {name:'基准',tag:'⚡',tagColor:'#dbeafe',tagText:'#1e40af',stockRet:8,bondRet:3.5,desc:'市场正常波动'},
+    {name:'熊市',tag:'🌡️',tagColor:'#fef3c7',tagText:'#92400e',stockRet:-15,bondRet:4,desc:'股市下跌+债市避险'},
+    {name:'极端压力',tag:'🚨',tagColor:'#fee2e2',tagText:'#991b1b',stockRet:-35,bondRet:5,desc:'金融危机级别事件'},
+  ];
+
+  return {seed,riskLevel,label:labels[riskLevel],cfg,assets,efPoints,drawdown,corr,scenarios};
+}
+
+/* ===== 渲染 ===== */
+function generateAllocation(){
+  if(Object.keys(kycState).length < kycQuestions.length){
+    alert('请先完成KYC评测');return;
+  }
+  const data = generateAllocationData();
+  window._lastData = data;
+  renderResult(data);
+  renderPie(data);
+  renderScenario(data);
+  renderStress(data);
+  renderEF(data);
+  renderHeat(data);
+  renderDD(data);
+  renderRebalance(data);
+  renderBrinson(data);
+  renderEvents(data);
+
+  ['sec-result','sec-pie','sec-scenario','sec-stress','sec-ef','sec-heat','sec-dd','sec-rebalance','sec-brinson','sec-events','sec-agent'].forEach(id=>{
+    document.getElementById(id).style.display='block';
+  });
+}
+
+function renderResult(data){
+  const wrap = document.getElementById('resultWrap');
+  const c = data.cfg;
+  const circumference = 2*Math.PI*28;
+  const offset = circumference - (c.expected/15)*circumference;
+  wrap.innerHTML = '<div class="result-top"><div class="result-ring"><svg width="64" height="64"><circle cx="32" cy="32" r="28" stroke="#e2e8f0" stroke-width="5" fill="none"/><circle cx="32" cy="32" r="28" stroke="var(--primary)" stroke-width="5" fill="none" stroke-dasharray="'+circumference+'" stroke-dashoffset="'+offset+'" stroke-linecap="round"/></svg><div style="position:absolute;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--primary)">'+c.expected.toFixed(1)+'%</div><div style="font-size:9px;color:var(--muted)">预期年化</div></div></div><div class="result-info"><h4>风险等级：'+data.label+'</h4><p>预期年化收益 '+c.expected.toFixed(1)+'% ± '+c.vol.toFixed(1)+'%</p><p>波动率 '+c.vol.toFixed(1)+'% · 复利策略 · 再平衡规则</p></div></div><table class="alloc-table"><tr><th>资产类别</th><th>配置比例</th><th>历史年化</th><th>波动率</th></tr>'+data.assets.map(a=>'<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+a.color+';margin-right:6px"></span>'+a.name+'</td><td><div class="alloc-bar"><div class="alloc-bar-inner" style="width:'+a.weight+'%;background:'+a.color+'"></div></div> '+a.weight+'%</td><td>'+a.ret.toFixed(1)+'%</td><td>'+a.vol.toFixed(1)+'%</td></tr>').join('')+'</table><div style="margin-top:10px;padding:10px;background:#f8fafc;border-radius:10px;font-size:12px;color:var(--muted)"><b>💡 配置逻辑：</b>基于马科维茨均值-方差优化模型，在您的风险偏好约束下追求最大预期收益。以上数据仅为示例模拟，实际投资请结合市场环境。</div>';
+}
+
+function renderPie(data){
+  const wrap = document.getElementById('pieWrap');
+  const total = data.assets.reduce((s,a)=>s+a.weight,0);
+  let cum = 0;
+  const grad = data.assets.map(a=>{
+    const start = (cum/total)*360;
+    cum += a.weight;
+    const end = (cum/total)*360;
+    return a.color+' '+start+'deg '+end+'deg';
+  }).join(',');
+  wrap.innerHTML = '<div class="pie-chart" style="background:conic-gradient('+grad+')"></div><div class="pie-legend">'+data.assets.map(a=>'<div class="pie-legend-item"><div class="pie-dot" style="background:'+a.color+'"></div><span>'+a.name+' '+a.weight+'%</span></div>').join('')+'</div>';
+}
+
+function renderScenario(data){
+  const wrap = document.getElementById('scenarioWrap');
+  wrap.innerHTML = data.scenarios.map(s=>{
+    const portRet = (s.stockRet * data.cfg.stock/100 + s.bondRet * data.cfg.bond/100 + s.bondRet*0.8*data.cfg.mix/100 + 2*data.cfg.cash/100).toFixed(1);
+    return '<div class="scenario-row"><span class="scenario-tag" style="background:'+s.tagColor+';color:'+s.tagText+'">'+s.tag+' '+s.name+'</span><div class="scenario-info">'+s.desc+'</div><div class="scenario-val" style="color:'+(portRet>0?'var(--success)':portRet<0?'var(--danger)':'var(--muted)')+'">'+(portRet>0?'+':'')+portRet+'%</div></div>';
+  }).join('');
+}
+
+function renderStress(data){
+  const wrap = document.getElementById('stressWrap');
+  wrap.innerHTML = '<div class="stress-slider"><div class="stress-item"><label><span>股市波动率偏离</span><span id="stockVal">0%</span></label><input type="range" id="stockSlider" min="-20" max="20" value="0" oninput="updateStress()"></div><div class="stress-item"><label><span>利率上行幅度</span><span id="rateVal">0bp</span></label><input type="range" id="rateSlider" min="0" max="200" value="0" oninput="updateStress()"></div><div class="stress-item"><label><span>通胀率偏离</span><span id="infVal">0%</span></label><input type="range" id="infSlider" min="-3" max="5" value="0" step="0.5" oninput="updateStress()"></div></div><div class="stress-result" id="stressResult">调节上方滑块，实时观察组合收益与风险变化</div>';
+  window._stressData = data;
+}
+
+function updateStress(){
+  const data = window._stressData;
+  const s = parseInt(document.getElementById('stockSlider').value);
+  const r = parseInt(document.getElementById('rateSlider').value);
+  const i = parseFloat(document.getElementById('infSlider').value);
+  document.getElementById('stockVal').textContent = (s>=0?'+':'')+s+'%';
+  document.getElementById('rateVal').textContent = r+'bp';
+  document.getElementById('infVal').textContent = (i>=0?'+':'')+i+'%';
+  const newRet = data.cfg.expected + s*data.cfg.stock/100 - r*0.02 - i*0.3;
+  const newVol = data.cfg.vol + Math.abs(s)*0.15 + r*0.01;
+  document.getElementById('stressResult').innerHTML = '<b>压力情景下：</b>预期年化 '+newRet.toFixed(1)+'% · 波动率 '+newVol.toFixed(1)+'% · '+(newRet>data.cfg.expected?'好于基准':newRet<data.cfg.expected*0.7?'<span style="color:var(--danger)">风险警示</span>':'算中性');
+}
+
+function renderEF(data){
+  const wrap = document.getElementById('efWrap');
+  const pts = data.efPoints;
+  const maxVol = Math.max(...pts.map(p=>p.vol));
+  const maxRet = Math.max(...pts.map(p=>p.ret));
+  const w = wrap.clientWidth || 380;
+  const h = 200;
+  wrap.innerHTML = '<canvas id="efCanvas" width="'+(w*2)+'" height="'+(h*2)+'" style="width:'+w+'px;height:'+h+'px;border-radius:10px;background:#f8fafc"></canvas>';
+  const c = document.getElementById('efCanvas').getContext('2d');
+  c.scale(2,2);
+  const pad = {l:40,r:20,t:20,b:30};
+  const cw = w - pad.l - pad.r;
+  const ch = h - pad.t - pad.b;
+  c.strokeStyle = '#e2e8f0'; c.lineWidth = 0.5;
+  for(let i=0;i<=4;i++){
+    const y = pad.t + (i/4)*ch; c.beginPath();c.moveTo(pad.l,y);c.lineTo(pad.l+cw,y);c.stroke();
+    const x = pad.l + (i/4)*cw; c.beginPath();c.moveTo(x,pad.t);c.lineTo(x,pad.t+ch);c.stroke();
+  }
+  c.strokeStyle = '#94a3b8'; c.lineWidth = 1;
+  c.beginPath();c.moveTo(pad.l,pad.t+ch);c.lineTo(pad.l+cw,pad.t+ch);c.stroke();
+  c.beginPath();c.moveTo(pad.l,pad.t);c.lineTo(pad.l,pad.t+ch);c.stroke();
+  c.fillStyle = '#64748b'; c.font = '10px sans-serif'; c.textAlign = 'center';
+  c.fillText('风险(波动率%)', pad.l+cw/2, h-6);
+  c.save();c.translate(12, pad.t+ch/2);c.rotate(-Math.PI/2);c.fillText('收益(%)', 0, 0);c.restore();
+  for(let i=0;i<=4;i++){
+    const v = (i/4)*maxVol; c.fillText(v.toFixed(0)+'%', pad.l+(i/4)*cw, pad.t+ch+12);
+    const r = (i/4)*maxRet; c.fillText(r.toFixed(0)+'%', pad.l-8, pad.t+ch-(i/4)*ch+4);
+  }
+  c.strokeStyle = '#2563eb'; c.lineWidth = 2; c.beginPath();
+  pts.forEach((p,idx)=>{
+    const x = pad.l + (p.vol/maxVol)*cw;
+    const y = pad.t + ch - (p.ret/maxRet)*ch;
+    if(idx===0) c.moveTo(x,y); else c.lineTo(x,y);
+  });
+  c.stroke();
+  const opt = pts[Math.floor(pts.length/2)];
+  const ox = pad.l + (opt.vol/maxVol)*cw;
+  const oy = pad.t + ch - (opt.ret/maxRet)*ch;
+  c.fillStyle = '#ef4444'; c.beginPath();c.arc(ox,oy,5,0,Math.PI*2);c.fill();
+  c.fillStyle = '#ef4444'; c.font = 'bold 11px sans-serif';
+  c.fillText('最优组合', ox+8, oy-8);
+  const curVol = data.cfg.vol;
+  const curRet = data.cfg.expected;
+  const cx = pad.l + (curVol/maxVol)*cw;
+  const cy = pad.t + ch - (curRet/maxRet)*ch;
+  c.fillStyle = '#10b981'; c.beginPath();c.arc(cx,cy,5,0,Math.PI*2);c.fill();
+  c.fillStyle = '#10b981'; c.font = 'bold 11px sans-serif';
+  c.fillText('当前配置', cx+8, cy-8);
+}
+
+function renderHeat(data){
+  const wrap = document.getElementById('heatWrap');
+  const names = data.assets.map(a=>a.name.replace('基金',''));
+  const corr = data.corr;
+  const cells = [];
+  for(let i=0;i<4;i++){
+    for(let j=0;j<4;j++){
+      const v = corr[i][j];
+      const color = v>=0.5?'rgba(239,68,68,'+v+')':v>=0.2?'rgba(245,158,11,'+(v*2)+')':v>0?'rgba(16,185,129,'+(v*3+0.2)+')':'rgba(148,163,184,0.3)';
+      cells.push('<div class="heat-cell" style="background:'+color+';color:'+(v>0.4?'#fff':'var(--text)')+'">'+v.toFixed(2)+'</div>');
+    }
+    cells.push('<div class="heat-label">'+names[i]+'</div>');
+  }
+  wrap.innerHTML = '<div class="heat-grid" style="grid-template-columns:repeat(4,1fr)">'+cells.join('')+'</div>';
+}
+
+function renderDD(data){
+  const wrap = document.getElementById('ddWrap');
+  const pts = data.drawdown;
+  const minVal = Math.min(...pts.map(p=>p.value), 0);
+  const w = wrap.clientWidth || 380;
+  const h = 160;
+  wrap.innerHTML = '<canvas id="ddCanvas" width="'+(w*2)+'" height="'+(h*2)+'" style="width:'+w+'px;height:'+h+'px;border-radius:10px;background:#f8fafc"></canvas>';
+  const c = document.getElementById('ddCanvas').getContext('2d');
+  c.scale(2,2);
+  const pad = {l:40,r:20,t:20,b:30};
+  const cw = w - pad.l - pad.r;
+  const ch = h - pad.t - pad.b;
+  c.strokeStyle = '#e2e8f0'; c.lineWidth = 0.5;
+  for(let i=0;i<=3;i++){
+    const y = pad.t + (i/3)*ch; c.beginPath();c.moveTo(pad.l,y);c.lineTo(pad.l+cw,y);c.stroke();
+  }
+  c.strokeStyle = '#94a3b8'; c.lineWidth = 1;
+  c.beginPath();c.moveTo(pad.l,pad.t);c.lineTo(pad.l,pad.t+ch);c.stroke();
+  c.beginPath();c.moveTo(pad.l,pad.t+ch);c.lineTo(pad.l+cw,pad.t+ch);c.stroke();
+  c.strokeStyle = '#ef4444'; c.lineWidth = 1.5; c.beginPath();
+  pts.forEach((p,idx)=>{
+    const x = pad.l + (p.month/36)*cw;
+    const y = pad.t + ch - (p.value/minVal)*ch*0.8;
+    if(idx===0) c.moveTo(x,y); else c.lineTo(x,y);
+  });
+  c.stroke();
+  c.lineTo(pad.l+cw, pad.t+ch); c.lineTo(pad.l, pad.t+ch); c.closePath();
+  c.fillStyle = 'rgba(239,68,68,0.08)'; c.fill();
+  c.fillStyle = '#64748b'; c.font = '10px sans-serif'; c.textAlign = 'center';
+  c.fillText('月', pad.l+cw/2, h-6);
+  c.save();c.translate(12, pad.t+ch/2);c.rotate(-Math.PI/2);c.fillText('回撤(%)', 0, 0);c.restore();
+  for(let i=0;i<=3;i++){
+    const v = (i/3)*minVal; c.fillText(v.toFixed(0)+'%', pad.l-10, pad.t+ch-(i/3)*ch+4);
+  }
+  const maxPt = pts.reduce((a,b)=>a.value<b.value?a:b, pts[0]);
+  const mx = pad.l + (maxPt.month/36)*cw;
+  const my = pad.t + ch - (maxPt.value/minVal)*ch*0.8;
+  c.fillStyle = '#ef4444'; c.font = 'bold 10px sans-serif';
+  c.fillText('最大回撤 '+maxPt.value.toFixed(1)+'%', mx+10, my);
+}
+
+function renderRebalance(data){
+  const wrap = document.getElementById('rebalanceWrap');
+  const actual = data.assets.map((a,i)=>{
+    const drift = Math.round((Math.random()-0.5)*8);
+    return {...a, actual: Math.max(0, a.weight+drift), drift};
+  });
+  const total = actual.reduce((s,a)=>s+a.actual,0);
+  actual.forEach(a=>a.actual = Math.round(a.actual/total*100));
+  let html = '<table class="alloc-table"><tr><th>资产</th><th>目标</th><th>实际</th><th>偏离</th></tr>';
+  let needRebalance = false;
+  actual.forEach(a=>{
+    const diff = a.actual - a.weight;
+    const color = Math.abs(diff)>5?'var(--danger)':Math.abs(diff)>2?'var(--warning)':'var(--success)';
+    if(Math.abs(diff)>5) needRebalance = true;
+    html += '<tr><td>'+a.name+'</td><td>'+a.weight+'%</td><td>'+a.actual+'%</td><td style="color:'+color+';font-weight:700">'+(diff>0?'+':'')+diff+'%</td></tr>';
+  });
+  html += '</table>';
+  wrap.innerHTML = html;
+  document.getElementById('rebalanceAdvice').textContent = needRebalance
+    ? '⚠️ 检测到偏离超过 ±5%，建议本月底执行再平衡操作。'
+    : '✅ 各资产偏离控制在合理范围内，暂无需要再平衡。';
+}
+
+function renderBrinson(data){
+  const wrap = document.getElementById('brinsonWrap');
+  const allocEff = (Math.random()*3-1).toFixed(2);
+  const selectEff = (Math.random()*2-0.5).toFixed(2);
+  const interactEff = (Math.random()*1-0.3).toFixed(2);
+  const total = (parseFloat(allocEff)+parseFloat(selectEff)+parseFloat(interactEff)).toFixed(2);
+  wrap.innerHTML = '<table class="alloc-table">'+
+    '<tr><th>归因维度</th><th>贡献(%)</th><th>说明</th></tr>'+
+    '<tr><td>配置效应</td><td style="color:'+(allocEff>0?'var(--success)':'var(--danger)')+';font-weight:700">'+(allocEff>0?'+':'')+allocEff+'%</td><td>超配/低配某类资产带来的超额收益</td></tr>'+
+    '<tr><td>选股效应</td><td style="color:'+(selectEff>0?'var(--success)':'var(--danger)')+';font-weight:700">'+(selectEff>0?'+':'')+selectEff+'%</td><td>在同一类资产内选择优秀个股的贡献</td></tr>'+
+    '<tr><td>交互效应</td><td style="color:'+(interactEff>0?'var(--success)':'var(--danger)')+';font-weight:700">'+(interactEff>0?'+':'')+interactEff+'%</td><td>配置与选股的交叉影响</td></tr>'+
+    '<tr style="font-weight:700;background:#f8fafc"><td>总超额收益</td><td style="color:'+(total>0?'var(--success)':'var(--danger)')+';font-weight:700">'+(total>0?'+':'')+total+'%</td><td>相对基准的综合超额</td></tr>'+
+    '</table>';
+}
+
+function renderEvents(data){
+  const wrap = document.getElementById('eventsWrap');
+  const events = [
+    {date:'2025-01-15',event:'央行降息20bp',impact:'利好债市，建议增配债券型基金',action:'+5% 债券'},
+    {date:'2025-03-02',event:'券商行情活跃度上升',impact:'股市风险偏好回升',action:'持有现状'},
+    {date:'2025-05-10',event:'海外市场波动加大',impact:'QDII产品短期受压',action:'等待回稳'},
+  ];
+  let html = '<div style="display:flex;flex-direction:column;gap:8px">';
+  events.forEach(e=>{
+    html += '<div style="padding:10px;background:#f8fafc;border-radius:10px;border:1px solid var(--border)">'+\
+      '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>'+e.date+'</span><span style="color:var(--primary);font-weight:600">'+e.action+'</span></div>'+\
+      '<div style="font-size:13px;font-weight:700;margin:4px 0">'+e.event+'</div>'+\
+      '<div style="font-size:12px;color:var(--muted)">'+e.impact+'</div></div>';
+  });
+  html += '</div><div style="margin-top:10px;padding:10px;background:#fffbeb;border-radius:10px;font-size:12px;color:#92400e"><b>⚠️ 关注事项：</b>下周美联储议息会议，建议提前关注利率决议对债市的影响。</div>';
+  wrap.innerHTML = html;
+}
+
+function agentAsk(q){
+  const chat = document.getElementById('agentChat');
+  const rl = (window._lastData && window._lastData.label) || '稳健型';
+  const md = (window._lastData && window._lastData.cfg && window._lastData.cfg.expected) || 5.5;
+  const al = (window._lastData && window._lastData.cfg) || {expected:5.5,bond:55,mix:30,stock:12,cash:3};
+  const replies = {};
+  replies['为什么不多配点股票？'] = '根据您的KYC评测，您的风险偏好为“'+rl+'”。在马科维茨框架下，更多的股票配置会显著提升波动率，可能超出您的风险承受能力。当然，如果您的风险偏好发生变化，我可以重新优化配置。';
+  replies['压力测试下会亏多少？'] = '在极端压力情景（金融危机级别）下，组合最大回撤约 -'+Math.abs(md*1.5).toFixed(1)+'%。这意味着如果投入 100 万，短期内最大亏损约 '+Math.abs(md*1.5).toFixed(1)+' 万元。请确保您能接受这个水平的波动。';
+  replies['给我一个定投计划'] = '建议每月定投 '+Math.round(al.expected*1000)+' 元，拆分为四类资产按配置比例投入。例如：债券型 '+al.bond+'% → '+Math.round(al.expected*1000*al.bond/100)+'元/月，混合型 '+al.mix+'% → '+Math.round(al.expected*1000*al.mix/100)+'元/月。这样可以平滑市场波动并享受复利效应。';
+  const a = replies[q] || '这是一个很好的问题！请给我一点时间来分析...';
+  chat.innerHTML += '<div style="margin-top:10px;padding:10px;background:#f8fafc;border-radius:10px;border-left:3px solid var(--primary)"><b style="color:var(--primary)">您：</b>'+q+'</div><div style="margin-top:6px;padding:10px;background:#f0fdf4;border-radius:10px;border-left:3px solid var(--success)"><b style="color:var(--success)">AI顾问：</b>'+a+'</div>';
+  chat.scrollTop = chat.scrollHeight;
+}
+
+renderKYC();
+
+function renderFunds(cfg){
+  const wrap = document.getElementById('fundsWrap');
+  const funds = [
+    {code:"110022",name:"某债券型基金A",category:"债券型",aer:4.2,sharpe:1.8,max_dd:-2.1,fee:0.30,scale:120},
+    {code:"000171",name:"某债券型基金B",category:"债券型",aer:3.8,sharpe:1.5,max_dd:-1.8,fee:0.25,scale:85},
+    {code:"110027",name:"某混合型基金A",category:"混合型",aer:8.5,sharpe:1.2,max_dd:-12.5,fee:1.50,scale:320},
+    {code:"519732",name:"某混合型基金B",category:"混合型",aer:7.2,sharpe:1.0,max_dd:-15.3,fee:1.20,scale:200},
+    {code:"001938",name:"某混合型基金C",category:"混合型",aer:9.1,sharpe:1.3,max_dd:-11.8,fee:1.50,scale:450},
+    {code:"005911",name:"某股票型基金A",category:"股票型",aer:12.5,sharpe:0.9,max_dd:-25.6,fee:1.50,scale:180},
+    {code:"003834",name:"某股票型基金B",category:"股票型",aer:14.2,sharpe:0.8,max_dd:-28.3,fee:1.50,scale:95},
+    {code:"002943",name:"某股票型基金C",category:"股票型",aer:11.8,sharpe:1.0,max_dd:-22.1,fee:1.20,scale:65},
+  ];
+  let html = '<table class="data-table"><thead><tr><th>代码</th><th>名称</th><th>类型</th><th>年化收益</th><th>夏普</th><th>最大回撤</th><th>费率</th></tr></thead><tbody>';
+  funds.forEach(f=>{
+    html += '<tr><td>'+f.code+'</td><td>'+f.name+'</td><td>'+f.category+'</td><td style="color:var(--success);font-weight:700">'+f.aer+'%</td><td>'+f.sharpe+'</td><td style="color:var(--danger)">'+f.max_dd+'%</td><td>'+f.fee+'%</td></tr>';
+  });
+  html += '</tbody></table>';
+  html += '<div style="margin-top:10px;font-size:12px;color:var(--muted)">共展示8只代表性基金，完整库含20只产品</div>';
+  wrap.innerHTML = html;
+  document.getElementById('sec-funds').style.display = '';
+}
+
+function runPensionCalc(){
+  const annual = parseFloat(document.getElementById('pensionAnnual').value) || 1.2;
+  const taxRate = parseFloat(document.getElementById('pensionTax').value) / 100 || 0.20;
+  const years = parseInt(document.getElementById('pensionYears').value) || 20;
+  const ret = parseFloat(document.getElementById('pensionReturn').value) / 100 || 0.06;
+  
+  const annualTaxSaved = annual * taxRate;
+  let pensionVal = 0;
+  const path = [];
+  for(let y=1; y<=years; y++){
+    pensionVal = (pensionVal + annual) * (1 + ret);
+    if(y%5===0 || y===1 || y===years) path.push({year:y,value:pensionVal});
+  }
+  const totalContrib = annual * years;
+  const totalTaxSaved = annualTaxSaved * years;
+  const gains = pensionVal - totalContrib;
+  
+  let html = '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#dbeafe,#eff6ff);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">每年节税</div><div style="font-size:18px;font-weight:800;color:var(--primary)">'+annualTaxSaved.toFixed(2)+'万</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#dcfce7,#f0fdf4);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">'+years+'年累计节税</div><div style="font-size:18px;font-weight:800;color:var(--success)">'+totalTaxSaved.toFixed(2)+'万</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#fef3c7,#fffbeb);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">投资收益</div><div style="font-size:18px;font-weight:800;color:var(--warning)">'+gains.toFixed(2)+'万</div></div>';
+  html += '<div style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#fee2e2,#fef2f2);border-radius:10px;text-align:center"><div style="font-size:11px;color:var(--muted)">账户累计</div><div style="font-size:18px;font-weight:800;color:var(--danger)">'+pensionVal.toFixed(2)+'万</div></div>';
+  html += '</div>';
+  
+  html += '<table class="data-table"><thead><tr><th>年份</th><th>账户累计价值(万)</th></tr></thead><tbody>';
+  path.forEach(p=>{
+    html += '<tr><td>第'+p.year+'年</td><td style="color:var(--primary);font-weight:700">'+p.value.toFixed(2)+'</td></tr>';
+  });
+  html += '</tbody></table>';
+  
+  document.getElementById('pensionCalcWrap').innerHTML = html;
+  document.getElementById('sec-pension-calc').style.display = '';
+}
+
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    // 自动加载股票数据
+    const stockContainer = document.querySelector('.stock-data, #stock-data, [data-type="stocks"]');
+    if (stockContainer) {
+        const result = await LongmaAPI.stocks.list();
+        if (result.success && result.data) {
+            renderStockList(stockContainer, result.data);
+        }
+    }
+    
+    // 自动加载基金数据
+    const fundContainer = document.querySelector('.fund-data, #fund-data, [data-type="funds"]');
+    if (fundContainer) {
+        const result = await LongmaAPI.funds.get('110022');
+        if (result.success && result.data) {
+            renderFundCard(fundContainer, result.data);
+        }
+    }
+});
+
+function renderStockList(container, stocks) {
+    let html = '<div class="api-stock-list">';
+    stocks.forEach(stock => {
+        const changeClass = stock.change >= 0 ? 'up' : 'down';
+        const changeSign = stock.change >= 0 ? '+' : '';
+        html += `<div class="api-stock-item ${changeClass}">
+            <span class="code">${stock.code}</span>
+            <span class="name">${stock.name}</span>
+            <span class="price">¥${stock.price.toFixed(2)}</span>
+            <span class="change">${changeSign}${(stock.change * 100).toFixed(2)}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function renderFundCard(container, fund) {
+    container.innerHTML = `<div class="api-fund-card">
+        <h4>${fund.name}</h4>
+        <p>净值: ¥${fund.nav.toFixed(3)}</p>
+        <p>日涨跌: ${fund.change > 0 ? '+' : ''}${(fund.change * 100).toFixed(2)}%</p>
+        <p>风险等级: ${fund.risk}</p>
+    </div>`;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
