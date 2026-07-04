@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI IPO项目辅助，PE/PB/PS估值+同行对比+市场情绪分析，辅助IPO投资决策。">
+    <meta name="keywords" content="IPO研究,IPO辅助,估值分析,新股打新,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/ipo-research">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/ipo-research">
+    <meta property="og:title" content="IPO项目辅助 | FinAIAI">
+    <meta property="og:description" content="FinAIAI IPO项目辅助，PE/PB/PS估值+同行对比+市场情绪分析，辅助IPO投资决策。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/ipo-research.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IPO项目辅助 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI IPO项目辅助，PE/PB/PS估值+同行对比+市场情绪分析，辅助IPO投资决策。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/ipo-research.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "IPO项目辅助 | FinAIAI",
+        "description": "FinAIAI IPO项目辅助，PE/PB/PS估值+同行对比+市场情绪分析，辅助IPO投资决策。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>IPO项目辅助 | FinAIAI</title>
+  <style>
+    :root { --primary:#2563eb; --success:#10b981; --warning:#f59e0b; --danger:#ef4444;
+      --bg:#f1f5f9; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+      --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06);
+      --shadow-lg:0 14px 44px rgba(37,99,235,.18); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; padding-bottom:env(safe-area-inset-bottom,0); }
+    .wrap { max-width:720px; margin:0 auto; padding:16px; }
+    .hero { background:linear-gradient(135deg,#0f172a,#06b6d4); color:#fff; border-radius:24px; padding:28px 22px;
+      box-shadow:var(--shadow-lg); position:relative; overflow:hidden; }
+    .hero h1 { font-size:24px; font-weight:900; margin-bottom:4px; position:relative; }
+    .hero .sub { opacity:.85; font-size:13px; position:relative; }
+    .section-title { font-size:18px; font-weight:900; margin:28px 0 14px; display:flex; align-items:center; gap:8px; }
+    .section-title .dot { width:8px; height:8px; border-radius:50%; background:var(--primary); }
+    .tab-bar { display:flex; gap:8px; margin-bottom:12px; overflow-x:auto; padding-bottom:4px; }
+    .tab { flex-shrink:0; padding:8px 16px; border-radius:999px; background:var(--card); border:1px solid var(--border);
+      font-size:13px; font-weight:700; cursor:pointer; transition:.2s; }
+    .tab:hover { border-color:#bfdbfe; }
+    .tab.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+    .card { background:var(--card); border-radius:20px; padding:20px; box-shadow:var(--shadow); margin-bottom:12px; }
+    .card h3 { font-size:16px; margin-bottom:10px; }
+    .ipo-row { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:8px; padding:12px 0;
+      border-bottom:1px solid var(--border); font-size:13px; align-items:center; }
+    .ipo-row:last-child { border-bottom:none; }
+    .ipo-row.header { font-weight:800; color:var(--muted); font-size:12px; padding:8px 0; }
+    .ipo-name { font-weight:700; }
+    .ipo-badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; }
+    .badge-kcb { background:#dbeafe; color:#1e40af; }
+    .badge-cyb { background:#d1fae5; color:#065f46; }
+    .badge-zb { background:#f3e8ff; color:#6b21a8; }
+    .score-ring { width:80px; height:80px; position:relative; margin:0 auto; }
+    .score-ring svg { transform:rotate(-90deg); }
+    .score-value { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; }
+    .score-value b { font-size:22px; }
+    .score-value span { font-size:10px; color:var(--muted); }
+    .rating { text-align:center; margin-top:8px; font-size:14px; font-weight:800; }
+    .detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .detail-cell { background:#f8fafc; border-radius:12px; padding:12px; }
+    .detail-cell .label { font-size:11px; color:var(--muted); margin-bottom:2px; }
+    .detail-cell .value { font-size:15px; font-weight:800; }
+    .input-box { background:var(--card); border-radius:16px; padding:16px; box-shadow:var(--shadow); margin-top:12px; }
+    .input-box input { width:100%; border:1px solid var(--border); border-radius:12px; padding:12px 14px;
+      font-size:15px; outline:none; margin-bottom:8px; }
+    .input-box input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+    .run-btn { width:100%; border:none; background:linear-gradient(135deg,var(--primary),#1d4ed8); color:#fff;
+      padding:14px; border-radius:14px; font-size:16px; font-weight:800; cursor:pointer;
+      box-shadow:0 4px 16px rgba(37,99,235,.3); }
+    .run-btn:disabled { opacity:.6; cursor:not-allowed; }
+    .tip-box { background:#eff6ff; border-radius:12px; padding:12px; font-size:12px; color:#1e40af; margin-top:12px; }
+    .back-home { display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--primary);
+      text-decoration:none; font-size:14px; font-weight:700; }
+    @media(max-width:520px){ .ipo-row{grid-template-columns:2fr 1fr 1fr;} .detail-grid{grid-template-columns:1fr;} }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>📈 IPO项目辅助</h1>
+    <div class="sub">证券业 · 打新日历 · 估值分析 · 中签预测</div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab active" onclick="switchTab('calendar')">📅 打新日历</div>
+    <div class="tab" onclick="switchTab('analysis')">📊 估值分析</div>
+    <div class="tab" onclick="switchTab('lottery')">🎰 中签预测</div>
+  </div>
+
+  <div id="calendarTab">
+    <div class="card">
+      <h3>📅 近期IPO打新日历</h3>
+      <div class="ipo-row header"><div>股票名称</div><div>行业</div><div>发行价</div><div>市盈率</div></div>
+      <div id="calendarList"></div>
+    </div>
+    <div class="tip-box">
+      <strong>打新提示：</strong>科创板/创业板需开通相应权限；沪市1万市值对应1000股；深市5千市值对应500股。
+    </div>
+  </div>
+
+  <div id="analysisTab" style="display:none;">
+    <div class="input-box">
+      <input type="text" id="ipoNameInput" placeholder="输入IPO名称，如：华虹半导体" value="华虹半导体">
+      <button class="run-btn" onclick="analyzeIPO()">🔭 分析评价</button>
+    </div>
+    <div id="analysisResult"></div>
+  </div>
+
+  <div id="lotteryTab" style="display:none;">
+    <div class="input-box">
+      <input type="number" id="amountInput" placeholder="认购金额（万）" value="50">
+      <input type="number" id="priceInput" placeholder="预估发行价（元）" value="28">
+      <button class="run-btn" onclick="calcLottery()">🎰 计算中签率</button>
+    </div>
+    <div id="lotteryResult"></div>
+  </div>
+
+  <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+</div>
+
+<script>
+(function(){
+  const ipoData = [
+    {name:"华虹半导体",code:"688347.SH",date:"2026-06-18",price:"28.00-32.00",pe:"35-42倍",industry:"半导体",type:"科创板",lottery:"0.023%"},
+    {name:"中芯集成",code:"688xxx.SH",date:"2026-06-20",price:"18.00-22.00",pe:"28-35倍",industry:"半导体",type:"科创板",lottery:"0.031%"},
+    {name:"晶合集成",code:"688xxx.SH",date:"2026-06-25",price:"15.00-18.00",pe:"25-32倍",industry:"半导体",type:"科创板",lottery:"0.045%"},
+    {name:"颀中科技",code:"688xxx.SH",date:"2026-07-02",price:"12.00-15.00",pe:"22-28倍",industry:"半导体",type:"科创板",lottery:"0.058%"},
+    {name:"百利天恒",code:"688xxx.SH",date:"2026-07-05",price:"35.00-42.00",pe:"48-56倍",industry:"医药",type:"科创板",lottery:"0.018%"},
+  ];
+
+  const industryPE = {"半导体":45,"医药":38,"新能源":35,"消费":28,"金融":15};
+
+  function switchTab(tab){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('calendarTab').style.display = tab==='calendar'?'block':'none';
+    document.getElementById('analysisTab').style.display = tab==='analysis'?'block':'none';
+    document.getElementById('lotteryTab').style.display = tab==='lottery'?'block':'none';
+  }
+  window.switchTab = switchTab;
+
+  function renderCalendar(){
+    const list = document.getElementById('calendarList');
+    list.innerHTML = ipoData.map(ipo=>`
+      <div class="ipo-row">
+        <div><div class="ipo-name">${ipo.name}</div><div style="font-size:11px;color:var(--muted);">${ipo.code}</div></div>
+        <div><span class="ipo-badge badge-kcb">${ipo.industry}</span></div>
+        <div>${ipo.price}</div>
+        <div>${ipo.pe}</div>
+      </div>
+    `).join('');
+  }
+  renderCalendar();
+
+  function calcScore(ipo){
+    let score = 70;
+    if(["半导体","新能源"].includes(ipo.industry)) score += 10;
+    if(ipo.industry.includes("医药")) score += 5;
+    const peMid = parseFloat(ipo.pe.split('-')[0]);
+    if(peMid < 30) score += 15;
+    else if(peMid > 50) score -= 15;
+    return Math.max(0, Math.min(100, score));
+  }
+
+  window.analyzeIPO = function(){
+    const name = document.getElementById('ipoNameInput').value.trim() || '华虹半导体';
+    const ipo = ipoData.find(i=>i.name.includes(name)) || ipoData[0];
+    const avgPE = industryPE[ipo.industry] || 35;
+    const peVals = ipo.pe.replace('倍','').split('-').map(parseFloat);
+    const peMid = peVals.reduce((a,b)=>a+b,0)/peVals.length;
+    const premium = ((peMid-avgPE)/avgPE*100).toFixed(0);
+    const score = calcScore(ipo);
+    let rating = score>=80?"⭐⭐⭐⭐⭐ 强烈推荐":score>=65?"⭐⭐⭐⭐ 建议认购":score>=50?"⭐⭐⭐ 可选择性认购":"⭐⭐ 谨慎认购";
+
+    const highlights = {
+      "半导体": ["国内领先的晶圆代工企业","产能利用率维持高位","客户覆盖国内外主流设计厂"],
+      "医药": ["创新药研发管线丰富","核心产品进入临床III期","商业化能力持续增强"]
+    };
+
+    document.getElementById('analysisResult').innerHTML = `
+      <div class="card">
+        <h3>📊 ${ipo.name} IPO分析</h3>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+          <div class="score-ring">
+            <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" fill="none" stroke="#e2e8f0" stroke-width="6"/>
+              <circle cx="40" cy="40" r="32" fill="none" stroke="url(#grad)" stroke-width="6" stroke-linecap="round"
+                stroke-dasharray="201" stroke-dashoffset="${201*(1-score/100)}" style="transition:stroke-dashoffset 1s ease;"/>
+              <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+            </svg>
+            <div class="score-value"><b>${score}</b><span>综合评分</span></div>
+          </div>
+          <div style="flex:1;min-width:200px;">
+            <div class="rating">${rating}</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px;">发行PE: ${ipo.pe} | 行业均值: ~${avgPE}x | 折溢价: ${premium>0?'+'+premium:premium}%</div>
+          </div>
+        </div>
+        <div class="detail-grid">
+          <div class="detail-cell"><div class="label">发行价格</div><div class="value">${ipo.price}元</div></div>
+          <div class="detail-cell"><div class="label">申购日期</div><div class="value">${ipo.date}</div></div>
+          <div class="detail-cell"><div class="label">行业</div><div class="value">${ipo.industry}</div></div>
+          <div class="detail-cell"><div class="label">板块</div><div class="value">${ipo.type}</div></div>
+        </div>
+        <div style="margin-top:14px;"><strong>基本面亮点：</strong></div>
+        <div style="font-size:13px;line-height:1.8;">
+          ${(highlights[ipo.industry]||["行业龙头地位稳固","技术壁垒较高"]).map(h=>`• ${h}`).join('<br>')}
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:#991b1b;"><strong>风险提示：</strong>行业竞争加剧；募投项目进度不确定；发行价偏高可能压制上市表现。</div>
+      </div>`;
+  };
+
+  window.calcLottery = function(){
+    const amount = parseFloat(document.getElementById('amountInput').value) || 50;
+    const price = parseFloat(document.getElementById('priceInput').value) || 28;
+    const units = Math.floor(amount*10000/(price*500))*500;
+    const rate = 0.028;
+    const tiers = [
+      {n:1,label:'1个配号'},
+      {n:5,label:'5个配号'},
+      {n:10,label:'10个配号'},
+      {n:20,label:'20个配号'}
+    ];
+
+    document.getElementById('lotteryResult').innerHTML = `
+      <div class="card">
+        <h3>🎰 中签概率预估</h3>
+        <div style="font-size:14px;margin-bottom:12px;"><strong>认购金额：</strong>${amount}万元 | <strong>预估发行价：</strong>${price}元 | <strong>可认购股数：</strong>${units}股</div>
+        <div class="ipo-row header"><div>认购金额</div><div>配号数</div><div>预估中签率</div></div>
+        ${tiers.map(t=>{
+          const prob = Math.min(1, rate*t.n);
+          return `<div class="ipo-row"><div>${(t.n*amount).toFixed(0)}万</div><div>${t.label}</div><div style="font-weight:800;color:${prob>0.1?'#10b981':prob>0.05?'#f59e0b':'#ef4444'}">${(prob*100).toFixed(3)}%</div></div>`;
+        }).join('')}
+        <div class="tip-box" style="margin-top:10px;">
+          <strong>中签技巧：</strong>集中火力攻打1-2只确定性高的IPO；顶格认购可显著提高中签率；避开市场追捧的大热IPO；市值较小的IPO更容易炒作。
+        </div>
+      </div>`;
+  };
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 绑定AI分析按钮
+    const analyzeBtn = document.querySelector('#analyze-btn, .analyze-btn, [data-action="analyze"]');
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', async function() {
+            const input = document.querySelector('#analyze-input, .analyze-input');
+            const context = document.querySelector('#analyze-context, .analyze-context');
+            const resultContainer = document.querySelector('#analyze-result, .analyze-result');
+            
+            const prompt = input ? input.value : '';
+            const ctx = context ? context.value : '';
+            
+            if (!prompt) { alert('请输入分析内容'); return; }
+            
+            resultContainer.innerHTML = '<div class="api-loading"><div class="loading-spinner"></div><p>AI分析中...</p></div>';
+            analyzeBtn.disabled = true;
+            
+            const result = await LongmaAPI.ai.analyze(prompt, ctx);
+            analyzeBtn.disabled = false;
+            
+            if (result.success) {
+                resultContainer.innerHTML = `<div class="api-analysis-result">
+                    <h4>分析结果</h4>
+                    <div class="content">${result.data.analysis.replace(/\n/g, '<br>')}</div>
+                    <div class="meta">模型: ${result.data.model} | 时间: ${result.data.timestamp}</div>
+                </div>`;
+            } else {
+                resultContainer.innerHTML = `<div class="api-error">分析失败: ${result.error}</div>`;
+            }
+        });
+    }
+    
+    // 绑定报告生成按钮
+    const reportBtn = document.querySelector('#report-btn, .report-btn, [data-action="generate-report"]');
+    if (reportBtn) {
+        reportBtn.addEventListener('click', async function() {
+            const resultContainer = document.querySelector('#report-result, .report-result');
+            resultContainer.innerHTML = '<div class="api-loading"><div class="loading-spinner"></div><p>报告生成中...</p></div>';
+            reportBtn.disabled = true;
+            
+            const result = await LongmaAPI.ai.generateReport('general', {});
+            reportBtn.disabled = false;
+            
+            if (result.success) {
+                resultContainer.innerHTML = `<div class="api-report-result">
+                    <h4>生成的报告</h4>
+                    <div class="content">${result.data.report.replace(/\n/g, '<br>')}</div>
+                </div>`;
+            } else {
+                resultContainer.innerHTML = '<div class="api-error">报告生成失败</div>';
+            }
+        });
+    }
+});
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
