@@ -1,0 +1,601 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI基金对比分析，业绩归因+经理评价+费率比较，筛选优质基金产品。">
+    <meta name="keywords" content="基金对比,基金分析,基金筛选,业绩归因,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/fund-compare">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/fund-compare">
+    <meta property="og:title" content="基金对比分析 | FinAIAI">
+    <meta property="og:description" content="FinAIAI基金对比分析，业绩归因+经理评价+费率比较，筛选优质基金产品。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/fund-compare.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="基金对比分析 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI基金对比分析，业绩归因+经理评价+费率比较，筛选优质基金产品。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/fund-compare.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "基金对比分析 | FinAIAI",
+        "description": "FinAIAI基金对比分析，业绩归因+经理评价+费率比较，筛选优质基金产品。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>基金对比分析 | FinAIAI</title>
+  <style>
+    :root { --primary:#2563eb; --success:#10b981; --warning:#f59e0b; --danger:#ef4444; --purple:#8b5cf6;
+      --bg:#f1f5f9; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+      --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; }
+    .wrap { max-width:720px; margin:0 auto; padding:16px; }
+    .hero { background:linear-gradient(135deg,#059669,#10b981); color:#fff; border-radius:24px; padding:28px 22px;
+      box-shadow:0 14px 44px rgba(5,150,105,.18); }
+    .hero h1 { font-size:24px; font-weight:900; margin-bottom:4px; }
+    .hero .sub { opacity:.85; font-size:13px; }
+    .section-title { font-size:18px; font-weight:900; margin:28px 0 14px; display:flex; align-items:center; gap:8px; }
+    .section-title .dot { width:8px; height:8px; border-radius:50%; background:var(--primary); }
+    .card { background:var(--card); border-radius:20px; padding:20px; box-shadow:var(--shadow); margin-bottom:12px; }
+    .card h3 { font-size:16px; margin-bottom:10px; }
+    .input-box { background:var(--card); border-radius:16px; padding:16px; box-shadow:var(--shadow); }
+    .input-box select, .input-box input { width:100%; border:1px solid var(--border); border-radius:12px; padding:12px 14px;
+      font-size:15px; outline:none; margin-bottom:10px; }
+    .input-box select:focus, .input-box input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+    .run-btn { width:100%; border:none; background:linear-gradient(135deg,#059669,#10b981); color:#fff;
+      padding:14px; border-radius:14px; font-size:16px; font-weight:800; cursor:pointer;
+      box-shadow:0 4px 16px rgba(5,150,105,.3); }
+    .run-btn:disabled { opacity:.6; }
+    .loading { display:none; text-align:center; padding:40px; }
+    .loading.active { display:block; }
+    .spinner { width:48px; height:48px; border:4px solid rgba(5,150,105,.15); border-top-color:#059669;
+      border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 16px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .result { display:none; }
+    .result.active { display:block; animation:fadeIn .5s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+    .chart-grid { margin-bottom: 8px; } .compare-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:10px; }
+    .compare-table th { background:#f8fafc; padding:10px; text-align:left; font-weight:800; color:var(--muted); border-bottom:2px solid var(--border); }
+    .compare-table td { padding:10px; border-bottom:1px solid var(--border); }
+    .compare-table tr:last-child td { border-bottom:none; }
+    .metric-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px; }
+    .metric { background:#f8fafc; border-radius:14px; padding:14px; text-align:center; }
+    .metric b { display:block; font-size:20px; }
+    .metric span { font-size:11px; color:var(--muted); }
+    .fund-card { padding:12px; background:#f8fafc; border-radius:12px; margin:8px 0; }
+    .fund-card .name { font-weight:800; font-size:15px; margin-bottom:4px; }
+    .fund-card .tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:6px; }
+    .fund-tag { padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; }
+    .back-home { display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--primary);
+      text-decoration:none; font-size:14px; font-weight:700; }
+    .suitability-match { display:inline-block; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:800; }
+    .match-good { background:#d1fae5; color:#065f46; }
+    .match-caution { background:#fef3c7; color:#92400e; }
+    .match-no { background:#fee2e2; color:#991b1b; }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <script src="../chart-manager.js" defer></script>
+    <script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <!-- Preconnect to CDN for chart.js -->
+    <link rel="preconnect" href="//cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+    <!-- Performance: Lazy load non-critical resources -->
+    <meta name="theme-color" content="#10b981">
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>📈 基金对比分析</h1>
+    <div class="sub">基金业 · 收益对比 · 风险对比 · 持仓分析 · 适当性匹配</div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>选择对比条件</div>
+  <div class="input-box">
+    <select id="fundType">
+      <option value="stock">股票型基金</option>
+      <option value="bond">债券型基金</option>
+      <option value="mixed" selected>混合型基金</option>
+      <option value="index">指数型基金</option>
+      <option value="qdii">QDII基金</option>
+    </select>
+    <select id="horizon">
+      <option value="1">短期（1年以内）</option>
+      <option value="3" selected>中期（1-3年）</option>
+      <option value="5">长期（3年以上）</option>
+    </select>
+    <select id="riskPref">
+      <option value="low">低风险偏好</option>
+      <option value="medium" selected>中风险偏好</option>
+      <option value="high">高风险偏好</option>
+    </select>
+    <input type="number" id="amount" placeholder="投资金额（万元，可选）" value="">
+    <button class="run-btn" id="advisorBtn" onclick="loadAdvisorRecommend()">🤖 获取智能投顾推荐</button>
+    <button class="run-btn" id="runBtn" onclick="runCompare()">📈 生成对比分析</button>
+  </div>
+
+  <div id="advisorRecommend" style="margin-bottom:16px;"></div>
+
+  <div class="loading" id="loading"><div class="spinner"></div><p>正在分析基金数据并生成对比报告...</p></div>
+
+  <div class="result" id="result"></div>
+
+  <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+</div>
+
+<script>
+(function(){
+  function cyrb128(str){
+    let h1=1779033703,h2=3144134277,h3=1013904242,h4=2773480762;
+    for(let i=0,k;i<str.length;i++){
+      k=str.charCodeAt(i);
+      h1=h2^Math.imul(h1^k,597399067);
+      h2=h3^Math.imul(h2^k,2869860233);
+      h3=h4^Math.imul(h3^k,951274213);
+      h4=h1^Math.imul(h4^k,2716044179);
+    }
+    h1=Math.imul(h3^(h1>>>18),597399067);
+    h2=Math.imul(h4^(h2>>>22),2869860233);
+    h3=Math.imul(h1^(h3>>>17),951274213);
+    h4=Math.imul(h2^(h4>>>19),2716044179);
+    return [(h1^h2^h3^h4)>>>0,(h2^h1)>>>0,(h3^h1)>>>0,(h4^h1)>>>0];
+  }
+  function sfc32(a,b,c,d){
+    return function(){
+      a>>>=0;b>>>=0;c>>>=0;d>>>=0;
+      let t=(a+b)|0;
+      a=b^b>>>9;
+      b=c+(c<<3)|0;
+      c=(c<<21)|(c>>>11);
+      d=d+1|0;
+      t=t+d|0;
+      c=c+t|0;
+      return (t>>>0)/4294967296;
+    };
+  }
+  function createRng(seed){ const s=cyrb128(seed); return sfc32(s[0],s[1],s[2],s[3]); }
+
+  const fundDB = {
+    stock: [
+      {name:"易方达深严·深圳100ETF",code:"110020",risk:"高",sharpe:"1.35",fee:0.6,volatility:18.5},
+      {name:"嘉实中证红利指数A",code:"100032",risk:"高",sharpe:"1.12",fee:0.8,volatility:16.2},
+      {name:"易方达新能源汽车A",code:"001256",risk:"高",sharpe:"0.95",fee:1.2,volatility:22.8},
+      {name:"易方达中证半导体A",code:"007301",risk:"高",sharpe:"1.08",fee:1.2,volatility:24.5},
+      {name:"易方达中证全指指数A",code:"007339",risk:"高",sharpe:"1.42",fee:0.6,volatility:17.8}
+    ],
+    bond: [
+      {name:"华夏短债债券A",code:"004042",risk:"低",sharpe:"2.15",fee:0.3,volatility:2.1},
+      {name:"易方达信用债主体A",code:"007950",risk:"低",sharpe:"1.85",fee:0.4,volatility:3.5},
+      {name:"招商银行理财稳健",code:"003103",risk:"中低",sharpe:"1.55",fee:0.5,volatility:5.8},
+      {name:"易方达中证银行债A",code:"007343",risk:"低",sharpe:"1.92",fee:0.3,volatility:2.8},
+      {name:"广发中债1-3年A",code:"006482",risk:"低",sharpe:"2.05",fee:0.3,volatility:2.5}
+    ],
+    mixed: [
+      {name:"易方达蓝筹精选混合",code:"005827",risk:"中",sharpe:"1.48",fee:1.5,volatility:12.5},
+      {name:"富国天惠成长混合",code:"161005",risk:"中",sharpe:"1.35",fee:1.5,volatility:13.8},
+      {name:"兴全合泰混合A",code:"163402",risk:"中",sharpe:"1.52",fee:1.5,volatility:11.5},
+      {name:"易方达科技创新混合",code:"001938",risk:"中高",sharpe:"1.28",fee:1.5,volatility:15.2},
+      {name:"广发多因素混合",code:"002943",risk:"中",sharpe:"1.38",fee:1.2,volatility:12.8}
+    ],
+    index: [
+      {name:"易方达深严·深圳100ETF",code:"110020",risk:"高",sharpe:"1.35",fee:0.6,volatility:18.5},
+      {name:"华夏上证50ETF",code:"510050",risk:"高",sharpe:"1.28",fee:0.5,volatility:19.2},
+      {name:"南方中证500ETF",code:"510500",risk:"高",sharpe:"1.15",fee:0.5,volatility:20.5},
+      {name:"易方达中证全指指数A",code:"007339",risk:"高",sharpe:"1.42",fee:0.6,volatility:17.8},
+      {name:"嘉实中证红利指数A",code:"100032",risk:"高",sharpe:"1.12",fee:0.8,volatility:16.2}
+    ],
+    qdii: [
+      {name:"易方达中证港股通A",code:"005777",risk:"高",sharpe:"1.08",fee:1.2,volatility:21.5},
+      {name:"易方达纳斯达克100A",code:"161130",risk:"高",sharpe:"1.25",fee:1.0,volatility:18.8},
+      {name:"南方道琼斯中国指数A",code:"501018",risk:"高",sharpe:"0.95",fee:1.2,volatility:22.5},
+      {name:"易方达标普500指数A",code:"050025",risk:"高",sharpe:"1.18",fee:1.0,volatility:19.5},
+      {name:"广发纳斯达克100ETF",code:"159941",risk:"高",sharpe:"1.22",fee:0.8,volatility:18.2}
+    ]
+  };
+
+  function getRet(rng, horizon, volatility) {
+    const base = (rng() * 6 - 1);
+    const horizonMult = horizon === '1' ? 0.8 : horizon === '3' ? 1.0 : 1.3;
+    const ret = base * horizonMult;
+    return ret.toFixed(2);
+  }
+
+  function getMaxDD(volatility) {
+    return -(volatility * (0.6 + Math.random() * 0.4)).toFixed(1);
+  }
+
+  function checkSuitability(fundRisk, userRisk) {
+    const riskMap = {'低':1,'中低':2,'中':3,'中高':4,'高':5};
+    const fundLevel = riskMap[fundRisk] || 3;
+    const userLevel = userRisk === 'low' ? 2 : userRisk === 'medium' ? 3 : 5;
+    if(fundLevel <= userLevel) return {label:'适合',class:'match-good'};
+    if(fundLevel <= userLevel + 1) return {label:'谨慎',class:'match-caution'};
+    return {label:'不匹配',class:'match-no'};
+  }
+
+  window.loadAdvisorRecommend = async function(){
+    const btn = document.getElementById('advisorBtn');
+    if(!btn) return;
+    btn.disabled = true; btn.textContent = '⏳ 正在生成投顾方案...';
+    const riskPref = document.getElementById('riskPref').value;
+    const amount = parseFloat(document.getElementById('amount').value) || 10;
+    const riskMap = {'low':'稳健型','medium':'平衡型','high':'激进型'};
+    const container = document.getElementById('advisorRecommend');
+    container.innerHTML = '<div class="card">⏳ 正在连接统一API...</div>';
+    try{
+      const resp = await fetch('/api/advisor/recommend',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({task:'推荐基金组合',risk_profile:riskMap[riskPref]||'稳健型',amount:amount})
+      });
+      const data = await resp.json();
+      if(data.code !== 0){ throw new Error(data.message || '请求失败'); }
+      const rec = data.data || {};
+      const funds = rec.funds || [];
+      container.innerHTML = `
+        <div class="card" style="border-left:4px solid #2563eb;">
+          <h3>🤖 智能投顾推荐</h3>
+          <p style="font-size:13px;color:#64748b;margin-bottom:12px;">${rec.knowledge && rec.knowledge.answer ? rec.knowledge.answer : '基于您的风险偏好，AI为您推荐以下基金组合：'}</p>
+          <div style="display:grid;gap:8px;">
+            ${funds.map((f,i)=>`
+              <div class="fund-card" style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:#f8fafc;border-radius:8px;">
+                <div>
+                  <div class="name" style="font-weight:700;">${i+1}. ${f.name}</div>
+                  <div style="font-size:12px;color:#64748b;">${f.code} · ${f.type} · 风险${f.risk}</div>
+                  ${f.net_value ? `<div style="font-size:11px;color:#475569;margin-top:2px;">
+                    净值: ${f.net_value} <span style="color:${f.daily_change_pct > 0 ? '#059669' : f.daily_change_pct < 0 ? '#dc2626' : '#64748b'};">${f.daily_change_pct > 0 ? '+' : ''}${f.daily_change_pct}% </span>
+                    | 估算: ${f.estimate_value}
+                  </div>` : ''}
+                </div>
+                <div style="font-size:12px;color:#2563eb;font-weight:700;">费率 ${f.fee}%</div>
+              </div>
+            `).join('')}
+          </div>
+          ${rec.h5_url ? `<p style="margin-top:12px;font-size:12px;">🔗 来源：统一API Agent编排 + RAG 2.0${rec.data_source === 'eastmoney_public_api' ? ' + 天天基金公开数据' : '（演示数据）'}</p>` : ''}
+        </div>
+      `;
+    }catch(e){
+      container.innerHTML = `<div class="card" style="color:#dc2626;">投顾推荐失败：${e.message}</div>`;
+    }finally{
+      btn.disabled = false; btn.textContent = '🤖 获取智能投顾推荐';
+    }
+  };
+
+  window.runCompare = function(){
+    const fundType = document.getElementById('fundType').value;
+    const horizon = document.getElementById('horizon').value;
+    const riskPref = document.getElementById('riskPref').value;
+    const amount = parseFloat(document.getElementById('amount').value) || 10;
+
+    document.getElementById('loading').classList.add('active');
+    document.getElementById('result').classList.remove('active');
+    document.getElementById('runBtn').disabled = true;
+
+    setTimeout(()=>{
+      const seed = fundType + '_' + horizon + '_' + riskPref + '_' + amount;
+      const rng = createRng(seed);
+
+      const funds = fundDB[fundType];
+      const enriched = funds.map(f => {
+        const ret1y = getRet(rng, '1', f.volatility);
+        const ret3y = getRet(rng, '3', f.volatility);
+        const maxDD = getMaxDD(f.volatility);
+        const suit = checkSuitability(f.risk, riskPref);
+        return {...f, ret1y, ret3y, maxDD, suit};
+      });
+
+      // 排序：复利后收益
+      enriched.sort((a,b) => parseFloat(b.ret3y) - parseFloat(a.ret3y));
+
+      const bestFund = enriched[0];
+      const worstFund = enriched[enriched.length-1];
+
+      // 风险收益散点
+      const riskReturn = enriched.map(f => ({x:f.volatility,y:parseFloat(f.ret3y),name:f.name}));
+      const avgRet = (enriched.reduce((s,f)=>s+parseFloat(f.ret3y),0)/enriched.length).toFixed(2);
+      const avgVol = (enriched.reduce((s,f)=>s+f.volatility,0)/enriched.length).toFixed(1);
+      const avgSharpe = (enriched.reduce((s,f)=>s+parseFloat(f.sharpe),0)/enriched.length).toFixed(2);
+
+      // 投资建议
+      const investAmount = amount;
+      const suggestedAlloc = enriched.slice(0,3).map((f,i) => {
+        const ratio = i === 0 ? 50 : i === 1 ? 30 : 20;
+        return {...f, ratio, invest: (investAmount * ratio / 100).toFixed(1)};
+      });
+
+
+      // Register charts with chart-manager
+      window.__chartManager = window.__chartManager || new LongmaChartManager({cdnCheckTimeout:2000});
+
+      // Returns bar chart
+      window.__chartManager.register('fundReturnChart', {
+        type: 'bar',
+        selector: '#fundReturnChart',
+        lazy: true,
+        data: {
+          labels: enriched.map(f => f.name.substring(0,6) + '...'),
+          datasets: [
+            {
+              label: '近1年收益(%)',
+              data: enriched.map(f => parseFloat(f.ret1y)),
+              backgroundColor: enriched.map(f => parseFloat(f.ret1y) >= 0 ? 'rgba(16,185,129,0.8)' : 'rgba(239,68,68,0.8)'),
+              borderRadius: 6,
+            },
+            {
+              label: '近3年收益(%)',
+              data: enriched.map(f => parseFloat(f.ret3y)),
+              backgroundColor: enriched.map(f => parseFloat(f.ret3y) >= 0 ? 'rgba(37,99,235,0.8)' : 'rgba(239,68,68,0.8)'),
+              borderRadius: 6,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+          scales: { y: { ticks: { callback: v => v + '%' }, grid: { color: 'rgba(0,0,0,0.04)' } } }
+        }
+      });
+
+      // Risk-Return scatter (as bubble chart)
+      window.__chartManager.register('fundRiskChart', {
+        type: 'bubble',
+        selector: '#fundRiskChart',
+        lazy: true,
+        data: {
+          datasets: [{
+            label: '基金',
+            data: enriched.map(f => ({
+              x: f.volatility,
+              y: parseFloat(f.ret3y),
+              r: Math.max(6, parseFloat(f.sharpe) * 4)
+            })),
+            backgroundColor: enriched.map((f, i) => {
+              const colors = ['rgba(37,99,235,0.6)','rgba(16,185,129,0.6)','rgba(245,158,11,0.6)','rgba(139,92,246,0.6)','rgba(239,68,68,0.6)'];
+              return colors[i % colors.length];
+            }),
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => {
+                  const d = ctx.raw;
+                  const fund = enriched[ctx.dataIndex];
+                  return [fund.name.substring(0,8), `波动率:${d.x}%`, `收益:${d.y}%`, `夏普:${fund.sharpe}`];
+                }
+              }
+            }
+          },
+          scales: {
+            x: { title: { display: true, text: '波动率(%)', font: { size: 10 } }, grid: { color: 'rgba(0,0,0,0.04)' } },
+            y: { title: { display: true, text: '近3年收益(%)', font: { size: 10 } }, ticks: { callback: v => v + '%' }, grid: { color: 'rgba(0,0,0,0.04)' } }
+          }
+        }
+      });
+
+      // Initialize charts after DOM update
+      window.__chartManager.initAll();
+            document.getElementById('result').innerHTML = `
+        <div class="card">
+          <h3>📊 对比概览</h3>
+          <div class="chart-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+            <div style="position:relative;height:200px;">
+              <canvas id="fundReturnChart" data-chart="fundReturnChart"></canvas>
+            </div>
+            <div style="position:relative;height:200px;">
+              <canvas id="fundRiskChart" data-chart="fundRiskChart"></canvas>
+            </div>
+          </div>
+          <div class="metric-grid">
+            <div class="metric"><b style="color:var(--primary);">${avgRet}%</b><span>平均近3年收益</span></div>
+            <div class="metric"><b style="color:var(--warning);">${avgVol}%</b><span>平均波动率</span></div>
+            <div class="metric"><b style="color:var(--success);">${avgSharpe}</b><span>平均夏普比率</span></div>
+            <div class="metric"><b style="color:var(--purple);">${bestFund.name.substring(0,8)}...</b><span>收益冠军</span></div>
+            <div class="metric"><b style="color:var(--danger);">${bestFund.ret3y}%</b><span>最高近3年收益</span></div>
+            <div class="metric"><b style="color:var(--muted);">${enriched.filter(f=>f.suit.label==='适合').length}只</b><span>适合您风险偏好</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📈 基金对比表</h3>
+          <table class="compare-table">
+            <tr><th>基金</th><th>类型</th><th>风险</th><th>近年</th><th>近3年</th><th>最大回撤</th><th>夏普</th><th>适合度</th></tr>
+            ${enriched.map(f=>`<tr>
+              <td><b>${f.name}</b><br><span style="font-size:11px;color:var(--muted);">${f.code}</span></td>
+              <td>${fundType==='stock'?'股票':fundType==='bond'?'债券':fundType==='mixed'?'混合':fundType==='index'?'指数':'QDII'}</td>
+              <td>${f.risk}</td>
+              <td style="color:${parseFloat(f.ret1y)>0?'#059669':'#dc2626'};font-weight:700;">${f.ret1y}%</td>
+              <td style="color:${parseFloat(f.ret3y)>0?'#059669':'#dc2626'};font-weight:700;">${f.ret3y}%</td>
+              <td>${f.maxDD}%</td>
+              <td>${f.sharpe}</td>
+              <td><span class="suitability-match ${f.suit.class}">${f.suit.label}</span></td>
+            </tr>`).join('')}
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>🎯 投资建议</h3>
+          <div style="font-size:14px;line-height:1.8;margin-bottom:12px;">
+            <div><strong>您的风险偏好：</strong>${riskPref==='low'?'低风险':riskPref==='medium'?'中风险':'高风险'} · <strong>投资期限：</strong>${horizon==='1'?'短期':horizon==='3'?'中期':'长期'} · <strong>投资金额：</strong>${investAmount}万元</div>
+          </div>
+          ${suggestedAlloc.map(f=>`
+            <div class="fund-card">
+              <div class="name">${f.name}</div>
+              <div class="tags">
+                <span class="fund-tag" style="background:#dbeafe;color:#1e40af;">${f.ratio}%</span>
+                <span class="fund-tag" style="background:#d1fae5;color:#065f46;">${f.invest}万元</span>
+                <span class="fund-tag" style="background:#f3e8ff;color:#6b21a8;">夏普${f.sharpe}</span>
+                <span class="suitability-match ${f.suit.class}">${f.suit.label}</span>
+              </div>
+              <div style="font-size:13px;color:var(--muted);">预估${horizon}年收益${f.ret3y}%，最大回撤${f.maxDD}%
+              </div>
+            </div>
+          `).join('')}
+          <div style="margin-top:10px;font-size:12px;color:#92400e;background:#fef3c7;padding:8px 12px;border-radius:8px;">
+            ⚠️ 以上分析仅供参考，不构成投资建议。基金过往业绩不代表未来表现。
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📊 风险收益分析</h3>
+          <div style="font-size:14px;line-height:1.8;">
+            <div>• <strong>收益分散度：</strong>最高${bestFund.ret3y}% vs 最低${worstFund.ret3y}%，差距${(parseFloat(bestFund.ret3y)-parseFloat(worstFund.ret3y)).toFixed(2)}%</div>
+            <div>• <strong>风险集中度：</strong>平均波动率${avgVol}%，${avgVol>15?'属于高波动品种':avgVol>8?'属于中等波动品种':'属于低波动品种'}</div>
+            <div>• <strong>性价比：</strong>平均夏普比率${avgSharpe}，${avgSharpe>1.5?'性价比优秀':avgSharpe>1?'性价比良好':'性价比一般'}</div>
+            <div>• <strong>适当性：</strong>${enriched.filter(f=>f.suit.label==='适合').length}只基金完全匹配您的风险偏好</div>
+          </div>
+        </div>`;
+
+      document.getElementById('loading').classList.remove('active');
+      document.getElementById('result').classList.add('active');
+      document.getElementById('runBtn').disabled = false;
+    },800);
+  };
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    if (typeof LongmaAPI === 'undefined') {
+        console.warn('[FundCompare] LongmaAPI 未加载，跳过自动数据加载');
+        return;
+    }
+    try {
+        // 自动加载股票数据
+        const stockContainer = document.querySelector('.stock-data, #stock-data, [data-type="stocks"]');
+        if (stockContainer && LongmaAPI && LongmaAPI.stocks && LongmaAPI.stocks.list) {
+            const result = await LongmaAPI.stocks.list();
+            if (result.success && result.data) {
+                renderStockList(stockContainer, result.data);
+            }
+        }
+
+        // 自动加载基金数据
+        const fundContainer = document.querySelector('.fund-data, #fund-data, [data-type="funds"]');
+        if (fundContainer && LongmaAPI && LongmaAPI.funds && LongmaAPI.funds.get) {
+            const result = await LongmaAPI.funds.get('110022');
+            if (result.success && result.data) {
+                renderFundCard(fundContainer, result.data);
+            }
+        }
+    } catch (e) {
+        console.warn('[FundCompare] 自动数据加载失败（非关键）:', e.message);
+    }
+});
+
+function renderStockList(container, stocks) {
+    let html = '<div class="api-stock-list">';
+    stocks.forEach(stock => {
+        const changeClass = stock.change >= 0 ? 'up' : 'down';
+        const changeSign = stock.change >= 0 ? '+' : '';
+        html += `<div class="api-stock-item ${changeClass}">
+            <span class="code">${stock.code}</span>
+            <span class="name">${stock.name}</span>
+            <span class="price">¥${stock.price.toFixed(2)}</span>
+            <span class="change">${changeSign}${(stock.change * 100).toFixed(2)}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function renderFundCard(container, fund) {
+    container.innerHTML = `<div class="api-fund-card">
+        <h4>${fund.name}</h4>
+        <p>净值: ¥${fund.nav.toFixed(3)}</p>
+        <p>日涨跌: ${fund.change > 0 ? '+' : ''}${(fund.change * 100).toFixed(2)}%</p>
+        <p>风险等级: ${fund.risk}</p>
+    </div>`;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+<script>window.addEventListener("resize", function(){ if(window.__chartManager) window.__chartManager.resizeAll(); });</script></body>
+</html>
