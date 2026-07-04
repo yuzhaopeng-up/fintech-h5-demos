@@ -1,0 +1,745 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>信用卡申请 | FinAIAI</title>
+    <meta name="description" content="FinAIAI信用卡申请助手，智能匹配最适合您的信用卡，在线申请快速审批。">
+    <meta name="keywords" content="信用卡申请,FinAI信用卡,信用卡办理,信用卡推荐,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/credit-card-apply">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/credit-card-apply">
+    <meta property="og:title" content="信用卡申请 | FinAIAI">
+    <meta property="og:description" content="智能匹配+快速审批+专属额度，在线申请信用卡。">
+    <meta property="og:site_name" content="FinAIAI">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "信用卡申请 | FinAIAI",
+        "description": "FinAIAI信用卡申请助手，智能匹配最适合您的信用卡，在线申请快速审批。",
+        "applicationCategory": "FinancialProductApplication",
+        "operatingSystem": "Web",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CNY"},
+        "provider": {"@type": "Organization", "name": "FinAIAI", "url": "https://www.longma-ai.com"}
+    }
+    </script>
+    <link rel="preconnect" href="//cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <meta name="theme-color" content="#1E3A5F">
+
+    <style>
+        :root {
+            --primary: #1E3A5F;
+            --accent: #2563EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --purple: #7C3AED;
+            --bg: #F1F5F9;
+            --card: #FFFFFF;
+            --text: #0F172A;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+            --radius: 18px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1E3A5F, #2563EB);
+            color: white;
+            padding: 18px 16px 22px;
+            border-radius: 0 0 28px 28px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 24px rgba(30, 58, 95, 0.25);
+        }
+        .header-top {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 14px;
+        }
+        .header-icon {
+            width: 44px; height: 44px; background: rgba(255,255,255,0.15);
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; flex-shrink: 0;
+        }
+        .header-info h1 { font-size: 18px; font-weight: 900; }
+        .header-info p { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+        .header-badge {
+            background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px;
+            font-size: 12px; font-weight: 700; margin-left: auto;
+        }
+
+        .stats-row {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.15); border-radius: 14px;
+            padding: 12px 8px; text-align: center;
+        }
+        .stat-card .val { font-size: 22px; font-weight: 900; }
+        .stat-card .lbl { font-size: 11px; opacity: 0.85; margin-top: 2px; }
+
+        /* Content */
+        .content { max-width: 720px; margin: 0 auto; padding: 16px 16px 100px; }
+
+        /* Section */
+        .section-title {
+            font-size: 15px; font-weight: 700; margin-bottom: 12px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .section-title::before {
+            content: ''; width: 3px; height: 14px; background: var(--accent); border-radius: 2px;
+        }
+
+        /* Cards list */
+        .card-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+
+        /* Credit card visual */
+        .credit-card-visual {
+            background: linear-gradient(135deg, #1E3A5F, #2563EB);
+            border-radius: 20px; padding: 20px; color: white;
+            min-height: 160px; display: flex; flex-direction: column;
+            justify-content: space-between; position: relative; overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .credit-card-visual.diamond {
+            background: linear-gradient(135deg, #4C1D95, #7C3AED);
+        }
+        .credit-card-visual.gold {
+            background: linear-gradient(135deg, #92400E, #D97706);
+        }
+        .credit-card-visual.green {
+            background: linear-gradient(135deg, #065F46, #10B981);
+        }
+        .credit-card-bg-circle {
+            position: absolute; right: -30px; top: -30px;
+            width: 180px; height: 180px; border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+        .card-bank { font-size: 13px; font-weight: 600; opacity: 0.9; }
+        .card-chip {
+            width: 36px; height: 28px; background: linear-gradient(135deg, #D4A017, #FFD700);
+            border-radius: 6px; margin: 12px 0;
+        }
+        .card-number {
+            font-size: 16px; letter-spacing: 3px; font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+        .card-bottom {
+            display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .card-holder { font-size: 11px; opacity: 0.8; }
+        .card-holder-name { font-size: 13px; font-weight: 700; text-transform: uppercase; }
+        .card-level { font-size: 22px; font-weight: 900; opacity: 0.9; }
+
+        /* Card info card */
+        .card-item {
+            background: var(--card); border-radius: var(--radius);
+            padding: 16px; box-shadow: var(--shadow); cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border: 2px solid transparent;
+        }
+        .card-item:active { transform: scale(0.99); }
+        .card-item.selected { border-color: var(--accent); background: #EEF2FF; }
+        .card-item-header {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+        }
+        .card-item-icon {
+            width: 44px; height: 44px; border-radius: 12px; display: flex;
+            align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0;
+        }
+        .card-item-info { flex: 1; }
+        .card-item-name { font-size: 15px; font-weight: 800; }
+        .card-item-level { font-size: 12px; color: var(--muted); }
+        .card-item-check {
+            width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border);
+            display: flex; align-items: center; justify-content: center; font-size: 12px;
+            color: white; font-weight: 900; flex-shrink: 0;
+        }
+        .card-item.selected .card-item-check { background: var(--accent); border-color: var(--accent); }
+        .card-item-fees {
+            display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px;
+        }
+        .fee-tag {
+            background: var(--bg); color: var(--muted); font-size: 11px;
+            padding: 2px 8px; border-radius: 8px; font-weight: 600;
+        }
+        .card-item-btns { display: flex; gap: 8px; }
+        .card-btn {
+            flex: 1; border: none; padding: 10px; border-radius: 10px;
+            font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.15s;
+        }
+        .card-btn:active { opacity: 0.8; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-outline { background: var(--bg); color: var(--accent); border: 1.5px solid var(--border); }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px;
+        }
+        .benefit-item {
+            display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted);
+        }
+        .benefit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+        /* Quick apply form */
+        .apply-form {
+            background: var(--card); border-radius: var(--radius);
+            padding: 20px; box-shadow: var(--shadow); margin-bottom: 16px;
+        }
+        .form-title { font-size: 15px; font-weight: 800; margin-bottom: 16px; }
+        .form-row { margin-bottom: 14px; }
+        .form-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+        .form-input {
+            width: 100%; border: 1.5px solid var(--border); border-radius: 12px;
+            padding: 12px 14px; font-size: 15px; outline: none;
+            transition: border-color 0.2s; font-family: inherit; background: var(--card);
+        }
+        .form-input:focus { border-color: var(--accent); }
+        .form-select {
+            width: 100%; border: 1.5px solid var(--border); border-radius: 12px;
+            padding: 12px 14px; font-size: 15px; outline: none;
+            background: var(--card); cursor: pointer; font-family: inherit;
+        }
+        .submit-btn {
+            width: 100%; border: none; padding: 16px; border-radius: 14px;
+            background: linear-gradient(135deg, #1E3A5F, #2563EB);
+            color: white; font-size: 16px; font-weight: 900; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3); transition: transform 0.15s;
+        }
+        .submit-btn:active { transform: scale(0.98); }
+        .submit-btn:disabled { background: var(--muted); box-shadow: none; cursor: not-allowed; }
+
+        /* Chat section */
+        .chat-section {
+            background: var(--card); border-radius: var(--radius);
+            padding: 16px; box-shadow: var(--shadow); margin-bottom: 16px;
+        }
+        .chat-list { max-height: 300px; overflow-y: auto; margin-bottom: 12px; }
+        .msg { display: flex; gap: 10px; margin-bottom: 12px; }
+        .msg.user { flex-direction: row-reverse; }
+        .avatar {
+            width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; font-size: 16px;
+        }
+        .bubble {
+            max-width: 78%; padding: 10px 14px; border-radius: 16px;
+            font-size: 14px; line-height: 1.6; word-break: break-word;
+        }
+        .msg.bot .bubble { background: #F8FAFC; border-bottom-left-radius: 4px; }
+        .msg.user .bubble { background: var(--primary); color: white; border-bottom-right-radius: 4px; }
+        .intent-tag {
+            display: inline-block; background: rgba(37,99,235,0.1); color: var(--accent);
+            padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-bottom: 4px;
+        }
+
+        .quick-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .qbtn {
+            padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+            border: 1.5px solid var(--border); background: var(--card); cursor: pointer;
+            transition: all 0.15s; color: var(--text);
+        }
+        .qbtn:active { transform: scale(0.96); }
+        .qbtn:hover { border-color: var(--accent); color: var(--accent); background: #EEF2FF; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 6px; margin-bottom: 16px; overflow-x: auto; }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab {
+            padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 700;
+            white-space: nowrap; cursor: pointer; border: none;
+            background: var(--card); color: var(--muted); box-shadow: var(--shadow);
+            transition: all 0.2s; flex-shrink: 0;
+        }
+        .tab.active { background: var(--primary); color: white; }
+
+        /* Info display */
+        .info-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px;
+        }
+        .info-item { background: var(--bg); border-radius: 12px; padding: 12px; }
+        .info-item .lbl { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+        .info-item .val { font-size: 15px; font-weight: 800; }
+        .info-item .val.empty { color: var(--muted); font-weight: 400; font-size: 13px; }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.8); color: white; padding: 12px 24px;
+            border-radius: 24px; font-size: 14px; font-weight: 600;
+            z-index: 300; white-space: nowrap; pointer-events: none;
+        }
+
+        /* Footer */
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--muted); }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-top">
+            <div class="header-icon">💳</div>
+            <div class="header-info">
+                <h1>信用卡申请中心</h1>
+                <p>智能匹配 · 快速审批 · 专属额度</p>
+            </div>
+            <div class="header-badge" id="currentDate"></div>
+        </div>
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="val" style="color:#86EFAC;" id="statMatched">0</div>
+                <div class="lbl">可申请卡片</div>
+            </div>
+            <div class="stat-card">
+                <div class="val" style="color:#FCD34D;" id="statQuota">—</div>
+                <div class="lbl">预估额度</div>
+            </div>
+            <div class="stat-card">
+                <div class="val" style="color:#FCA5A5;" id="statProgress">0/5</div>
+                <div class="lbl">信息完成</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" id="tabCards" onclick="switchTab('cards')">💳 卡片列表</button>
+            <button class="tab" id="tabApply" onclick="switchTab('apply')">📝 在线申请</button>
+            <button class="tab" id="tabChat" onclick="switchTab('chat')">💬 咨询助手</button>
+        </div>
+
+        <!-- ========== Cards Tab ========== -->
+        <div id="sectionCards">
+            <div class="section-title">🏆 为您推荐</div>
+
+            <!-- Featured card visual -->
+            <div class="credit-card-visual" id="featuredCard">
+                <div class="credit-card-bg-circle"></div>
+                <div>
+                    <div class="card-bank" id="fcBank">FinAI银行</div>
+                    <div class="card-chip"></div>
+                    <div class="card-number">•••• •••• •••• ••••</div>
+                </div>
+                <div class="card-bottom">
+                    <div class="card-holder">
+                        <div class="card-holder-name" id="fcHolder">LONGMA BANK</div>
+                    </div>
+                    <div class="card-level" id="fcLevel">白金卡</div>
+                </div>
+            </div>
+
+            <!-- Card list -->
+            <div class="card-list" id="cardList"></div>
+        </div>
+
+        <!-- ========== Apply Tab ========== -->
+        <div id="sectionApply" style="display:none;">
+            <div class="section-title">📝 填写申请信息</div>
+            <div class="apply-form" id="applyForm">
+                <div class="form-row">
+                    <div class="form-label">姓名</div>
+                    <input type="text" class="form-input" id="formName" placeholder="请输入真实姓名">
+                </div>
+                <div class="form-row">
+                    <div class="form-label">手机号</div>
+                    <input type="tel" class="form-input" id="formPhone" placeholder="请输入大陆手机号">
+                </div>
+                <div class="form-row">
+                    <div class="form-label">身份证号</div>
+                    <input type="text" class="form-input" id="formId" placeholder="请输入18位身份证号">
+                </div>
+                <div class="form-row">
+                    <div class="form-label">申请卡片</div>
+                    <select class="form-select" id="formCard">
+                        <option value="">请选择卡片</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">所在城市</div>
+                    <select class="form-select" id="formCity">
+                        <option value="">请选择城市</option>
+                        <option>北京</option><option>上海</option><option>广州</option><option>深圳</option>
+                        <option>杭州</option><option>南京</option><option>苏州</option><option>成都</option>
+                        <option>武汉</option><option>西安</option><option>其他</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">月收入(元)</div>
+                    <input type="number" class="form-input" id="formIncome" placeholder="请输入月收入">
+                </div>
+                <button class="submit-btn" id="submitBtn" onclick="submitApply()" disabled>请先完善信息</button>
+            </div>
+        </div>
+
+        <!-- ========== Chat Tab ========== -->
+        <div id="sectionChat" style="display:none;">
+            <div class="info-grid" id="custInfo">
+                <div class="info-item"><div class="lbl">年龄</div><div class="val empty" id="ciAge">—</div></div>
+                <div class="info-item"><div class="lbl">月收入</div><div class="val empty" id="ciIncome">—</div></div>
+                <div class="info-item"><div class="lbl">职业</div><div class="val empty" id="ciOcc">—</div></div>
+                <div class="info-item"><div class="lbl">城市</div><div class="val empty" id="ciCity">—</div></div>
+            </div>
+
+            <div class="chat-section">
+                <div class="section-title">💬 信用卡咨询</div>
+                <div class="chat-list" id="chatList">
+                    <div class="msg bot">
+                        <div class="avatar" style="background:#DBEAFE;">💳</div>
+                        <div class="bubble">
+                            <div class="intent-tag">💳 信用卡顾问</div>
+                            您好！我是FinAIAI信用卡顾问 💳<br><br>
+                            请告诉我您的基本情况，我来为您智能匹配最合适的信用卡：<br>
+                            • 年龄<br>
+                            • 月收入<br>
+                            • 职业（工薪/企业主/学生）<br><br>
+                            <b>直接说「30岁月收入1万工薪族」</b>即可一步到位！
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-btns">
+                    <button class="qbtn" onclick="sendQuick('30岁月收入1万工薪族')">30岁/1万/工薪</button>
+                    <button class="qbtn" onclick="sendQuick('25岁月收入8000自由职业')">25岁/8000/自由</button>
+                    <button class="qbtn" onclick="sendQuick('22岁月收入5000企业主有房')">22岁/5000/企业主</button>
+                    <button class="qbtn" onclick="sendQuick('20岁月收入3000学生')">20岁/3000/学生</button>
+                </div>
+                <div style="display:flex;gap:8px;align-items:flex-end;">
+                    <input type="text" class="form-input" id="chatInput" placeholder="描述您的情况..." style="flex:1;min-height:44px;resize:none;" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}">
+                    <button class="btn-primary" style="padding:12px 18px;border:none;border-radius:12px;background:var(--accent);color:white;font-weight:700;cursor:pointer;flex-shrink:0;" onclick="sendChat()">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="footer" href="../experience-center.html">← 返回H5体验中心</a>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============ Card Data ============
+        var CARDS = [
+            { name: '龙誉钻石卡', bank: 'FinAI银行', level: '钻石', levelIcon: '💎', annualFee: 3600, feeNote: '刚性年费，VIP专属服务', maxPeriod: '56天', colorClass: 'diamond', bgColor: '#F3E8FF', textColor: '#4C1D95', minIncome: 50000, ageRange: [25,55], creditRange: [20,200], features: ['无限额消费', '私人银行服务', '三甲医院绿色通道'], benefits: ['消费无限额', '私人顾问', '医疗绿通'], suitable: ['高净值客户', '企业主', '成功人士'] },
+            { name: '龙耀白金卡', bank: 'FinAI银行', level: '白金', levelIcon: '💳', annualFee: 800, feeNote: '首年免，消费6笔免次年', maxPeriod: '50天', colorClass: '', bgColor: '#DBEAFE', textColor: '#1E3A5F', minIncome: 12000, ageRange: [22,60], creditRange: [3,30], features: ['取现手续费低', '境外返现', '航空延误险'], benefits: ['境外返现15%', '无限次贵宾厅', '延误2h赔500'], suitable: ['高收入', '商旅人士', '有车族'] },
+            { name: '龙出行卡', bank: 'FinAI银行', level: '白金', levelIcon: '✈️', annualFee: 500, feeNote: '首年免，消费10笔免次年', maxPeriod: '50天', colorClass: '', bgColor: '#E0E7FF', textColor: '#1E40AF', minIncome: 8000, ageRange: [22,65], creditRange: [2,20], features: ['里程兑换', '机场贵宾厅', '延误赔付'], benefits: ['自动兑里程', '6次贵宾厅', '延误1h赔200'], suitable: ['商务出差', '旅游爱好者'] },
+            { name: '龙腾金卡', bank: 'FinAI银行', level: '金卡', levelIcon: '💰', annualFee: 200, feeNote: '首年免，消费3笔免次年', maxPeriod: '48天', colorClass: 'gold', bgColor: '#FEF3C7', textColor: '#92400E', minIncome: 5000, ageRange: [20,65], creditRange: [1,10], features: ['超市返现', '周五半价', '加油返现'], benefits: ['超市返现5%', '周五餐饮半价', '加油返现3%'], suitable: ['工薪阶层', '家庭消费', '有车族'] },
+            { name: '龙腾普卡', bank: 'FinAI银行', level: '普卡', levelIcon: '💵', annualFee: 0, feeNote: '终身免年费', maxPeriod: '48天', colorClass: 'green', bgColor: '#D1FAE5', textColor: '#065F46', minIncome: 3000, ageRange: [18,70], creditRange: [0.3,3], features: ['终身免年费', '2倍积分', '分期0手续费'], benefits: ['终身免年费', '线上2倍积分', '3期0手续费'], suitable: ['年轻人', '入门用户', '日常消费'] },
+            { name: '龙青春卡', bank: 'FinAI银行', level: '普卡', levelIcon: '🎓', annualFee: 0, feeNote: '28岁以下免至毕业', maxPeriod: '48天', colorClass: 'green', bgColor: '#FCE7F3', textColor: '#BE185D', minIncome: 0, ageRange: [18,28], creditRange: [0.2,1.5], features: ['在校生专属', '毕业前免年费', '取现额度高'], benefits: ['在校生专属', '毕业前免年费', '生日月双倍'], suitable: ['在校大学生', '职场新人', '第一张卡'] },
+        ];
+
+        // ============ State ============
+        var customer = { age: null, income: null, occupation: null, city: null };
+        var selectedCardIdx = -1;
+        var matchedCards = [];
+
+        // ============ Init ============
+        window.addEventListener('load', function() {
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('zh-CN', {month:'short',day:'numeric'});
+            renderCardList();
+            populateCardSelect();
+        });
+
+        // ============ Tab switching ============
+        window.switchTab = function(tab) {
+            ['cards','apply','chat'].forEach(function(t) {
+                var btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+                var sec = document.getElementById('section' + t.charAt(0).toUpperCase() + t.slice(1));
+                var active = t === tab;
+                btn.classList.toggle('active', active);
+                sec.style.display = active ? 'block' : 'none';
+            });
+        };
+
+        // ============ Match cards ============
+        function matchCards() {
+            matchedCards = [];
+            CARDS.forEach(function(card) {
+                var score = 0;
+                if (customer.age !== null && card.ageRange[0] <= customer.age && customer.age <= card.ageRange[1]) {
+                    score += 30;
+                }
+                if (customer.income !== null && customer.income >= card.minIncome) {
+                    score += 40;
+                    if (customer.income >= card.minIncome * 2) score += 10;
+                }
+                if (customer.occupation === '企业主' && card.level === '钻石') score += 10;
+                if (customer.occupation === '学生' && card.level === '普卡') score += 20;
+                if (score > 0) matchedCards.push({card: card, score: score});
+            });
+            matchedCards.sort(function(a, b) { return b.score - a.score; });
+            return matchedCards;
+        }
+
+        // ============ Render featured card ============
+        function updateFeaturedCard(card) {
+            var fc = document.getElementById('featuredCard');
+            fc.className = 'credit-card-visual ' + (card.colorClass || '');
+            document.getElementById('fcLevel').textContent = card.level + '卡';
+        }
+
+        // ============ Render card list ============
+        function renderCardList() {
+            var list = document.getElementById('cardList');
+            var matches = matchCards();
+            var cards = matches.length > 0 ? matches.map(function(m) { return m.card; }) : CARDS.slice(0, 3);
+
+            // Update stats
+            document.getElementById('statMatched').textContent = matches.length > 0 ? matches.length + '+' : CARDS.length;
+            if (matches.length > 0 && matches[0].card.creditRange) {
+                var topRange = matches[0].card.creditRange;
+                document.getElementById('statQuota').textContent = topRange[0] + '-' + topRange[1] + '万';
+            }
+
+            if (matches.length === 0) {
+                updateFeaturedCard(CARDS[1]); // default to platinum
+            } else {
+                updateFeaturedCard(matches[0].card);
+            }
+
+            var html = '';
+            cards.forEach(function(card, idx) {
+                var isSelected = selectedCardIdx === idx;
+                html += '<div class="card-item' + (isSelected ? ' selected' : '') + '" onclick="selectCard(' + idx + ')">';
+                html += '<div class="card-item-header">';
+                html += '<div class="card-item-icon" style="background:' + card.bgColor + ';color:' + card.textColor + ';">' + card.levelIcon + '</div>';
+                html += '<div class="card-item-info">';
+                html += '<div class="card-item-name">' + card.name + '</div>';
+                html += '<div class="card-item-level">' + card.bank + ' · ' + card.level + '</div>';
+                html += '</div>';
+                html += '<div class="card-item-check">' + (isSelected ? '✓' : '') + '</div>';
+                html += '</div>';
+                html += '<div class="card-item-fees">';
+                html += '<span class="fee-tag">年费' + card.annualFee + '元</span>';
+                html += '<span class="fee-tag">免息' + card.maxPeriod + '</span>';
+                html += '<span class="fee-tag">额度' + card.creditRange[0] + '-' + card.creditRange[1] + '万</span>';
+                html += '<span class="fee-tag">月收入' + (card.minIncome/1000) + 'K+</span>';
+                html += '</div>';
+                html += '<div class="benefits-grid">';
+                card.features.forEach(function(f) {
+                    html += '<div class="benefit-item"><div class="benefit-dot"></div>' + f + '</div>';
+                });
+                html += '</div>';
+                html += '<div class="card-item-btns">';
+                html += '<button class="card-btn btn-primary" onclick="event.stopPropagation();applyCard(' + idx + ')">立即申请</button>';
+                html += '<button class="card-btn btn-outline" onclick="event.stopPropagation();showCardDetail(' + idx + ')">了解详情</button>';
+                html += '</div></div>';
+            });
+
+            if (html === '') {
+                html = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:14px;">请先完善信息，系统将为您推荐最合适的卡片</div>';
+            }
+            list.innerHTML = html;
+        }
+
+        window.selectCard = function(idx) {
+            selectedCardIdx = idx;
+            var card = CARDS[idx];
+            document.getElementById('formCard').value = card.name;
+            renderCardList();
+            updateFeaturedCard(card);
+            showToast('已选择：' + card.name);
+        };
+
+        window.applyCard = function(idx) {
+            selectedCardIdx = idx;
+            var card = CARDS[idx];
+            document.getElementById('formCard').value = card.name;
+            switchTab('apply');
+            document.getElementById('formCard').scrollIntoView({behavior: 'smooth'});
+            showToast('即将申请：' + card.name);
+        };
+
+        window.showCardDetail = function(idx) {
+            var card = CARDS[idx];
+            var html = '<div style="padding:8px 0;">';
+            html += '<div style="text-align:center;margin-bottom:16px;">';
+            html += '<div style="font-size:40px;margin-bottom:8px;">' + card.levelIcon + '</div>';
+            html += '<div style="font-size:20px;font-weight:900;">' + card.name + '</div>';
+            html += '<div style="font-size:13px;color:var(--muted);">' + card.bank + ' · ' + card.level + '</div>';
+            html += '</div>';
+            html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;text-align:center;">';
+            html += '<div style="background:var(--bg);padding:10px;border-radius:10px;"><div style="font-size:18px;font-weight:900;">' + card.annualFee + '元</div><div style="font-size:11px;color:var(--muted);">年费</div></div>';
+            html += '<div style="background:var(--bg);padding:10px;border-radius:10px;"><div style="font-size:18px;font-weight:900;">' + card.maxPeriod + '</div><div style="font-size:11px;color:var(--muted);">免息期</div></div>';
+            html += '<div style="background:var(--bg);padding:10px;border-radius:10px;"><div style="font-size:18px;font-weight:900;">' + card.creditRange[0] + '-' + card.creditRange[1] + '万</div><div style="font-size:11px;color:var(--muted);">额度</div></div>';
+            html += '</div>';
+            html += '<div style="font-size:13px;font-weight:700;margin-bottom:8px;">✨ 核心权益</div>';
+            card.benefits.forEach(function(b) { html += '<div style="font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);">' + b + '</div>'; });
+            html += '</div>';
+            alert(html);
+        };
+
+        // ============ Populate card select ============
+        function populateCardSelect() {
+            var sel = document.getElementById('formCard');
+            CARDS.forEach(function(c) { sel.innerHTML += '<option value="' + c.name + '">' + c.name + ' · ' + c.level + '</option>'; });
+        }
+
+        // ============ Chat ============
+        function parseCustomer(text) {
+            var c = Object.assign({}, customer);
+
+            // Age
+            var ageMatch = text.match(/(\d{2})\s*岁/);
+            if (ageMatch) c.age = parseInt(ageMatch[1]);
+
+            // Income
+            var incMatch = text.match(/(\d+(?:\.\d+)?)\s*万/);
+            if (incMatch) c.income = parseFloat(incMatch[1]) * 10000;
+            else {
+                incMatch = text.match(/(\d+)\s*千/);
+                if (incMatch) c.income = parseFloat(incMatch[1]) * 1000;
+            }
+
+            // Occupation
+            if (/企业主|老板/.test(text)) c.occupation = '企业主';
+            else if (/学生|在校/.test(text)) c.occupation = '学生';
+            else if (/工薪|上班|打工/.test(text)) c.occupation = '工薪';
+            else if (/自由职业/.test(text)) c.occupation = '自由职业';
+
+            // City
+            if (/北京|上海|广州|深圳/.test(text)) c.city = '一线';
+            else if (/杭州|南京|成都|武汉/.test(text)) c.city = '二线';
+
+            return c;
+        }
+
+        function updateCustInfo() {
+            var c = customer;
+            var setVal = function(id, val, unit) {
+                var el = document.getElementById(id);
+                el.textContent = val !== null ? (unit ? val + unit : val) : '—';
+                el.className = 'val' + (val !== null ? '' : ' empty');
+            };
+            setVal('ciAge', c.age, '岁');
+            setVal('ciIncome', c.income ? (c.income/10000).toFixed(1) + '万' : null);
+            setVal('ciOcc', c.occupation);
+            setVal('ciCity', c.city);
+
+            // Progress
+            var done = [c.age, c.income, c.occupation].filter(function(v) { return v !== null; }).length;
+            document.getElementById('statProgress').textContent = done + '/5';
+
+            // Re-match
+            renderCardList();
+        }
+
+        function addMsg(html, isUser) {
+            var list = document.getElementById('chatList');
+            var div = document.createElement('div');
+            div.className = 'msg ' + (isUser ? 'user' : 'bot');
+            div.innerHTML = '<div class="avatar" style="background:' + (isUser ? '#DBEAFE' : '#F1F5F9') + ';">' + (isUser ? '👤' : '💳') + '</div>' +
+                '<div class="bubble' + (isUser ? '' : '') + '">' + html + '</div>';
+            list.appendChild(div);
+            list.scrollTop = list.scrollHeight;
+        }
+
+        function generateChatResponse(text) {
+            customer = parseCustomer(text);
+            updateCustInfo();
+            var matches = matchCards();
+            var age = customer.age, income = customer.income;
+
+            if (matches.length > 0) {
+                var top = matches[0].card;
+                var summary = '根据您的情况（' + (age ? age + '岁' : '') + (income ? '，月收入' + (income/10000).toFixed(1) + '万' : '') + '）\n\n';
+                summary += '🎉 为您推荐 **' + top.name + '**\n';
+                summary += '额度：' + top.creditRange[0] + '-' + top.creditRange[1] + '万 | 年费：' + top.annualFee + '元\n';
+                summary += '核心权益：' + top.benefits[0] + '\n\n';
+                if (matches.length > 1) {
+                    summary += '备选：' + matches[1].card.name + '（额度' + matches[1].card.creditRange[0] + '-' + matches[1].card.creditRange[1] + '万）';
+                }
+                summary += '\n\n回复数字选择：1 - ' + top.name + ' / 2 - ' + (matches[1] ? matches[1].card.name : '暂无') + '\n或回复「申请」开始办理流程';
+                return summary.replace(/\*\*/g, '');
+            } else if (age && income) {
+                return '根据您的信息（' + age + '岁，月收入' + (income/10000).toFixed(1) + '万），暂未匹配到符合条件的卡片。\n\n建议提升收入后再次申请，或联系客服咨询专属产品～';
+            } else {
+                var missing = [];
+                if (!age) missing.push('年龄');
+                if (!income) missing.push('月收入');
+                return '还缺一些信息：' + missing.join('、') + '\n请补充告诉我～';
+            }
+        }
+
+        window.sendQuick = function(text) {
+            addMsg('<div style="font-size:15px;">' + text + '</div>', true);
+            setTimeout(function() {
+                addMsg(generateChatResponse(text).replace(/\n/g, '<br>'), false);
+            }, 400);
+        };
+
+        window.sendChat = function() {
+            var input = document.getElementById('chatInput');
+            var text = input.value.trim();
+            if (!text) return;
+            input.value = '';
+            addMsg('<div style="font-size:15px;">' + text + '</div>', true);
+            setTimeout(function() {
+                addMsg(generateChatResponse(text).replace(/\n/g, '<br>'), false);
+            }, 400);
+        };
+
+        // ============ Form validation ============
+        ['formName','formPhone','formId','formCard','formCity','formIncome'].forEach(function(id) {
+            document.getElementById(id).addEventListener('input', checkForm);
+            document.getElementById(id).addEventListener('change', checkForm);
+        });
+
+        function checkForm() {
+            var name = document.getElementById('formName').value.trim();
+            var phone = document.getElementById('formPhone').value.trim();
+            var id = document.getElementById('formId').value.trim();
+            var card = document.getElementById('formCard').value;
+            var city = document.getElementById('formCity').value;
+            var income = document.getElementById('formIncome').value;
+            var ok = name.length >= 2 && phone.length === 11 && id.length === 18 && card && city && income;
+            var btn = document.getElementById('submitBtn');
+            btn.disabled = !ok;
+            btn.textContent = ok ? '提交申请' : '请完善信息';
+        }
+
+        window.submitApply = function() {
+            var name = document.getElementById('formName').value;
+            var card = document.getElementById('formCard').value;
+            showToast('✅ 申请已提交！预计1-3个工作日完成审核');
+            // Reset form
+            ['formName','formPhone','formId','formIncome'].forEach(function(id) {
+                document.getElementById(id).value = '';
+            });
+            document.getElementById('formCard').value = '';
+            document.getElementById('formCity').value = '';
+            checkForm();
+        };
+
+        // ============ Toast ============
+        window.showToast = function(msg) {
+            var t = document.createElement('div');
+            t.className = 'toast';
+            t.textContent = msg;
+            document.body.appendChild(t);
+            setTimeout(function() {
+                t.style.opacity = '0';
+                t.style.transition = 'opacity 0.3s';
+                setTimeout(function() { if (t.parentNode) t.parentNode.removeChild(t); }, 300);
+            }, 2000);
+        };
+    })();
+    </script>
+</body>
+</html>
