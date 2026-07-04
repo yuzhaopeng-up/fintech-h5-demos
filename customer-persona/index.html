@@ -1,0 +1,623 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI客户画像分析，多维度标签体系+消费行为预测，洞察客户真实需求。">
+    <meta name="keywords" content="客户画像,消费行为,需求洞察,客群分析,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/customer-persona">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/customer-persona">
+    <meta property="og:title" content="客户画像分析 | FinAIAI">
+    <meta property="og:description" content="FinAIAI客户画像分析，多维度标签体系+消费行为预测，洞察客户真实需求。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/customer-persona.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="客户画像分析 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI客户画像分析，多维度标签体系+消费行为预测，洞察客户真实需求。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/customer-persona.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "客户画像分析 | FinAIAI",
+        "description": "FinAIAI客户画像分析，多维度标签体系+消费行为预测，洞察客户真实需求。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>客户画像分析 | FinAIAI</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --text: #111827;
+      --text-secondary: #6b7280;
+      --border: #e5e7eb;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .container { max-width: 480px; margin: 0 auto; padding: 16px; }
+    header {
+      text-align: center; padding: 24px 0 16px;
+    }
+    header .logo {
+      width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary), #1d4ed8);
+      border-radius: 14px; display: inline-flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 22px; margin-bottom: 10px; box-shadow: var(--shadow);
+    }
+    header h1 { font-size: 20px; font-weight: 700; }
+    header p { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+
+    .card {
+      background: var(--card); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 16px; margin-bottom: 12px;
+      animation: fadeUp 0.4s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card-title {
+      font-size: 15px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px;
+    }
+    .form-group input, .form-group select {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 15px; background: #fff; color: var(--text); outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .btn {
+      display: block; width: 100%; padding: 12px; border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 600; text-align: center; cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), #1d4ed8); color: #fff; box-shadow: 0 4px 14px rgba(37,99,235,0.35); }
+    .btn-outline { background: #fff; color: var(--primary); border: 1.5px solid var(--primary); }
+
+    .hidden { display: none !important; }
+
+    /* Result sections */
+    .profile-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    }
+    .avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, #c084fc, #a855f7);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 22px; font-weight: 700; flex-shrink: 0;
+    }
+    .profile-meta h3 { font-size: 17px; font-weight: 700; }
+    .profile-meta .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .tag {
+      font-size: 11px; padding: 3px 8px; border-radius: 20px; font-weight: 600;
+      background: var(--primary-light); color: var(--primary);
+    }
+    .tag.success { background: #d1fae5; color: #047857; }
+    .tag.warning { background: #fef3c7; color: #b45309; }
+    .tag.danger { background: #fee2e2; color: #b91c1c; }
+
+    .rfm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .rfm-item {
+      background: linear-gradient(180deg, #f8fafc, #f1f5f9); border-radius: 10px;
+      padding: 14px 8px; text-align: center; border: 1px solid var(--border);
+    }
+    .rfm-item .score { font-size: 28px; font-weight: 800; color: var(--primary); line-height: 1; }
+    .rfm-item .label { font-size: 12px; color: var(--text-secondary); margin-top: 6px; }
+    .rfm-item .grade { font-size: 11px; font-weight: 700; margin-top: 4px; display: inline-block; padding: 2px 8px; border-radius: 12px; }
+    .grade-high { background: #d1fae5; color: #047857; }
+    .grade-mid { background: #fef3c7; color: #b45309; }
+    .grade-low { background: #fee2e2; color: #b91c1c; }
+
+    .lifecycle-bar {
+      display: flex; align-items: center; gap: 8px; margin-top: 10px;
+    }
+    .lifecycle-track {
+      flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; position: relative;
+    }
+    .lifecycle-fill {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--primary), #06b6d4); transition: width 1s ease;
+    }
+    .lifecycle-text { font-size: 12px; font-weight: 700; color: var(--primary); white-space: nowrap; }
+
+    .product-list { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+    .product-list::-webkit-scrollbar { display: none; }
+    .product-card {
+      min-width: 140px; background: linear-gradient(180deg, #fff, #f8fafc);
+      border: 1px solid var(--border); border-radius: 10px; padding: 12px;
+      text-align: center; flex-shrink: 0;
+    }
+    .product-card .icon { font-size: 26px; margin-bottom: 6px; }
+    .product-card .name { font-size: 13px; font-weight: 600; }
+    .product-card .match { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+    .match-bar { height: 4px; background: var(--border); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .match-bar i { display: block; height: 100%; border-radius: 2px; background: var(--success); }
+
+    .channel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+    .channel-item {
+      text-align: center; padding: 10px 4px; border-radius: 10px; background: #f8fafc; border: 1px solid var(--border);
+    }
+    .channel-item .icon { font-size: 22px; margin-bottom: 4px; }
+    .channel-item .name { font-size: 11px; color: var(--text-secondary); }
+    .channel-item .value { font-size: 12px; font-weight: 700; margin-top: 2px; }
+
+    .hook-box {
+      background: #f0f9ff; border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0;
+      padding: 12px; font-size: 13px; line-height: 1.7; color: #1e3a5f; margin-top: 10px; position: relative;
+    }
+    .copy-btn {
+      position: absolute; top: 8px; right: 8px; font-size: 11px; padding: 4px 10px;
+      background: var(--primary); color: #fff; border: none; border-radius: 6px; cursor: pointer;
+    }
+
+    .loading {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 20px; color: var(--text-secondary); font-size: 14px;
+    }
+    .spinner {
+      width: 18px; height: 18px; border: 2px solid var(--border);
+      border-top-color: var(--primary); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .toast {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.75); color: #fff; padding: 10px 20px; border-radius: 8px;
+      font-size: 14px; z-index: 999; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">🎯</div>
+      <h1>客户画像引擎</h1>
+      <p>输入客户信息，秒级生成精准画像与营销方案</p>
+    </header>
+
+    <div class="card" id="inputCard">
+      <div class="card-title">📝 客户信息录入</div>
+      <div class="form-group">
+        <label>客户姓名</label>
+        <input type="text" id="name" placeholder="请输入客户姓名" value="">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>年龄</label>
+          <input type="number" id="age" placeholder="35" value="35">
+        </div>
+        <div class="form-group">
+          <label>婚姻状况</label>
+          <select id="marriage">
+            <option value="married_child">已婚有孩</option>
+            <option value="married">已婚无孩</option>
+            <option value="single">未婚</option>
+            <option value="divorced">离异</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>家庭年收入</label>
+        <select id="income">
+          <option value="30-50">30-50万</option>
+          <option value="10-30">10-30万</option>
+          <option value="50-100">50-100万</option>
+          <option value="<10">10万以下</option>
+          <option value=">100">100万以上</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>房贷情况</label>
+          <select id="mortgage">
+            <option value="commercial">有商贷</option>
+            <option value="fund">有公积金贷</option>
+            <option value="mix">组合贷</option>
+            <option value="none">无房贷</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>风险偏好</label>
+          <select id="risk">
+            <option value="steady">稳健型</option>
+            <option value="conservative">保守型</option>
+            <option value="balanced">平衡型</option>
+            <option value="aggressive">进取型</option>
+            <option value="radical">激进型</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>最近交易（天前）</label>
+          <input type="number" id="recency" placeholder="30" value="12">
+        </div>
+        <div class="form-group">
+          <label>年交易频次</label>
+          <input type="number" id="frequency" placeholder="6" value="8">
+        </div>
+      </div>
+      <button class="btn btn-primary" id="generateBtn" onclick="generatePersona()">🚀 生成客户画像</button>
+    </div>
+
+    <div id="loadingArea" class="loading hidden">
+      <div class="spinner"></div>
+      <span>AI 正在分析客户数据...</span>
+    </div>
+
+    <div id="resultArea" class="hidden">
+      <div class="card" style="animation-delay:0.05s">
+        <div class="profile-header">
+          <div class="avatar" id="avatar">张</div>
+          <div class="profile-meta">
+            <h3 id="resName">待输入</h3>
+            <div class="tags">
+              <span class="tag" id="tagAge">35岁</span>
+              <span class="tag" id="tagIncome">中产家庭</span>
+              <span class="tag success" id="tagRisk">稳健型</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="animation-delay:0.1s">
+        <div class="card-title">📊 RFM 价值模型</div>
+        <div class="rfm-grid">
+          <div class="rfm-item">
+            <div class="score" id="rScore">85</div>
+            <div class="label">Recency<br>最近交易</div>
+            <div class="grade grade-high" id="rGrade">高</div>
+          </div>
+          <div class="rfm-item">
+            <div class="score" id="fScore">72</div>
+            <div class="label">Frequency<br>交易频次</div>
+            <div class="grade grade-mid" id="fGrade">中</div>
+          </div>
+          <div class="rfm-item">
+            <div class="score" id="mScore">68</div>
+            <div class="label">Monetary<br>交易金额</div>
+            <div class="grade grade-mid" id="mGrade">中</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary);padding:0 4px;">
+          <span>综合价值分: <b id="rfmTotal" style="color:var(--primary);font-size:16px;">75</b></span>
+          <span id="rfmLabel">重要价值客户</span>
+        </div>
+      </div>
+
+      <div class="card" style="animation-delay:0.15s">
+        <div class="card-title">🔄 客户生命周期</div>
+        <div class="lifecycle-bar">
+          <div class="lifecycle-track"><div class="lifecycle-fill" id="lifeFill" style="width:0%"></div></div>
+          <div class="lifecycle-text" id="lifeText">成长期</div>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;" id="lifeDesc">
+          客户资产稳步增长，对复杂产品接受度较高，是深度经营的关键窗口期。
+        </p>
+      </div>
+
+      <div class="card" style="animation-delay:0.2s">
+        <div class="card-title">💎 推荐产品</div>
+        <div class="product-list" id="productList">
+          <!-- dynamic -->
+        </div>
+      </div>
+
+      <div class="card" style="animation-delay:0.25s">
+        <div class="card-title">📡 触达渠道偏好</div>
+        <div class="channel-grid" id="channelGrid">
+          <!-- dynamic -->
+        </div>
+      </div>
+
+      <div class="card" style="animation-delay:0.3s">
+        <div class="card-title">🎣 话术钩子</div>
+        <div class="hook-box" id="hookBox">
+          <button class="copy-btn" onclick="copyHook()">复制</button>
+          <p id="hookText">张哥，最近市场波动比较大，您之前关注的稳健型理财正好有个新品，年化预估4.2%，我发您看看？</p>
+        </div>
+      </div>
+
+      <div style="height:40px;"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">已复制到剪贴板</div>
+
+  <script>
+    // Mock engine
+    function generatePersona() {
+      const name = document.getElementById('name').value || '客户';
+      const age = parseInt(document.getElementById('age').value) || 35;
+      const income = document.getElementById('income').value;
+      const marriage = document.getElementById('marriage').value;
+      const mortgage = document.getElementById('mortgage').value;
+      const risk = document.getElementById('risk').value;
+      const recency = parseInt(document.getElementById('recency').value) || 30;
+      const frequency = parseInt(document.getElementById('frequency').value) || 5;
+
+      document.getElementById('generateBtn').disabled = true;
+      document.getElementById('loadingArea').classList.remove('hidden');
+      document.getElementById('resultArea').classList.add('hidden');
+
+      setTimeout(() => {
+        document.getElementById('loadingArea').classList.add('hidden');
+        document.getElementById('resultArea').classList.remove('hidden');
+        document.getElementById('generateBtn').disabled = false;
+
+        // Profile header
+        document.getElementById('avatar').textContent = name[0];
+        document.getElementById('resName').textContent = name;
+        document.getElementById('tagAge').textContent = age + '岁';
+        const incomeLabels = {'<10':'基础收入','10-30':'小康家庭','30-50':'中产家庭','50-100':'富裕家庭','>100':'高净值'};
+        document.getElementById('tagIncome').textContent = incomeLabels[income] || '中产家庭';
+        const riskLabels = {conservative:'保守型',steady:'稳健型',balanced:'平衡型',aggressive:'进取型',radical:'激进型'};
+        document.getElementById('tagRisk').textContent = riskLabels[risk] || '稳健型';
+
+        // RFM Scores (mock logic)
+        const rScore = Math.max(30, Math.min(100, Math.round(100 - recency * 1.5)));
+        const fScore = Math.max(30, Math.min(100, Math.round(40 + frequency * 6)));
+        const mScore = Math.max(30, Math.min(100, Math.round(50 + (income === '>100' ? 40 : income === '50-100' ? 25 : income === '30-50' ? 10 : -10))));
+        const total = Math.round((rScore + fScore + mScore) / 3);
+
+        document.getElementById('rScore').textContent = rScore;
+        document.getElementById('fScore').textContent = fScore;
+        document.getElementById('mScore').textContent = mScore;
+        document.getElementById('rfmTotal').textContent = total;
+
+        const gradeClass = s => s >= 80 ? 'grade-high' : s >= 50 ? 'grade-mid' : 'grade-low';
+        const gradeText = s => s >= 80 ? '高' : s >= 50 ? '中' : '低';
+        document.getElementById('rGrade').className = 'grade ' + gradeClass(rScore);
+        document.getElementById('rGrade').textContent = gradeText(rScore);
+        document.getElementById('fGrade').className = 'grade ' + gradeClass(fScore);
+        document.getElementById('fGrade').textContent = gradeText(fScore);
+        document.getElementById('mGrade').className = 'grade ' + gradeClass(mScore);
+        document.getElementById('mGrade').textContent = gradeText(mScore);
+
+        let label = '一般维持客户';
+        if (total >= 80) label = '重要价值客户';
+        else if (total >= 65) label = '重要发展客户';
+        else if (total >= 50) label = '潜力培养客户';
+        document.getElementById('rfmLabel').textContent = label;
+
+        // Lifecycle
+        const lifePct = Math.min(95, Math.max(15, Math.round((age - 22) / 0.43)));
+        let stage = '导入期', stageDesc = '新客户，需建立信任，推荐低风险入门级产品。';
+        if (lifePct > 30) { stage = '成长期'; stageDesc = '客户资产稳步增长，对复杂产品接受度较高，是深度经营的关键窗口期。'; }
+        if (lifePct > 60) { stage = '成熟期'; stageDesc = '客户资产规模较大，关注财富保值与传承，适合推荐综合资产配置方案。'; }
+        if (lifePct > 85) { stage = '衰退期'; stageDesc = '活跃度下降，需通过增值服务唤醒，防止客户流失。'; }
+        document.getElementById('lifeFill').style.width = lifePct + '%';
+        document.getElementById('lifeText').textContent = stage;
+        document.getElementById('lifeDesc').textContent = stageDesc;
+
+        // Products
+        const products = [
+          {icon:'🏦',name:'大额存单',match:92,desc:'保本保息，期限灵活'},
+          {icon:'📈',name:'稳健理财',match:88,desc:'R2风险，年化3.8-4.5%'},
+          {icon:'🏠',name:'房贷置换',match:85,desc:'利率优化，节省利息'},
+          {icon:'👶',name:'教育金保险',match:78,desc:'专款专用，强制储蓄'},
+          {icon:'🛡️',name:'家庭财险',match:72,desc:'保障全面，保费低廉'},
+        ];
+        if (risk === 'aggressive' || risk === 'radical') {
+          products.unshift({icon:'🚀',name:'权益基金',match:90,desc:'中长期配置，博取高收益'});
+        }
+        if (mortgage === 'none' && income === '>100') {
+          products.unshift({icon:'🌐',name:'家族信托',match:95,desc:'财富隔离，代际传承'});
+        }
+        document.getElementById('productList').innerHTML = products.slice(0,5).map(p => `
+          <div class="product-card">
+            <div class="icon">${p.icon}</div>
+            <div class="name">${p.name}</div>
+            <div class="match">匹配度 ${p.match}%</div>
+            <div class="match-bar"><i style="width:${p.match}%"></i></div>
+          </div>
+        `).join('');
+
+        // Channels
+        const channels = [
+          {icon:'💬',name:'企微',value:'首选'},
+          {icon:'📞',name:'电话',value:'次要'},
+          {icon:'📱',name:'APP',value:'活跃'},
+          {icon:'🏢',name:'面访',value:'月度'},
+        ];
+        if (age > 50) channels[1].value = '首选';
+        document.getElementById('channelGrid').innerHTML = channels.map(c => `
+          <div class="channel-item">
+            <div class="icon">${c.icon}</div>
+            <div class="name">${c.name}</div>
+            <div class="value" style="color:${c.value==='首选'? 'var(--primary)' : c.value==='活跃' ? 'var(--success)' : 'var(--text-secondary)'};">${c.value}</div>
+          </div>
+        `).join('');
+
+        // Hook
+        const hooks = {
+          conservative: `${name}哥，现在存款利率下行，我这有一款保本保息的大额存单，三年期利率还能到2.8%，我帮您预留个额度？`,
+          steady: `${name}哥，最近市场波动比较大，您之前关注的稳健型理财正好有个新品，年化预估4.2%，我发您看看？`,
+          balanced: `${name}哥，您资产配置比较均衡，最近权益市场调整，正是定投加仓的好时机，我给您做了个方案。`,
+          aggressive: `${name}哥，新能源板块最近回调了15%，您之前关注的基金经理正好在低位布局，要不要聊聊？`,
+          radical: `${name}哥，量化私募这边有个封闭期2年的产品，历史年化18%+，额度很紧，我帮您先报个名？`,
+        };
+        const hook = hooks[risk] || hooks.steady;
+        document.getElementById('hookText').textContent = hook;
+
+        window.scrollTo({top: document.getElementById('resultArea').offsetTop - 20, behavior:'smooth'});
+      }, 1200);
+    }
+
+    function copyHook() {
+      const text = document.getElementById('hookText').textContent;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast());
+      } else {
+        const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta); showToast();
+      }
+    }
+    function showToast() {
+      const t = document.getElementById('toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1500);
+    }
+  </script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const profileContainer = document.querySelector('.customer-profile, #customer-profile, [data-type="customer"]');
+    if (profileContainer) {
+        const result = await LongmaAPI.customer.getProfile('C001');
+        if (result.success && result.data) {
+            renderCustomerProfile(profileContainer, result.data);
+        }
+    }
+    
+    const recContainer = document.querySelector('.recommendations, #recommendations, [data-type="recommendations"]');
+    if (recContainer) {
+        const result = await LongmaAPI.customer.getRecommendations('C001');
+        if (result.success && result.data) {
+            renderRecommendations(recContainer, result.data);
+        }
+    }
+});
+
+function renderCustomerProfile(container, data) {
+    let html = `<div class="api-profile-card">
+        <h3>${data.name} (ID: ${data.customer_id})</h3>
+        <p>年龄: ${data.age}岁 | 风险偏好: ${data.risk_preference}</p>
+        <p>总资产: ${LongmaAPI.utils.formatMoney(data.assets)}</p>
+        <div class="api-holdings"><h4>持仓分布</h4>`;
+    data.holdings.forEach(h => {
+        html += `<div class="api-holding-item">
+            <span>${h.type}</span>
+            <span>${LongmaAPI.utils.formatMoney(h.amount)}</span>
+            <span>${(h.ratio * 100).toFixed(1)}%</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    container.innerHTML = html;
+}
+
+function renderRecommendations(container, data) {
+    let html = '<div class="api-recommendations"><h4>产品推荐</h4>';
+    data.products.forEach(p => {
+        html += `<div class="api-product-card">
+            <span class="name">${p.name}</span>
+            <span class="type">${p.type}</span>
+            <span class="match">匹配度: ${p.match}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
