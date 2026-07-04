@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI风控场景体验，贷前评估+贷后监控+反欺诈，护航银行信控安全。">
+    <meta name="keywords" content="风控场景,贷前评估,贷后监控,反欺诈,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/scenario-risk">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/scenario-risk">
+    <meta property="og:title" content="风控场景体验 | FinAIAI">
+    <meta property="og:description" content="FinAIAI风控场景体验，贷前评估+贷后监控+反欺诈，护航银行信控安全。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/scenario-risk.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="风控场景体验 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI风控场景体验，贷前评估+贷后监控+反欺诈，护航银行信控安全。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/scenario-risk.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "风控场景体验 | FinAIAI",
+        "description": "FinAIAI风控场景体验，贷前评估+贷后监控+反欺诈，护航银行信控安全。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>风控场景体验 | FinAIAI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fa;
+      min-height: 100vh;
+      color: #333;
+    }
+    .container { max-width: 430px; margin: 0 auto; padding: 20px; }
+    .header {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+      border-radius: 16px;
+      padding: 30px 24px;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .header h1 { font-size: 24px; margin-bottom: 8px; }
+    .header p { font-size: 14px; opacity: 0.9; }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .scenario-item {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-left: 4px solid #ee5a6f;
+    }
+    .scenario-name { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .scenario-desc { font-size: 13px; color: #666; margin-bottom: 8px; }
+    .scenario-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .tag-risk { background: #ffebee; color: #c62828; }
+    .tag-mid { background: #fff8e1; color: #f57f17; }
+    .tag-low { background: #e8f5e9; color: #2e7d32; }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .metric-item {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .metric-value { font-size: 24px; font-weight: 700; color: #ee5a6f; }
+    .metric-label { font-size: 12px; color: #666; margin-top: 4px; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 16px;
+      text-align: center;
+      text-decoration: none;
+    }
+    .alert-box {
+      background: #fff3e0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid #ffe0b2;
+    }
+    .alert-title { font-size: 14px; font-weight: 600; color: #e65100; margin-bottom: 8px; }
+    .alert-text { font-size: 13px; color: #666; }
+    .footer {
+      text-align: center;
+      padding: 30px 0;
+      color: #999;
+      font-size: 12px;
+    }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 信贷风险情景分析</h1>
+      <p>多维度压力测试与风险预警</p>
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">⚠️ 当前风险等级：中等</div>
+      <div class="alert-text">基于最新宏观经济数据和行业趋势，建议关注房地产和地方政府融资平台风险。</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📈 关键风险指标</div>
+      <div class="metric-grid">
+        <div class="metric-item">
+          <div class="metric-value">3.2%</div>
+          <div class="metric-label">不良贷款率</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value">185%</div>
+          <div class="metric-label">拨备覆盖率</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value">12.5%</div>
+          <div class="metric-label">资本充足率</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value">2.8%</div>
+          <div class="metric-label">关注类贷款占比</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🎯 压力测试情景</div>
+      
+      <div class="scenario-item">
+        <div class="scenario-name">情景一：经济温和衰退</div>
+        <div class="scenario-desc">GDP增速下降至3%，失业率上升至5.5%，房地产价格下降10%</div>
+        <div class="scenario-tags">
+          <span class="tag tag-mid">不良贷款率↑ 4.5%</span>
+          <span class="tag tag-mid">拨备覆盖率↓ 150%</span>
+        </div>
+      </div>
+      
+      <div class="scenario-item">
+        <div class="scenario-name">情景二：行业集中违约</div>
+        <div class="scenario-desc">房地产行业违约率上升至15%，地方政府融资平台违约率上升至8%</div>
+        <div class="scenario-tags">
+          <span class="tag tag-risk">不良贷款率↑ 6.2%</span>
+          <span class="tag tag-risk">拨备覆盖率↓ 120%</span>
+        </div>
+      </div>
+      
+      <div class="scenario-item">
+        <div class="scenario-name">情景三：流动性危机</div>
+        <div class="scenario-desc">市场利率急剧上升200BP，同业拆借利率飙升，存款大量流失</div>
+        <div class="scenario-tags">
+          <span class="tag tag-risk">LCR↓ 85%</span>
+          <span class="tag tag-risk">NSFR↓ 95%</span>
+        </div>
+      </div>
+      
+      <div class="scenario-item">
+        <div class="scenario-name">情景四：基准情景</div>
+        <div class="scenario-desc">经济平稳运行，GDP增速5%，通胀率2%，政策环境稳定</div>
+        <div class="scenario-tags">
+          <span class="tag tag-low">不良贷款率 3.2%</span>
+          <span class="tag tag-low">拨备覆盖率 185%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🛡️ 风险缓释措施</div>
+      <div style="font-size:14px;color:#666;line-height:1.8;">
+        <p>• 加强房地产贷款集中度管理，控制单一行业敞口</p>
+        <p>• 提升拨备水平，增强风险抵御能力</p>
+        <p>• 优化资产负债结构，提高流动性覆盖率</p>
+        <p>• 强化贷后管理，建立早期预警机制</p>
+      </div>
+      <a href="../risk-compliance/index.html" class="btn">查看完整合规检查 →</a>
+    </div>
+
+    <div class="footer">
+      <p>🦞 FinAIAI · 让风控更智能</p>
+      <p style="margin-top:4px;">本页面仅供演示，数据为模拟数据</p>
+    </div>
+  </div>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const radarContainer = document.querySelector('.risk-radar, #risk-radar, [data-type="risk"]');
+    if (radarContainer) {
+        const result = await LongmaAPI.risk.getRadar('示例企业');
+        if (result.success && result.data) {
+            renderRiskRadar(radarContainer, result.data);
+        }
+    }
+});
+
+function renderRiskRadar(container, data) {
+    let html = `<div class="api-risk-summary">
+        <h3>${data.enterprise} - 综合评分: ${data.overall_score}</h3>
+        <div class="api-dimensions">`;
+    data.dimensions.forEach(dim => {
+        const levelClass = dim.level === 'low' ? 'safe' : dim.level === 'medium' ? 'warning' : 'danger';
+        html += `<div class="api-dim-item ${levelClass}">
+            <span class="name">${dim.name}</span>
+            <span class="score">${dim.score}</span>
+            <span class="level">${dim.level}</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    if (data.alerts && data.alerts.length > 0) {
+        html += '<div class="api-alerts"><h4>预警信息</h4>';
+        data.alerts.forEach(alert => {
+            html += `<div class="api-alert ${alert.type}">${alert.message}</div>`;
+        });
+        html += '</div>';
+    }
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
