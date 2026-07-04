@@ -1,0 +1,531 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI财务分析仪表盘，杜邦分析+财务指标+趋势预测，助力企业财务决策。">
+    <meta name="keywords" content="财务分析,杜邦分析,财务指标,趋势预测,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/financial-dashboard">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/financial-dashboard">
+    <meta property="og:title" content="财务分析仪表盘 | FinAIAI">
+    <meta property="og:description" content="FinAIAI财务分析仪表盘，杜邦分析+财务指标+趋势预测，助力企业财务决策。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/financial-dashboard.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="财务分析仪表盘 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI财务分析仪表盘，杜邦分析+财务指标+趋势预测，助力企业财务决策。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/financial-dashboard.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "财务分析仪表盘 | FinAIAI",
+        "description": "FinAIAI财务分析仪表盘，杜邦分析+财务指标+趋势预测，助力企业财务决策。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+
+
+
+eta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>财务分析仪表盘 | FinAIAI</title>
+    <script src="../chart-manager.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js" defer></script>
+    <style>
+        :root {
+            --primary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --bg: #f5f7fa;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .header p { opacity: 0.9; font-size: 1.1rem; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; color: var(--dark); display: flex; align-items: center; gap: 0.5rem; }
+        .chart-container { position: relative; height: 350px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .kpi-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--primary);
+        }
+        .kpi-value { font-size: 2rem; font-weight: 800; color: var(--dark); }
+        .kpi-label { font-size: 0.9rem; color: #7f8c8d; margin-top: 0.3rem; }
+        .kpi-change { font-size: 0.85rem; margin-top: 0.3rem; font-weight: 600; }
+        .positive { color: var(--success); }
+        .negative { color: var(--danger); }
+        .warning { color: var(--warning); }
+        .risk-banner {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .risk-banner h3 { color: #856404; margin-bottom: 0.8rem; }
+        .risk-item { display: flex; align-items: center; gap: 0.5rem; margin: 0.4rem 0; color: #856404; }
+        .grade-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .grade-a { background: #d4edda; color: #155724; }
+        .grade-b { background: #fff3cd; color: #856404; }
+        .grade-c { background: #f8d7da; color: #721c24; }
+        .dupont-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; text-align: center; }
+        .dupont-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+        .dupont-formula { font-size: 0.8rem; opacity: 0.9; margin-top: 0.3rem; }
+        .full-width { grid-column: 1 / -1; }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .dupont-grid { grid-template-columns: 1fr; }
+        }
+        .update-time { text-align: center; color: #95a5a6; font-size: 0.85rem; margin-top: 2rem; }
+    </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 对公财务分析</h1>
+        <p>实时财务健康监测 | 多维度智能评级 | 风险预警系统</p>
+    </div>
+
+    <div class="container">
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card" style="border-left-color: #e74c3c;">
+                <div class="kpi-value">42.5%</div>
+                <div class="kpi-label">净资产收益率 (ROE)</div>
+                <div class="kpi-change positive">↑ 行业Top 5%</div>
+            </div>
+            <div class="kpi-card" style="border-left-color: #3498db;">
+                <div class="kpi-value">24.3%</div>
+                <div class="kpi-label">净利润率</div>
+                <div class="kpi-change positive">↑ +3.2% YoY</div>
+            </div>
+            <div class="kpi-card" style="border-left-color: #f39c12;">
+                <div class="kpi-value">60%</div>
+                <div class="kpi-label">资产负债率</div>
+                <div class="kpi-change negative">⚠ 偏高</div>
+            </div>
+            <div class="kpi-card" style="border-left-color: #27ae60;">
+                <div class="kpi-value">12亿</div>
+                <div class="kpi-label">经营现金流</div>
+                <div class="kpi-change positive">↑ > 净利润</div>
+            </div>
+        </div>
+
+        <!-- Risk Banner -->
+        <div class="risk-banner">
+            <h3>⚠️ 风险警示</h3>
+            <div class="risk-item">🔴 <strong>偿债压力</strong> — 资产负债率60%，流动比率1.39接近警戒线</div>
+            <div class="risk-item">🟡 <strong>投资扩张风险</strong> — 大规模资本支出可能影响现金流稳定性</div>
+            <div class="risk-item">🟡 <strong>高ROE可持续性</strong> — 行业竞争加剧，需关注盈利质量</div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid">
+            <!-- Radar Chart -->
+            <div class="card">
+                <div class="card-title">🎯 财务健康度六维雷达</div>
+                <div class="chart-container">
+                    <canvas id="radarChart" data-chart="radarChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Grade Distribution -->
+            <div class="card">
+                <div class="card-title">📈 能力评级分布</div>
+                <div class="chart-container">
+                    <canvas id="barChart" data-chart="barChart"></canvas>
+                </div>
+            </div>
+
+            <!-- DuPont ROE Breakdown -->
+            <div class="card">
+                <div class="card-title">🏗️ 杜邦分析分解</div>
+                <div class="dupont-grid">
+                    <div class="dupont-box full-width">
+                        ROE = 42.5%
+                        <div class="dupont-formula">净资产收益率</div>
+                    </div>
+                    <div class="dupont-box" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                        24.3%
+                        <div class="dupont-formula">净利润率</div>
+                    </div>
+                    <div class="dupont-box" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+                        0.70次
+                        <div class="dupont-formula">资产周转率</div>
+                    </div>
+                    <div class="dupont-box" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                        2.50倍
+                        <div class="dupont-formula">权益乘数</div>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <p style="font-size: 0.9rem; color: #2c3e50;"><strong>💡 洞察：</strong>ROE主要由高净利润率驱动(24.3%)，但杠杆偏高(2.5x)。资产周转率0.70次有提升空间。</p>
+                </div>
+            </div>
+
+            <!-- Trend Chart -->
+            <div class="card">
+                <div class="card-title">📉 关键指标趋势 (近5期)</div>
+                <div class="chart-container">
+                    <canvas id="trendChart" data-chart="trendChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Analysis Table -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-title">📋 详细评级分析</div>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #f8f9fa;">
+                        <th style="padding: 1rem; text-align: left; border-bottom: 2px solid #dee2e6;">维度</th>
+                        <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #dee2e6;">评分</th>
+                        <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #dee2e6;">等级</th>
+                        <th style="padding: 1rem; text-align: left; border-bottom: 2px solid #dee2e6;">分析详情</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;"><strong>偿债能力</strong></td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;">70</td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;"><span class="grade-badge grade-b">B</span></td>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;">资产负债率60%偏高，流动比率1.39接近警戒线</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;"><strong>盈利能力</strong></td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;">95</td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;"><span class="grade-badge grade-a">A</span></td>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;">ROE 42.5%行业顶尖，净利润率24.3%</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;"><strong>现金流</strong></td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;">92</td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;"><span class="grade-badge grade-a">A</span></td>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;">经营现金流12亿 > 净利润8.5亿，现金流质量优秀</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;"><strong>成长能力</strong></td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;">90</td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;"><span class="grade-badge grade-a">A</span></td>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;">营收+22%，净利+35%，增长势头强劲</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;"><strong>运营效率</strong></td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;">82</td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #dee2e6;"><span class="grade-badge grade-b">B+</span></td>
+                        <td style="padding: 1rem; border-bottom: 1px solid #dee2e6;">ROA 17%优秀，但营运资金偏紧</td>
+                    </tr>
+                    <tr style="background: #f8f9fa;">
+                        <td style="padding: 1rem; border-bottom: 2px solid #dee2e6;"><strong>综合评级</strong></td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 2px solid #dee2e6;"><strong>88</strong></td>
+                        <td style="padding: 1rem; text-align: center; border-bottom: 2px solid #dee2e6;"><span class="grade-badge grade-a">A</span></td>
+                        <td style="padding: 1rem; border-bottom: 2px solid #dee2e6;"><strong>综合表现优秀，关注偿债风险</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="update-time">🕐 数据更新时间: 2026-05-31 | 数据来源: 财务分析示例数据</div>
+    </div>
+
+    <script>
+        // 雷达图 - 使用统一图表管理器
+        window.__chartManager.register('radarChart', {
+            type: 'radar',
+            selector: '#radarChart',
+            lazy: false,
+            data: {
+                labels: ['偿债能力', '盈利能力', '现金流', '成长能力', '运营效率', '综合评级'],
+                datasets: [{
+                    label: '当前企业',
+                    data: [70, 95, 92, 90, 82, 88],
+                    backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                    borderColor: '#3498db',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#2980b9',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6
+                }, {
+                    label: '行业平均',
+                    data: [65, 70, 68, 60, 72, 70],
+                    backgroundColor: 'rgba(149, 165, 166, 0.1)',
+                    borderColor: '#95a5a6',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0
+                }, {
+                    label: '警戒线',
+                    data: [60, 60, 60, 50, 60, 60],
+                    backgroundColor: 'rgba(231, 76, 60, 0.05)',
+                    borderColor: '#e74c3c',
+                    borderWidth: 2,
+                    borderDash: [10, 5],
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { stepSize: 20, font: { size: 10 } },
+                        pointLabels: { font: { size: 12, weight: 'bold' } }
+                    }
+                }
+            }
+        });
+
+        // 柱状图 - 使用统一图表管理器
+        window.__chartManager.register('barChart', {
+            type: 'bar',
+            selector: '#barChart',
+            lazy: false,
+            data: {
+                labels: ['偿债能力', '盈利能力', '现金流', '成长能力', '运营效率', '综合评级'],
+                datasets: [{
+                    label: '评分',
+                    data: [70, 95, 92, 90, 82, 88],
+                    backgroundColor: [
+                        '#f39c12', '#27ae60', '#27ae60', '#27ae60', '#f39c12', '#3498db'
+                    ],
+                    borderRadius: 8,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true, max: 100, grid: { color: 'rgba(0,0,0,0.05)' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 趋势图 - 使用统一图表管理器
+        window.__chartManager.register('trendChart', {
+            type: 'line',
+            selector: '#trendChart',
+            lazy: false,
+            data: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+                datasets: [{
+                    label: 'ROE (%)',
+                    data: [35.2, 37.8, 39.5, 41.2, 42.5],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5
+                }, {
+                    label: '净利润率 (%)',
+                    data: [20.1, 21.5, 22.8, 23.5, 24.3],
+                    borderColor: '#3498db',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5
+                }, {
+                    label: '资产负债率 (%)',
+                    data: [55, 57, 58, 59, 60],
+                    borderColor: '#f39c12',
+                    backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                scales: {
+                    y: { grid: { color: 'rgba(0,0,0,0.05)' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 初始化图表管理器
+        window.__chartManager.initAll();
+    </script>
+
+
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 绑定AI分析按钮
+    const analyzeBtn = document.querySelector('#analyze-btn, .analyze-btn, [data-action="analyze"]');
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', async function() {
+            const input = document.querySelector('#analyze-input, .analyze-input');
+            const context = document.querySelector('#analyze-context, .analyze-context');
+            const resultContainer = document.querySelector('#analyze-result, .analyze-result');
+            
+            const prompt = input ? input.value : '';
+            const ctx = context ? context.value : '';
+            
+            if (!prompt) { alert('请输入分析内容'); return; }
+            
+            resultContainer.innerHTML = '<div class="api-loading"><div class="loading-spinner"></div><p>AI分析中...</p></div>';
+            analyzeBtn.disabled = true;
+            
+            const result = await LongmaAPI.ai.analyze(prompt, ctx);
+            analyzeBtn.disabled = false;
+            
+            if (result.success) {
+                resultContainer.innerHTML = `<div class="api-analysis-result">
+                    <h4>分析结果</h4>
+                    <div class="content">${result.data.analysis.replace(/\n/g, '<br>')}</div>
+                    <div class="meta">模型: ${result.data.model} | 时间: ${result.data.timestamp}</div>
+                </div>`;
+            } else {
+                resultContainer.innerHTML = `<div class="api-error">分析失败: ${result.error}</div>`;
+            }
+        });
+    }
+    
+    // 绑定报告生成按钮
+    const reportBtn = document.querySelector('#report-btn, .report-btn, [data-action="generate-report"]');
+    if (reportBtn) {
+        reportBtn.addEventListener('click', async function() {
+            const resultContainer = document.querySelector('#report-result, .report-result');
+            resultContainer.innerHTML = '<div class="api-loading"><div class="loading-spinner"></div><p>报告生成中...</p></div>';
+            reportBtn.disabled = true;
+            
+            const result = await LongmaAPI.ai.generateReport('general', {});
+            reportBtn.disabled = false;
+            
+            if (result.success) {
+                resultContainer.innerHTML = `<div class="api-report-result">
+                    <h4>生成的报告</h4>
+                    <div class="content">${result.data.report.replace(/\n/g, '<br>')}</div>
+                </div>`;
+            } else {
+                resultContainer.innerHTML = '<div class="api-error">报告生成失败</div>';
+            }
+        });
+    }
+});
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
