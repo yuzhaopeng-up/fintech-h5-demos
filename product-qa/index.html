@@ -1,0 +1,431 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI产品手册智能问答，BM25+TF-IDF双路检索，秒级响应产品相关问题。">
+    <meta name="keywords" content="产品问答,知识库问答,智能客服,产品手册,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/product-qa">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/product-qa">
+    <meta property="og:title" content="产品手册问答 | FinAIAI">
+    <meta property="og:description" content="FinAIAI产品手册智能问答，BM25+TF-IDF双路检索，秒级响应产品相关问题。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/product-qa.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="产品手册问答 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI产品手册智能问答，BM25+TF-IDF双路检索，秒级响应产品相关问题。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/product-qa.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "产品手册问答 | FinAIAI",
+        "description": "FinAIAI产品手册智能问答，BM25+TF-IDF双路检索，秒级响应产品相关问题。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>产品手册问答 | FinAIAI</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --bg: #f3f4f6;
+      --surface: #ffffff;
+      --text: #111827;
+      --text-secondary: #6b7280;
+      --border: #e5e7eb;
+      --user-bubble: #2563eb;
+      --ai-bubble: #f9fafb;
+      --radius: 18px;
+      --shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+    }
+    .app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+
+    header {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 12px 16px; display: flex; align-items: center; gap: 10px;
+      flex-shrink: 0; z-index: 10;
+    }
+    header .avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #1d4ed8);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 16px; font-weight: 700;
+    }
+    header .info { flex: 1; }
+    header .info h1 { font-size: 15px; font-weight: 700; }
+    header .info p { font-size: 11px; color: var(--text-secondary); }
+    header .status { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #10b981; }
+    header .status::before { content: ''; width: 6px; height: 6px; background: #10b981; border-radius: 50%; }
+
+    .chat { flex: 1; overflow-y: auto; padding: 16px; scroll-behavior: smooth; }
+    .chat::-webkit-scrollbar { width: 0; }
+
+    .message { display: flex; gap: 10px; margin-bottom: 18px; animation: fadeUp 0.3s ease both; }
+    .message.user { flex-direction: row-reverse; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(6px);} to { opacity:1; transform:translateY(0);} }
+
+    .bubble {
+      max-width: 78%; padding: 10px 14px; font-size: 14px; line-height: 1.65;
+      word-break: break-word; position: relative;
+    }
+    .message.ai .bubble {
+      background: var(--ai-bubble); border: 1px solid var(--border);
+      border-radius: 4px var(--radius) var(--radius) var(--radius); color: var(--text);
+    }
+    .message.user .bubble {
+      background: var(--user-bubble); color: #fff;
+      border-radius: var(--radius) 4px var(--radius) var(--radius);
+    }
+
+    .citation {
+      margin-top: 10px; padding: 10px 12px; background: #fff;
+      border: 1px solid var(--border); border-radius: 10px; font-size: 12px;
+    }
+    .citation-header { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+    .citation-header .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+    .citation-header .title { font-weight: 600; color: var(--text); }
+    .citation-header .match { margin-left: auto; font-size: 11px; color: var(--primary); font-weight: 700; background: var(--primary-light); padding: 2px 8px; border-radius: 10px; }
+    .citation-meta { color: var(--text-secondary); line-height: 1.6; }
+    .citation-meta span { display: inline-block; margin-right: 10px; }
+
+    .welcome {
+      background: linear-gradient(135deg, #eff6ff, #f0f9ff); border: 1px solid #bfdbfe;
+      border-radius: 12px; padding: 16px; margin-bottom: 20px; animation: fadeUp 0.4s ease both;
+    }
+    .welcome h3 { font-size: 15px; margin-bottom: 8px; color: #1e3a5f; }
+    .welcome p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+    .quick-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .quick-tag {
+      font-size: 12px; padding: 6px 12px; border-radius: 20px; background: #fff;
+      border: 1px solid #bfdbfe; color: var(--primary); cursor: pointer; font-weight: 500;
+      transition: all 0.15s;
+    }
+    .quick-tag:active { background: var(--primary); color: #fff; transform: scale(0.96); }
+
+    .typing { display: flex; align-items: center; gap: 4px; padding: 12px 14px; }
+    .typing span { width: 6px; height: 6px; background: var(--text-secondary); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
+    .typing span:nth-child(1) { animation-delay: -0.32s; }
+    .typing span:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes bounce { 0%,80%,100%{transform:scale(0);} 40%{transform:scale(1);} }
+
+    .input-area {
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      flex-shrink: 0; display: flex; gap: 8px; align-items: flex-end;
+    }
+    .input-area textarea {
+      flex: 1; min-height: 40px; max-height: 120px; padding: 10px 14px;
+      border: 1px solid var(--border); border-radius: 20px; font-size: 15px;
+      background: #f9fafb; color: var(--text); outline: none; resize: none;
+      line-height: 1.5; font-family: inherit;
+    }
+    .input-area textarea:focus { border-color: var(--primary); background: #fff; }
+    .send-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: none;
+      background: var(--primary); color: #fff; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; transition: transform 0.1s, opacity 0.2s;
+    }
+    .send-btn:active { transform: scale(0.92); }
+    .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .time-divider { text-align: center; font-size: 11px; color: #9ca3af; margin: 14px 0; }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="avatar">🤖</div>
+      <div class="info">
+        <h1>产品手册智能问答</h1>
+        <p>基于全行产品知识库实时检索</p>
+      </div>
+      <div class="status">在线</div>
+    </header>
+
+    <div class="chat" id="chat">
+      <div class="welcome">
+        <h3>👋 您好，我是产品助手</h3>
+        <p>我已学习全行 200+ 款产品的手册、条款与问答对。您可以问我任何关于产品的问题，我会给出精准答案并标注信息来源。</p>
+        <div class="quick-tags">
+          <span class="quick-tag" onclick="ask('大额存单起存金额和利率？')">大额存单起存金额和利率？</span>
+          <span class="quick-tag" onclick="ask('稳健理财R2风险说明')">稳健理财R2风险说明</span>
+          <span class="quick-tag" onclick="ask('房贷提前还款违约金')">房贷提前还款违约金</span>
+          <span class="quick-tag" onclick="ask('信用卡积分兑换规则')">信用卡积分兑换规则</span>
+          <span class="quick-tag" onclick="ask('私行客户准入标准')">私行客户准入标准</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <textarea id="msgInput" rows="1" placeholder="输入产品问题..." onkeydown="handleKey(event)"></textarea>
+      <button class="send-btn" id="sendBtn" onclick="send()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('msgInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    const qaDB = [
+      {
+        keywords: ['大额存单','起存','利率'],
+        answer: '本行大额存单起存金额为 **20万元**，期限覆盖 1个月至3年。当前在售利率：1年期 2.15%、2年期 2.45%、3年期 2.80%。支持提前支取，靠档计息，保本保息，属于存款保险保障范围。',
+        citation: { product: '大额存单（2026年第3期）', chapter: '第二章 产品要素', section: '起存金额与利率表', match: 96 }
+      },
+      {
+        keywords: ['稳健理财','R2','风险'],
+        answer: '「稳健增利」系列理财产品风险等级为 **R2（中低风险）**。主要投资于高等级信用债、货币市场工具及同业存单，权益类资产占比不超过 20%。历史上未出现本金亏损，但净值会随市场波动，不构成收益承诺。适合风险承受能力为「稳健型」及以上的客户。',
+        citation: { product: '稳健增利系列理财说明书', chapter: '第四章 风险评级', section: 'R2风险定义与投资范围', match: 94 }
+      },
+      {
+        keywords: ['房贷','提前还款','违约金'],
+        answer: '根据本行《个人住房贷款合同》第 12.3 条：贷款发放满 **12 个月**后申请提前还款，**不收取违约金**；未满 12 个月提前还款，按提前还款金额的 **1%** 收取违约金。提前还款需提前 15 个工作日向经办支行提交书面申请。',
+        citation: { product: '个人住房贷款合同（2024版）', chapter: '第十二章 提前还款', section: '12.3 违约金条款', match: 98 }
+      },
+      {
+        keywords: ['信用卡','积分','兑换'],
+        answer: '本行信用卡积分有效期为 **3年**（自然年）。每消费 1 元累积 1 积分，特定商户（加油、超市）双倍积分。积分兑换途径：\n1. 手机银行「积分商城」；\n2. 微信公众号「我的积分」；\n3. 客服热线 400-xxx-xxxx。\n1000 积分约可兑换价值 5 元礼品或抵扣账单。',
+        citation: { product: '信用卡积分规则手册', chapter: '第三章 积分累积与兑换', section: '兑换渠道与比例', match: 91 }
+      },
+      {
+        keywords: ['私行','准入','标准'],
+        answer: '私人银行客户准入标准为：\n- **金融资产月日均余额 ≥ 600万元**；或\n- **综合金融资产（含贷款授信）≥ 1000万元**。\n达标后可享专属理财经理、家族信托、全球资产配置、高端医疗等 12 项增值服务。',
+        citation: { product: '私人银行客户服务手册', chapter: '第一章 客户分层', section: '私行客户准入标准', match: 97 }
+      },
+      {
+        keywords: ['基金定投','手续费','费率'],
+        answer: '通过手机银行或柜台办理基金定投，申购费率 **1折起**（通常为 0.15%）。定投周期支持每周、每两周、每月。最低扣款金额 **100元/期**。持有满 2 年后赎回，大部分基金免赎回费。',
+        citation: { product: '基金代销业务手册', chapter: '第五章 定投业务', section: '费率与最低金额', match: 89 }
+      }
+    ];
+
+    function handleKey(e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+    }
+
+    function ask(text) {
+      input.value = text;
+      send();
+    }
+
+    function appendUser(text) {
+      const div = document.createElement('div');
+      div.className = 'message user';
+      div.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+      chat.appendChild(div);
+      scrollBottom();
+    }
+
+    function appendTyping() {
+      const id = 'typing-' + Date.now();
+      const div = document.createElement('div');
+      div.className = 'message ai';
+      div.id = id;
+      div.innerHTML = `<div class="bubble typing"><span></span><span></span><span></span></div>`;
+      chat.appendChild(div);
+      scrollBottom();
+      return id;
+    }
+
+    function appendAI(answer, citation) {
+      const div = document.createElement('div');
+      div.className = 'message ai';
+      div.style.animationDelay = '0.05s';
+      div.innerHTML = `
+        <div class="bubble">
+          <div>${answer.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>')}</div>
+          <div class="citation">
+            <div class="citation-header">
+              <div class="dot"></div>
+              <div class="title">${escapeHtml(citation.product)}</div>
+              <div class="match">匹配度 ${citation.match}%</div>
+            </div>
+            <div class="citation-meta">
+              <span>📑 ${escapeHtml(citation.chapter)}</span>
+              <span>📄 ${escapeHtml(citation.section)}</span>
+            </div>
+          </div>
+        </div>
+      `;
+      chat.appendChild(div);
+      scrollBottom();
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    }
+
+    function scrollBottom() {
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function findAnswer(text) {
+      const t = text.toLowerCase();
+      for (const item of qaDB) {
+        if (item.keywords.some(k => t.includes(k))) return item;
+      }
+      return {
+        answer: '抱歉，我暂时没有找到与您问题完全匹配的产品信息。建议您：\n1. 换个关键词重试（如产品具体名称）\n2. 联系专属客户经理 400-xxx-xxxx\n3. 查阅手机银行「产品说明书」专区',
+        citation: { product: '产品知识库', chapter: '系统提示', section: '未命中回复模板', match: 0 }
+      };
+    }
+
+    function send() {
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      input.style.height = 'auto';
+      sendBtn.disabled = true;
+      appendUser(text);
+
+      const typingId = appendTyping();
+
+      setTimeout(() => {
+        const el = document.getElementById(typingId);
+        if (el) el.remove();
+        const result = findAnswer(text);
+        appendAI(result.answer, result.citation);
+        sendBtn.disabled = false;
+        input.focus();
+      }, 800 + Math.random() * 600);
+    }
+
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = input.scrollHeight + 'px';
+    });
+  </script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const radarContainer = document.querySelector('.risk-radar, #risk-radar, [data-type="risk"]');
+    if (radarContainer) {
+        const result = await LongmaAPI.risk.getRadar('示例企业');
+        if (result.success && result.data) {
+            renderRiskRadar(radarContainer, result.data);
+        }
+    }
+});
+
+function renderRiskRadar(container, data) {
+    let html = `<div class="api-risk-summary">
+        <h3>${data.enterprise} - 综合评分: ${data.overall_score}</h3>
+        <div class="api-dimensions">`;
+    data.dimensions.forEach(dim => {
+        const levelClass = dim.level === 'low' ? 'safe' : dim.level === 'medium' ? 'warning' : 'danger';
+        html += `<div class="api-dim-item ${levelClass}">
+            <span class="name">${dim.name}</span>
+            <span class="score">${dim.score}</span>
+            <span class="level">${dim.level}</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    if (data.alerts && data.alerts.length > 0) {
+        html += '<div class="api-alerts"><h4>预警信息</h4>';
+        data.alerts.forEach(alert => {
+            html += `<div class="api-alert ${alert.type}">${alert.message}</div>`;
+        });
+        html += '</div>';
+    }
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
