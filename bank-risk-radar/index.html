@@ -1,0 +1,789 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI企业风险雷达，实时监测企业信用风险、财务异常、法律诉讼，预警银行信贷风险。">
+    <meta name="keywords" content="企业风险,风险雷达,信用风险,风险预警,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/bank-risk-radar">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/bank-risk-radar">
+    <meta property="og:title" content="企业风险雷达 | FinAIAI">
+    <meta property="og:description" content="FinAIAI企业风险雷达，实时监测企业信用风险、财务异常、法律诉讼，预警银行信贷风险。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/bank-risk-radar.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="企业风险雷达 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI企业风险雷达，实时监测企业信用风险、财务异常、法律诉讼，预警银行信贷风险。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/bank-risk-radar.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "企业风险雷达 | FinAIAI",
+        "description": "FinAIAI企业风险雷达，实时监测企业信用风险、财务异常、法律诉讼，预警银行信贷风险。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>企业风险雷达 | FinAIAI</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #10b981;
+      --info: #06b6d4;
+      --bg: #f1f5f9;
+      --card: #fff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06);
+      --shadow-lg: 0 14px 44px rgba(37,99,235,.18);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1e3a5f, #2563eb);
+      border-radius: 24px; padding: 28px 22px; color: #fff;
+      box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -40%; right: -20%; width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,.12) 0, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero h1 { font-size: 24px; font-weight: 900; margin-bottom: 4px; position: relative; }
+    .hero .sub { opacity: .85; font-size: 13px; position: relative; }
+    .scan-box {
+      background: rgba(255,255,255,.12); backdrop-filter: blur(8px);
+      border-radius: 16px; padding: 16px; margin-top: 18px; display: flex; gap: 10px;
+      border: 1px solid rgba(255,255,255,.18); position: relative;
+    }
+    .scan-box input {
+      flex: 1; border: none; background: rgba(255,255,255,.18); color: #fff;
+      padding: 12px 16px; border-radius: 12px; font-size: 15px; outline: none;
+    }
+    .scan-box input::placeholder { color: rgba(255,255,255,.65); }
+    .scan-box button {
+      border: none; background: #fff; color: var(--primary); padding: 12px 22px;
+      border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer;
+      transition: .2s; white-space: nowrap;
+    }
+    .scan-box button:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+    .scan-box button:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* Loading */
+    .loading {
+      display: none; text-align: center; padding: 40px 20px;
+    }
+    .loading.active { display: block; }
+    .spinner {
+      width: 48px; height: 48px; border: 4px solid rgba(37,99,235,.15);
+      border-top-color: var(--primary); border-radius: 50%;
+      animation: spin 1s linear infinite; margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading p { color: var(--muted); font-size: 14px; }
+    .loading-dots::after { content: ''; animation: dots 1.5s infinite; }
+    @keyframes dots { 0%,20% { content: '.'; } 40% { content: '..'; } 60%,100% { content: '...'; } }
+
+    /* Result sections */
+    .result { display: none; }
+    .result.active { display: block; animation: fadeIn .5s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .section-title {
+      font-size: 18px; font-weight: 900; margin: 28px 0 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-title .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--primary);
+    }
+
+    /* Score Card */
+    .score-card {
+      background: var(--card); border-radius: 20px; padding: 22px;
+      box-shadow: var(--shadow); display: flex; align-items: center; gap: 20px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .ring-wrap { position: relative; width: 140px; height: 140px; flex-shrink: 0; }
+    .ring-wrap svg { transform: rotate(-90deg); }
+    .ring-value {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      text-align: center;
+    }
+    .ring-value b { display: block; font-size: 32px; line-height: 1; }
+    .ring-value span { font-size: 12px; color: var(--muted); }
+    .score-meta { flex: 1; min-width: 200px; }
+    .score-meta .grade {
+      display: inline-block; padding: 4px 14px; border-radius: 999px;
+      font-size: 14px; font-weight: 800; margin-bottom: 10px;
+    }
+    .grade-aaa { background: #d1fae5; color: #065f46; }
+    .grade-aa { background: #dbeafe; color: #1e40af; }
+    .grade-a { background: #fef3c7; color: #92400e; }
+    .grade-bbb { background: #fed7aa; color: #9a3412; }
+    .grade-bb { background: #fecaca; color: #991b1b; }
+    .grade-b { background: #fee2e2; color: #7f1d1d; }
+    .score-meta .desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* Radar Chart */
+    .radar-card {
+      background: var(--card); border-radius: 20px; padding: 22px;
+      box-shadow: var(--shadow); text-align: center;
+    }
+    .radar-card svg { max-width: 100%; height: auto; }
+
+    /* KRI Grid */
+    .kri-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .kri-card {
+      background: var(--card); border-radius: 16px; padding: 16px 12px;
+      box-shadow: var(--shadow); text-align: center;
+    }
+    .kri-card .kri-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .kri-card .kri-value { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+    .kri-card .kri-status {
+      font-size: 11px; padding: 2px 8px; border-radius: 999px; font-weight: 700;
+      display: inline-block;
+    }
+    .status-normal { background: #d1fae5; color: #065f46; }
+    .status-warn { background: #fef3c7; color: #92400e; }
+    .status-danger { background: #fecaca; color: #991b1b; }
+
+    /* Risk List */
+    .risk-list { background: var(--card); border-radius: 20px; padding: 16px; box-shadow: var(--shadow); }
+    .risk-item {
+      display: flex; align-items: flex-start; gap: 12px; padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .risk-item:last-child { border-bottom: none; }
+    .risk-badge {
+      flex-shrink: 0; width: 44px; text-align: center; padding: 4px 0;
+      border-radius: 8px; font-size: 11px; font-weight: 800;
+    }
+    .badge-veto { background: #fee2e2; color: #991b1b; }
+    .badge-warn { background: #fef3c7; color: #92400e; }
+    .badge-attn { background: #dbeafe; color: #1e40af; }
+    .risk-body { flex: 1; }
+    .risk-body .signal { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .risk-body .source { font-size: 12px; color: var(--muted); }
+    .risk-conf { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+    /* Peer Compare */
+    .peer-card {
+      background: var(--card); border-radius: 20px; padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    .peer-bar {
+      display: flex; align-items: center; gap: 10px; margin: 12px 0;
+    }
+    .peer-bar .bar-label { width: 80px; font-size: 13px; color: var(--muted); flex-shrink: 0; }
+    .peer-bar .bar-track { flex: 1; height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; position: relative; }
+    .peer-bar .bar-fill { height: 100%; border-radius: 999px; transition: width 1s ease; }
+    .peer-bar .bar-value { width: 50px; text-align: right; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+
+    /* Credit Proposal */
+    .credit-card {
+      background: linear-gradient(135deg, #1e3a5f, #2563eb); color: #fff;
+      border-radius: 20px; padding: 22px; box-shadow: var(--shadow-lg);
+    }
+    .credit-card h3 { font-size: 16px; margin-bottom: 14px; }
+    .credit-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    .credit-cell { background: rgba(255,255,255,.12); border-radius: 12px; padding: 12px; }
+    .credit-cell .label { font-size: 12px; opacity: .75; margin-bottom: 4px; }
+    .credit-cell .value { font-size: 18px; font-weight: 800; }
+    .credit-conditions { margin-top: 14px; font-size: 13px; opacity: .9; line-height: 1.8; }
+
+    /* Back home */
+    .back-home {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 24px; color: var(--primary); text-decoration: none;
+      font-size: 14px; font-weight: 700;
+    }
+
+    @media (max-width: 520px) {
+      .kri-grid { grid-template-columns: repeat(2, 1fr); }
+      .credit-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 20px; }
+      .scan-box { flex-direction: column; }
+      .scan-box button { width: 100%; }
+    }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>🛡️ 企业风险雷达</h1>
+    <div class="sub">银行业 · 对公风控 · 3秒生成企业风险概览</div>
+    <div class="scan-box">
+      <input type="text" id="companyInput" placeholder="输入企业名称，如：某制造业集团" value="">
+      <button id="scanBtn" onclick="startScan()">🔍 扫描风险</button>
+    </div>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>正在扫描企业多维度风险数据<span class="loading-dots"></span></p>
+  </div>
+
+  <div class="result" id="result">
+    <div class="section-title"><span class="dot"></span>风险综合评分</div>
+    <div class="score-card">
+      <div class="ring-wrap">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="58" fill="none" stroke="#e2e8f0" stroke-width="10"/>
+          <circle id="scoreRing" cx="70" cy="70" r="58" fill="none" stroke="url(#ringGrad)" stroke-width="10"
+            stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="364.4" style="transition: stroke-dashoffset 1.2s ease;"/>
+          <defs>
+            <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="50%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#ef4444"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="ring-value">
+          <b id="totalScore">--</b>
+          <span>风险评分</span>
+        </div>
+      </div>
+      <div class="score-meta">
+        <div class="grade" id="gradeBadge">--</div>
+        <div class="desc" id="gradeDesc">输入企业名称后点击扫描，系统将基于财务、经营、司法、舆情四维度进行风险评估。</div>
+      </div>
+    </div>
+
+    <div class="section-title"><span class="dot"></span>四维风险雷达</div>
+    <div class="radar-card">
+      <svg id="radarSvg" width="320" height="280" viewBox="0 0 320 280"></svg>
+    </div>
+
+    <div class="section-title"><span class="dot"></span>关键风险指标 (KRI)</div>
+    <div class="kri-grid" id="kriGrid"></div>
+
+    <div class="section-title"><span class="dot"></span>风险信号明细</div>
+    <div class="risk-list" id="riskList"></div>
+
+    <div class="section-title"><span class="dot"></span>同业对比</div>
+    <div class="peer-card" id="peerCard"></div>
+
+    <div class="section-title"><span class="dot"></span>授信建议</div>
+    <div class="credit-card" id="creditCard"></div>
+
+    <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ====== Seed-based PRNG ======
+  function cyrb128(str) {
+    let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+    for (let i = 0, k; i < str.length; i++) {
+      k = str.charCodeAt(i);
+      h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
+      h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+      h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
+      h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+    }
+    h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+    h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+    h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+    h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+    return [(h1^h2^h3^h4)>>>0, (h2^h1)>>>0, (h3^h1)>>>0, (h4^h1)>>>0];
+  }
+  function sfc32(a, b, c, d) {
+    return function() {
+      a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
+      let t = (a + b) | 0;
+      a = b ^ b >>> 9;
+      b = c + (c << 3) | 0;
+      c = (c << 21) | (c >>> 11);
+      d = d + 1 | 0;
+      t = t + d | 0;
+      c = c + t | 0;
+      return (t >>> 0) / 4294967296;
+    };
+  }
+  function createRng(seedStr) {
+    const s = cyrb128(seedStr);
+    return sfc32(s[0], s[1], s[2], s[3]);
+  }
+
+  // ====== Data Generation ======
+  function generateData(company) {
+    const rng = createRng(company + '_risk_radar_v1');
+    const randInt = (min, max) => Math.floor(rng() * (max - min + 1)) + min;
+    const randFloat = (min, max, dec) => {
+      const v = rng() * (max - min) + min;
+      return parseFloat(v.toFixed(dec));
+    };
+
+    // Industry
+    const industries = [
+      { name: '制造业', factors: [1.0, 1.05, 0.95, 1.0] },
+      { name: '科技互联网', factors: [1.05, 1.1, 0.9, 1.15] },
+      { name: '金融业', factors: [0.95, 0.9, 1.05, 0.95] },
+      { name: '新能源', factors: [1.1, 1.15, 0.9, 1.1] },
+      { name: '医药生物', factors: [1.0, 1.0, 0.95, 1.05] },
+      { name: '房地产', factors: [0.85, 0.8, 1.1, 0.85] },
+      { name: '零售消费', factors: [1.0, 1.05, 1.0, 1.0] },
+    ];
+    const industry = industries[randInt(0, industries.length - 1)];
+
+    // Dimension scores (0-100)
+    const dims = [
+      { key: 'financial', name: '财务风险', weight: 0.30, base: randInt(55, 92) },
+      { key: 'operation', name: '经营风险', weight: 0.25, base: randInt(50, 90) },
+      { key: 'legal', name: '司法风险', weight: 0.25, base: randInt(60, 95) },
+      { key: 'public', name: '舆情风险', weight: 0.20, base: randInt(55, 90) },
+    ];
+    dims.forEach((d, i) => {
+      d.score = Math.min(100, Math.max(0, Math.round(d.base * industry.factors[i])));
+    });
+    const totalScore = Math.round(dims.reduce((s, d) => s + d.score * d.weight, 0));
+
+    // Grade
+    const gradeMap = [
+      { min: 90, grade: 'AAA', cls: 'grade-aaa', label: '优质' },
+      { min: 80, grade: 'AA', cls: 'grade-aa', label: '良好' },
+      { min: 70, grade: 'A', cls: 'grade-a', label: '正常' },
+      { min: 60, grade: 'BBB', cls: 'grade-bbb', label: '关注' },
+      { min: 50, grade: 'BB', cls: 'grade-bb', label: '警告' },
+      { min: 0, grade: 'B', cls: 'grade-b', label: '高风险' },
+    ];
+    const gradeInfo = gradeMap.find(g => totalScore >= g.min);
+
+    // KRIs
+    const kris = [
+      { label: '资产负债率', value: randFloat(35, 75, 1) + '%', status: randFloat(35,75,1) > 60 ? 'danger' : randFloat(35,75,1) > 50 ? 'warn' : 'normal' },
+      { label: '流动比率', value: randFloat(0.8, 2.2, 2), status: randFloat(0.8,2.2,2) < 1.2 ? 'danger' : randFloat(0.8,2.2,2) < 1.5 ? 'warn' : 'normal' },
+      { label: '应收周转天数', value: randInt(30, 100) + '天', status: randInt(30,100) > 80 ? 'danger' : randInt(30,100) > 60 ? 'warn' : 'normal' },
+      { label: '被执行案件', value: randInt(0, 8) + '件', status: randInt(0,8) > 3 ? 'danger' : randInt(0,8) > 0 ? 'warn' : 'normal' },
+      { label: '负面舆情', value: randInt(0, 25) + '条', status: randInt(0,25) > 12 ? 'danger' : randInt(0,25) > 5 ? 'warn' : 'normal' },
+      { label: '行政处罚', value: randInt(0, 5) + '次', status: randInt(0,5) > 2 ? 'danger' : randInt(0,5) > 0 ? 'warn' : 'normal' },
+    ];
+    // Regenerate with consistent rng for status checks
+    const kriVals = [
+      { v: randFloat(35, 75, 1), label: '资产负债率', fmt: v => v.toFixed(1)+'%', thr: [50, 60] },
+      { v: randFloat(0.8, 2.2, 2), label: '流动比率', fmt: v => v.toFixed(2), thr: [1.5, 1.2] },
+      { v: randInt(30, 100), label: '应收周转天数', fmt: v => v+'天', thr: [60, 80] },
+      { v: randInt(0, 8), label: '被执行案件', fmt: v => v+'件', thr: [1, 4] },
+      { v: randInt(0, 25), label: '负面舆情', fmt: v => v+'条', thr: [5, 12] },
+      { v: randInt(0, 5), label: '行政处罚', fmt: v => v+'次', thr: [1, 3] },
+    ];
+    const kriFinal = kriVals.map(k => {
+      let st = 'normal';
+      if (k.thr.length === 2) {
+        if (k.v >= k.thr[1]) st = 'danger';
+        else if (k.v >= k.thr[0]) st = 'warn';
+      } else {
+        if (k.v <= k.thr[1]) st = 'danger';
+        else if (k.v <= k.thr[0]) st = 'warn';
+      }
+      // Special: higher is worse for these
+      if (['资产负债率','应收周转天数','被执行案件','负面舆情','行政处罚'].includes(k.label)) {
+        if (k.v >= k.thr[1]) st = 'danger';
+        else if (k.v >= k.thr[0]) st = 'warn';
+        else st = 'normal';
+      }
+      if (k.label === '流动比率') {
+        if (k.v <= k.thr[1]) st = 'danger';
+        else if (k.v <= k.thr[0]) st = 'warn';
+        else st = 'normal';
+      }
+      return { label: k.label, value: k.fmt(k.v), status: st };
+    });
+
+    // Risk signals
+    const riskPool = [
+      { level: '关注', signal: '应收账款占比较上季度上升' + randInt(2,8) + '%', conf: randFloat(0.6,0.8,2), src: '财务报表分析' },
+      { level: '关注', signal: '存货周转天数略高于行业均值' + randInt(5,20) + '天', conf: randFloat(0.55,0.75,2), src: '运营数据对比' },
+      { level: '警告', signal: '行业竞争加剧，毛利率承压', conf: randFloat(0.7,0.85,2), src: '行业研究+舆情监测' },
+      { level: '警告', signal: '海外收入占比上升，汇率风险需关注', conf: randFloat(0.65,0.8,2), src: '财务报表分析' },
+      { level: '关注', signal: '短期借款增长较快', conf: randFloat(0.55,0.72,2), src: '资金流监测' },
+      { level: '关注', signal: '关联交易占比较高', conf: randFloat(0.6,0.75,2), src: '关联图谱分析' },
+      { level: '警告', signal: '核心客户集中度上升', conf: randFloat(0.7,0.82,2), src: '客户结构分析' },
+      { level: '关注', signal: '研发投入增加但产品化率仍在提升', conf: randFloat(0.55,0.7,2), src: '研发数据分析' },
+      { level: '否决', signal: '重大诉讼/被执行案件未结', conf: randFloat(0.88,0.98,2), src: '司法风险扫描' },
+      { level: '警告', signal: '现金流动性覆盖倍数下降', conf: randFloat(0.75,0.88,2), src: '财务指标监测' },
+      { level: '警告', signal: '存量贷款逾期率上升至' + randFloat(1.5,4.5,1) + '%', conf: randFloat(0.72,0.86,2), src: '贷后监控' },
+      { level: '关注', signal: '担保圈联度上升，二次代偿风险需关注', conf: randFloat(0.6,0.78,2), src: '担保链分析' },
+    ];
+    const numRisks = randInt(3, 6);
+    const riskSignals = [];
+    const used = new Set();
+    for (let i = 0; i < numRisks && used.size < riskPool.length; i++) {
+      const idx = randInt(0, riskPool.length - 1);
+      if (used.has(idx)) continue;
+      used.add(idx);
+      const r = riskPool[idx];
+      if (r.level === '否决' && totalScore >= 70) continue;
+      riskSignals.push({ ...r });
+    }
+
+    // Peer comparison
+    const industryAvg = randInt(65, 78);
+    const peerBars = [
+      { label: '风险总分', value: totalScore, avg: industryAvg, color: '#2563eb' },
+      { label: '财务健康', value: dims[0].score, avg: randInt(60, 80), color: '#10b981' },
+      { label: '经营稳定', value: dims[1].score, avg: randInt(58, 78), color: '#f59e0b' },
+      { label: '司法合规', value: dims[2].score, avg: randInt(65, 85), color: '#8b5cf6' },
+      { label: '舆情表现', value: dims[3].score, avg: randInt(62, 82), color: '#06b6d4' },
+    ];
+
+    // Credit proposal
+    const baseAmount = randInt(500, 8000);
+    const amount = Math.round(baseAmount * totalScore / 100 / 10) * 10;
+    const term = totalScore >= 75 ? 12 : totalScore >= 60 ? 6 : 3;
+    const rateBp = totalScore >= 85 ? 60 : totalScore >= 75 ? 90 : totalScore >= 60 ? 130 : 180;
+    const collateralOptions = [
+      '应收账款质押+母公司担保',
+      '不动产抵押+第三方保证',
+      '股权质押+核心子公司担保',
+      '应收票据质押+供应链保理',
+      '动产质押+企业信用保证',
+    ];
+    const collateral = collateralOptions[randInt(0, collateralOptions.length - 1)];
+    const conditions = [
+      '资金回流账户监管，专户专用',
+      '按月提供财务报表和银行流水',
+      '单笔提款需匹配合同/发票/订单',
+    ];
+    if (totalScore < 75) conditions.push('增加第三方连带责任担保或核心股东个人担保');
+    if (totalScore < 65) conditions.push('压降存量负债或补充保证人后方可首提款');
+
+    return {
+      company, industry: industry.name, totalScore, gradeInfo, dims,
+      kris: kriFinal, riskSignals, peerBars,
+      credit: { amount, term, rate: 'LPR+' + rateBp + 'bp', collateral, conditions },
+    };
+  }
+
+  // ====== Render ======
+  function drawRadar(dims) {
+    const svg = document.getElementById('radarSvg');
+    const cx = 160, cy = 130, r = 90;
+    const angles = [Math.PI/2, Math.PI*2+Math.PI/2, Math.PI+Math.PI/2, Math.PI*3+Math.PI/2]; // 4 points
+    // Actually 4 points: top, right, bottom, left
+    const pts = [
+      { angle: -Math.PI/2, name: dims[0].name, score: dims[0].score },
+      { angle: 0, name: dims[1].name, score: dims[1].score },
+      { angle: Math.PI/2, name: dims[2].name, score: dims[2].score },
+      { angle: Math.PI, name: dims[3].name, score: dims[3].score },
+    ];
+
+    let pathD = '';
+    let polyPoints = '';
+    pts.forEach((p, i) => {
+      const pr = (p.score / 100) * r;
+      const px = cx + Math.cos(p.angle) * pr;
+      const py = cy + Math.sin(p.angle) * pr;
+      polyPoints += (i ? ' ' : '') + px + ',' + py;
+      pathD += (i ? ' L ' : 'M ') + px + ' ' + py;
+    });
+    pathD += ' Z';
+
+    // Grid circles
+    let gridHTML = '';
+    [0.25, 0.5, 0.75, 1].forEach(ratio => {
+      let d = '';
+      pts.forEach((p, i) => {
+        const pr = ratio * r;
+        const px = cx + Math.cos(p.angle) * pr;
+        const py = cy + Math.sin(p.angle) * pr;
+        d += (i ? ' L ' : 'M ') + px + ' ' + py;
+      });
+      d += ' Z';
+      gridHTML += `<path d="${d}" fill="none" stroke="#e2e8f0" stroke-width="1"/>`;
+    });
+    // Axis lines
+    pts.forEach(p => {
+      gridHTML += `<line x1="${cx}" y1="${cy}" x2="${cx + Math.cos(p.angle) * r}" y2="${cy + Math.sin(p.angle) * r}" stroke="#e2e8f0" stroke-width="1"/>`;
+    });
+
+    // Labels
+    let labelHTML = '';
+    pts.forEach(p => {
+      const lr = r + 28;
+      const lx = cx + Math.cos(p.angle) * lr;
+      const ly = cy + Math.sin(p.angle) * lr;
+      labelHTML += `<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#475569" font-weight="700">${p.name}</text>`;
+      labelHTML += `<text x="${lx}" y="${ly+16}" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#2563eb" font-weight="800">${p.score}</text>`;
+    });
+
+    svg.innerHTML = `
+      ${gridHTML}
+      <path d="${pathD}" fill="rgba(37,99,235,.18)" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>
+      ${pts.map(p => {
+        const pr = (p.score / 100) * r;
+        const px = cx + Math.cos(p.angle) * pr;
+        const py = cy + Math.sin(p.angle) * pr;
+        return `<circle cx="${px}" cy="${py}" r="4" fill="#2563eb" stroke="#fff" stroke-width="2"/>`;
+      }).join('')}
+      ${labelHTML}
+    `;
+  }
+
+  function render(data) {
+    // Score ring
+    const ring = document.getElementById('scoreRing');
+    const circumference = 2 * Math.PI * 58; // ~364.4
+    const offset = circumference * (1 - data.totalScore / 100);
+    ring.style.strokeDashoffset = offset;
+
+    document.getElementById('totalScore').textContent = data.totalScore;
+    const gb = document.getElementById('gradeBadge');
+    gb.textContent = data.gradeInfo.grade + ' 级 · ' + data.gradeInfo.label;
+    gb.className = 'grade ' + data.gradeInfo.cls;
+
+    const descs = [
+      `该企业风险评分为${data.totalScore}分，属于${data.gradeInfo.label}水平。四维度风险均值为${Math.round(data.dims.reduce((s,d)=>s+d.score,0)/4)}分，其中${data.dims.sort((a,b)=>b.score-a.score)[0].name}表现最优。建议结合具体风险信号进行综合判断。`,
+      `综合评分${data.totalScore}分（${data.gradeInfo.grade}级）。从四维度看，${data.dims.reduce((a,b)=>a.score<b.score?a:b).name}需重点关注。同时建议对比行业均值，评估相对优势与劣势。`,
+      (function() {
+        let advice = '建议冻结额度并启动贷后监控';
+        if (data.totalScore >= 75) advice = '按基准方案执行';
+        else if (data.totalScore >= 60) advice = '审慎通过并追加担保';
+        else if (data.totalScore >= 50) advice = '补充材料后复核';
+        return `企业风险总分${data.totalScore}，等级${data.gradeInfo.grade}。财务风险${data.dims[0].score}分、经营风险${data.dims[1].score}分、司法风险${data.dims[2].score}分、舆情风险${data.dims[3].score}分。建议${advice}。`;
+      })(),
+    ];
+    const rng = createRng(data.company + '_desc');
+    document.getElementById('gradeDesc').textContent = descs[Math.floor(rng() * descs.length)];
+
+    // Radar
+    drawRadar(data.dims);
+
+    // KRIs
+    const kriGrid = document.getElementById('kriGrid');
+    kriGrid.innerHTML = data.kris.map(k => `
+      <div class="kri-card">
+        <div class="kri-label">${k.label}</div>
+        <div class="kri-value" style="color:${k.status==='danger'?'#ef4444':k.status==='warn'?'#f59e0b':'#10b981'}">${k.value}</div>
+        <div class="kri-status status-${k.status}">${k.status==='danger'?'异常':k.status==='warn'?'关注':'正常'}</div>
+      </div>
+    `).join('');
+
+    // Risk signals
+    const riskList = document.getElementById('riskList');
+    if (data.riskSignals.length === 0) {
+      riskList.innerHTML = '<div style="padding:20px;text-align:center;color:var(--muted);font-size:14px;">暂未检测到明显风险信号</div>';
+    } else {
+      riskList.innerHTML = data.riskSignals.map(r => {
+        const badgeCls = r.level === '否决' ? 'badge-veto' : r.level === '警告' ? 'badge-warn' : 'badge-attn';
+        return `
+          <div class="risk-item">
+            <div class="risk-badge ${badgeCls}">${r.level}</div>
+            <div class="risk-body">
+              <div class="signal">${r.signal}</div>
+              <div class="source">${r.src}</div>
+            </div>
+            <div class="risk-conf">置信度 ${(r.conf*100).toFixed(0)}%</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Peer comparison
+    const peerCard = document.getElementById('peerCard');
+    const maxBar = Math.max(...data.peerBars.map(b => Math.max(b.value, b.avg)), 100);
+    peerCard.innerHTML = data.peerBars.map(b => {
+      const pct = (b.value / maxBar * 100).toFixed(1);
+      const avgPct = (b.avg / maxBar * 100).toFixed(1);
+      return `
+        <div class="peer-bar">
+          <div class="bar-label">${b.label}</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:${pct}%;background:${b.color};"></div>
+            <div style="position:absolute;top:0;left:${avgPct}%;width:2px;height:100%;background:rgba(0,0,0,.3);"></div>
+          </div>
+          <div class="bar-value">${b.value}</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin:-6px 0 8px 90px;">
+          <span>行业均值: ${b.avg}</span>
+          <span style="color:${b.value>=b.avg?'#10b981':'#ef4444'}">${b.value>=b.avg?'⬆ 优于均值':'2b07 低于均值'}</span>
+        </div>
+      `;
+    }).join('');
+
+    // Credit proposal
+    const cc = document.getElementById('creditCard');
+    cc.innerHTML = `
+      <h3>💳 授信方案建议</h3>
+      <div class="credit-grid">
+        <div class="credit-cell"><div class="label">建议额度</div><div class="value">¥${data.credit.amount.toLocaleString()}万</div></div>
+        <div class="credit-cell"><div class="label">建议期限</div><div class="value">${data.credit.term}个月</div></div>
+        <div class="credit-cell"><div class="label">定价建议</div><div class="value">${data.credit.rate}</div></div>
+        <div class="credit-cell"><div class="label">担保方式</div><div class="value" style="font-size:14px;">${data.credit.collateral}</div></div>
+      </div>
+      <div class="credit-conditions">
+        <strong>附加条件：</strong><br>
+        ${data.credit.conditions.map((c,i) => (i+1) + '. ' + c).join('<br>')}
+      </div>
+    `;
+  }
+
+  // ====== Main Flow ======
+  window.startScan = function() {
+    const input = document.getElementById('companyInput');
+    const company = input.value.trim();
+    if (!company) { input.focus(); return; }
+
+    document.getElementById('loading').classList.add('active');
+    document.getElementById('result').classList.remove('active');
+    document.getElementById('scanBtn').disabled = true;
+
+    // Simulate network latency
+    setTimeout(() => {
+      const data = generateData(company);
+      render(data);
+      document.getElementById('loading').classList.remove('active');
+      document.getElementById('result').classList.add('active');
+      document.getElementById('scanBtn').disabled = false;
+    }, 1200);
+  };
+
+  // Enter key
+  document.getElementById('companyInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') startScan();
+  });
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const radarContainer = document.querySelector('.risk-radar, #risk-radar, [data-type="risk"]');
+    if (radarContainer) {
+        const result = await LongmaAPI.risk.getRadar('示例企业');
+        if (result.success && result.data) {
+            renderRiskRadar(radarContainer, result.data);
+        }
+    }
+});
+
+function renderRiskRadar(container, data) {
+    let html = `<div class="api-risk-summary">
+        <h3>${data.enterprise} - 综合评分: ${data.overall_score}</h3>
+        <div class="api-dimensions">`;
+    data.dimensions.forEach(dim => {
+        const levelClass = dim.level === 'low' ? 'safe' : dim.level === 'medium' ? 'warning' : 'danger';
+        html += `<div class="api-dim-item ${levelClass}">
+            <span class="name">${dim.name}</span>
+            <span class="score">${dim.score}</span>
+            <span class="level">${dim.level}</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    if (data.alerts && data.alerts.length > 0) {
+        html += '<div class="api-alerts"><h4>预警信息</h4>';
+        data.alerts.forEach(alert => {
+            html += `<div class="api-alert ${alert.type}">${alert.message}</div>`;
+        });
+        html += '</div>';
+    }
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
