@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频KYC - 远程开户</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+        .header h1 { font-size: 22px; margin-bottom: 8px; }
+        .header p { font-size: 14px; opacity: 0.9; }
+        .progress {
+            display: flex;
+            padding: 16px 24px;
+            background: #f8f9fa;
+        }
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #dee2e6;
+            color: #6c757d;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .step.active .step-number { background: #667eea; color: white; }
+        .step.completed .step-number { background: #28a745; color: white; }
+        .step-label { font-size: 12px; color: #6c757d; margin-top: 6px; }
+        .step.active .step-label { color: #667eea; font-weight: 600; }
+        .content { padding: 24px; }
+        .panel { display: none; }
+        .panel.active { display: block; }
+        .panel h2 { font-size: 18px; margin-bottom: 16px; color: #333; }
+        .panel p { font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.5; }
+        .upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .upload-area:hover { border-color: #667eea; background: #f0f4ff; }
+        .upload-area.success { border-color: #28a745; background: #f0fff4; }
+        .upload-icon { font-size: 48px; margin-bottom: 12px; }
+        .upload-text { font-size: 14px; color: #666; }
+        .preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 16px;
+            display: none;
+        }
+        .video-container {
+            width: 100%;
+            height: 240px;
+            background: #000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .video-placeholder { text-align: center; }
+        .video-icon { font-size: 48px; margin-bottom: 8px; }
+        .recording-indicator {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dc3545;
+            animation: blink 1s infinite;
+            display: none;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #667eea;
+            border: 1px solid #667eea;
+        }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .actions { display: flex; gap: 12px; margin-top: 20px; }
+        .actions .btn { flex: 1; }
+        .status {
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .status.success { background: #d4edda; color: #155724; display: block; }
+        .status.error { background: #f8d7da; color: #721c24; display: block; }
+        .status.info { background: #d1ecf1; color: #0c5460; display: block; }
+        .tips {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: #856404;
+            margin-bottom: 20px;
+        }
+        .checkbox-group {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .checkbox-group label {
+            display: block;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .checkbox-group input { margin-right: 8px; }
+        .result-summary {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 14px;
+        }
+        .result-item:last-child { border-bottom: none; }
+        .result-item .label { color: #666; }
+        .result-item .value { color: #333; font-weight: 600; }
+        .success-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .container { border-radius: 12px; }
+            .header { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📹 视频KYC远程开户</h1>
+            <p>安全、便捷、合规的线上身份认证</p>
+        </div>
+
+        <div class="progress">
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">身份证上传</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">视频见证</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">电子签署</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-label">完成</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- 步骤1：身份证上传 -->
+            <div class="panel active" id="panel-1">
+                <h2>请上传身份证正反面</h2>
+                <div class="tips">
+                    💡 请确保身份证清晰、完整、无遮挡，四角均在拍摄范围内。
+                </div>
+                <div class="upload-area" id="upload-front">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">点击上传身份证正面</div>
+                    <input type="file" accept="image/*" style="display: none;">
+                </div>
+                <img class="preview" id="preview-front" alt="身份证正面预览">
+
+                <div class="upload-area" id="upload-back" style="margin-top: 16px;">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">点击上传身份证反面</div>
+                    <input type="file" accept="image/*" style="display: none;">
+                </div>
+                <img class="preview" id="preview-back" alt="身份证反面预览">
+
+                <div class="status" id="status-1"></div>
+                <button class="btn btn-primary" id="btn-step-1" disabled>下一步：视频见证</button>
+            </div>
+
+            <!-- 步骤2：视频见证 -->
+            <div class="panel" id="panel-2">
+                <h2>请进行视频见证</h2>
+                <div class="tips">
+                    💡 请保持正对屏幕，光线充足，按照提示朗读验证文字。视频将用于合规留痕。
+                </div>
+                <div class="video-container" id="video-container">
+                    <div class="recording-indicator" id="recording-indicator"></div>
+                    <div class="video-placeholder" id="video-placeholder">
+                        <div class="video-icon">🎥</div>
+                        <div>点击开始视频见证</div>
+                    </div>
+                </div>
+                <div class="status" id="status-2"></div>
+                <div class="actions">
+                    <button class="btn btn-secondary" id="btn-record">开始录制</button>
+                    <button class="btn btn-primary" id="btn-step-2" disabled>下一步</button>
+                </div>
+            </div>
+
+            <!-- 步骤3：电子签署 -->
+            <div class="panel" id="panel-3">
+                <h2>请确认并签署开户协议</h2>
+                <div class="tips">
+                    💡 请仔细阅读以下协议，勾选即表示您同意相关条款。电子签名具有法律效力。
+                </div>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="agree-1"> 我已阅读并同意《个人银行账户开户协议》</label>
+                    <label><input type="checkbox" id="agree-2"> 我已阅读并同意《电子银行业务服务协议》</label>
+                    <label><input type="checkbox" id="agree-3"> 我已阅读并同意《个人信息授权书》</label>
+                </div>
+                <div class="status" id="status-3"></div>
+                <button class="btn btn-primary" id="btn-step-3" disabled>提交开户申请</button>
+            </div>
+
+            <!-- 步骤4：完成 -->
+            <div class="panel" id="panel-4">
+                <div style="text-align: center; padding: 20px 0;">
+                    <div style="font-size: 64px; margin-bottom: 16px;">✅</div>
+                    <div class="success-badge">开户申请已提交</div>
+                </div>
+                <div class="result-summary">
+                    <div class="result-item">
+                        <span class="label">申请人</span>
+                        <span class="value">张*三</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">身份证认证</span>
+                        <span class="value">已通过</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">视频见证</span>
+                        <span class="value">已完成</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">电子签署</span>
+                        <span class="value">已签署</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">预计审核时间</span>
+                        <span class="value">1-2个工作日</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="location.reload()">完成</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+        let idFrontUploaded = false;
+        let idBackUploaded = false;
+        let videoRecorded = false;
+
+        function showStep(step) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('panel-' + step).classList.add('active');
+            document.querySelectorAll('.step').forEach(s => {
+                const sNum = parseInt(s.dataset.step);
+                s.classList.remove('active', 'completed');
+                if (sNum < step) s.classList.add('completed');
+                else if (sNum === step) s.classList.add('active');
+            });
+            currentStep = step;
+        }
+
+        function showStatus(id, message, type) {
+            const el = document.getElementById(id);
+            el.textContent = message;
+            el.className = 'status ' + type;
+        }
+
+        // 身份证上传
+        document.querySelectorAll('.upload-area').forEach(area => {
+            area.addEventListener('click', () => area.querySelector('input').click());
+            area.querySelector('input').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = area.id === 'upload-front' ?
+                        document.getElementById('preview-front') :
+                        document.getElementById('preview-back');
+                    img.src = event.target.result;
+                    img.style.display = 'block';
+                    area.classList.add('success');
+                    area.querySelector('.upload-text').textContent = '上传成功';
+
+                    if (area.id === 'upload-front') idFrontUploaded = true;
+                    else idBackUploaded = true;
+
+                    if (idFrontUploaded && idBackUploaded) {
+                        document.getElementById('btn-step-1').disabled = false;
+                        showStatus('status-1', '身份证上传完成，请继续视频见证', 'success');
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        document.getElementById('btn-step-1').addEventListener('click', () => showStep(2));
+
+        // 视频录制
+        const videoContainer = document.getElementById('video-container');
+        const recordBtn = document.getElementById('btn-record');
+        const recordingIndicator = document.getElementById('recording-indicator');
+        let isRecording = false;
+
+        recordBtn.addEventListener('click', () => {
+            if (!isRecording) {
+                isRecording = true;
+                recordBtn.textContent = '停止录制';
+                recordBtn.classList.remove('btn-secondary');
+                recordBtn.classList.add('btn-primary');
+                recordingIndicator.style.display = 'block';
+                document.getElementById('video-placeholder').innerHTML =
+                    '<div style="font-size:18px;">🔴 录制中...</div><div style="font-size:14px;margin-top:8px;">请朗读：我是本人，自愿申请开户</div>';
+                showStatus('status-2', '正在录制视频见证，请保持正对屏幕', 'info');
+            } else {
+                isRecording = false;
+                recordBtn.textContent = '重新录制';
+                recordingIndicator.style.display = 'none';
+                document.getElementById('video-placeholder').innerHTML =
+                    '<div style="font-size:48px;">✅</div><div>视频见证已完成</div>';
+                videoRecorded = true;
+                document.getElementById('btn-step-2').disabled = false;
+                showStatus('status-2', '视频见证录制完成，请点击下一步', 'success');
+            }
+        });
+
+        document.getElementById('btn-step-2').addEventListener('click', () => showStep(3));
+
+        // 电子签署
+        const checkboxes = document.querySelectorAll('.checkbox-group input');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                const allChecked = Array.from(checkboxes).every(c => c.checked);
+                document.getElementById('btn-step-3').disabled = !allChecked;
+                if (allChecked) {
+                    showStatus('status-3', '请确认协议后提交开户申请', 'info');
+                }
+            });
+        });
+
+        document.getElementById('btn-step-3').addEventListener('click', () => {
+            showStatus('status-3', '正在提交开户申请...', 'info');
+            setTimeout(() => {
+                showStep(4);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
