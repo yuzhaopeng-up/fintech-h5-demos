@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI代理人销售助手，智能话术生成+客户画像+异议处理，提升代理人展业效率。">
+    <meta name="keywords" content="销售助手,智能话术,客户画像,代理人,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/agent-support">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/agent-support">
+    <meta property="og:title" content="代理人销售助手 | FinAIAI">
+    <meta property="og:description" content="FinAIAI代理人销售助手，智能话术生成+客户画像+异议处理，提升代理人展业效率。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/agent-support.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="代理人销售助手 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI代理人销售助手，智能话术生成+客户画像+异议处理，提升代理人展业效率。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/agent-support.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "代理人销售助手 | FinAIAI",
+        "description": "FinAIAI代理人销售助手，智能话术生成+客户画像+异议处理，提升代理人展业效率。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>代理人销售助手 | FinAIAI</title>
+  <style>
+    :root { --primary:#2563eb; --success:#10b981; --warning:#f59e0b; --danger:#ef4444; --purple:#8b5cf6;
+      --bg:#f1f5f9; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+      --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06);
+      --shadow-lg:0 14px 44px rgba(37,99,235,.18); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; padding-bottom:env(safe-area-inset-bottom,0); }
+    .wrap { max-width:720px; margin:0 auto; padding:16px; }
+    .hero { background:linear-gradient(135deg,#1e3a5f,#7c3aed); color:#fff; border-radius:24px; padding:28px 22px;
+      box-shadow:var(--shadow-lg); position:relative; overflow:hidden; }
+    .hero h1 { font-size:24px; font-weight:900; margin-bottom:4px; position:relative; }
+    .hero .sub { opacity:.85; font-size:13px; position:relative; }
+    .section-title { font-size:18px; font-weight:900; margin:28px 0 14px; display:flex; align-items:center; gap:8px; }
+    .section-title .dot { width:8px; height:8px; border-radius:50%; background:var(--primary); }
+    .scenario-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .scenario-card { background:var(--card); border:2px solid var(--border); border-radius:14px; padding:12px 8px;
+      text-align:center; cursor:pointer; transition:.2s; }
+    .scenario-card:hover { border-color:#bfdbfe; transform:translateY(-2px); box-shadow:var(--shadow); }
+    .scenario-card.active { border-color:var(--purple); background:#f3e8ff; }
+    .scenario-card .emoji { font-size:24px; margin-bottom:4px; }
+    .scenario-card .name { font-size:13px; font-weight:800; }
+    .input-box { background:var(--card); border-radius:16px; padding:16px; box-shadow:var(--shadow); margin-top:12px; }
+    .input-box input { width:100%; border:1px solid var(--border); border-radius:12px; padding:12px 14px;
+      font-size:15px; outline:none; }
+    .input-box input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+    .run-btn { width:100%; border:none; background:linear-gradient(135deg,var(--purple),#6d28d9); color:#fff;
+      padding:14px; border-radius:14px; font-size:16px; font-weight:800; cursor:pointer; margin-top:12px;
+      box-shadow:0 4px 16px rgba(139,92,246,.3); }
+    .run-btn:disabled { opacity:.6; cursor:not-allowed; }
+    .loading { display:none; text-align:center; padding:40px 20px; }
+    .loading.active { display:block; }
+    .spinner { width:48px; height:48px; border:4px solid rgba(139,92,246,.15); border-top-color:var(--purple);
+      border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 16px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .result { display:none; }
+    .result.active { display:block; animation:fadeIn .5s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+    .card { background:var(--card); border-radius:20px; padding:20px; box-shadow:var(--shadow); margin-bottom:12px; }
+    .card h3 { font-size:16px; margin-bottom:10px; }
+    .script-step { display:flex; gap:10px; margin:10px 0; padding:12px; background:#f8fafc; border-radius:12px; }
+    .step-num { width:26px; height:26px; border-radius:50%; background:var(--purple); color:#fff;
+      text-align:center; line-height:26px; font-weight:800; font-size:12px; flex-shrink:0; }
+    .step-body { font-size:13px; line-height:1.7; }
+    .compliance-badge { display:inline-block; padding:4px 12px; border-radius:999px; font-size:12px; font-weight:800; margin-bottom:8px; }
+    .badge-red { background:#fee2e2; color:#991b1b; }
+    .badge-orange { background:#fed7aa; color:#9a3412; }
+    .badge-yellow { background:#fef3c7; color:#92400e; }
+    .faq-item { padding:12px 0; border-bottom:1px solid var(--border); }
+    .faq-item:last-child { border-bottom:none; }
+    .faq-q { font-weight:700; font-size:14px; margin-bottom:4px; }
+    .faq-a { font-size:13px; color:var(--muted); line-height:1.7; }
+    .back-home { display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--primary);
+      text-decoration:none; font-size:14px; font-weight:700; }
+    @media(max-width:520px){ .scenario-grid{grid-template-columns:repeat(2,1fr);} }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>🤝 代理人销售助手</h1>
+    <div class="sub">保险业 · 培训材料 · 沟通脚本 · 合规提示 · 产品FAQ</div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>选择场景</div>
+  <div class="scenario-grid" id="scenarioGrid">
+    <div class="scenario-card active" data-scenario="training" onclick="selectScenario(this)">
+      <div class="emoji">📚</div><div class="name">培训材料</div>
+    </div>
+    <div class="scenario-card" data-scenario="communication" onclick="selectScenario(this)">
+      <div class="emoji">🗣️</div><div class="name">沟通脚本</div>
+    </div>
+    <div class="scenario-card" data-scenario="product" onclick="selectScenario(this)">
+      <div class="emoji">📦</div><div class="name">产品知识</div>
+    </div>
+    <div class="scenario-card" data-scenario="compliance" onclick="selectScenario(this)">
+      <div class="emoji">⚠️</div><div class="name">合规提示</div>
+    </div>
+    <div class="scenario-card" data-scenario="objection" onclick="selectScenario(this)">
+      <div class="emoji">🛡️</div><div class="name">异议处理</div>
+    </div>
+    <div class="scenario-card" data-scenario="faq" onclick="selectScenario(this)">
+      <div class="emoji">❓</div><div class="name">通用FAQ</div>
+    </div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>输入关键词</div>
+  <div class="input-box">
+    <input type="text" id="queryInput" placeholder="如：健康告知注意事项 / 客户说保险是骗人的 / 返佣" value="">
+    <button class="run-btn" id="runBtn" onclick="generateResponse()">🔍 查询支持</button>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>AI正在匹配知识库并生成应答...</p>
+  </div>
+
+  <div class="result" id="result">
+    <div class="section-title"><span class="dot"></span>查询结果</div>
+    <div id="resultContent"></div>
+    <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  let selectedScenario = 'training';
+  function selectScenario(el){
+    document.querySelectorAll('.scenario-card').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    selectedScenario = el.dataset.scenario;
+  }
+  window.selectScenario = selectScenario;
+
+  function cyrb128(str){
+    let h1=1779033703,h2=3144134277,h3=1013904242,h4=2773480762;
+    for(let i=0,k;i<str.length;i++){
+      k=str.charCodeAt(i);
+      h1=h2^Math.imul(h1^k,597399067);
+      h2=h3^Math.imul(h2^k,2869860233);
+      h3=h4^Math.imul(h3^k,951274213);
+      h4=h1^Math.imul(h4^k,2716044179);
+    }
+    h1=Math.imul(h3^(h1>>>18),597399067);
+    h2=Math.imul(h4^(h2>>>22),2869860233);
+    h3=Math.imul(h1^(h3>>>17),951274213);
+    h4=Math.imul(h2^(h4>>>19),2716044179);
+    return [(h1^h2^h3^h4)>>>0,(h2^h1)>>>0,(h3^h1)>>>0,(h4^h1)>>>0];
+  }
+  function sfc32(a,b,c,d){
+    return function(){
+      a>>>=0;b>>>=0;c>>>=0;d>>>=0;
+      let t=(a+b)|0;
+      a=b^b>>>9;
+      b=c+(c<<3)|0;
+      c=(c<<21)|(c>>>11);
+      d=d+1|0;
+      t=t+d|0;
+      c=c+t|0;
+      return (t>>>0)/4294967296;
+    };
+  }
+  function createRng(seed){ const s=cyrb128(seed); return sfc32(s[0],s[1],s[2],s[3]); }
+
+  const knowledge = {
+    training: {
+      title:'培训材料：KYC面谈技巧',
+      content:`KYC（Know Your Customer）是保险销售的基础。\n\n**面谈四步法：**\n1. 破冰建立信任（5-10分钟）\n2. 需求挖掘（SPIN提问法）\n3. 方案呈现（先讲理念，再讲产品）\n4. 促成与异议处理`,
+      points:['SPIN提问法','先理念后产品','二选一促单'],
+      compliance:['不得夸大收益','不得证毁同业','必须录音录像']
+    },
+    communication: {
+      title:'沟通脚本：客户说"保险是骗人的"',
+      opening:'我完全理解您的顾虑。确实有一些人对保险有不好的印象。',
+      probing:['您是不是身边有人理赔不顺利？','还是对保险代理人有些不愉快的经历？'],
+      presentation:`保险本身是法律保障的金融工具，理赔依据的是合同条款。\n\n理赔纠纷的主要原因：\n1. 投保时未如实告知健康状况（80%纠纷来源于此）\n2. 对保险责任有误解\n3. 未达到理赔标凅`,
+      closing:'保险不是骗人的，骗人是那些不专业的销售行为。我们可以把您关心的条款一条一条解释清楚。'
+    },
+    product: {
+      title:'产品知识：重疾险',
+      highlights:['确诊即赔','一次性给付','弥补收入损失','覆盖康复费用'],
+      targets:['家庭经济支柱','有房贷人群','996上班族'],
+      objections:{'理赔难':'重疾险确诊即赔，合同条款明确，我司理赔时效行业领先（平均2.3天）','保费贵':'重疾险越早买越便宜，30岁买50万保额年缴仅8000左右，50岁买要翻倍'},
+      compliance:['不得承诺理赔结果','不得夸大疾病定义范围','必须说明等待期']
+    },
+    compliance: {
+      title:'合规警示：返佣',
+      level:'严重违规',
+      law:'《保险法》第116条、第131条',
+      consequence:'罚款（最高30万）、吊销执照、行业禁入',
+      correct:'用专业服务价值赢得客户，不承诺任何合同外利益',
+      script:'我们的服务是专业咨询和长期陪伴，而不是一次性交易。返佣是违法的，我不能做'
+    },
+    objection: {
+      title:'异议处理：客户说"考虑考虑"',
+      opening:'当然，买保险是重要决定，确实需要考虑。',
+      probing:['您主要考虑的是哪方面？是产品、公司，还是保费？','您大概想考虑多久？我可以帮您准备对比材料'],
+      presentation:`建议您考虑这3个问题：\n1. 您担心的风险是什么？\n2. 如果不配置保险，您现在的方案是什么？\n3. 考虑的这段时间内，万一发生风险，家庭能否承受？`,
+      closing:'我给您准备一份对比方案，您周末前给我答复就好，不急。'
+    },
+    faq: {
+      title:'通用FAQ',
+      items:[
+        {q:'犹豫期是什么？',a:'犹豫期是投保后15天内，可以无条件退保，全额退还保费（仅扣10元工本费）。'},
+        {q:'宽限期是什么？',a:'宽限期是缴费日之后60天，宽限期内保障仍然有效，但出险需补缴保费。'},
+        {q:'等待期是什么？',a:'等待期内非意外出险，保险公司不赔。重疾通常90-180天，医疗30-90天。'}
+      ]
+    }
+  };
+
+  function generateResponse(){
+    const query = document.getElementById('queryInput').value.trim() || selectedScenario;
+    document.getElementById('loading').classList.add('active');
+    document.getElementById('result').classList.remove('active');
+    document.getElementById('runBtn').disabled = true;
+    setTimeout(()=>{
+      const seed = selectedScenario + '_' + query;
+      const rng = createRng(seed);
+      const data = knowledge[selectedScenario];
+      let html = '';
+
+      if(selectedScenario === 'training'){
+        html = `
+          <div class="card">
+            <h3>📚 ${data.title}</h3>
+            <div style="font-size:14px;line-height:1.8;white-space:pre-wrap;margin-bottom:12px;">${data.content}</div>
+            <div style="font-size:13px;color:var(--muted);"><strong>要点：</strong>${data.points.join(' · ')}</div>
+            <div style="margin-top:10px;font-size:12px;color:#991b1b;"><strong>合规提醒：</strong>${data.compliance.join(' · ')}</div>
+          </div>`;
+      } else if(selectedScenario === 'communication' || selectedScenario === 'objection'){
+        html = `
+          <div class="card">
+            <h3>🗣️ ${data.title}</h3>
+            <div class="script-step"><div class="step-num">1</div><div class="step-body"><strong>开场：</strong>${data.opening}</div></div>
+            <div class="script-step"><div class="step-num">2</div><div class="step-body"><strong>探询：</strong><br>${data.probing.map(p=>'• '+p).join('<br>')}</div></div>
+            <div class="script-step"><div class="step-num">3</div><div class="step-body"><strong>呈现：</strong><br>${data.presentation.replace(/\n/g,'<br>')}</div></div>
+            <div class="script-step"><div class="step-num">4</div><div class="step-body"><strong>收尾：</strong>${data.closing}</div></div>
+          </div>`;
+      } else if(selectedScenario === 'product'){
+        html = `
+          <div class="card">
+            <h3>📦 ${data.title}</h3>
+            <div style="margin-bottom:10px;"><strong>核心卖点：</strong> ${data.highlights.join(' · ')}</div>
+            <div style="margin-bottom:10px;"><strong>目标客群：</strong> ${data.targets.join(' · ')}</div>
+            <div style="margin-bottom:10px;"><strong>异议处理：</strong></div>
+            ${Object.entries(data.objections).map(([k,v])=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><strong>${k}：</strong>${v}</div>`).join('')}
+            <div style="margin-top:10px;font-size:12px;color:#991b1b;"><strong>合规要点：</strong> ${data.compliance.join(' · ')}</div>
+          </div>`;
+      } else if(selectedScenario === 'compliance'){
+        html = `
+          <div class="card">
+            <h3>⚠️ ${data.title}</h3>
+            <div class="compliance-badge badge-red">风险等级：${data.level}</div>
+            <div style="font-size:13px;line-height:1.8;">
+              <div><strong>法规依据：</strong>${data.law}</div>
+              <div><strong>后果：</strong>${data.consequence}</div>
+              <div><strong>正确做法：</strong>${data.correct}</div>
+              <div style="margin-top:8px;padding:10px;background:#f8fafc;border-radius:8px;"><strong>参考话术：</strong><br>${data.script}</div>
+            </div>
+          </div>`;
+      } else {
+        html = `
+          <div class="card">
+            <h3>❓ ${data.title}</h3>
+            ${data.items.map(item=>`<div class="faq-item"><div class="faq-q">${item.q}</div><div class="faq-a">${item.a}</div></div>`).join('')}
+          </div>`;
+      }
+
+      document.getElementById('resultContent').innerHTML = html;
+      document.getElementById('loading').classList.remove('active');
+      document.getElementById('result').classList.add('active');
+      document.getElementById('runBtn').disabled = false;
+    },800);
+  }
+  window.generateResponse = generateResponse;
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const radarContainer = document.querySelector('.risk-radar, #risk-radar, [data-type="risk"]');
+    if (radarContainer) {
+        const result = await LongmaAPI.risk.getRadar('示例企业');
+        if (result.success && result.data) {
+            renderRiskRadar(radarContainer, result.data);
+        }
+    }
+});
+
+function renderRiskRadar(container, data) {
+    let html = `<div class="api-risk-summary">
+        <h3>${data.enterprise} - 综合评分: ${data.overall_score}</h3>
+        <div class="api-dimensions">`;
+    data.dimensions.forEach(dim => {
+        const levelClass = dim.level === 'low' ? 'safe' : dim.level === 'medium' ? 'warning' : 'danger';
+        html += `<div class="api-dim-item ${levelClass}">
+            <span class="name">${dim.name}</span>
+            <span class="score">${dim.score}</span>
+            <span class="level">${dim.level}</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    if (data.alerts && data.alerts.length > 0) {
+        html += '<div class="api-alerts"><h4>预警信息</h4>';
+        data.alerts.forEach(alert => {
+            html += `<div class="api-alert ${alert.type}">${alert.message}</div>`;
+        });
+        html += '</div>';
+    }
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
