@@ -1,0 +1,1497 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>风险评估对话 | FinAIAI</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI风险评估对话助手，企业风险+信用评级+反欺诈+合规检查，智能对话评估风险。">
+    <meta name="keywords" content="风险评估,企业风险,信用评级,反欺诈,合规检查,风险对话,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/risk-assessment-dialogue">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/risk-assessment-dialogue">
+    <meta property="og:title" content="风险评估对话 | FinAIAI">
+    <meta property="og:description" content="企业风险+信用评级+反欺诈+合规检查，智能对话评估风险。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="风险评估对话 | FinAIAI">
+    <meta name="twitter:description" content="企业风险+信用评级+反欺诈+合规检查，智能对话评估风险。">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "风险评估对话 | FinAIAI",
+        "description": "FinAIAI风险评估对话助手，企业风险+信用评级+反欺诈+合规检查，智能对话评估风险。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CNY"},
+        "provider": {"@type": "Organization", "name": "FinAIAI", "url": "https://www.longma-ai.com"}
+    }
+    </script>
+
+    <!-- Performance Hints -->
+    <link rel="preconnect" href="//cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <meta name="theme-color" content="#1E40AF">
+
+    <style>
+        :root {
+            --primary: #1E40AF;
+            --primary-light: #3B82F6;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --purple: #7C3AED;
+            --cyan: #06B6D4;
+            --bg: #F1F5F9;
+            --card: #FFFFFF;
+            --text: #0F172A;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 18px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.07);
+            --bot-bg: #EEF2FF;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1E3A8A, #1E40AF);
+            color: white;
+            padding: 18px 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 24px rgba(30,64,175,0.3);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .header-avatar {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .header-info h1 {
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        .header-info .sub {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .header-status {
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ADE80;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 6px #4ADE80;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .header-status .status-text {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        /* Chat container */
+        .chat-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 12px 16px 100px;
+        }
+
+        /* Risk type pills */
+        .risk-types {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 10px 0 4px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .risk-types::-webkit-scrollbar { display: none; }
+
+        .risk-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            border: 1.5px solid var(--border);
+            background: var(--card);
+            color: var(--muted);
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .risk-pill:hover, .risk-pill.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #EEF2FF;
+        }
+
+        /* Message bubbles */
+        .msg {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+            animation: fadeInUp 0.25s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .msg.user { flex-direction: row-reverse; }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            background: var(--bot-bg);
+        }
+
+        .msg.user .avatar {
+            background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
+            font-size: 16px;
+        }
+
+        .bubble {
+            max-width: 78%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 15px;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+
+        .msg.bot .bubble {
+            background: var(--bot-bg);
+            border-bottom-left-radius: 6px;
+        }
+
+        .msg.user .bubble {
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 6px;
+        }
+
+        /* Intent tag */
+        .intent-tag {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .msg.user .intent-tag { display: none; }
+
+        /* Risk cards */
+        .risk-card {
+            background: var(--card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-top: 10px;
+        }
+
+        .risk-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .risk-card-header .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .risk-card-header .info .title {
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .risk-card-header .info .sub {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* Risk score bar */
+        .risk-score-bar {
+            padding: 16px;
+        }
+
+        .risk-score-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .risk-score-label {
+            font-size: 13px;
+            color: var(--muted);
+            width: 60px;
+            flex-shrink: 0;
+        }
+
+        .risk-bar-bg {
+            flex: 1;
+            height: 10px;
+            background: var(--bg);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .risk-bar-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.6s ease;
+        }
+
+        .risk-score-value {
+            font-size: 14px;
+            font-weight: 800;
+            width: 40px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        /* Risk dimension pills */
+        .risk-dims {
+            padding: 12px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .dim-pill {
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .dim-high { background: #FEE2E2; color: #991B1B; }
+        .dim-mid { background: #FEF3C7; color: #92400E; }
+        .dim-low { background: #D1FAE5; color: #065F46; }
+
+        /* Risk list */
+        .risk-list {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .risk-list-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .risk-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 13px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .risk-item:last-child { border-bottom: none; }
+
+        .risk-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .risk-item-name { flex: 1; font-weight: 600; }
+        .risk-item-level { font-weight: 700; font-size: 12px; }
+
+        /* Credit rating card */
+        .credit-rating-card {
+            padding: 16px;
+            text-align: center;
+        }
+
+        .credit-big {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .credit-label {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .credit-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .credit-detail-cell {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 10px 6px;
+            text-align: center;
+        }
+
+        .credit-detail-cell .val {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .credit-detail-cell .lbl {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        /* Fraud alert card */
+        .fraud-card {
+            padding: 16px;
+        }
+
+        .fraud-score {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .fraud-big {
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        .fraud-label {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .fraud-signals {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .fraud-signal {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            padding: 8px 12px;
+            background: var(--bg);
+            border-radius: 10px;
+        }
+
+        .fraud-signal.warn { background: #FEF3C7; color: #92400E; }
+        .fraud-signal.danger { background: #FEE2E2; color: #991B1B; }
+        .fraud-signal.ok { background: #D1FAE5; color: #065F46; }
+
+        /* Compliance check */
+        .compliance-card {
+            padding: 0;
+        }
+
+        .compliance-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .compliance-item:last-child { border-bottom: none; }
+        .compliance-check { font-size: 18px; flex-shrink: 0; }
+
+        /* Quick buttons */
+        .quick-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 10px 16px;
+            max-width: 720px;
+            margin: 0 auto;
+            position: sticky;
+            bottom: 80px;
+            z-index: 50;
+            background: linear-gradient(transparent, var(--bg) 30%);
+            pointer-events: none;
+        }
+
+        .quick-btns.show { pointer-events: auto; }
+
+        .qbtn {
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1.5px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .qbtn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #EEF2FF;
+        }
+
+        .qbtn:active { transform: scale(0.96); }
+
+        /* Input box */
+        .input-box {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 16px 20px;
+            background: var(--bg);
+            z-index: 90;
+            border-top: 1px solid var(--border);
+        }
+
+        .input-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .input-field {
+            flex: 1;
+            border: 1.5px solid var(--border);
+            border-radius: 24px;
+            padding: 12px 18px;
+            font-size: 15px;
+            outline: none;
+            background: var(--card);
+            transition: border-color 0.2s;
+            font-family: inherit;
+            min-height: 48px;
+            resize: none;
+            line-height: 1.5;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .input-field:focus { border-color: var(--primary); }
+
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.15s, opacity 0.15s;
+            box-shadow: 0 4px 12px rgba(30,64,175,0.3);
+        }
+
+        .send-btn:active { transform: scale(0.93); opacity: 0.8; }
+        .send-btn:disabled { background: var(--muted); box-shadow: none; cursor: not-allowed; }
+
+        /* Back link */
+        .back-home {
+            display: block;
+            text-align: center;
+            padding: 16px;
+            font-size: 13px;
+            color: var(--muted);
+            text-decoration: none;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+
+        /* Mode tabs */
+        .mode-tab { transition: all 0.2s; }
+
+        /* Quiz styles */
+        .quiz-card {
+            background: #FFFFFF; border-radius: 18px;
+            padding: 20px; margin: 16px auto; max-width: 720px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08),0 4px 12px rgba(0,0,0,0.05);
+        }
+        .quiz-question { font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 16px; line-height: 1.6; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 16px; border-radius: 14px;
+            border: 1.5px solid #E2E8F0; background: #FFFFFF;
+            cursor: pointer; transition: all 0.15s; font-size: 14px;
+        }
+        .quiz-option:hover { border-color: #2563EB; background: #EEF2FF; }
+        .quiz-option.selected { border-color: #2563EB; background: #EEF2FF; }
+        .quiz-option .opt-letter {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: #F1F5F9; display: flex; align-items: center;
+            justify-content: center; font-weight: 800; font-size: 13px; flex-shrink: 0; color: #64748B;
+        }
+        .quiz-option.selected .opt-letter { background: #2563EB; color: white; }
+        .quiz-option .opt-text { flex: 1; font-weight: 600; }
+        .quiz-option .opt-score { font-size: 12px; color: #64748B; }
+        .quiz-nav { display: flex; gap: 10px; margin-top: 16px; }
+        .quiz-nav .btn-prev {
+            flex: 1; padding: 14px; border: 1.5px solid #E2E8F0;
+            border-radius: 14px; background: white; font-weight: 700;
+            cursor: pointer; font-size: 14px; color: #64748B;
+        }
+        .quiz-nav .btn-prev:disabled { opacity: 0.4; cursor: not-allowed; }
+        .quiz-nav .btn-next {
+            flex: 2; padding: 14px; border: none; border-radius: 14px;
+            background: #2563EB; color: white; font-weight: 700;
+            cursor: pointer; font-size: 14px;
+        }
+        .quiz-nav .btn-next:disabled { background: #94A3B8; cursor: not-allowed; }
+
+        /* Result card */
+        .result-card {
+            background: #FFFFFF; border-radius: 18px;
+            padding: 20px; margin: 16px auto; max-width: 720px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08),0 4px 12px rgba(0,0,0,0.05);
+        }
+        .result-gauge { position: relative; width: 180px; height: 100px; margin: 0 auto 12px; }
+        .result-dim-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+        .result-dim-name { width: 70px; font-weight: 600; flex-shrink: 0; }
+        .result-dim-bar-bg { flex: 1; height: 8px; background: #F1F5F9; border-radius: 4px; overflow: hidden; }
+        .result-dim-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+        .result-dim-val { width: 40px; text-align: right; font-weight: 700; font-size: 12px; }
+        .result-product-tag {
+            display: inline-block; padding: 6px 14px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin: 4px 4px 4px 0;
+        }
+
+        /* Radar card */
+        .radar-card {
+            background: #FFFFFF; border-radius: 18px;
+            padding: 16px; margin: 12px auto; max-width: 720px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08),0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* Compare card */
+        .compare-card {
+            background: #FFFFFF; border-radius: 18px;
+            padding: 16px; margin: 12px auto; max-width: 720px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08),0 4px 12px rgba(0,0,0,0.05);
+        }
+        .compare-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+        .compare-name { width: 80px; font-weight: 700; flex-shrink: 0; }
+        .compare-bar-bg { flex: 1; height: 8px; background: #F1F5F9; border-radius: 4px; overflow: hidden; }
+        .compare-bar-fill { height: 100%; border-radius: 4px; }
+        .compare-val { width: 40px; text-align: right; font-weight: 700; font-size: 12px; }
+
+        /* Disclaimer */
+        .disclaimer {
+            text-align: center;
+            padding: 0 16px 16px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-inner">
+            <div class="header-avatar">🛡️</div>
+            <div class="header-info">
+                <h1>风险评估对话</h1>
+                <div class="sub">企业风险 · 信用评级 · 反欺诈 · 合规检查</div>
+            </div>
+            <div class="header-status">
+                <span class="online-dot"></span>
+                <span class="status-text">在线</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Risk type filter pills -->
+    <div style="max-width:720px;margin:0 auto;padding:0 16px;">
+        <!-- Mode Toggle -->
+        <div style="max-width:720px;margin:0 auto;padding:0 16px 12px;">
+            <div style="display:flex;background:#E2E8F0;border-radius:14px;padding:3px;gap:3px;">
+                <button class="mode-tab active" id="tabDialog" onclick="switchMode('dialog')" style="flex:1;padding:10px;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;background:white;color:#0F172A;box-shadow:0 2px 6px rgba(0,0,0,0.08);transition:all 0.2s;">💬 风险对话</button>
+                <button class="mode-tab" id="tabQuiz" onclick="switchMode('quiz')" style="flex:1;padding:10px;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;background:transparent;color:#64748B;transition:all 0.2s;">📋 风险测评</button>
+            </div>
+        </div>
+
+        <div class="risk-types" id="riskTypes">
+            <button class="risk-pill active" data-type="all">🌐 全部分类</button>
+            <button class="risk-pill" data-type="enterprise">🏢 企业风险</button>
+            <button class="risk-pill" data-type="credit">💳 信用评级</button>
+            <button class="risk-pill" data-type="fraud">🚨 反欺诈</button>
+            <button class="risk-pill" data-type="compliance">📋 合规检查</button>
+            <button class="risk-pill" data-type="financial">📊 财务诊断</button>
+            <button class="risk-pill" data-type="regulatory">⚖️ 监管政策</button>
+        </div>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizSection" style="display:none;">
+        <div style="background:linear-gradient(135deg,#0F172A,#1E3A5F);color:white;padding:16px 16px 20px;border-radius:0 0 24px 24px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(15,23,42,0.2);">
+            <div style="display:flex;gap:4px;margin-bottom:10px;" id="quizProgress"></div>
+            <div style="font-size:12px;opacity:0.8;margin-bottom:4px;" id="quizLabel">风险承受偏好测评</div>
+            <div style="font-size:11px;opacity:0.6;" id="quizQNum">第 1/5 题</div>
+        </div>
+
+        <div class="quiz-card" id="quizCard">
+            <div class="quiz-question" id="quizQuestion"></div>
+            <div class="quiz-options" id="quizOptions"></div>
+            <div class="quiz-nav">
+                <button class="btn-prev" id="quizPrev" onclick="quizPrev()" disabled>← 上一步</button>
+                <button class="btn-next" id="quizNext" onclick="quizNext()">下一步 →</button>
+            </div>
+        </div>
+
+        <div class="result-card" id="quizResult" style="display:none;">
+            <div style="text-align:center;margin-bottom:16px;">
+                <div style="position:relative;width:180px;height:100px;margin:0 auto 12px;">
+                    <canvas id="gaugeCanvas"></canvas>
+                </div>
+                <div style="font-size:26px;font-weight:900;" id="resultLevel"></div>
+                <div style="font-size:13px;color:#64748B;margin-top:4px;" id="resultDesc"></div>
+            </div>
+            <div style="margin-top:16px;" id="resultDimensions"></div>
+            <div style="margin-top:16px;" id="resultProducts"></div>
+            <div style="margin-top:16px;padding:12px;background:#F8FAFC;border-radius:12px;font-size:13px;color:#64748B;text-align:center;">
+                测评结果仅供参考，不构成投资建议<br>
+                <span style="color:#2563EB;cursor:pointer;font-weight:700;" onclick="resetQuiz()">重新测评</span>
+            </div>
+        </div>
+
+        <div class="radar-card" id="radarCard" style="display:none;">
+            <div style="font-size:14px;font-weight:700;margin-bottom:8px;">📡 风险维度雷达图</div>
+            <div style="position:relative;height:220px;">
+                <canvas id="radarCanvas"></canvas>
+            </div>
+        </div>
+
+        <div class="compare-card" id="compareCard" style="display:none;">
+            <div style="font-size:14px;font-weight:700;margin-bottom:12px;">🏢 企业风险对比</div>
+            <div id="compareContent"></div>
+        </div>
+    </div>
+
+    <!-- Chat -->
+    <div class="chat-container" id="chatBox">
+        <div class="msg bot">
+            <div class="avatar">🛡️</div>
+            <div class="bubble">
+                <div class="intent-tag">🛡️ 风险助手</div>
+                您好！我是FinAIAI风险评估助手。请描述您的风险评估场景，我可以帮您：
+                <br>• 分析企业风险等级与评分
+                <br>• 查询信用评级与贷款额度
+                <br>• 检测交易欺诈风险
+                <br>• 检查合规问题
+                <br>• 诊断财务报表健康度
+                <br>
+                <br>请问您需要哪类风险评估？
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick buttons -->
+    <div class="quick-btns show" id="quickBtns">
+        <button class="qbtn" onclick="sendQuick('评估比亚迪的风险')">🏢 评估企业风险</button>
+        <button class="qbtn" onclick="sendQuick('查询宁德时代信用评级')">💳 信用评级查询</button>
+        <button class="qbtn" onclick="sendQuick('检测这笔交易是否欺诈')">🚨 反欺诈检测</button>
+        <button class="qbtn" onclick="sendQuick('检查贷款合规性')">📋 合规检查</button>
+        <button class="qbtn" onclick="sendQuick('诊断财务报表健康度')">📊 财务诊断</button>
+        <button class="qbtn" onclick="sendQuick('查询最新监管政策')">⚖️ 监管政策</button>
+    </div>
+
+    <!-- Input -->
+    <div class="input-box">
+        <div class="input-inner">
+            <textarea class="input-field" id="msgInput" placeholder="描述您的风险评估场景..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"></textarea>
+            <button class="send-btn" id="sendBtn" onclick="sendMsg()">➤</button>
+        </div>
+    </div>
+
+    <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+    <div class="disclaimer">评估结果仅供参考，不构成投资建议</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <script src="../chart-manager.js" defer></script>
+    <script>
+    (function() {
+        'use strict';
+
+        // ============ Risk Knowledge Base ============
+        const RISK_KB = {
+            // Enterprise risk data
+            enterprises: {
+                "比亚迪": {
+                    score: 72, rating: "AA",
+                    dimensions: {市场: 60, 财务: 85, 运营: 75, 法律: 80, 供应链: 65},
+                    risks: [
+                        {name: "市场竞争风险", level: "中", color: "#F59E0B"},
+                        {name: "原材料价格波动", level: "中", color: "#F59E0B"},
+                        {name: "技术迭代风险", level: "低", color: "#10B981"},
+                        {name: "政策变化风险", level: "低", color: "#10B981"},
+                    ],
+                    suggestion: "建议关注原材料价格波动，加强供应链多元化布局"
+                },
+                "宁德时代": {
+                    score: 68, rating: "AA-",
+                    dimensions: {市场: 55, 财务: 78, 运营: 72, 法律: 82, 供应链: 50},
+                    risks: [
+                        {name: "电池产能过剩", level: "高", color: "#EF4444"},
+                        {name: "客户集中度高", level: "高", color: "#EF4444"},
+                        {name: "技术替代风险", level: "中", color: "#F59E0B"},
+                        {name: "海外政策风险", level: "中", color: "#F59E0B"},
+                    ],
+                    suggestion: "建议分散客户结构，加大海外市场本土化布局"
+                },
+                "某科技公司": {
+                    score: 45, rating: "BBB",
+                    dimensions: {市场: 40, 财务: 35, 运营: 50, 法律: 60, 供应链: 45},
+                    risks: [
+                        {name: "经营历史短", level: "高", color: "#EF4444"},
+                        {name: "财务亏损", level: "高", color: "#EF4444"},
+                        {name: "技术壁垒低", level: "中", color: "#F59E0B"},
+                        {name: "人才流失风险", level: "中", color: "#F59E0B"},
+                    ],
+                    suggestion: "建议要求提供担保或抵押，缩短授信期限"
+                }
+            },
+
+            // Credit ratings
+            creditRatings: {
+                "AAA": {desc: "偿债能力极强，风险极低", color: "#065F46"},
+                "AA":  {desc: "偿债能力很强，风险很低", color: "#059669"},
+                "AA-": {desc: "偿债能力很强，风险较低", color: "#10B981"},
+                "A":   {desc: "偿债能力较强，风险较低", color: "#34D399"},
+                "BBB": {desc: "偿债能力良好，风险中等", color: "#F59E0B"},
+                "BB":  {desc: "偿债能力一般，存在投机性", color: "#F97316"},
+                "B":   {desc: "偿债能力较弱，高投机性", color: "#EF4444"},
+                "CCC": {desc: "偿债能力极弱，高风险", color: "#DC2626"},
+            },
+
+            // Fraud detection rules
+            fraudRules: [
+                {pattern: "金额异常", desc: "单笔金额超过日常均值10倍以上", risk: "高"},
+                {pattern: "时间异常", desc: "非营业时间（22:00-06:00）大额交易", risk: "高"},
+                {pattern: "地点异常", desc: "短时间跨地区交易（间隔<30min）", risk: "高"},
+                {pattern: "频率异常", desc: "账户日交易频次超过平常5倍", risk: "中"},
+                {pattern: "对手方异常", desc: "与高风险名单客户交易", risk: "高"},
+                {pattern: "结构化交易", desc: "刻意拆分金额规避报告阈值", risk: "高"},
+                {pattern: "反向交易", desc: "资金快进快出，账户不留余额", risk: "中"},
+                {pattern: "身份核实异常", desc: "人脸识别/手机号验证失败", risk: "中"},
+            ],
+
+            // Compliance check items
+            complianceItems: [
+                {item: "贷款用途合规", desc: "资金用途符合贷款合同约定", ok: true},
+                {item: "抵押物状态", desc: "抵押物未被重复抵押或查封", ok: true},
+                {item: "担保人资质", desc: "担保人符合监管规定的资质要求", ok: true},
+                {item: "利率水平", desc: "贷款利率不超过LPR4倍上限", ok: true},
+                {item: "信息披露", desc: "向借款人充分披露费用和风险", ok: false, note: "需补充风险揭示书"},
+                {item: "贷后管理", desc: "按规定进行贷后检查并留存记录", ok: true},
+            ],
+
+            // Regulatory policies
+            regulations: [
+                {title: "《商业银行互联网贷款管理暂行办法》", issuer: "银保监会", date: "2021-02", key: "额度管理、风险管控、信息披露"},
+                {title: "《商业银行金融资产风险分类办法》", issuer: "银保监会", date: "2023-02", key: "五级分类→十六级分类、重组资产分类"},
+                {title: "《个人贷款管理暂行办法》", issuer: "银保监会", date: "2020-05", key: "受托支付、合同面签、用途追踪"},
+                {title: "《中华人民共和国反洗钱法》", issuer: "全国人大", date: "2006", key: "客户身份识别、大额可疑报告、保存记录"},
+                {title: "《贷款通则》", issuer: "央行", date: "1996", key: "贷款条件、利率管理、贷款展期"},
+            ]
+        };
+
+        // ============ Intent Matching ============
+        function matchIntent(text) {
+            text = text.toLowerCase();
+
+            // Enterprise risk
+            if (/评估|分析|查询|查看|企业风险|这家公司|风险等级/.test(text) &&
+                /比亚迪|宁德|某科技|公司|企业/.test(text)) {
+                return 'enterprise';
+            }
+            if (/信用评级|信用评分|评级|credit rating/.test(text)) {
+                return 'credit';
+            }
+            // Fraud
+            if (/欺诈|诈骗|可疑|交易风险|fraud|诈骗/.test(text)) {
+                return 'fraud';
+            }
+            // Compliance
+            if (/合规|检查|合规性|合规检查/.test(text)) {
+                return 'compliance';
+            }
+            // Financial diagnosis
+            if (/财务|诊断|报表|健康|盈利|负债|现金/.test(text)) {
+                return 'financial';
+            }
+            // Regulatory
+            if (/监管|政策|法规|条例|暂行办法|反洗钱|风险分类/.test(text)) {
+                return 'regulatory';
+            }
+            // Default
+            if (/贷款|借|申请|授信/.test(text)) {
+                return 'loan';
+            }
+            return 'unknown';
+        }
+
+        // ============ Build Risk Cards ============
+        function buildEnterpriseCard(name, data) {
+            const total = data.score;
+            const barColor = total >= 70 ? '#10B981' : total >= 50 ? '#F59E0B' : '#EF4444';
+            const ratingColor = RISK_KB.creditRatings[data.rating] ?
+                RISK_KB.creditRatings[data.rating].color : '#64748B';
+
+            let dimsHtml = '';
+            for (const [k, v] of Object.entries(data.dimensions)) {
+                const color = v >= 70 ? '#10B981' : v >= 50 ? '#F59E0B' : '#EF4444';
+                dimsHtml += `<span class="dim-pill dim-${v>=70?'low':v>=50?'mid':'high'}" title="${k}">${k}:${v}</span>`;
+            }
+
+            let risksHtml = '';
+            data.risks.forEach(function(r) {
+                const dotColor = r.level === '高' ? '#EF4444' : r.level === '中' ? '#F59E0B' : '#10B981';
+                risksHtml += `<div class="risk-item">
+                    <span class="risk-dot" style="background:${dotColor}"></span>
+                    <span class="risk-item-name">${r.name}</span>
+                    <span class="risk-item-level" style="color:${dotColor}">${r.level}风险</span>
+                </div>`;
+            });
+
+            return `<div class="risk-card">
+                <div class="risk-card-header">
+                    <div class="icon" style="background:#DBEAFE;">🏢</div>
+                    <div class="info">
+                        <div class="title">${name}</div>
+                        <div class="sub">综合风险评估报告</div>
+                    </div>
+                    <div style="margin-left:auto;text-align:right;">
+                        <div style="font-size:22px;font-weight:900;color:${ratingColor};">${data.rating}</div>
+                        <div style="font-size:11px;color:var(--muted);">信用评级</div>
+                    </div>
+                </div>
+                <div class="risk-score-bar">
+                    <div class="risk-score-row">
+                        <span class="risk-score-label">综合评分</span>
+                        <div class="risk-bar-bg"><div class="risk-bar-fill" style="width:${total}%;background:${barColor}"></div></div>
+                        <span class="risk-score-value" style="color:${barColor}">${total}</span>
+                    </div>
+                    <div class="risk-dims">${dimsHtml}</div>
+                </div>
+                <div class="risk-list">
+                    <div class="risk-list-title">⚠️ 风险明细</div>
+                    ${risksHtml}
+                </div>
+                <div style="padding:12px 16px;font-size:13px;color:var(--muted);background:#F8FAFC;">
+                    💡 建议：${data.suggestion}
+                </div>
+            </div>`;
+        }
+
+        function buildCreditCard(name, rating, data) {
+            const info = RISK_KB.creditRatings[rating] || {};
+            const color = info.color || '#64748B';
+            const limits = {
+                "AAA": {quota: "无上限", term: "无限制", rate: "LPR-50BP起"},
+                "AA":  {quota: "5000万", term: "3年", rate: "LPR-20BP起"},
+                "AA-": {quota: "3000万", term: "2年", rate: "LPR-10BP起"},
+                "A":   {quota: "1000万", term: "1年", rate: "LPR+50BP起"},
+                "BBB": {quota: "500万", term: "1年", rate: "LPR+100BP起"},
+                "BB":  {quota: "200万", term: "6个月", rate: "LPR+200BP起"},
+                "B":   {quota: "50万", term: "3个月", rate: "LPR+300BP起"},
+                "CCC": {quota: "拒绝", term: "—", rate: "—"},
+            };
+            const limit = limits[rating] || {quota: "待评估", term: "待评估", rate: "待评估"};
+
+            return `<div class="risk-card">
+                <div class="risk-card-header">
+                    <div class="icon" style="background:#FEF3C7;">💳</div>
+                    <div class="info">
+                        <div class="title">${name} · 信用评级</div>
+                        <div class="sub">银行授信评估报告</div>
+                    </div>
+                </div>
+                <div class="credit-rating-card">
+                    <div class="credit-big" style="color:${color}">${rating}</div>
+                    <div class="credit-label">${info.desc || '评估中'}</div>
+                    <div class="credit-detail-grid">
+                        <div class="credit-detail-cell">
+                            <div class="val" style="color:${color}">${limit.quota}</div>
+                            <div class="lbl">授信额度</div>
+                        </div>
+                        <div class="credit-detail-cell">
+                            <div class="val">${limit.term}</div>
+                            <div class="lbl">最长期限</div>
+                        </div>
+                        <div class="credit-detail-cell">
+                            <div class="val">${limit.rate}</div>
+                            <div class="lbl">利率区间</div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function buildFraudCard() {
+            const signals = [
+                {text: "✅ 交易金额在正常范围内", type: "ok"},
+                {text: "⚠️ 交易时间符合营业时间", type: "ok"},
+                {text: "❌ 交易对手方在高风险名单中", type: "danger"},
+                {text: "⚠️ 资金快进快出特征明显", type: "warn"},
+            ];
+
+            let signalsHtml = signals.map(function(s) {
+                return `<div class="fraud-signal ${s.type}">${s.text}</div>`;
+            }).join('');
+
+            return `<div class="risk-card">
+                <div class="risk-card-header">
+                    <div class="icon" style="background:#FEE2E2;">🚨</div>
+                    <div class="info">
+                        <div class="title">反欺诈检测报告</div>
+                        <div class="sub">交易风险评估</div>
+                    </div>
+                    <div style="margin-left:auto;text-align:right;">
+                        <div style="font-size:22px;font-weight:900;color:#EF4444;">72</div>
+                        <div style="font-size:11px;color:var(--muted);">风险分</div>
+                    </div>
+                </div>
+                <div class="fraud-card">
+                    <div class="fraud-score">
+                        <div class="fraud-big" style="color:#EF4444">⚠️ 中风险</div>
+                        <div class="fraud-label">建议加强人工审核或要求补充材料</div>
+                    </div>
+                    <div class="risk-list-title">🔍 风险信号检测</div>
+                    <div class="fraud-signals">${signalsHtml}</div>
+                </div>
+                <div style="padding:12px 16px;font-size:13px;color:#92400E;background:#FEF3C7;">
+                    💡 建议：要求客户提供资金来源证明，增加电话核实环节
+                </div>
+            </div>`;
+        }
+
+        function buildComplianceCard() {
+            let itemsHtml = RISK_KB.complianceItems.map(function(item) {
+                const icon = item.ok ? '✅' : '❌';
+                const color = item.ok ? '#059669' : '#EF4444';
+                const note = item.note ? `<br><span style="font-size:12px;">📝 ${item.note}</span>` : '';
+                return `<div class="compliance-item">
+                    <span class="compliance-check" style="color:${color}">${icon}</span>
+                    <div style="flex:1">
+                        <div style="font-weight:600;">${item.item}</div>
+                        <div style="font-size:12px;color:var(--muted);">${item.desc}${note}</div>
+                    </div>
+                    <span style="font-size:12px;font-weight:700;color:${color};">${item.ok ? '通过' : '不通过'}</span>
+                </div>`;
+            }).join('');
+
+            const passCount = RISK_KB.complianceItems.filter(function(i) { return i.ok; }).length;
+            const total = RISK_KB.complianceItems.length;
+            const passRate = Math.round(passCount / total * 100);
+
+            return `<div class="risk-card">
+                <div class="risk-card-header">
+                    <div class="icon" style="background:#F3E8FF;">📋</div>
+                    <div class="info">
+                        <div class="title">贷款合规性检查</div>
+                        <div class="sub">监管合规审查报告</div>
+                    </div>
+                    <div style="margin-left:auto;text-align:right;">
+                        <div style="font-size:22px;font-weight:900;color:#10B981;">${passRate}%</div>
+                        <div style="font-size:11px;color:var(--muted);">合规率</div>
+                    </div>
+                </div>
+                <div class="compliance-card">${itemsHtml}</div>
+            </div>`;
+        }
+
+        function buildFinancialCard(name) {
+            const metrics = [
+                {label: "资产负债率", value: "58%", level: "中", levelColor: "#F59E0B"},
+                {label: "流动比率", value: "1.8", level: "良", levelColor: "#10B981"},
+                {label: "净利润率", value: "4.2%", level: "中", levelColor: "#F59E0B"},
+                {label: "经营现金流", value: "正值", level: "良", levelColor: "#10B981"},
+                {label: "应收账款周转", value: "偏慢", level: "关注", levelColor: "#EF4444"},
+                {label: "存货周转", value: "正常", level: "良", levelColor: "#10B981"},
+            ];
+
+            let metricsHtml = metrics.map(function(m) {
+                return `<div style="background:var(--bg);border-radius:10px;padding:12px;text-align:center;">
+                    <div style="font-size:18px;font-weight:800;">${m.value}</div>
+                    <div style="font-size:11px;color:var(--muted);">${m.label}</div>
+                    <div style="font-size:11px;font-weight:700;color:${m.levelColor};margin-top:2px;">${m.level}</div>
+                </div>`;
+            }).join('');
+
+            return `<div class="risk-card">
+                <div class="risk-card-header">
+                    <div class="icon" style="background:#D1FAE5;">📊</div>
+                    <div class="info">
+                        <div class="title">${name} · 财务健康诊断</div>
+                        <div class="sub">基于最新财务报表分析</div>
+                    </div>
+                </div>
+                <div style="padding:16px;">
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">${metricsHtml}</div>
+                    <div style="margin-top:14px;padding:12px;background:#F0FDF4;border-radius:12px;font-size:13px;color:#065F46;">
+                        💡 诊断结论：企业财务状况总体健康，流动性较好。建议关注应收账款回收和负债率控制。
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function buildRegulatoryCard() {
+            let regsHtml = RISK_KB.regulations.map(function(r) {
+                return `<div style="padding:12px 0;border-bottom:1px solid var(--border);">
+                    <div style="font-weight:700;font-size:14px;margin-bottom:4px;">📌 ${r.title}</div>
+                    <div style="font-size:12px;color:var(--muted);">
+                        🏛️ ${r.issuer} · ${r.date}
+                        <br>🔑 重点：${r.key}
+                    </div>
+                </div>`;
+            }).join('');
+
+            return `<div class="risk-card">
+                <div class="risk-card-header">
+                    <div class="icon" style="background:#E0E7FF;">⚖️</div>
+                    <div class="info">
+                        <div class="title">金融监管政策库</div>
+                        <div class="sub">2024-2026年重点法规一览</div>
+                    </div>
+                </div>
+                <div style="padding:16px;">${regsHtml}</div>
+            </div>`;
+        }
+
+        // ============ Message Display ============
+        var chatBox = document.getElementById('chatBox');
+
+        function addMsg(html, isUser) {
+            var div = document.createElement('div');
+            div.className = 'msg ' + (isUser ? 'user' : 'bot');
+            div.innerHTML = '<div class="avatar">' + (isUser ? '👤' : '🛡️') + '</div>' +
+                '<div class="bubble">' + html + '</div>';
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function addCard(cardHtml) {
+            var div = document.createElement('div');
+            div.className = 'msg bot';
+            div.innerHTML = '<div class="avatar">🛡️</div>' +
+                '<div class="bubble" style="padding:0;max-width:92%;overflow:hidden;"></div>';
+            div.querySelector('.bubble').appendChild(createEl(cardHtml));
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function createEl(html) {
+            var template = document.createElement('div');
+            template.innerHTML = html;
+            return template.firstElementChild;
+        }
+
+        // ============ Process Query ============
+        function processQuery(text) {
+            var intent = matchIntent(text);
+
+            // Extract company name
+            var enterpriseNames = Object.keys(RISK_KB.enterprises);
+            var foundName = null;
+            for (var i = 0; i < enterpriseNames.length; i++) {
+                if (text.indexOf(enterpriseNames[i]) >= 0) {
+                    foundName = enterpriseNames[i];
+                    break;
+                }
+            }
+
+            // Default fallback
+            var defaultReplies = {
+                'enterprise': '请提供企业名称，例如："评估比亚迪的风险"',
+                'credit': '请提供企业名称，例如："查询宁德时代的信用评级"',
+                'fraud': '请描述交易具体情况，例如："帮我检测这笔交易是否可疑：金额50万，对方是高风险客户"',
+                'compliance': '请描述贷款产品或业务场景，例如："检查一笔经营贷的合规性"',
+                'financial': '请提供企业名称，例如："诊断比亚迪的财务报表健康度"',
+                'regulatory': '好的，正在为您查询金融监管政策...',
+                'loan': '关于贷款风险，我可以帮您做企业风险评估或合规检查。请问您需要哪类服务？',
+                'unknown': '抱歉，我没有理解您的需求。您可以：\n• 输入企业名称评估风险（如"评估比亚迪"）\n• 查询信用评级（如"查宁德时代评级"）\n• 检测交易欺诈（如"这笔交易可疑吗"）\n• 检查合规性（如"贷款合规检查"）'
+            };
+
+            switch(intent) {
+                case 'enterprise':
+                    if (foundName) {
+                        var entData = RISK_KB.enterprises[foundName];
+                        addCard(buildEnterpriseCard(foundName, entData));
+                    } else {
+                        addMsg('请告诉我您要评估的企业名称，支持：<b>比亚迪、宁德时代、某科技公司</b>', false);
+                    }
+                    break;
+
+                case 'credit':
+                    if (foundName) {
+                        var cData = RISK_KB.enterprises[foundName];
+                        addCard(buildCreditCard(foundName, cData.rating, cData));
+                    } else {
+                        addMsg('请告诉我您要查询信用评级企业名称，支持：<b>比亚迪（AA）、宁德时代（AA-）、某科技公司（BBB）</b>', false);
+                    }
+                    break;
+
+                case 'fraud':
+                    addCard(buildFraudCard());
+                    break;
+
+                case 'compliance':
+                    addCard(buildComplianceCard());
+                    break;
+
+                case 'financial':
+                    if (foundName) {
+                        addCard(buildFinancialCard(foundName));
+                    } else {
+                        addMsg('请告诉我您要诊断财务状况的企业名称，支持：<b>比亚迪、宁德时代、某科技公司</b>', false);
+                    }
+                    break;
+
+                case 'regulatory':
+                    addCard(buildRegulatoryCard());
+                    break;
+
+                case 'loan':
+                    addMsg(defaultReplies['loan'], false);
+                    break;
+
+                default:
+                    addMsg(defaultReplies['unknown'], false);
+            }
+        }
+
+        // ============ Send ============
+        window.sendMsg = function() {
+            var input = document.getElementById('msgInput');
+            var q = input.value.trim();
+            if (!q) return;
+
+            input.value = '';
+            input.style.height = 'auto';
+            addMsg('<div style="font-size:15px;">' + q + '</div>', true);
+
+            setTimeout(function() {
+                processQuery(q);
+            }, 400);
+        };
+
+        window.sendQuick = function(q) {
+            addMsg('<div style="font-size:15px;">' + q + '</div>', true);
+            setTimeout(function() {
+                processQuery(q);
+            }, 400);
+        };
+
+        // ============ Auto-resize textarea ============
+        document.getElementById('msgInput').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // ============ Filter tabs ============
+        // ============ Quiz Engine ============
+        var QUIZ_STEPS = [
+            { id: 1, question: '您进行投资的主要目的是什么？', options: [
+                { letter: 'A', text: '资产保值，长期持有，不追求高收益', score: 1 },
+                { letter: 'B', text: '稳健增值，获取稳定现金流', score: 2 },
+                { letter: 'C', text: '适度增长，能承受一定波动', score: 3 },
+                { letter: 'D', text: '追求高收益，愿意承担较大风险', score: 4 },
+            ]},
+            { id: 2, question: '您过去一年的投资经验如何？', options: [
+                { letter: 'A', text: '几乎没有接触过任何投资产品', score: 1 },
+                { letter: 'B', text: '有购买银行理财或货币基金经验', score: 2 },
+                { letter: 'C', text: '有股票、基金、债券等多元化投资经验', score: 3 },
+                { letter: 'D', text: '有期货、期权、私募等高风险产品经验', score: 4 },
+            ]},
+            { id: 3, question: '当投资收益短期内下跌20%时，您通常会怎么做？', options: [
+                { letter: 'A', text: '立即赎回，避免更大损失', score: 1 },
+                { letter: 'B', text: '观望一段时间，再决定是否调整', score: 2 },
+                { letter: 'C', text: '保持不动，等待反弹', score: 3 },
+                { letter: 'D', text: '趁低加仓，相信长期回报', score: 4 },
+            ]},
+            { id: 4, question: '您家庭的可支配收入中，可用于投资的比例是？', options: [
+                { letter: 'A', text: '低于10%，主要配置保险和存款', score: 1 },
+                { letter: 'B', text: '10%-30%，稳健型配置为主', score: 2 },
+                { letter: 'C', text: '30%-50%，股债平衡配置', score: 3 },
+                { letter: 'D', text: '超过50%，愿意承担高风险博高收益', score: 4 },
+            ]},
+            { id: 5, question: '您能承受的投资本金最大损失比例是？', options: [
+                { letter: 'A', text: '0-5%，极度厌恶风险', score: 1 },
+                { letter: 'B', text: '5-15%，风险偏好较为保守', score: 2 },
+                { letter: 'C', text: '15-30%，能承受中等风险', score: 3 },
+                { letter: 'D', text: '超过30%，追求高风险高回报', score: 4 },
+            ]},
+        ];
+        var QUIZ_SCORES = [0, 0, 0, 0, 0];
+        var QUIZ_CURRENT = 0;
+
+        function switchMode(mode) {
+            var tabD = document.getElementById('tabDialog');
+            var tabQ = document.getElementById('tabQuiz');
+            if (mode === 'dialog') {
+                tabD.style.background = 'white'; tabD.style.color = '#0F172A';
+                tabQ.style.background = 'transparent'; tabQ.style.color = '#64748B';
+                document.getElementById('quizSection').style.display = 'none';
+                document.getElementById('chatBox').style.display = 'block';
+                document.getElementById('quickBtns').style.display = '';
+            } else {
+                tabQ.style.background = 'white'; tabQ.style.color = '#0F172A';
+                tabD.style.background = 'transparent'; tabD.style.color = '#64748B';
+                document.getElementById('quizSection').style.display = 'block';
+                document.getElementById('chatBox').style.display = 'none';
+                document.getElementById('quickBtns').style.display = 'none';
+                if (QUIZ_CURRENT === 0 && QUIZ_SCORES.every(function(s) { return s === 0; })) renderQuizStep(0);
+            }
+        }
+
+        function renderQuizStep(idx) {
+            var step = QUIZ_STEPS[idx];
+            var total = QUIZ_STEPS.length;
+            var progressHtml = '';
+            for (var i = 0; i < total; i++) {
+                var cls = i < idx ? 'done' : i === idx ? 'active' : '';
+                progressHtml += '<div style="flex:1;height:4px;border-radius:2px;background:' + (i < idx ? '#10B981' : i === idx ? '#3B82F6' : 'rgba(255,255,255,0.2)') + ';"></div>';
+            }
+            document.getElementById('quizProgress').innerHTML = progressHtml;
+            document.getElementById('quizQNum').textContent = '第 ' + (idx + 1) + '/' + total + ' 题';
+            document.getElementById('quizQuestion').textContent = step.question;
+            var selectedScore = QUIZ_SCORES[idx];
+            var optionsHtml = '';
+            step.options.forEach(function(opt) {
+                var isSelected = opt.score === selectedScore;
+                optionsHtml += '<div class="quiz-option' + (isSelected ? ' selected' : '') + '" onclick="selectOption(' + opt.score + ', ' + idx + ', this)">';
+                optionsHtml += '<span class="opt-letter">' + opt.letter + '</span>';
+                optionsHtml += '<span class="opt-text">' + opt.text + '</span>';
+                optionsHtml += '<span class="opt-score">风险' + opt.score + '级</span>';
+                optionsHtml += '</div>';
+            });
+            document.getElementById('quizOptions').innerHTML = optionsHtml;
+            document.getElementById('quizPrev').disabled = idx === 0;
+            var nextBtn = document.getElementById('quizNext');
+            if (idx === total - 1) { nextBtn.textContent = '查看结果 →'; nextBtn.disabled = selectedScore === 0; }
+            else { nextBtn.textContent = '下一步 →'; nextBtn.disabled = selectedScore === 0; }
+        }
+
+        function selectOption(score, stepIdx, el) {
+            QUIZ_SCORES[stepIdx] = score;
+            document.querySelectorAll('#quizOptions .quiz-option').forEach(function(o) { o.classList.remove('selected'); });
+            el.classList.add('selected');
+            document.getElementById('quizNext').disabled = false;
+        }
+
+        function quizNext() {
+            if (QUIZ_CURRENT < QUIZ_STEPS.length - 1) { QUIZ_CURRENT++; renderQuizStep(QUIZ_CURRENT); }
+            else { showQuizResult(); }
+        }
+
+        function quizPrev() {
+            if (QUIZ_CURRENT > 0) { QUIZ_CURRENT--; renderQuizStep(QUIZ_CURRENT); }
+        }
+
+        function showQuizResult() {
+            var totalScore = QUIZ_SCORES.reduce(function(a, b) { return a + b; }, 0);
+            var avgScore = totalScore / QUIZ_STEPS.length;
+            var level, desc, color, gaugePct;
+            if (avgScore <= 1.5) { level = '⚠️ 保守型 (C1)'; desc = '建议以银行存款、货币基金、保险理财为主，避免高波动产品'; color = '#10B981'; gaugePct = 25; }
+            else if (avgScore <= 2.5) { level = '📊 稳健型 (C2)'; desc = '建议股债平衡配置，以债券基金+混合基金为主'; color = '#3B82F6'; gaugePct = 50; }
+            else if (avgScore <= 3.5) { level = '🔥 成长型 (C3)'; desc = '可配置股票型基金、指数基金，适度参与权益市场'; color = '#F59E0B'; gaugePct = 75; }
+            else { level = '💥 激进型 (C4)'; desc = '适合高权益配置，包括股票、基金、期货、期权等'; color = '#EF4444'; gaugePct = 95; }
+
+            document.getElementById('quizCard').style.display = 'none';
+            document.getElementById('quizResult').style.display = 'block';
+            document.getElementById('resultLevel').textContent = level;
+            document.getElementById('resultLevel').style.color = color;
+            document.getElementById('resultDesc').textContent = desc;
+
+            // Gauge chart
+            if (window.__chartManager) {
+                window.__chartManager.register('gaugeCanvas', {
+                    type: 'doughnut', selector: '#gaugeCanvas', lazy: false,
+                    data: { datasets: [{ data: [gaugePct, 100 - gaugePct], backgroundColor: [color, '#E2E8F0'], borderWidth: 0 }] },
+                    options: { responsive: false, cutout: '80%', plugins: { legend: { display: false }, tooltip: { enabled: false } } }
+                });
+                window.__chartManager.initAll();
+            }
+
+            // Dimension bars
+            var dimNames = ['风险认知', '投资经验', '亏损承受', '资产配置', '损失容忍'];
+            var dimColors = ['#3B82F6', '#8B5CF6', '#EC4899', '#F59E0B', '#EF4444'];
+            var dimsHtml = '';
+            for (var i = 0; i < dimNames.length; i++) {
+                var pct = (QUIZ_SCORES[i] / 4) * 100;
+                dimsHtml += '<div class="result-dim-row">';
+                dimsHtml += '<span class="result-dim-name">' + dimNames[i] + '</span>';
+                dimsHtml += '<div class="result-dim-bar-bg"><div class="result-dim-bar-fill" style="width:' + pct + '%;background:' + dimColors[i] + '"></div></div>';
+                dimsHtml += '<span class="result-dim-val" style="color:' + dimColors[i] + '">' + QUIZ_SCORES[i] + '分</span>';
+                dimsHtml += '</div>';
+            }
+            document.getElementById('resultDimensions').innerHTML = dimsHtml;
+
+            // Products
+            var products = [];
+            if (avgScore <= 1.5) products = [{name:'银行存款',color:'#10B981',bg:'#D1FAE5'},{name:'货币基金',color:'#10B981',bg:'#D1FAE5'},{name:'年金保险',color:'#10B981',bg:'#D1FAE5'}];
+            else if (avgScore <= 2.5) products = [{name:'债券基金',color:'#3B82F6',bg:'#DBEAFE'},{name:'混合基金',color:'#3B82F6',bg:'#DBEAFE'},{name:'银行理财',color:'#3B82F6',bg:'#DBEAFE'}];
+            else if (avgScore <= 3.5) products = [{name:'股票基金',color:'#F59E0B',bg:'#FEF3C7'},{name:'指数基金',color:'#F59E0B',bg:'#FEF3C7'},{name:'黄金ETF',color:'#F59E0B',bg:'#FEF3C7'}];
+            else products = [{name:'股票',color:'#EF4444',bg:'#FEE2E2'},{name:'期权/期货',color:'#EF4444',bg:'#FEE2E2'},{name:'私募股权',color:'#EF4444',bg:'#FEE2E2'},{name:'REITs',color:'#EF4444',bg:'#FEE2E2'}];
+            var prodHtml = '<div style="font-size:13px;font-weight:700;margin-bottom:8px;">💼 适配产品类型</div>';
+            products.forEach(function(p) { prodHtml += '<span class="result-product-tag" style="background:' + p.bg + ';color:' + p.color + '">' + p.name + '</span>'; });
+            document.getElementById('resultProducts').innerHTML = prodHtml;
+
+            // Radar chart
+            var radarCard = document.getElementById('radarCard');
+            radarCard.style.display = 'block';
+            if (window.__chartManager) {
+                window.__chartManager.register('radarCanvas', {
+                    type: 'radar', selector: '#radarCanvas', lazy: false,
+                    data: {
+                        labels: dimNames,
+                        datasets: [
+                            { label: '您的风险画像', data: QUIZ_SCORES.map(function(v) { return (v/4)*100; }), backgroundColor: 'rgba(59,130,246,0.15)', borderColor: '#3B82F6', borderWidth: 2, pointBackgroundColor: '#3B82F6', pointRadius: 4 },
+                            { label: '保守型基准', data: [25,25,25,25,25], backgroundColor: 'rgba(16,185,129,0.1)', borderColor: '#10B981', borderWidth: 1.5, borderDash: [4,4], pointRadius: 0 },
+                            { label: '激进型基准', data: [100,100,100,100,100], backgroundColor: 'rgba(239,68,68,0.08)', borderColor: '#EF4444', borderWidth: 1.5, borderDash: [4,4], pointRadius: 0 }
+                        ]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 10, font: { size: 10 }, padding: 6 } } }, scales: { r: { min: 0, max: 100, ticks: { stepSize: 25, font: { size: 9 }, backdropPadding: 2 }, pointLabels: { font: { size: 11, weight: '600' } }, grid: { color: 'rgba(0,0,0,0.06)' } } } }
+                });
+                window.__chartManager.initAll();
+            }
+
+            // Enterprise comparison
+            var compareCard = document.getElementById('compareCard');
+            var companies = [
+                { name: '比亚迪', score: 72, color: '#10B981' },
+                { name: '宁德时代', score: 68, color: '#3B82F6' },
+                { name: '某科技公司', score: 45, color: '#F59E0B' },
+            ];
+            var compHtml = '';
+            companies.forEach(function(c) {
+                compHtml += '<div class="compare-row">';
+                compHtml += '<span class="compare-name">' + c.name + '</span>';
+                compHtml += '<div class="compare-bar-bg"><div class="compare-bar-fill" style="width:' + c.score + '%;background:' + c.color + '"></div></div>';
+                compHtml += '<span class="compare-val" style="color:' + c.color + '">' + c.score + '</span>';
+                compHtml += '</div>';
+            });
+            compHtml += '<div style="font-size:11px;color:#64748B;margin-top:8px;">数据为示例综合风险评分，仅供参考</div>';
+            document.getElementById('compareContent').innerHTML = compHtml;
+            compareCard.style.display = 'block';
+        }
+
+        function resetQuiz() {
+            QUIZ_SCORES = [0, 0, 0, 0, 0];
+            QUIZ_CURRENT = 0;
+            document.getElementById('quizCard').style.display = 'block';
+            document.getElementById('quizResult').style.display = 'none';
+            document.getElementById('radarCard').style.display = 'none';
+            document.getElementById('compareCard').style.display = 'none';
+            renderQuizStep(0);
+        }
+
+        document.querySelectorAll('.risk-pill').forEach(function(pill) {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.risk-pill').forEach(function(p) { p.classList.remove('active'); });
+                pill.classList.add('active');
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
