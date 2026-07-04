@@ -1,0 +1,472 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI客户画像追踪，多维标签+行为分析+需求预测，精准把握客户需求。">
+    <meta name="keywords" content="客户画像,画像追踪,行为分析,需求预测,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/profile-tracking">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/profile-tracking">
+    <meta property="og:title" content="客户画像追踪 | FinAIAI">
+    <meta property="og:description" content="FinAIAI客户画像追踪，多维标签+行为分析+需求预测，精准把握客户需求。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/profile-tracking.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="客户画像追踪 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI客户画像追踪，多维标签+行为分析+需求预测，精准把握客户需求。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/profile-tracking.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "客户画像追踪 | FinAIAI",
+        "description": "FinAIAI客户画像追踪，多维标签+行为分析+需求预测，精准把握客户需求。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>客户画像追踪 | FinAIAI</title>
+  <style>
+    :root { --primary:#2563eb; --success:#10b981; --warning:#f59e0b; --danger:#ef4444; --purple:#8b5cf6;
+      --bg:#f1f5f9; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+      --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06);
+      --shadow-lg:0 14px 44px rgba(37,99,235,.18); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; }
+    .wrap { max-width:720px; margin:0 auto; padding:16px; }
+    .hero { background:linear-gradient(135deg,#0f172a,#3b82f6); color:#fff; border-radius:24px; padding:28px 22px;
+      box-shadow:var(--shadow-lg); }
+    .hero h1 { font-size:24px; font-weight:900; margin-bottom:4px; }
+    .hero .sub { opacity:.85; font-size:13px; }
+    .section-title { font-size:18px; font-weight:900; margin:28px 0 14px; display:flex; align-items:center; gap:8px; }
+    .section-title .dot { width:8px; height:8px; border-radius:50%; background:var(--primary); }
+    .card { background:var(--card); border-radius:20px; padding:20px; box-shadow:var(--shadow); margin-bottom:12px; }
+    .card h3 { font-size:16px; margin-bottom:10px; }
+    .input-box { background:var(--card); border-radius:16px; padding:16px; box-shadow:var(--shadow); }
+    .input-box input, .input-box select { width:100%; border:1px solid var(--border); border-radius:12px; padding:12px 14px;
+      font-size:15px; outline:none; margin-bottom:10px; }
+    .input-box input:focus, .input-box select:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+    .run-btn { width:100%; border:none; background:linear-gradient(135deg,#3b82f6,#2563eb); color:#fff;
+      padding:14px; border-radius:14px; font-size:16px; font-weight:800; cursor:pointer;
+      box-shadow:0 4px 16px rgba(59,130,246,.3); }
+    .run-btn:disabled { opacity:.6; }
+    .loading { display:none; text-align:center; padding:40px; }
+    .loading.active { display:block; }
+    .spinner { width:48px; height:48px; border:4px solid rgba(59,130,246,.15); border-top-color:#3b82f6;
+      border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 16px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .result { display:none; }
+    .result.active { display:block; animation:fadeIn .5s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+    .tag { display:inline-block; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:700; margin:0 4px 4px 0; }
+    .tag-blue { background:#dbeafe; color:#1e40af; }
+    .tag-green { background:#d1fae5; color:#065f46; }
+    .tag-orange { background:#fed7aa; color:#92400e; }
+    .tag-red { background:#fee2e2; color:#991b1b; }
+    .tag-purple { background:#f3e8ff; color:#6b21a8; }
+    .metric-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px; }
+    .metric { background:#f8fafc; border-radius:14px; padding:14px; text-align:center; }
+    .metric b { display:block; font-size:20px; }
+    .metric span { font-size:11px; color:var(--muted); }
+    .score-ring { width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      margin:0 auto 8px; font-weight:900; font-size:18px; color:#fff; position:relative; }
+    .score-ring::after { content:''; position:absolute; inset:4px; border-radius:50%; background:#fff; }
+    .score-ring span { position:relative; z-index:1; color:var(--text); }
+    .back-home { display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--primary);
+      text-decoration:none; font-size:14px; font-weight:700; }
+    .timeline { position:relative; padding-left:24px; }
+    .timeline::before { content:''; position:absolute; left:6px; top:4px; bottom:4px; width:2px; background:var(--border); }
+    .timeline-item { position:relative; margin:12px 0; padding-left:16px; }
+    .timeline-item::before { content:''; position:absolute; left:-22px; top:6px; width:10px; height:10px;
+      border-radius:50%; background:var(--primary); border:2px solid #fff; box-shadow:0 0 0 2px var(--primary); }
+    .timeline-date { font-size:11px; color:var(--muted); }
+    .timeline-text { font-size:13px; margin-top:2px; }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>👤 客户画像追踪</h1>
+    <div class="sub">银行业 · 客户画像 · 行为分析 · 价值评估 · 生命周期</div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>输入客户信息</div>
+  <div class="input-box">
+    <input type="text" id="name" placeholder="客户姓名" value="">
+    <input type="number" id="age" placeholder="年龄" value="38">
+    <input type="number" id="income" placeholder="月收入（元）" value="30000">
+    <select id="occupation">
+      <option value="enterprise">企业主/高管</option>
+      <option value="professional" selected>专业技术人员</option>
+      <option value="civil">公务员/事业单位</option>
+      <option value="freelance">自由职业</option>
+      <option value="retired">退休</option>
+    </select>
+    <select id="family">
+      <option value="single">单身</option>
+      <option value="married" selected>已婚无子女</option>
+      <option value="parent">已婚有子女</option>
+      <option value="eldercare">赡养老人</option>
+    </select>
+    <input type="number" id="assets" placeholder="现有金融资产（万元）" value="150">
+    <button class="run-btn" id="runBtn" onclick="genPersona()">🔭 生成客户画像</button>
+  </div>
+
+  <div class="loading" id="loading"><div class="spinner"></div><p>正在深度分析客户画像...</p></div>
+
+  <div class="result" id="result"></div>
+
+  <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+</div>
+
+<script>
+(function(){
+  function cyrb128(str){
+    let h1=1779033703,h2=3144134277,h3=1013904242,h4=2773480762;
+    for(let i=0,k;i<str.length;i++){
+      k=str.charCodeAt(i);
+      h1=h2^Math.imul(h1^k,597399067);
+      h2=h3^Math.imul(h2^k,2869860233);
+      h3=h4^Math.imul(h3^k,951274213);
+      h4=h1^Math.imul(h4^k,2716044179);
+    }
+    h1=Math.imul(h3^(h1>>>18),597399067);
+    h2=Math.imul(h4^(h2>>>22),2869860233);
+    h3=Math.imul(h1^(h3>>>17),951274213);
+    h4=Math.imul(h2^(h4>>>19),2716044179);
+    return [(h1^h2^h3^h4)>>>0,(h2^h1)>>>0,(h3^h1)>>>0,(h4^h1)>>>0];
+  }
+  function sfc32(a,b,c,d){
+    return function(){
+      a>>>=0;b>>>=0;c>>>=0;d>>>=0;
+      let t=(a+b)|0;
+      a=b^b>>>9;
+      b=c+(c<<3)|0;
+      c=(c<<21)|(c>>>11);
+      d=d+1|0;
+      t=t+d|0;
+      c=c+t|0;
+      return (t>>>0)/4294967296;
+    };
+  }
+  function createRng(seed){ const s=cyrb128(seed); return sfc32(s[0],s[1],s[2],s[3]); }
+
+  window.genPersona = function(){
+    const name = document.getElementById('name').value.trim() || '客户';
+    const age = parseInt(document.getElementById('age').value) || 38;
+    const income = parseInt(document.getElementById('income').value) || 30000;
+    const occupation = document.getElementById('occupation').value;
+    const family = document.getElementById('family').value;
+    const assets = parseFloat(document.getElementById('assets').value) || 150;
+
+    document.getElementById('loading').classList.add('active');
+    document.getElementById('result').classList.remove('active');
+    document.getElementById('runBtn').disabled = true;
+
+    setTimeout(()=>{
+      const seed = name + '_' + age + '_' + income + '_' + occupation + '_' + family + '_' + assets;
+      const rng = createRng(seed);
+
+      // 客群分类
+      const annualIncome = income * 12;
+      let segment, segmentColor;
+      if(annualIncome < 120000) { segment = '大众客群'; segmentColor = '#64748b'; }
+      else if(annualIncome < 500000) { segment = '中产客群'; segmentColor = '#2563eb'; }
+      else if(annualIncome < 1000000) { segment = '富裕客群'; segmentColor = '#8b5cf6'; }
+      else { segment = '高净值客群'; segmentColor = '#d97706'; }
+
+      // 风险偏好
+      const riskMap = {
+        conservative:{name:'保守型',color:'#10b981'},
+        steady:{name:'稳健型',color:'#3b82f6'},
+        balanced:{name:'平衡型',color:'#f59e0b'},
+        growth:{name:'成长型',color:'#f97316'},
+        aggressive:{name:'积极型',color:'#ef4444'}
+      };
+      const riskKeys = Object.keys(riskMap);
+      const riskKey = riskKeys[Math.floor(rng() * riskKeys.length)];
+      const risk = riskMap[riskKey];
+
+      // 核心需求
+      const needsMap = {
+        single:['职业发展','购房准备','个人保障'],
+        married:['购房改善','夫妻保障','财富增值'],
+        parent:['子女教育','家庭保障','教育金规划'],
+        eldercare:['养老规划','医疗保障','财产传承']
+      };
+      const needs = needsMap[family] || needsMap.single;
+      const primaryNeed = needs[Math.floor(rng() * needs.length)];
+
+      // 价值评分
+      const aumPotential = Math.min(100, Math.round((assets * 0.6 + annualIncome / 10000 * 0.4)));
+      const activityScore = Math.min(100, Math.round(50 + rng() * 50));
+      const loyaltyScore = Math.min(100, Math.round(40 + rng() * 60));
+      const totalScore = Math.round((aumPotential + activityScore + loyaltyScore) / 3);
+
+      // 行为洞察
+      const channels = ['手机银行','网点','微信银行','电话银行'];
+      const preferredChannel = channels[Math.floor(rng() * channels.length)];
+      const productPrefs = riskKey === 'aggressive' ? ['股票基金','主题投资','私募股权'] :
+                           riskKey === 'conservative' ? ['定期存款','货币基金','国债'] :
+                           ['混合基金','固收+','指数基金'];
+      const preferredProduct = productPrefs[Math.floor(rng() * productPrefs.length)];
+
+      // 生命周期阶段
+      let lifeStage;
+      if(age < 30) lifeStage = '单身期';
+      else if(age < 35) lifeStage = '家庭形成期';
+      else if(age < 45) lifeStage = '家庭成长期';
+      else if(age < 55) lifeStage = '事业高峰期';
+      else lifeStage = '退休准备期';
+
+      // 模拟历史事件
+      const events = [
+        {date:'3个月前', text:`开户并完成风险评估，评级结果：${risk.name}`},
+        {date:'2个月前', text:`购买${preferredProduct}，金额${Math.round(assets * 0.15)}万元`},
+        {date:'1个月前', text:`通过${preferredChannel}办理定期存款，金额${Math.round(assets * 0.1)}万元`},
+        {date:'2周前', text:'查询理财产品收益情况，页面停留10分钟'},
+        {date:'3天前', text:`预约财富管理顾问咨询，关注${primaryNeed}`}
+      ];
+
+      // 营销建议
+      const suggestions = [
+        `根据${name}当前${lifeStage}特点，建议重点推荐${primaryNeed}相关产品`,
+        `${name}偏好${preferredChannel}，建议通过该渠道推送个性化理财建议`,
+        `AUM潜力评分${aumPotential}分，建议定期跟进提升客户资产规模`,
+        `${name}对${preferredProduct}感兴趣，可推荐相关组合产品`
+      ];
+
+      document.getElementById('result').innerHTML = `
+        <div class="card">
+          <h3>👤 ${name} 客户画像</h3>
+          <div style="display:flex;gap:12px;margin-bottom:14px;">
+            <div style="flex:1;background:#f8fafc;border-radius:14px;padding:14px;text-align:center;">
+              <div style="font-size:13px;color:var(--muted);">客群分类</div>
+              <div style="font-weight:800;color:${segmentColor};margin-top:4px;">${segment}</div>
+            </div>
+            <div style="flex:1;background:#f8fafc;border-radius:14px;padding:14px;text-align:center;">
+              <div style="font-size:13px;color:var(--muted);">生命周期</div>
+              <div style="font-weight:800;color:var(--primary);margin-top:4px;">${lifeStage}</div>
+            </div>
+            <div style="flex:1;background:#f8fafc;border-radius:14px;padding:14px;text-align:center;">
+              <div style="font-size:13px;color:var(--muted);">风险偏好</div>
+              <div style="font-weight:800;color:${risk.color};margin-top:4px;">${risk.name}</div>
+            </div>
+          </div>
+          <div style="font-size:14px;line-height:1.8;">
+            <div><strong>年龄：</strong>${age}岁 ｜ <strong>月收入：</strong>${income.toLocaleString()}元 ｜ <strong>现有资产：</strong>${assets}万元</div>
+            <div><strong>核心需求：</strong><span class="tag tag-orange">${primaryNeed}</span></div>
+          </div>
+          <div style="margin-top:10px;">
+            <span class="tag tag-blue">${segment}</span>
+            <span class="tag tag-green">${risk.name}</span>
+            <span class="tag tag-orange">${lifeStage}</span>
+            <span class="tag tag-purple">${preferredChannel}</span>
+            <span class="tag tag-blue">${preferredProduct}</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📊 价值评分</h3>
+          <div class="metric-grid">
+            <div class="metric">
+              <div class="score-ring" style="background:conic-gradient(${totalScore>=80?'#10b981':totalScore>=60?'#f59e0b':'#ef4444'} ${totalScore*3.6}deg, #e2e8f0 0deg);">
+                <span>${totalScore}</span>
+              </div>
+              <span>综合评分</span>
+            </div>
+            <div class="metric">
+              <b style="color:var(--primary);">${aumPotential}</b>
+              <span>AUM潜力</span>
+            </div>
+            <div class="metric">
+              <b style="color:var(--success);">${activityScore}</b>
+              <span>活跃度</span>
+            </div>
+            <div class="metric">
+              <b style="color:var(--warning);">${loyaltyScore}</b>
+              <span>忠诚度</span>
+            </div>
+            <div class="metric">
+              <b style="color:var(--purple);">${Math.round(assets * 0.15)}</b>
+              <span>预计年贡献(万)</span>
+            </div>
+            <div class="metric">
+              <b style="color:var(--danger);">${Math.round(100 - loyaltyScore)}</b>
+              <span>流失风险%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🔬 行为洞察</h3>
+          <div style="font-size:14px;line-height:1.8;">
+            <div>• <strong>首选渠道：</strong>${preferredChannel}，建议通过该渠道推送个性化服务</div>
+            <div>• <strong>产品偏好：</strong>${preferredProduct}，可作为主打产品推荐</div>
+            <div>• <strong>服务需求：</strong>${segment==='高净值客群'?'VIP专属顾问+定制化方案':segment==='富裕客群'?'VIP专属服务+定期回访':'标准化服务+智能推荐'}</div>
+            <div>• <strong>触达时机：</strong>${rng()>0.5?'工作日晚上19:00-21:00':'周末上午9:00-11:00'}</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📅 近期行为时间线</h3>
+          <div class="timeline">
+            ${events.map(e=>`<div class="timeline-item">
+              <div class="timeline-date">${e.date}</div>
+              <div class="timeline-text">${e.text}</div>
+            </div>`).join('')}
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🎯 营销建议</h3>
+          <div style="font-size:14px;line-height:1.8;">
+            ${suggestions.map((s,i)=>`<div style="margin:8px 0;padding:10px;background:#f8fafc;border-radius:10px;">
+              <span class="tag tag-blue">${i+1}</span> ${s}
+            </div>`).join('')}
+          </div>
+        </div>`;
+
+      document.getElementById('loading').classList.remove('active');
+      document.getElementById('result').classList.add('active');
+      document.getElementById('runBtn').disabled = false;
+    },800);
+  };
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    // 自动加载股票数据
+    const stockContainer = document.querySelector('.stock-data, #stock-data, [data-type="stocks"]');
+    if (stockContainer) {
+        const result = await LongmaAPI.stocks.list();
+        if (result.success && result.data) {
+            renderStockList(stockContainer, result.data);
+        }
+    }
+    
+    // 自动加载基金数据
+    const fundContainer = document.querySelector('.fund-data, #fund-data, [data-type="funds"]');
+    if (fundContainer) {
+        const result = await LongmaAPI.funds.get('110022');
+        if (result.success && result.data) {
+            renderFundCard(fundContainer, result.data);
+        }
+    }
+});
+
+function renderStockList(container, stocks) {
+    let html = '<div class="api-stock-list">';
+    stocks.forEach(stock => {
+        const changeClass = stock.change >= 0 ? 'up' : 'down';
+        const changeSign = stock.change >= 0 ? '+' : '';
+        html += `<div class="api-stock-item ${changeClass}">
+            <span class="code">${stock.code}</span>
+            <span class="name">${stock.name}</span>
+            <span class="price">¥${stock.price.toFixed(2)}</span>
+            <span class="change">${changeSign}${(stock.change * 100).toFixed(2)}%</span>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function renderFundCard(container, fund) {
+    container.innerHTML = `<div class="api-fund-card">
+        <h4>${fund.name}</h4>
+        <p>净值: ¥${fund.nav.toFixed(3)}</p>
+        <p>日涨跌: ${fund.change > 0 ? '+' : ''}${(fund.change * 100).toFixed(2)}%</p>
+        <p>风险等级: ${fund.risk}</p>
+    </div>`;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
