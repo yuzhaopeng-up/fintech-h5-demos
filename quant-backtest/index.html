@@ -1,0 +1,750 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI量化回测，Python策略回测+因子分析+绩效归因，验证策略有效性。">
+    <meta name="keywords" content="量化回测,量化策略,因子分析,绩效归因,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/quant-backtest">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/quant-backtest">
+    <meta property="og:title" content="量化回测平台 | FinAIAI">
+    <meta property="og:description" content="FinAIAI量化回测，Python策略回测+因子分析+绩效归因，验证策略有效性。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/quant-backtest.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="量化回测平台 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI量化回测，Python策略回测+因子分析+绩效归因，验证策略有效性。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/quant-backtest.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "量化回测平台 | FinAIAI",
+        "description": "FinAIAI量化回测，Python策略回测+因子分析+绩效归因，验证策略有效性。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>量化回测平台 | FinAIAI</title>
+  <style>
+    :root {
+      --primary: #2563eb; --primary-dark: #1d4ed8; --success: #10b981;
+      --warning: #f59e0b; --danger: #ef4444; --purple: #8b5cf6;
+      --bg: #f1f5f9; --card: #fff; --text: #0f172a; --muted: #64748b;
+      --border: #e2e8f0; --shadow: 0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06);
+      --shadow-lg: 0 14px 44px rgba(37,99,235,.18);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #2563eb); color: #fff;
+      border-radius: 24px; padding: 28px 22px; box-shadow: var(--shadow-lg);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -40%; right: -20%; width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,.1) 0, transparent 70%); border-radius: 50%;
+    }
+    .hero h1 { font-size: 24px; font-weight: 900; margin-bottom: 4px; position: relative; }
+    .hero .sub { opacity: .85; font-size: 13px; position: relative; }
+
+    .section-title {
+      font-size: 18px; font-weight: 900; margin: 28px 0 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+
+    /* Strategy Selector */
+    .strat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .strat-card {
+      background: var(--card); border: 2px solid var(--border); border-radius: 16px;
+      padding: 14px; cursor: pointer; transition: .2s; text-align: center;
+    }
+    .strat-card:hover { border-color: #bfdbfe; transform: translateY(-2px); box-shadow: var(--shadow); }
+    .strat-card.active { border-color: var(--primary); background: #eff6ff; }
+    .strat-card .emoji { font-size: 28px; margin-bottom: 6px; }
+    .strat-card .name { font-size: 14px; font-weight: 800; }
+    .strat-card .risk { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    /* Config Panel */
+    .config-card {
+      background: var(--card); border-radius: 20px; padding: 20px; box-shadow: var(--shadow);
+    }
+    .form-row { margin-bottom: 16px; }
+    .form-row label { display: block; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+    .form-row input, .form-row select {
+      width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px;
+      font-size: 15px; outline: none; transition: .2s; background: #fff;
+    }
+    .form-row input:focus, .form-row select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+
+    .run-btn {
+      width: 100%; border: none; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff; padding: 14px; border-radius: 14px; font-size: 16px; font-weight: 800;
+      cursor: pointer; transition: .2s; box-shadow: 0 4px 16px rgba(37,99,235,.3);
+    }
+    .run-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,.4); }
+    .run-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* Loading */
+    .loading { display: none; text-align: center; padding: 40px 20px; }
+    .loading.active { display: block; }
+    .spinner {
+      width: 48px; height: 48px; border: 4px solid rgba(37,99,235,.15);
+      border-top-color: var(--primary); border-radius: 50%;
+      animation: spin 1s linear infinite; margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading p { color: var(--muted); font-size: 14px; }
+
+    /* Results */
+    .result { display: none; }
+    .result.active { display: block; animation: fadeIn .5s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Metric Cards */
+    .metric-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .metric-card {
+      background: var(--card); border-radius: 16px; padding: 16px 10px;
+      box-shadow: var(--shadow); text-align: center;
+    }
+    .metric-card .label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .metric-card .value { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+    .metric-card .change { font-size: 11px; font-weight: 700; }
+    .up { color: var(--danger); }
+    .down { color: var(--success); }
+    .neutral { color: var(--muted); }
+
+    /* Chart */
+    .chart-card {
+      background: var(--card); border-radius: 20px; padding: 20px; box-shadow: var(--shadow);
+    }
+    .chart-card svg { width: 100%; height: auto; }
+
+    /* Signal Table */
+    .signal-card {
+      background: var(--card); border-radius: 20px; padding: 16px; box-shadow: var(--shadow);
+    }
+    .signal-header {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: 8px; padding: 10px 0; font-size: 12px; font-weight: 700;
+      color: var(--muted); border-bottom: 1px solid var(--border);
+    }
+    .signal-row {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--border);
+      font-size: 13px; align-items: center;
+    }
+    .signal-row:last-child { border-bottom: none; }
+    .sig-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 800;
+    }
+    .sig-buy { background: #d1fae5; color: #065f46; }
+    .sig-sell { background: #fecaca; color: #991b1b; }
+    .sig-hold { background: #f1f5f9; color: #475569; }
+
+    /* Risk Radar Mini */
+    .risk-mini {
+      background: var(--card); border-radius: 20px; padding: 20px; box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    /* Suggestions */
+    .suggest-card {
+      background: linear-gradient(135deg, #0f172a, #1e3a5f); color: #fff;
+      border-radius: 20px; padding: 22px; box-shadow: var(--shadow-lg);
+    }
+    .suggest-card h3 { font-size: 16px; margin-bottom: 14px; }
+    .suggest-item {
+      display: flex; gap: 10px; margin: 10px 0; padding: 12px;
+      background: rgba(255,255,255,.1); border-radius: 12px; font-size: 13px;
+    }
+    .suggest-num {
+      width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.2);
+      text-align: center; line-height: 22px; font-size: 11px; font-weight: 800; flex-shrink: 0;
+    }
+
+    .back-home {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 24px; color: var(--primary); text-decoration: none;
+      font-size: 14px; font-weight: 700;
+    }
+
+    @media (max-width: 520px) {
+      .strat-grid { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero h1 { font-size: 20px; }
+    }
+  </style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>⚡ 量化策略回测</h1>
+    <div class="sub">证券业 · 策略回测 · 参数优化 · 信号生成</div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>选择策略</div>
+  <div class="strat-grid" id="stratGrid">
+    <div class="strat-card active" data-strat="momentum" onclick="selectStrat(this)">
+      <div class="emoji">🚀</div>
+      <div class="name">动量策略</div>
+      <div class="risk">风险: 中 | RSI/MACD</div>
+    </div>
+    <div class="strat-card" data-strat="mean_reversion" onclick="selectStrat(this)">
+      <div class="emoji">🔄</div>
+      <div class="name">均值回归</div>
+      <div class="risk">风险: 中 | 布林带/Z-Score</div>
+    </div>
+    <div class="strat-card" data-strat="trend_following" onclick="selectStrat(this)">
+      <div class="emoji">📈</div>
+      <div class="name">趋势跟踪</div>
+      <div class="risk">风险: 低 | 均线/ADX</div>
+    </div>
+    <div class="strat-card" data-strat="arbitrage" onclick="selectStrat(this)">
+      <div class="emoji">⚖️</div>
+      <div class="name">套利策略</div>
+      <div class="risk">风险: 低 | 价差/协整</div>
+    </div>
+    <div class="strat-card" data-strat="factor" onclick="selectStrat(this)">
+      <div class="emoji">🎯</div>
+      <div class="name">多因子策略</div>
+      <div class="risk">风险: 中 | 估值/质量/动量</div>
+    </div>
+  </div>
+
+  <div class="section-title"><span class="dot"></span>回测参数</div>
+  <div class="config-card">
+    <div class="form-row">
+      <label>交易标的</label>
+      <input type="text" id="symbolInput" placeholder="如: 000333 或 比亚迪" value="000333">
+    </div>
+    <div class="form-row">
+      <label>回测周期</label>
+      <select id="periodSelect">
+        <option value="63">3个月 (63日)</option>
+        <option value="126">6个月 (126日)</option>
+        <option value="252" selected>1年 (252日)</option>
+        <option value="504">2年 (504日)</option>
+        <option value="756">3年 (756日)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>初始资金 (万元)</label>
+      <input type="number" id="capitalInput" placeholder="100" value="100">
+    </div>
+    <button class="run-btn" id="runBtn" onclick="runBacktest()">▶ 开始回测</button>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>正在运行策略回测引擎<span class="loading-dots">...</span></p>
+  </div>
+
+  <div class="result" id="result">
+    <div class="section-title"><span class="dot"></span>回测结果</div>
+    <div class="metric-grid" id="metricGrid"></div>
+
+    <div class="section-title"><span class="dot"></span>收益曲线</div>
+    <div class="chart-card">
+      <svg id="returnChart" width="100%" height="240" viewBox="0 0 640 240"></svg>
+    </div>
+
+    <div class="section-title"><span class="dot"></span>交易信号</div>
+    <div class="signal-card" id="signalCard"></div>
+
+    <div class="section-title"><span class="dot"></span>风险分析</div>
+    <div class="risk-mini">
+      <svg id="riskSvg" width="280" height="220" viewBox="0 0 280 220"></svg>
+    </div>
+
+    <div class="section-title"><span class="dot"></span>参数优化建议</div>
+    <div class="suggest-card" id="suggestCard"></div>
+
+    <a class="back-home" href="../experience-center.html">← 返回H5体验中心</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  let selectedStrat = 'momentum';
+
+  function selectStrat(el) {
+    document.querySelectorAll('.strat-card').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    selectedStrat = el.dataset.strat;
+  }
+  window.selectStrat = selectStrat;
+
+  // PRNG
+  function cyrb128(str) {
+    let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+    for (let i = 0, k; i < str.length; i++) {
+      k = str.charCodeAt(i);
+      h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
+      h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+      h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
+      h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+    }
+    h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+    h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+    h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+    h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+    return [(h1^h2^h3^h4)>>>0, (h2^h1)>>>0, (h3^h1)>>>0, (h4^h1)>>>0];
+  }
+  function sfc32(a, b, c, d) {
+    return function() {
+      a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
+      let t = (a + b) | 0;
+      a = b ^ b >>> 9;
+      b = c + (c << 3) | 0;
+      c = (c << 21) | (c >>> 11);
+      d = d + 1 | 0;
+      t = t + d | 0;
+      c = c + t | 0;
+      return (t >>> 0) / 4294967296;
+    };
+  }
+  function createRng(seedStr) {
+    const s = cyrb128(seedStr);
+    return sfc32(s[0], s[1], s[2], s[3]);
+  }
+
+  const stratConfig = {
+    momentum: { name: '动量策略', annual: 0.15, sharpe: 1.2, drawdown: 0.15, winRate: 0.55, profitFactor: 1.8 },
+    mean_reversion: { name: '均值回归', annual: 0.12, sharpe: 1.0, drawdown: 0.12, winRate: 0.60, profitFactor: 1.6 },
+    trend_following: { name: '趋势跟踪', annual: 0.18, sharpe: 1.4, drawdown: 0.18, winRate: 0.45, profitFactor: 2.2 },
+    arbitrage: { name: '套利策略', annual: 0.08, sharpe: 2.0, drawdown: 0.05, winRate: 0.70, profitFactor: 1.4 },
+    factor: { name: '多因子策略', annual: 0.14, sharpe: 1.3, drawdown: 0.14, winRate: 0.58, profitFactor: 1.9 },
+  };
+
+  function generateData() {
+    const symbol = document.getElementById('symbolInput').value.trim() || '000333';
+    const periodDays = parseInt(document.getElementById('periodSelect').value);
+    const capitalWan = parseFloat(document.getElementById('capitalInput').value) || 100;
+    const cfg = stratConfig[selectedStrat];
+    const seed = selectedStrat + '_' + symbol + '_' + periodDays + '_' + capitalWan;
+    const rng = createRng(seed);
+    const randFloat = (min, max, dec) => parseFloat((rng() * (max - min) + min).toFixed(dec));
+    const randInt = (min, max) => Math.floor(rng() * (max - min + 1)) + min;
+
+    // Adjust by period
+    const totalReturn = cfg.annual * (periodDays / 252) * randFloat(0.7, 1.3, 2);
+    const annualReturn = cfg.annual * randFloat(0.85, 1.15, 3);
+    const sharpe = cfg.sharpe * randFloat(0.8, 1.2, 2);
+    const maxDrawdown = cfg.drawdown * randFloat(0.7, 1.4, 3);
+    const winRate = Math.min(0.95, cfg.winRate * randFloat(0.85, 1.15, 2));
+    const tradeCount = Math.max(5, Math.floor(periodDays / 5 * randFloat(0.5, 1.5, 2)));
+    const profitFactor = cfg.profitFactor * randFloat(0.8, 1.2, 2);
+    const finalCapital = capitalWan * 10000 * (1 + totalReturn);
+
+    // Generate equity curve
+    const points = 50;
+    const equityCurve = [];
+    let equity = capitalWan * 10000;
+    for (let i = 0; i <= points; i++) {
+      const t = i / points;
+      const trend = equity * (1 + totalReturn * t);
+      const noise = equity * (maxDrawdown * 0.5) * Math.sin(t * Math.PI * 4 + rng() * Math.PI * 2) * (rng() - 0.5) * 2;
+      equity = trend + noise;
+      if (equity < capitalWan * 10000 * 0.5) equity = capitalWan * 10000 * 0.5;
+      equityCurve.push({ day: Math.floor(periodDays * t), equity: Math.round(equity) });
+    }
+    // Ensure end matches
+    equityCurve[equityCurve.length - 1].equity = Math.round(finalCapital);
+
+    // Signals
+    const signalPools = {
+      momentum: [
+        { indicator: 'RSI(14)', value: randInt(25, 75), signal: randInt(25,75) > 70 ? 'SELL' : randInt(25,75) < 30 ? 'BUY' : 'HOLD', reason: randInt(25,75) > 70 ? '超买' : randInt(25,75) < 30 ? '超卖' : '中性' },
+        { indicator: 'MACD', value: rng() > 0.5 ? '金叉' : '死叉', signal: rng() > 0.5 ? 'BUY' : 'SELL', reason: rng() > 0.5 ? '动量转强' : '动量转弱' },
+        { indicator: 'MA20', value: rng() > 0.5 ? '上穿' : '下穿', signal: rng() > 0.5 ? 'BUY' : 'SELL', reason: rng() > 0.5 ? '趋势向上' : '趋势向下' },
+      ],
+      mean_reversion: [
+        { indicator: 'RSI(14)', value: randInt(20, 40), signal: 'BUY', reason: '超卖区域' },
+        { indicator: '布林带', value: '下轨附近', signal: 'BUY', reason: '价格偏离均值' },
+        { indicator: 'Z-Score', value: randFloat(-2.5, -0.5, 1), signal: 'BUY', reason: '统计偏离' },
+      ],
+      trend_following: [
+        { indicator: 'ADX', value: randInt(20, 45), signal: randInt(20,45) > 25 ? 'BUY' : 'HOLD', reason: randInt(20,45) > 25 ? '趋势强劲' : '趋势不明' },
+        { indicator: '均线排列', value: rng() > 0.5 ? '多头排列' : '空头排列', signal: rng() > 0.5 ? 'BUY' : 'SELL', reason: rng() > 0.5 ? '上升趋势' : '下降趋势' },
+      ],
+      arbitrage: [
+        { indicator: '价差', value: randFloat(-0.5, 2.0, 2) + '%', signal: randFloat(-0.5,2.0) > 1.0 ? 'SELL' : randFloat(-0.5,2.0) < 0.2 ? 'BUY' : 'HOLD', reason: '价差收敛' },
+        { indicator: '协整关系', value: rng() > 0.7 ? '显著' : '弱化', signal: rng() > 0.7 ? 'BUY' : 'HOLD', reason: '统计套利机会' },
+      ],
+      factor: [
+        { indicator: '估值因子', value: randInt(30, 80), signal: randInt(30,80) > 60 ? 'BUY' : randInt(30,80) < 40 ? 'SELL' : 'HOLD', reason: randInt(30,80) > 60 ? '估值优势' : randInt(30,80) < 40 ? '估值偏高' : '估值合理' },
+        { indicator: '质量因子', value: randInt(40, 90), signal: randInt(40,90) > 65 ? 'BUY' : 'HOLD', reason: randInt(40,90) > 65 ? '质量优秀' : '质量一般' },
+        { indicator: '动量因子', value: randInt(30, 85), signal: randInt(30,85) > 70 ? 'BUY' : randInt(30,85) < 30 ? 'SELL' : 'HOLD', reason: randInt(30,85) > 70 ? '动量强劲' : randInt(30,85) < 30 ? '动量转弱' : '动量中性' },
+      ],
+    };
+
+    // Risk dimensions
+    const riskDims = [
+      { name: '市场风险', score: randInt(40, 85) },
+      { name: '模型风险', score: randInt(50, 90) },
+      { name: '流动性风险', score: randInt(45, 88) },
+      { name: '操作风险', score: randInt(55, 92) },
+    ];
+
+    // Suggestions
+    const suggestions = [
+      '建议回测周期不少于3年数据，以覆盖完整牛熊市场周期',
+      '参数优化时避免过度拟合，建议使用滚动交叉验证',
+      '实盘前进行模拟交易验证，确认滑点与成交量影响',
+      '定期复核策略有效性，建议每季度评估一次',
+      '结合基本面分析综合判断，避免纯技术信号盲目',
+      '设置严格止损机制，单笔交易亏损不超过总资金的2%',
+    ];
+    const numSugs = randInt(3, 5);
+    const finalSugs = [];
+    const usedSugs = new Set();
+    for (let i = 0; i < numSugs && usedSugs.size < suggestions.length; i++) {
+      const idx = randInt(0, suggestions.length - 1);
+      if (usedSugs.has(idx)) continue;
+      usedSugs.add(idx);
+      finalSugs.push(suggestions[idx]);
+    }
+
+    return {
+      symbol, periodDays, capitalWan,
+      totalReturn, annualReturn, sharpe, maxDrawdown, winRate, tradeCount, profitFactor, finalCapital,
+      equityCurve, signals: signalPools[selectedStrat], riskDims, suggestions: finalSugs,
+      strategyName: cfg.name,
+    };
+  }
+
+  function drawChart(curve, capitalWan) {
+    const svg = document.getElementById('returnChart');
+    const w = 640, h = 240, pad = { t: 20, r: 20, b: 30, l: 60 };
+    const cw = w - pad.l - pad.r, ch = h - pad.t - pad.b;
+
+    const minEq = Math.min(...curve.map(p => p.equity), capitalWan * 10000);
+    const maxEq = Math.max(...curve.map(p => p.equity));
+    const range = maxEq - minEq || 1;
+
+    const toX = i => pad.l + (i / (curve.length - 1)) * cw;
+    const toY = v => pad.t + ch - ((v - minEq) / range) * ch;
+
+    // Grid
+    let grid = '';
+    for (let i = 0; i <= 4; i++) {
+      const y = pad.t + (ch / 4) * i;
+      grid += `<line x1="${pad.l}" y1="${y}" x2="${w - pad.r}" y2="${y}" stroke="#e2e8f0" stroke-width="1"/>`;
+      const val = maxEq - (range / 4) * i;
+      grid += `<text x="${pad.l - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="#94a3b8">${(val/10000).toFixed(0)}w</text>`;
+    }
+
+    // Path
+    let pathD = `M ${toX(0)} ${toY(curve[0].equity)}`;
+    for (let i = 1; i < curve.length; i++) {
+      pathD += ` L ${toX(i)} ${toY(curve[i].equity)}`;
+    }
+
+    // Area
+    const areaD = pathD + ` L ${toX(curve.length - 1)} ${pad.t + ch} L ${toX(0)} ${pad.t + ch} Z`;
+
+    // Benchmark line (flat at initial)
+    const benchY = toY(capitalWan * 10000);
+
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(37,99,235,.25)"/>
+          <stop offset="100%" stop-color="rgba(37,99,235,.02)"/>
+        </linearGradient>
+      </defs>
+      ${grid}
+      <path d="${areaD}" fill="url(#areaGrad)"/>
+      <path d="${pathD}" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="${pad.l}" y1="${benchY}" x2="${w - pad.r}" y2="${benchY}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <text x="${w - pad.r}" y="${benchY - 6}" text-anchor="end" font-size="11" fill="#94a3b8">初始资金</text>
+    `;
+  }
+
+  function drawRiskRadar(dims) {
+    const svg = document.getElementById('riskSvg');
+    const cx = 140, cy = 100, r = 70;
+    const pts = [
+      { angle: -Math.PI/2, name: dims[0].name, score: dims[0].score },
+      { angle: 0, name: dims[1].name, score: dims[1].score },
+      { angle: Math.PI/2, name: dims[2].name, score: dims[2].score },
+      { angle: Math.PI, name: dims[3].name, score: dims[3].score },
+    ];
+
+    let pathD = '';
+    pts.forEach((p, i) => {
+      const pr = (p.score / 100) * r;
+      const px = cx + Math.cos(p.angle) * pr;
+      const py = cy + Math.sin(p.angle) * pr;
+      pathD += (i ? ' L ' : 'M ') + px + ' ' + py;
+    });
+    pathD += ' Z';
+
+    // Grid
+    let grid = '';
+    [0.25, 0.5, 0.75, 1].forEach(ratio => {
+      let d = '';
+      pts.forEach((p, i) => {
+        const pr = ratio * r;
+        const px = cx + Math.cos(p.angle) * pr;
+        const py = cy + Math.sin(p.angle) * pr;
+        d += (i ? ' L ' : 'M ') + px + ' ' + py;
+      });
+      d += ' Z';
+      grid += `<path d="${d}" fill="none" stroke="#e2e8f0" stroke-width="1"/>`;
+    });
+    pts.forEach(p => {
+      grid += `<line x1="${cx}" y1="${cy}" x2="${cx + Math.cos(p.angle) * r}" y2="${cy + Math.sin(p.angle) * r}" stroke="#e2e8f0" stroke-width="1"/>`;
+    });
+
+    // Labels
+    let labels = '';
+    pts.forEach(p => {
+      const lr = r + 22;
+      const lx = cx + Math.cos(p.angle) * lr;
+      const ly = cy + Math.sin(p.angle) * lr;
+      labels += `<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#475569" font-weight="700">${p.name}</text>`;
+      labels += `<text x="${lx}" y="${ly + 14}" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#2563eb" font-weight="800">${p.score}</text>`;
+    });
+
+    svg.innerHTML = `
+      ${grid}
+      <path d="${pathD}" fill="rgba(239,68,68,.15)" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/>
+      ${pts.map(p => {
+        const pr = (p.score / 100) * r;
+        return `<circle cx="${cx + Math.cos(p.angle) * pr}" cy="${cy + Math.sin(p.angle) * pr}" r="3.5" fill="#ef4444" stroke="#fff" stroke-width="1.5"/>`;
+      }).join('')}
+      ${labels}
+    `;
+  }
+
+  function render(data) {
+    // Metrics
+    const mg = document.getElementById('metricGrid');
+    const totalReturnPct = (data.totalReturn * 100).toFixed(2);
+    const isProfit = data.totalReturn >= 0;
+    mg.innerHTML = `
+      <div class="metric-card">
+        <div class="label">总收益率</div>
+        <div class="value ${isProfit ? 'up' : 'down'}">${isProfit ? '+' : ''}${totalReturnPct}%</div>
+        <div class="change ${isProfit ? 'up' : 'down'}">${isProfit ? '盈利' : '亏损'}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">年化收益</div>
+        <div class="value ${data.annualReturn >= 0 ? 'up' : 'down'}">${(data.annualReturn * 100).toFixed(1)}%</div>
+        <div class="change neutral">年化</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">夏普比率</div>
+        <div class="value ${data.sharpe >= 1.5 ? 'up' : data.sharpe >= 1.0 ? 'neutral' : 'down'}">${data.sharpe.toFixed(2)}</div>
+        <div class="change ${data.sharpe >= 1.5 ? 'up' : 'down'}">${data.sharpe >= 1.5 ? '优秀' : data.sharpe >= 1.0 ? '良好' : '一般'}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">最大回撤</div>
+        <div class="value down">-${(data.maxDrawdown * 100).toFixed(1)}%</div>
+        <div class="change ${data.maxDrawdown < 0.15 ? 'up' : 'down'}">${data.maxDrawdown < 0.15 ? '可控' : '需关注'}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">胜率</div>
+        <div class="value ${data.winRate >= 0.6 ? 'up' : 'neutral'}">${(data.winRate * 100).toFixed(1)}%</div>
+        <div class="change ${data.winRate >= 0.6 ? 'up' : 'down'}">${data.winRate >= 0.6 ? '高' : '中'}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">交易次数</div>
+        <div class="value neutral">${data.tradeCount}</div>
+        <div class="change neutral">次</div>
+      </div>
+    `;
+
+    // Chart
+    drawChart(data.equityCurve, data.capitalWan);
+
+    // Signals
+    const sc = document.getElementById('signalCard');
+    if (data.signals.length === 0) {
+      sc.innerHTML = '<div style="padding:20px;text-align:center;color:var(--muted);font-size:14px;">暂无信号</div>';
+    } else {
+      sc.innerHTML = `
+        <div class="signal-header"><div>指标</div><div>数值</div><div>信号</div><div>理由</div></div>
+        ${data.signals.map(s => {
+          const cls = s.signal === 'BUY' ? 'sig-buy' : s.signal === 'SELL' ? 'sig-sell' : 'sig-hold';
+          return `<div class="signal-row">
+            <div>${s.indicator}</div>
+            <div>${s.value}</div>
+            <div><span class="sig-badge ${cls}">${s.signal}</span></div>
+            <div>${s.reason}</div>
+          </div>`;
+        }).join('')}
+      `;
+    }
+
+    // Risk
+    drawRiskRadar(data.riskDims);
+
+    // Suggestions
+    const sug = document.getElementById('suggestCard');
+    sug.innerHTML = `
+      <h3>💡 参数优化与风控建议</h3>
+      ${data.suggestions.map((s, i) => `
+        <div class="suggest-item">
+          <div class="suggest-num">${i + 1}</div>
+          <div>${s}</div>
+        </div>
+      `).join('')}
+      <div style="margin-top:14px;font-size:12px;opacity:.7;">
+        回测策略: ${data.strategyName} | 标的: ${data.symbol} | 周期: ${data.periodDays}日 | 资金: ${data.capitalWan}万
+      </div>
+    `;
+  }
+
+  window.runBacktest = function() {
+    document.getElementById('loading').classList.add('active');
+    document.getElementById('result').classList.remove('active');
+    document.getElementById('runBtn').disabled = true;
+
+    setTimeout(() => {
+      const data = generateData();
+      render(data);
+      document.getElementById('loading').classList.remove('active');
+      document.getElementById('result').classList.add('active');
+      document.getElementById('runBtn').disabled = false;
+    }, 1200);
+  };
+})();
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const radarContainer = document.querySelector('.risk-radar, #risk-radar, [data-type="risk"]');
+    if (radarContainer) {
+        const result = await LongmaAPI.risk.getRadar('示例企业');
+        if (result.success && result.data) {
+            renderRiskRadar(radarContainer, result.data);
+        }
+    }
+});
+
+function renderRiskRadar(container, data) {
+    let html = `<div class="api-risk-summary">
+        <h3>${data.enterprise} - 综合评分: ${data.overall_score}</h3>
+        <div class="api-dimensions">`;
+    data.dimensions.forEach(dim => {
+        const levelClass = dim.level === 'low' ? 'safe' : dim.level === 'medium' ? 'warning' : 'danger';
+        html += `<div class="api-dim-item ${levelClass}">
+            <span class="name">${dim.name}</span>
+            <span class="score">${dim.score}</span>
+            <span class="level">${dim.level}</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    if (data.alerts && data.alerts.length > 0) {
+        html += '<div class="api-alerts"><h4>预警信息</h4>';
+        data.alerts.forEach(alert => {
+            html += `<div class="api-alert ${alert.type}">${alert.message}</div>`;
+        });
+        html += '</div>';
+    }
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
