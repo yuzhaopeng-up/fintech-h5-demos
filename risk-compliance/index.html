@@ -1,0 +1,842 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FinAIAI风控合规体验，监管政策解读+合规检查+风险预警，赋能银行风控部门。">
+    <meta name="keywords" content="风控合规,监管合规,风险预警,合规检查,FinAIAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FinAIAI">
+    <link rel="canonical" href="https://www.longma-ai.com/h5/risk-compliance">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longma-ai.com/h5/risk-compliance">
+    <meta property="og:title" content="风控合规深度体验 | FinAIAI">
+    <meta property="og:description" content="FinAIAI风控合规体验，监管政策解读+合规检查+风险预警，赋能银行风控部门。">
+    <meta property="og:site_name" content="FinAIAI">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://www.longma-ai.com/og/risk-compliance.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="风控合规深度体验 | FinAIAI">
+    <meta name="twitter:description" content="FinAIAI风控合规体验，监管政策解读+合规检查+风险预警，赋能银行风控部门。">
+    <meta name="twitter:image" content="https://www.longma-ai.com/og/risk-compliance.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "风控合规深度体验 | FinAIAI",
+        "description": "FinAIAI风控合规体验，监管政策解读+合规检查+风险预警，赋能银行风控部门。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "FinAIAI",
+            "url": "https://www.longma-ai.com"
+        }
+    }
+    </script>
+    
+
+
+<!-- Structured Data (JSON-LD) -->
+
+
+<!-- Structured Data (JSON-LD) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>风控合规深度体验 | FinAIAI</title>
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--primary:#2563eb;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--info:#06b6d4;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--radius:14px;--shadow:0 4px 20px rgba(0,0,0,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:40px}
+.container{max-width:420px;margin:0 auto;padding:16px}
+
+/* 头部 */
+.header{text-align:center;padding:24px 0 16px}
+.header .logo{width:56px;height:56px;margin:0 auto 12px;border-radius:18px;background:linear-gradient(135deg,#dc2626,#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;box-shadow:0 8px 24px rgba(220,38,38,.25)}
+.header h1{font-size:22px;font-weight:800;background:linear-gradient(135deg,#dc2626,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header p{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* 功能选择 */
+.func-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.func-card{cursor:pointer;padding:12px 8px;border-radius:12px;border:2px solid var(--border);background:#fff;text-align:center;transition:all .15s}
+.func-card:hover{border-color:var(--primary)}
+.func-card.active{border-color:var(--primary);background:linear-gradient(135deg,#eff6ff,#eef2ff)}
+.func-card .emoji{font-size:24px;margin-bottom:4px}
+.func-card .name{font-size:12px;font-weight:700}
+
+/* 卡片 */
+.card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow);animation:fadeIn .5s ease forwards;opacity:0;transform:translateY(12px)}
+.card:nth-child(2){animation-delay:.05s}
+.card-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.card-title .icon{font-size:18px}
+
+/* 表单 */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-item{display:flex;flex-direction:column;gap:4px}
+.form-item.full{grid-column:1/-1}
+.form-item label{font-size:12px;color:var(--muted);font-weight:500}
+.form-item input,.form-item select{padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:#fff}
+.form-item input:focus,.form-item select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+
+/* 多选标签 */
+.tag-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tag{cursor:pointer;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:13px;transition:all .15s;user-select:none}
+.tag:hover{border-color:var(--primary);color:var(--primary)}
+.tag.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* 开关项 */
+.switch-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.switch-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border);cursor:pointer}
+.switch-item:hover{background:#f1f5f9}
+.switch-item.active{background:#fef2f2;border-color:#fecaca}
+.switch-item .toggle{width:40px;height:22px;border-radius:999px;background:#e2e8f0;position:relative;flex-shrink:0;transition:background .2s}
+.switch-item.active .toggle{background:var(--danger)}
+.switch-item .toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;left:2px;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.switch-item.active .toggle::after{transform:translateX(18px)}
+.switch-item .info{flex:1}
+.switch-item .name{font-size:13px;font-weight:600}
+.switch-item .desc{font-size:11px;color:var(--muted)}
+
+/* 评分圆环 */
+.score-wrap{display:flex;flex-direction:column;align-items:center;padding:20px 0}
+.score-circle{width:140px;height:140px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;transition:background .5s}
+.score-circle::before{content:'';position:absolute;width:110px;height:110px;border-radius:50%;background:#fff}
+.score-inner{position:relative;z-index:1;text-align:center}
+.score-num{font-size:36px;font-weight:800;line-height:1}
+.score-label{font-size:12px;color:var(--muted);margin-top:2px}
+.score-status{font-size:14px;font-weight:700;margin-top:8px;padding:4px 14px;border-radius:999px}
+.score-status.green{background:#d1fae5;color:#065f46}
+.score-status.yellow{background:#fef3c7;color:#92400e}
+.score-status.red{background:#fee2e2;color:#991b1b}
+
+/* 维度列表 */
+.dim-list{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.dim-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border)}
+.dim-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.dim-icon.green{background:#d1fae5}.dim-icon.yellow{background:#fef3c7}.dim-icon.red{background:#fee2e2}
+.dim-info{flex:1}
+.dim-name{font-size:13px;font-weight:600}
+.dim-desc{font-size:11px;color:var(--muted)}
+.dim-score{font-size:13px;font-weight:700;min-width:50px;text-align:right}
+.dim-score.green{color:var(--success)}.dim-score.yellow{color:var(--warning)}.dim-score.red{color:var(--danger)}
+
+/* 结论卡片 */
+.conclusion{padding:16px;border-radius:12px;text-align:center;margin-top:14px}
+.conclusion.green{background:linear-gradient(135deg,#d1fae5,#ecfdf5);border:1px solid #a7f3d0}
+.conclusion.yellow{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fde68a}
+.conclusion.red{background:linear-gradient(135deg,#fee2e2,#fef2f2);border:1px solid #fecaca}
+.conclusion-icon{font-size:32px;margin-bottom:6px}
+.conclusion-title{font-size:16px;font-weight:800;margin-bottom:4px}
+.conclusion-desc{font-size:13px;color:var(--muted)}
+
+/* 建议列表 */
+.advice-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.advice-item{display:flex;gap:8px;padding:10px 12px;background:#f8fafc;border-radius:10px;border-left:3px solid var(--primary);font-size:13px}
+.advice-item .bullet{width:18px;height:18px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* 表格 */
+.table-wrap{overflow-x:auto;margin-top:10px}
+.table{width:100%;border-collapse:collapse;font-size:12px}
+.table th,.table td{padding:8px;border:1px solid var(--border);text-align:center}
+.table th{background:#f8fafc;font-weight:600}
+.table td{white-space:nowrap}
+
+/* 按钮 */
+.btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#dc2626,#7c3aed);color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(220,38,38,.3);transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn-secondary{background:#f1f5f9;color:var(--text);box-shadow:none;margin-top:10px}
+
+/* 隐藏/显示 */
+.hidden{display:none}
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+
+/* 进度条 */
+.progress-wrap{margin-top:12px}
+.progress-bar{height:8px;background:var(--border);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--success),#34d399);transition:width .4s ease}
+
+/* 风险标记 */
+.flag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.flag-item{padding:6px 12px;border-radius:999px;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;font-size:12px;font-weight:600}
+.flag-item.green{background:#d1fae5;border-color:#a7f3d0;color:#065f46}
+.flag-item.yellow{background:#fef3c7;border-color:#fde68a;color:#92400e}
+</style>
+
+<style>
+/* 移动端优化 */
+* { -webkit-tap-highlight-color: transparent; }
+body { touch-action: manipulation; -webkit-touch-callout: none; }
+button, a { touch-action: manipulation; }
+</style>
+
+<script src="../longma-api-client.js" defer></script>
+    <!-- ========== Performance Hints ========== -->
+    <link rel="preconnect" href="//www.longma-ai.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.longma-ai.com">
+    <!-- Preload critical CSS for above-the-fold -->
+    <link rel="preload" as="style" href="" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href=""></noscript>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">🛡️</div>
+    <h1>风控合规深度体验</h1>
+    <p>风险扫描 · 压力测试 · 反欺诈 · 可疑交易 · AML评级</p>
+  </div>
+
+  <!-- 功能选择 -->
+  <div class="func-grid">
+    <div class="func-card active" data-func="riskScan" onclick="selectFunc(this)">
+      <div class="emoji">🔍</div>
+      <div class="name">风险扫描</div>
+    </div>
+    <div class="func-card" data-func="stressTest" onclick="selectFunc(this)">
+      <div class="emoji">📊</div>
+      <div class="name">压力测试</div>
+    </div>
+    <div class="func-card" data-func="fraudDetect" onclick="selectFunc(this)">
+      <div class="emoji">🚨</div>
+      <div class="name">反欺诈</div>
+    </div>
+    <div class="func-card" data-func="suspiciousTxn" onclick="selectFunc(this)">
+      <div class="emoji">👁️</div>
+      <div class="name">可疑交易</div>
+    </div>
+    <div class="func-card" data-func="amlRating" onclick="selectFunc(this)">
+      <div class="emoji">🔒</div>
+      <div class="name">AML评级</div>
+    </div>
+    <div class="func-card" data-func="complianceScript" onclick="selectFunc(this)">
+      <div class="emoji">✅</div>
+      <div class="name">合规话术</div>
+    </div>
+  </div>
+
+  <!-- ========== 风险扫描 ========== -->
+  <div id="riskScanForm">
+    <div class="card">
+      <div class="card-title"><span class="icon">🔍</span>企业风险扫描</div>
+      <div class="form-grid">
+        <div class="form-item">
+          <label>负债率 (%)</label>
+          <input type="number" id="rsDebt" value="55" min="0" max="100">
+        </div>
+        <div class="form-item">
+          <label>逾期次数</label>
+          <input type="number" id="rsOverdue" value="0" min="0" max="50">
+        </div>
+        <div class="form-item">
+          <label>负面舆情 (条)</label>
+          <input type="number" id="rsNegative" value="0" min="0" max="100">
+        </div>
+        <div class="form-item">
+          <label>投诉件数</label>
+          <input type="number" id="rsComplaints" value="0" min="0" max="100">
+        </div>
+      </div>
+      <button class="btn" onclick="evaluateRiskScan()">🚀 开始风险扫描</button>
+    </div>
+  </div>
+
+  <!-- ========== 压力测试 ========== -->
+  <div id="stressTestForm" class="hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span>压力测试情景</div>
+      <div class="form-grid">
+        <div class="func-card full" style="grid-column:1/-1;text-align:left;padding:14px" onclick="selectStress('mild',this)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:24px">🟢</span>
+            <div>
+              <div style="font-weight:700">轻度压力</div>
+              <div style="font-size:12px;color:var(--muted)">GDP增速+3.5%→+2.0% · 房价跌5%</div>
+            </div>
+          </div>
+        </div>
+        <div class="func-card full" style="grid-column:1/-1;text-align:left;padding:14px" onclick="selectStress('moderate',this)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:24px">🟡</span>
+            <div>
+              <div style="font-weight:700">中度压力</div>
+              <div style="font-size:12px;color:var(--muted)">GDP增速+3.5%→+0.5% · 房价跌15%</div>
+            </div>
+          </div>
+        </div>
+        <div class="func-card full" style="grid-column:1/-1;text-align:left;padding:14px" onclick="selectStress('severe',this)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:24px">🔴</span>
+            <div>
+              <div style="font-weight:700">重度压力</div>
+              <div style="font-size:12px;color:var(--muted)">GDP负增长2% · 房价跌30%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn" id="stressBtn" onclick="evaluateStressTest()" disabled>🚀 生成压力测试报告</button>
+    </div>
+  </div>
+
+  <!-- ========== 反欺诈 ========== -->
+  <div id="fraudDetectForm" class="hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">🚨</span>反欺诈检测</div>
+      <div class="switch-list">
+        <div class="switch-item" onclick="toggleSwitch(this,'fd1')">
+          <div class="toggle"></div>
+          <div class="info">
+            <div class="name">异地大额交易</div>
+            <div class="desc">非常用地点单笔≥5万</div>
+          </div>
+        </div>
+        <div class="switch-item" onclick="toggleSwitch(this,'fd2')">
+          <div class="toggle"></div>
+          <div class="info">
+            <div class="name">夜间频繁交易</div>
+            <div class="desc">00:00-06:00交易≥3笔</div>
+          </div>
+        </div>
+        <div class="switch-item" onclick="toggleSwitch(this,'fd3')">
+          <div class="toggle"></div>
+          <div class="info">
+            <div class="name">快进快出</div>
+            <div class="desc">资金转入后30分钟内转出</div>
+          </div>
+        </div>
+        <div class="switch-item" onclick="toggleSwitch(this,'fd4')">
+          <div class="toggle"></div>
+          <div class="info">
+            <div class="name">新卡大额</div>
+            <div class="desc">开卡7天内单笔≥2万</div>
+          </div>
+        </div>
+        <div class="switch-item" onclick="toggleSwitch(this,'fd5')">
+          <div class="toggle"></div>
+          <div class="info">
+            <div class="name">POS集中交易</div>
+            <div class="desc">同一商户短时间多笔交易</div>
+          </div>
+        </div>
+        <div class="switch-item" onclick="toggleSwitch(this,'fd6')">
+          <div class="toggle"></div>
+          <div class="info">
+            <div class="name">跨境异常</div>
+            <div class="desc">非常用国家/地区交易</div>
+          </div>
+        </div>
+        <div class="switch-item" onclick="toggleSwitch(this,'fd7')">
+          <div class="toggle"></div>
+          <div class="info">
+            <div class="name">关联可疑账户</div>
+            <div class="desc">与可疑账户有资金往来</div>
+          </div>
+        </div>
+        <div class="switch-item" onclick="toggleSwitch(this,'fd8')">
+          <div class="toggle"></div>
+          <div class="info">
+            <div class="name">整数交易</div>
+            <div class="desc">频繁出现整数金额交易</div>
+          </div>
+        </div>
+      </div>
+      <button class="btn" onclick="evaluateFraud()">🚀 评估欺诈风险</button>
+    </div>
+  </div>
+
+  <!-- ========== 可疑交易 ========== -->
+  <div id="suspiciousTxnForm" class="hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">👁️</span>可疑交易识别</div>
+      <div class="form-grid">
+        <div class="form-item">
+          <label>分担/转账笔数</label>
+          <input type="number" id="stCount" value="5" min="0">
+        </div>
+        <div class="form-item">
+          <label>每笔金额 (万)</label>
+          <input type="number" id="stAmount" value="3" min="0" step="0.1">
+        </div>
+        <div class="form-item">
+          <label>对手方数量</label>
+          <input type="number" id="stCounterparties" value="3" min="0">
+        </div>
+        <div class="form-item full">
+          <label>交易时段</label>
+          <div class="tag-group">
+            <span class="tag" data-val="day">白天</span>
+            <span class="tag active" data-val="night">凌晨/夜间</span>
+          </div>
+        </div>
+        <div class="form-item full">
+          <label>交易地域</label>
+          <div class="tag-group">
+            <span class="tag active" data-val="local">常用地</span>
+            <span class="tag" data-val="remote">异地</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn" onclick="evaluateSuspicious()">🚀 识别可疑交易</button>
+    </div>
+  </div>
+
+  <!-- ========== AML评级 ========== -->
+  <div id="amlRatingForm" class="hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">🔒</span>AML客户风险评级</div>
+      <div class="form-item full">
+        <label>客户特征</label>
+        <div class="tag-group" id="amlCustomerTags">
+          <span class="tag" data-val="3">非居民客户</span>
+          <span class="tag" data-val="5">政治公众人物</span>
+          <span class="tag" data-val="5">匿名/假名</span>
+          <span class="tag" data-val="3">复杂股权结构</span>
+          <span class="tag" data-val="2">现金密集型行业</span>
+          <span class="tag" data-val="2">无固定职业</span>
+        </div>
+      </div>
+      <div class="form-item full">
+        <label>业务特征</label>
+        <div class="tag-group" id="amlBusinessTags">
+          <span class="tag" data-val="3">跨境交易</span>
+          <span class="tag" data-val="3">现金交易频繁</span>
+          <span class="tag" data-val="2">第三方付款</span>
+          <span class="tag" data-val="2">无明确用途</span>
+          <span class="tag" data-val="2">频繁变更信息</span>
+          <span class="tag" data-val="4">拒绝配合尽调</span>
+        </div>
+      </div>
+      <div class="form-item full">
+        <label>地域风险</label>
+        <div class="tag-group" id="amlGeoTags">
+          <span class="tag" data-val="4">高风险国家</span>
+          <span class="tag" data-val="5">制裁国家</span>
+          <span class="tag" data-val="3">离岸金融中心</span>
+          <span class="tag" data-val="3">反洗钱薄弱地区</span>
+        </div>
+      </div>
+      <button class="btn" onclick="evaluateAML()">🚀 AML风险评级</button>
+    </div>
+  </div>
+
+  <!-- ========== 合规话术 ========== -->
+  <div id="complianceScriptForm" class="hidden">
+    <div class="card">
+      <div class="card-title"><span class="icon">✅</span>合规话术检查</div>
+      <div class="form-item full">
+        <label>营销话术</label>
+        <textarea id="scriptText" rows="4" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;resize:vertical" placeholder="输入您的营销话术，例如：这款产品稳赚不赔，保本保收益，内部渠道限量发售..."></textarea>
+      </div>
+      <button class="btn" onclick="evaluateScript()">🚀 检查合规性</button>
+    </div>
+  </div>
+
+  <!-- ========== 结果区域 ========== -->
+  <div id="resultArea" class="hidden"></div>
+
+</div>
+
+<script>
+let currentFunc='riskScan';
+let stressScenario='';
+let fraudSwitches=new Set();
+
+// 功能切换
+function selectFunc(el){
+  document.querySelectorAll('.func-card').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  currentFunc=el.dataset.func;
+  ['riskScanForm','stressTestForm','fraudDetectForm','suspiciousTxnForm','amlRatingForm','complianceScriptForm'].forEach(id=>{
+    document.getElementById(id).classList.add('hidden');
+  });
+  document.getElementById(currentFunc+'Form').classList.remove('hidden');
+  document.getElementById('resultArea').classList.add('hidden');
+}
+
+// 标签交互
+document.querySelectorAll('.tag-group').forEach(g=>{
+  g.addEventListener('click',e=>{
+    if(!e.target.classList.contains('tag'))return;
+    e.target.classList.toggle('active');
+  });
+});
+
+// 压力测试选择
+function selectStress(type,el){
+  stressScenario=type;
+  document.querySelectorAll('#stressTestForm .func-card').forEach(c=>c.style.borderColor='var(--border)');
+  el.style.borderColor='var(--primary)';
+  document.getElementById('stressBtn').disabled=false;
+}
+
+// 反欺诈开关
+function toggleSwitch(el,key){
+  el.classList.toggle('active');
+  if(el.classList.contains('active'))fraudSwitches.add(key);else fraudSwitches.delete(key);
+}
+
+// ====== 风险扫描 ======
+function evaluateRiskScan(){
+  const debt=parseFloat(document.getElementById('rsDebt').value)||0;
+  const overdue=parseInt(document.getElementById('rsOverdue').value)||0;
+  const negative=parseInt(document.getElementById('rsNegative').value)||0;
+  const complaints=parseInt(document.getElementById('rsComplaints').value)||0;
+
+  const creditScore=Math.min(100,debt*0.7+overdue*12);
+  const marketScore=Math.min(100,negative*15);
+  const operationalScore=Math.min(100,complaints*10);
+  const complianceScore=Math.min(100,(debt>=70&&overdue>=2)?30:0);
+  const total=Math.round(creditScore*0.45+marketScore*0.25+operationalScore*0.2+complianceScore*0.1);
+  const level=total>=70?'红色':total>=50?'橙色':total>=30?'黄色':'绿色';
+  const advice=level==='红色'?'立即冻结新增授信并启动人工复核':level==='橙色'?'限制新增敝口，7日内完成补充调查':level==='黄色'?'纳入观察名单，月度复查':'维持常规监控';
+
+  renderResult(`
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span>风险扫描结果</div>
+      <div class="score-wrap">
+        <div class="score-circle" style="background:conic-gradient(${total>=70?'var(--danger)':total>=50?'var(--warning)':'var(--success)'} 0deg,${total>=70?'var(--danger)':total>=50?'var(--warning)':'var(--success)'} ${total*3.6}deg,#e2e8f0 ${total*3.6}deg,#e2e8f0 360deg)">
+          <div class="score-inner"><div class="score-num">${total}</div><div class="score-label">/100</div></div>
+        </div>
+        <div class="score-status ${total>=70?'red':total>=50?'yellow':'green'}">${total>=70?'🔴':total>=50?'🟡':'🟢'} ${level}风险</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">🔍</span>四维度评分</div>
+      <div class="dim-list">
+        <div class="dim-item"><div class="dim-icon ${creditScore>=60?'red':creditScore>=30?'yellow':'green'}">💰</div><div class="dim-info"><div class="dim-name">信用风险</div><div class="dim-desc">负债率${debt}% · 逾期${overdue}次</div></div><div class="dim-score ${creditScore>=60?'red':creditScore>=30?'yellow':'green'}">${Math.round(creditScore)}分</div></div>
+        <div class="dim-item"><div class="dim-icon ${marketScore>=60?'red':marketScore>=30?'yellow':'green'}">📢</div><div class="dim-info"><div class="dim-name">市场/舆情风险</div><div class="dim-desc">负面舆情${negative}条</div></div><div class="dim-score ${marketScore>=60?'red':marketScore>=30?'yellow':'green'}">${Math.round(marketScore)}分</div></div>
+        <div class="dim-item"><div class="dim-icon ${operationalScore>=60?'red':operationalScore>=30?'yellow':'green'}">⚖️</div><div class="dim-info"><div class="dim-name">操作风险</div><div class="dim-desc">投诉${complaints}件</div></div><div class="dim-score ${operationalScore>=60?'red':operationalScore>=30?'yellow':'green'}">${Math.round(operationalScore)}分</div></div>
+        <div class="dim-item"><div class="dim-icon ${complianceScore>=60?'red':complianceScore>=30?'yellow':'green'}">📋</div><div class="dim-info"><div class="dim-name">合规风险</div><div class="dim-desc">异常/资料缺失检测</div></div><div class="dim-score ${complianceScore>=60?'red':complianceScore>=30?'yellow':'green'}">${Math.round(complianceScore)}分</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span>处置建议</div>
+      <div class="conclusion ${total>=70?'red':total>=50?'yellow':'green'}">
+        <div class="conclusion-icon">${total>=70?'⚠️':total>=50?'🟡':'✅'}</div>
+        <div class="conclusion-title">${advice}</div>
+        <div class="conclusion-desc">综合风险评分 ${total}/100 · ${level}等级</div>
+      </div>
+    </div>
+    <button class="btn btn-secondary" onclick="resetResult()">🔄 重新扫描</button>
+  `);
+}
+
+// ====== 压力测试 ======
+function evaluateStressTest(){
+  if(!stressScenario)return;
+  const scenarios={
+    mild:{名称:'轻度压力',GDP:'+3.5% → +2.0%',unemployment:'5.0% → 6.5%',house:'-5%',stock:'-15%',rate:'+50bp',impact:1.5,
+      baseNPL:1.5,capBefore:13.5,provBefore:200},
+    moderate:{名称:'中度压力',GDP:'+3.5% → +0.5%',unemployment:'5.0% → 8.0%',house:'-15%',stock:'-30%',rate:'+100bp',impact:3.0,
+      baseNPL:1.6,capBefore:12.8,provBefore:190},
+    severe:{名称:'重度压力',GDP:'+3.5% → -2.0%',unemployment:'5.0% → 10.0%',house:'-30%',stock:'-50%',rate:'+200bp',impact:5.0,
+      baseNPL:1.7,capBefore:12.0,provBefore:180}
+  };
+  const s=scenarios[stressScenario];
+  const projectedNPL=(s.baseNPL+s.impact).toFixed(2);
+  const capAfter=(s.capBefore-s.impact*0.8).toFixed(2);
+  const provAfter=Math.max(100,(s.provBefore-s.impact*15)).toFixed(0);
+
+  renderResult(`
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span>${s.名称}测试报告</div>
+      <div class="table-wrap">
+        <table class="table">
+          <tr><th>宏观指标</th><th>基准情景</th><th>压力情景</th></tr>
+          <tr><td>GDP增速</td><td>+3.5%</td><td>${s.GDP.split('→')[1]}</td></tr>
+          <tr><td>失业率</td><td>5.0%</td><td>${s.unemployment.split('→')[1]}</td></tr>
+          <tr><td>房价跌幅</td><td>0%</td><td>${s.house}</td></tr>
+          <tr><td>股市跌幅</td><td>0%</td><td>${s.stock}</td></tr>
+          <tr><td>利率变动</td><td>0bp</td><td>${s.rate}</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">💰</span>关键指标影响</div>
+      <div class="table-wrap">
+        <table class="table">
+          <tr><th>指标</th><th>基准值</th><th>压力后</th><th>变动</th></tr>
+          <tr><td>不良贷款率</td><td>${s.baseNPL}%</td><td>${projectedNPL}%</td><td>+${s.impact}pp</td></tr>
+          <tr><td>资本充足率</td><td>${s.capBefore}%</td><td>${capAfter}%</td><td>${(capAfter-s.capBefore).toFixed(2)}pp</td></tr>
+          <tr><td>拨备覆盖率</td><td>${s.provBefore}%</td><td>${provAfter}%</td><td>${(provAfter-s.provBefore).toFixed(0)}pp</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">⚠️</span>风险分析</div>
+      <div class="conclusion ${stressScenario==='severe'?'red':stressScenario==='moderate'?'yellow':'green'}">
+        <div class="conclusion-icon">${stressScenario==='severe'?'🔴':stressScenario==='moderate'?'🟡':'🟢'}</div>
+        <div class="conclusion-title">${stressScenario==='severe'?'严重风险警告：资本充足率可能低于监管要求':stressScenario==='moderate'?'资产质量明显恶化，需加强预警':'银行整体风险可控'}</div>
+        <div class="conclusion-desc">不良贷款率上升${s.impact}个百分点 · 资本充足率${capAfter}%</div>
+      </div>
+    </div>
+    <button class="btn btn-secondary" onclick="resetResult()">🔄 重新测试</button>
+  `);
+}
+
+// ====== 反欺诈 ======
+function evaluateFraud(){
+  const rules=[
+    {key:'fd1',name:'异地大额交易',score:15,risk:'高'},
+    {key:'fd2',name:'夜间频繁交易',score:10,risk:'中'},
+    {key:'fd3',name:'快进快出',score:20,risk:'高'},
+    {key:'fd4',name:'新卡大额',score:12,risk:'中'},
+    {key:'fd5',name:'POS集中交易',score:18,risk:'高'},
+    {key:'fd6',name:'跨境异常',score:15,risk:'中'},
+    {key:'fd7',name:'关联可疑账户',score:20,risk:'高'},
+    {key:'fd8',name:'整数交易',score:5,risk:'低'}
+  ];
+  let score=0;
+  const flags=[];
+  rules.forEach(r=>{
+    if(fraudSwitches.has(r.key)){score+=r.score;flags.push(r.name);}
+  });
+  const level=score>=50?'高风险':score>=25?'中风险':'低风险';
+
+  renderResult(`
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span>欺诈风险评估</div>
+      <div class="score-wrap">
+        <div class="score-circle" style="background:conic-gradient(${score>=50?'var(--danger)':score>=25?'var(--warning)':'var(--success)'} 0deg,${score>=50?'var(--danger)':score>=25?'var(--warning)':'var(--success)'} ${score*3.6}deg,#e2e8f0 ${score*3.6}deg,#e2e8f0 360deg)">
+          <div class="score-inner"><div class="score-num">${score}</div><div class="score-label">/100</div></div>
+        </div>
+        <div class="score-status ${score>=50?'red':score>=25?'yellow':'green'}">${score>=50?'🔴':score>=25?'🟡':'🟢'} ${level}</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span>命中规则</div>
+      ${flags.length?'<div class="flag-list">'+flags.map(f=>`<div class="flag-item">${f}</div>`).join('')+'</div>':'<p style="color:var(--muted);font-size:13px">未命中任何欺诈规则</p>'}
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">💡</span>处置建议</div>
+      <div class="advice-list">
+        <div class="advice-item"><div class="bullet">1</div><div>${score>=50?'立即冻结相关账户并上报人工复核':score>=25?'加强交易监控并电话核实':'维持常规监控'}</div></div>
+        <div class="advice-item"><div class="bullet">2</div><div>更新客户风险画像标签</div></div>
+        <div class="advice-item"><div class="bullet">3</div><div>定期复审欺诈规则命中策略</div></div>
+      </div>
+    </div>
+    <button class="btn btn-secondary" onclick="resetResult()">🔄 重新评估</button>
+  `);
+}
+
+// ====== 可疑交易 ======
+function evaluateSuspicious(){
+  const count=parseInt(document.getElementById('stCount').value)||0;
+  const amount=parseFloat(document.getElementById('stAmount').value)||0;
+  const cps=parseInt(document.getElementById('stCounterparties').value)||0;
+  const timeTag=document.querySelector('#suspiciousTxnForm .tag-group[data-val="day"],[data-val="night"] .tag.active');
+  const isNight=document.querySelector('#suspiciousTxnForm .tag-group:nth-of-type(1) .tag.active')?.dataset.val==='night';
+  const isRemote=document.querySelector('#suspiciousTxnForm .tag-group:nth-of-type(2) .tag.active')?.dataset.val==='remote';
+
+  let score=0,rules=[];
+  if(count>=5&&amount&&amount<5){score+=35;rules.push(`分拆交易：${count}笔、每笔${amount}万`);}
+  if(isNight){score+=25;rules.push('凌晨交易：非营业高风险时段');}
+  if(cps>=5){score+=25;rules.push(`对手方${cps}个：交易对手分散异常`);}
+  if(isRemote){score+=15;rules.push('异地交易：地域行为偏离');}
+  const level=score>=70?'高风险':score>=40?'中风险':'低风险';
+
+  renderResult(`
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span>可疑交易评估</div>
+      <div class="score-wrap">
+        <div class="score-circle" style="background:conic-gradient(${score>=70?'var(--danger)':score>=40?'var(--warning)':'var(--success)'} 0deg,${score>=70?'var(--danger)':score>=40?'var(--warning)':'var(--success)'} ${score*3.6}deg,#e2e8f0 ${score*3.6}deg,#e2e8f0 360deg)">
+          <div class="score-inner"><div class="score-num">${score}</div><div class="score-label">/100</div></div>
+        </div>
+        <div class="score-status ${score>=70?'red':score>=40?'yellow':'green'}">${score>=70?'🔴':score>=40?'🟡':'🟢'} ${level}</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span>命中规则</div>
+      ${rules.length?'<div class="flag-list">'+rules.map(r=>`<div class="flag-item">${r}</div>`).join('')+'</div>':'<p style="color:var(--muted);font-size:13px">未命中典型可疑规则</p>'}
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">💡</span>处置建议</div>
+      <div class="conclusion ${score>=70?'red':score>=40?'yellow':'green'}">
+        <div class="conclusion-icon">${score>=70?'⚠️':score>=40?'🟡':'✅'}</div>
+        <div class="conclusion-title">${score>=70?'立即人工复核，必要时提交可疑交易报告':score>=40?'纳入增强尽调并持续监测':'常规监控'}</div>
+      </div>
+    </div>
+    <button class="btn btn-secondary" onclick="resetResult()">🔄 重新识别</button>
+  `);
+}
+
+// ====== AML评级 ======
+function evaluateAML(){
+  let score=0;
+  const factors=[];
+  document.querySelectorAll('#amlRatingForm .tag.active').forEach(t=>{
+    const val=parseInt(t.dataset.val)||0;
+    score+=val;
+    factors.push(t.textContent);
+  });
+  const level=score>=10?'高风险':score>=5?'中风险':'低风险';
+  const period=score>=10?'每半年复审':score>=5?'每年复审':'每两年复审';
+
+  renderResult(`
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span>AML风险评级结果</div>
+      <div class="score-wrap">
+        <div class="score-circle" style="background:conic-gradient(${score>=10?'var(--danger)':score>=5?'var(--warning)':'var(--success)'} 0deg,${score>=10?'var(--danger)':score>=5?'var(--warning)':'var(--success)'} ${Math.min(score,20)*18}deg,#e2e8f0 ${Math.min(score,20)*18}deg,#e2e8f0 360deg)">
+          <div class="score-inner"><div class="score-num">${score}</div><div class="score-label">分</div></div>
+        </div>
+        <div class="score-status ${score>=10?'red':score>=5?'yellow':'green'}">${score>=10?'🔴':score>=5?'🟡':'🟢'} ${level}</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span>风险因素</div>
+      ${factors.length?'<div class="flag-list">'+factors.map(f=>`<div class="flag-item">${f}</div>`).join('')+'</div>':'<p style="color:var(--muted);font-size:13px">未选择风险因素</p>'}
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">🛡️</span>管控措施</div>
+      <div class="advice-list">
+        <div class="advice-item"><div class="bullet">1</div><div>${score>=10?'加强客户尽职调查':score>=5?'定期更新客户信息':'维持常规客户维护'}</div></div>
+        <div class="advice-item"><div class="bullet">2</div><div>${score>=10?'交易需经高级主管审批':score>=5?'关注交易异常':'标准交易监控'}</div></div>
+        <div class="advice-item"><div class="bullet">3</div><div>复审周期：${period}</div></div>
+      </div>
+    </div>
+    <button class="btn btn-secondary" onclick="resetResult()">🔄 重新评级</button>
+  `);
+}
+
+// ====== 合规话术 ======
+function evaluateScript(){
+  const text=document.getElementById('scriptText').value||'';
+  const rules={
+    '保本保收益':'不得承诺本金或收益保障',
+    '稳赚不赔':'不得使用绝对化收益承诺',
+    '无风险':'不得弱化或免除风险提示',
+    '最高收益':'不得片面强调最高收益',
+    '内部渠道':'不得暗示非公开特殊利益'
+  };
+  const hits=[];
+  Object.entries(rules).forEach(([kw,reason])=>{if(text.includes(kw))hits.push({kw,reason});});
+  const level=hits.length?'红灯':'绿灯';
+  let rewritten=text;
+  const replacements={'稳赚不赔':'历史表现不代表未来，产品收益存在波动','保本保收益':'请结合产品说明书了解本金和收益风险','无风险':'风险等级与您的风险承受能力匹配','最高收益':'业绩比较基准/历史收益仅供参考','内部渠道':'请以官方渠道披露信息为准'};
+  Object.entries(replacements).forEach(([old,t])=>{if(text.includes(old))rewritten=rewritten.replace(old,t);});
+
+  renderResult(`
+    <div class="card">
+      <div class="card-title"><span class="icon">🚩</span>检查结论</div>
+      <div class="conclusion ${hits.length?'red':'green'}">
+        <div class="conclusion-icon">${hits.length?'🔴':'🟢'}</div>
+        <div class="conclusion-title">${level}</div>
+        <div class="conclusion-desc">${hits.length?`命中${hits.length}条禁用表达，需改写后再触达客户`:'未命中禁用表达，可使用'}</div>
+      </div>
+    </div>
+    ${hits.length?`
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span>命中规则</div>
+      <div class="dim-list">
+        ${hits.map(h=>`<div class="dim-item"><div class="dim-icon red">⚠️</div><div class="dim-info"><div class="dim-name">${h.kw}</div><div class="dim-desc">${h.reason}</div></div></div>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">✅</span>合规改写</div>
+      <div style="padding:12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border);font-size:13px;line-height:1.8">${rewritten||'（请输入话术文本）'}</div>
+    </div>
+    `:''}
+    <button class="btn btn-secondary" onclick="resetResult()">🔄 重新检查</button>
+  `);
+}
+
+// ====== 通用 ======
+function renderResult(html){
+  const area=document.getElementById('resultArea');
+  area.innerHTML=html;
+  area.classList.remove('hidden');
+  area.scrollIntoView({behavior:'smooth'});
+}
+function resetResult(){
+  document.getElementById('resultArea').classList.add('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+<!-- Loading Fallback -->
+<script>
+// 页面加载超时检测
+(function() {
+  var loadTimeout = setTimeout(function() {
+    var loaders = document.querySelectorAll('.loading, .spinner, .skeleton, [class*="loading"]');
+    if (loaders.length > 0) {
+      loaders.forEach(function(loader) {
+        loader.innerHTML = '<div style="padding:20px;text-align:center;">' +
+          '<div style="font-size:24px;margin-bottom:8px;">⚠️</div>' +
+          '<div style="font-size:13px;color:#666;">加载超时，请刷新页面重试</div>' +
+          '</div>';
+      });
+      console.warn('[Loading] 页面加载超时');
+    }
+  }, 30000); // 30秒超时
+  
+  // 页面加载完成后清除超时
+  window.addEventListener('load', function() {
+    clearTimeout(loadTimeout);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const radarContainer = document.querySelector('.risk-radar, #risk-radar, [data-type="risk"]');
+    if (radarContainer) {
+        const result = await LongmaAPI.risk.getRadar('示例企业');
+        if (result.success && result.data) {
+            renderRiskRadar(radarContainer, result.data);
+        }
+    }
+});
+
+function renderRiskRadar(container, data) {
+    let html = `<div class="api-risk-summary">
+        <h3>${data.enterprise} - 综合评分: ${data.overall_score}</h3>
+        <div class="api-dimensions">`;
+    data.dimensions.forEach(dim => {
+        const levelClass = dim.level === 'low' ? 'safe' : dim.level === 'medium' ? 'warning' : 'danger';
+        html += `<div class="api-dim-item ${levelClass}">
+            <span class="name">${dim.name}</span>
+            <span class="score">${dim.score}</span>
+            <span class="level">${dim.level}</span>
+        </div>`;
+    });
+    html += '</div></div>';
+    if (data.alerts && data.alerts.length > 0) {
+        html += '<div class="api-alerts"><h4>预警信息</h4>';
+        data.alerts.forEach(alert => {
+            html += `<div class="api-alert ${alert.type}">${alert.message}</div>`;
+        });
+        html += '</div>';
+    }
+    container.innerHTML = html;
+}
+</script>
+
+    <script>
+    (function(){
+        if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        var el=e.target;
+                        var bg=el.getAttribute('data-bg');
+                        if(bg){el.style.backgroundImage='url('+bg+')';el.removeAttribute('data-bg');}
+                        io.unobserve(el);
+                    }
+                });
+            },{rootMargin:'100px'});
+            document.querySelectorAll('[data-bg]').forEach(function(el){io.observe(el);});
+        }
+    })();
+    </script>
+</body>
+</html>
